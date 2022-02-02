@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "/Users/sebs/.dotnet/store/|arch|/|tfm|",
-      "/Users/sebs/.nuget/packages"
+      "C:\\Users\\jaffa\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\jaffa\\.nuget\\packages"
     ]
   }
 }

@@ -1,4 +1,14 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿var test;
+document.getElementById("fileInput").addEventListener("change", function () {
 
-// Write your Javascript code.
+    var fr = new FileReader();
+    fr.onload = function () {
+        test = fr.result
+        //document.getElementById('output').textContent = test;
+    }
+
+    fr.readAsText(this.files[0]);
+
+
+})
+
