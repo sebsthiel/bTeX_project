@@ -2,18 +2,12 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-
-    void Test(){
-        Console.WriteLine("Hejsa");
-
-    }
 }
-
 <div class="text-center">
     <h1 class="display-4">Welcome to Hermes</h1>
     <p>Please upload file below </p>
-    <input type="file" id="fileInput" name="fileInput" onkeydown="@@Test()" >
-    <input type="text" onchange="@Test()">
-    <pre id="output"></pre>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" asp-for="Upload" />
+        <input type="submit" />
+    </form>
 </div>
-

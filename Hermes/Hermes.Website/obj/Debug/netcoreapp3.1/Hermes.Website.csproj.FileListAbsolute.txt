@@ -70,3 +70,4 @@ C:\Users\jaffa\OneDrive\Skrivebord\BachelorProject\GitRepo\bTeX_project\Hermes\H
 C:\Users\jaffa\OneDrive\Skrivebord\BachelorProject\GitRepo\bTeX_project\Hermes\Hermes.Website\obj\Debug\netcoreapp3.1\Hermes.Website.pdb
 C:\Users\jaffa\OneDrive\Skrivebord\BachelorProject\GitRepo\bTeX_project\Hermes\Hermes.Website\obj\Debug\netcoreapp3.1\Hermes.Website.genruntimeconfig.cache
 C:\Users\jaffa\OneDrive\Skrivebord\BachelorProject\GitRepo\bTeX_project\Hermes\Hermes.Website\obj\Debug\netcoreapp3.1\Hermes.Website.csproj.CopyComplete
+C:\Users\jaffa\OneDrive\Skrivebord\BachelorProject\GitRepo\bTeX_project\Hermes\Hermes.Website\obj\Debug\netcoreapp3.1\Razor\Pages\UploadFile.cshtml.g.cs
