@@ -46,11 +46,11 @@ function searchFile(fileText) {
     let currentSection = 0
     for (let i = 0; i < commands.length; i++) {
         const currentCommand = commands[i];
-        let node1;
+        let node1 = null;
         if (currentCommand[2] == "section") {
             //TODO What if subsections?
             currentSection++;
-            node1 = new node(Section, currentCommand[2], currentSection,[]);
+            node1 = new node(Section, currentCommand[2], currentSection, []);
         }
         else if (currentCommand[2] == "label") {
             console.log("label " + currentCommand[4] + " is defined in " + currentSection);
@@ -62,15 +62,15 @@ function searchFile(fileText) {
 
             console.log("ref")
         }
-        else if (currentCommand[2].startsWith("cite")) {
-            console.log("cite")
 
+        //TODO currentCommand[2] =0
+
+        if(node1 == null){
+            continue;
         }
+            
         node_dict[node1.name] = node1;
     }
-    console.log("HALLO");
-
-    console.log("DICT: " + node_dict["rank3"].createdAt);
 
 }
 

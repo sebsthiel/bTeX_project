@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "uHsLLEWJ5Or2dj4uo276+HuqF4ibEYsYW2I/M///ckxPZ3xWvfZX1pVi4EcWhkUowqE8ta2/OUFctOp064vg3w==",
+  "dgSpecHash": "QP/WNTjmD9rFi0xUZB+6ghEtz+p2IIZ1V5iFqno8oNR+VJmbgln+Tw9VTKYK9pemUOX5DcTzWASqsskR4DG9qg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jaffa\\OneDrive\\Skrivebord\\Bachelor\\GitRepo\\bTeX_project\\Hermes\\Hermes.Website\\Hermes.Website.csproj",
+  "projectFilePath": "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/Hermes.Website.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\jaffa\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512"
+    "/Users/sebs/.nuget/packages/microsoft.netcore.app.ref/3.1.0/microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "/Users/sebs/.nuget/packages/microsoft.aspnetcore.app.ref/3.1.10/microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "/Users/sebs/.nuget/packages/microsoft.netcore.app.host.osx-x64/3.1.22/microsoft.netcore.app.host.osx-x64.3.1.22.nupkg.sha512"
   ],
   "logs": []
 }
