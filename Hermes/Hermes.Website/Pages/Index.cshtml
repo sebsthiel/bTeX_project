@@ -6,8 +6,6 @@
 <div class="text-center">
     <h1 class="display-4">Welcome to Hermes</h1>
     <p>Please upload file below </p>
-    <form method="post" enctype="multipart/form-data">
-        <input type="file" asp-for="Upload" />
-        <input type="submit" />
-    </form>
+    <input type="file" id="fileInput" name="fileInput" />
+    <p id="output" name="output"></p>
 </div>

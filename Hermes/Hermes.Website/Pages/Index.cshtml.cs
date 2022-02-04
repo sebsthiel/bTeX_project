@@ -22,17 +22,21 @@ namespace Hermes.Website.Pages
         {
             if (Upload.Length > 0)
             {
-                using (var ms = new MemoryStream())
-                {
-                    Upload.CopyTo(ms);
-                    ms.Position = 0;
-                    StreamReader sr = new StreamReader(ms);
-                    string s = sr.ReadToEnd();
-                    FileAsString = s;
-                }
+                MemoryStream ms = new MemoryStream();
+                Upload.CopyTo(ms);
+                ms.Position = 0;
+                StreamReader sr = new StreamReader(ms);
+                string s = sr.ReadToEnd();
+                FileAsString = s;
+                ms.Close();
+                sr.Close();
             }
-            Console.WriteLine(FileAsString);
-          
+            //Console.WriteLine(FileAsString);
+        }
+
+        public void OnGet()
+        {
+
         }
     }
 }

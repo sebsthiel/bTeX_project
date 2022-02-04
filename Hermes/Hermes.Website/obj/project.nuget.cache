@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "CDefUvucbLus/b/XG4+v2VI2B6vFo4DCEGNd+R/9aTClK/HKH412Yd6sfRdH+b6yOSPcFkrwvOjA19SNzTsmwg==",
+  "dgSpecHash": "uHsLLEWJ5Or2dj4uo276+HuqF4ibEYsYW2I/M///ckxPZ3xWvfZX1pVi4EcWhkUowqE8ta2/OUFctOp064vg3w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jaffa\\OneDrive\\Skrivebord\\BachelorProject\\GitRepo\\bTeX_project\\Hermes\\Hermes.Website\\Hermes.Website.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\jaffa\\OneDrive\\Skrivebord\\Bachelor\\GitRepo\\bTeX_project\\Hermes\\Hermes.Website\\Hermes.Website.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jaffa\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512"
+  ],
   "logs": []
 }
