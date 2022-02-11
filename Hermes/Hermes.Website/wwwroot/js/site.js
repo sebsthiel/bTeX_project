@@ -92,42 +92,48 @@ function searchFile(fileText) {
         }
  
         if (currentCommand[5] == "newtheorem") {
-            let group6 = String(currentCommand[6]).replace(/{|}/gm, '');
+            let envName = String(currentCommand[6]).replace(/{|}/gm, '');
             let group7 = String(currentCommand[7]);
             let group8 = String(currentCommand[8]);
-            let name;
+            console.log("group 8: ", currentCommand[8])
+            let envText;
             let counterName;
             if (group7.startsWith('{')) {
-                name = group7.replace(/{|}/gm, '');
+                envText = group7.replace(/{|}/gm, '');
 
                 // env should get own counter witch will reset each time the counterName is called
                 // this counterName could for example be \begin{theorem} or just \section
-                counterName = group8.replace(/\[|\]/gm, '');
 
-                // add this to dict{counterName}.counterShouldReset
-
-                if (counterName in env_dict) {
-                    env_dict[counterName].countersShouldReset.push(name);
-                } else {
-                    console.log("Env is NULL 1");
+                // check if there is a counter in the command
+                console.log(group8 != "undefined")
+                if(group8 != "undefined"){
+                    counterName = group8.replace(/\[|\]/gm, '');
+                     // add this new env to dict{counterName}.counterShouldReset
+                    if (counterName in env_dict) {
+                        env_dict[counterName].countersShouldReset.push(envName);
+                    } else {
+                        console.warn("ENVIRONMENT that is referenced as counter does NOT exists 1 " + counterName + " " + group8);
+                    }
                 }
-
+               
+            // The second argument (group7) starts with [, meaning its counter is dependent
+            // on the env called counterName
             } else {
-                name = group8.replace(/{|}/gm, '');
+                envText = group8.replace(/{|}/gm, '');
 
-                // env has same counter as group8
+                
                 counterName = group7.replace(/\[|\]/gm, '');
                 // create env
                 // add env to env_dict
                 // add this to dict{counterName}.CounterShouldUpdate
                 if (counterName in env_dict) {
-                    env_dict[counterName].countersShouldUpdate.push(name);
+                    env_dict[counterName].countersShouldUpdate.push(envText);
                 } else {
-                    console.log("Env is NULL 2");
+                    console.warn("ENVIRONMENT that is referenced as counter does NOT exists 2");
                 }
             }
 
-            env_dict[group6] = new env(group6, name, 0, [], []);
+            env_dict[envName] = new env(envName, envText, 0, [], []);
             if ("theorem" in env_dict) {
                 console.log("added env: " + env_dict["theorem"].name);
             }

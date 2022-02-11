@@ -9,31 +9,15 @@ namespace Hermes.Website.Pages
 {
     public class IndexModel : PageModel
     {
-        private IHostingEnvironment _environment;
-        public IndexModel(IHostingEnvironment environment)
+       
+        public IndexModel()
         {
-            _environment = environment;
+           
         }
         [BindProperty]
         public IFormFile Upload { get; set; }
         public string FileAsString { get; set; }
         
-        public void OnPost()
-        {
-            if (Upload.Length > 0)
-            {
-                MemoryStream ms = new MemoryStream();
-                Upload.CopyTo(ms);
-                ms.Position = 0;
-                StreamReader sr = new StreamReader(ms);
-                string s = sr.ReadToEnd();
-                FileAsString = s;
-                ms.Close();
-                sr.Close();
-            }
-            //Console.WriteLine(FileAsString);
-        }
-
         public void OnGet()
         {
 
