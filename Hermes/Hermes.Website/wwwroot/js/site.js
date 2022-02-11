@@ -1,4 +1,4 @@
-﻿document.getElementById("fileInput").addEventListener("change", function () {
+document.getElementById("fileInput").addEventListener("change", function () {
     let test;
     var fr = new FileReader();
     fr.onload = function () {
@@ -8,18 +8,17 @@
     }
 
     fr.readAsText(this.files[0]);
-    
-})
 
+})
 
 function node(type, name, createdAt, references) {
     this.type = type;
     this.name = name;
     this.createdAt = createdAt;
-    this.references = references;  
+    this.references = references;
 }
 
-function env(name, text, counter, countersShouldReset, countersShouldUpdate){
+function env(name, text, counter, countersShouldReset, countersShouldUpdate) {
     this.name = name;
     this.text = text;
     this.counter = counter;
@@ -31,7 +30,7 @@ function add(node, ref) {
     node.references.push(ref);
 }
 
-function startsWith(str1, str2) { 
+function startsWith(str1, str2) {
     let aStr = String(str1);
     let bStr = String(str2);
     if (aStr.length < bStr.length) {
@@ -48,54 +47,57 @@ function startsWith(str1, str2) {
 }
 
 // enums
-const Label     = 0;
-const Ref       = 1;
-const Section   = 2;
-const Cite      = 3;
-const Theorem   = 4;
+const Label = 0;
+const Ref = 1;
+const Section = 2;
+const Cite = 3;
+const Theorem = 4;
 
 // node_name -> node dict
 var node_dict = {};
 
 
-var sectionEnv = new env("section", "section", 0, [],[])
+var sectionEnv = new env("section", "section", 0, [], [])
 // list of env made with the \newtheorem command
 var env_dict = {};
 env_dict["section"] = sectionEnv;
 
 function searchFile(fileText) {
-    const regex = /\\((ref|label|section|cite?(p|t|author|year)?\*?){(.+?)})|(newtheorem)({.+?})({.+?}|\[.+?\])({.+?}|\[.+?\])?/gm;
-    const commands = [...fileText.matchAll(regex)];
-    //console.log(arrayTest[0])
-
+    const regex = /((?<type>ref|label|section|cite?(p|t|author|year)?\*?){(?<typeName>.+?)})|(?<newtheorem>newtheorem)(?<envName>{.+?})(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?/gm;
+    ///\\((ref|label|section|cite?(p|t|author|year)?\*?){(.+?)})|(newtheorem)({.+?})({.+?}|\[.+?\])({.+?}|\[.+?\])?/gm;
     let currentSection = "";
-    for (let i = 0; i < commands.length; i++) {
-        const currentCommand = commands[i];
+
+    let match = regex.exec(fileText);
+    do {
+
         let node1 = null;
-        if (currentCommand[2] == "section") {
+        if (match.groups.type == "section") {
             //TODO What if sub-sections?
             //currentSection++;
-            currentSection = currentCommand[4];
-            node1 = new node(Section, currentCommand[4], currentSection, []);
+            console.log(`Section ${match.groups.typeName} is defined in ${currentSection}`);
+            currentSection = match.groups.typeName;
+            node1 = new node(Section, match.groups.typeName, currentSection, []);
         }
-        else if (currentCommand[2] == "label") {
-            //console.log("label " + currentCommand[4] + " is defined in " + currentSection);
-            node1 = new node(Label, currentCommand[4], currentSection, []);
+        else if (match.groups.type == "label") {
+            console.log(`Label ${match.groups.typeName} is defined in ${currentSection}`);
+            node1 = new node(Label, match.groups.typeName, currentSection, []);
         }
-        else if (currentCommand[2] == "ref") {
-            //console.log("Ref " + currentCommand[4] + " is defined in " + currentSection);
-            node1 = new node(Ref, currentCommand[4], currentSection, []);
+        else if (match.groups.type == "ref") {
+            console.log(`Ref ${match.groups.typeName} is defined in ${currentSection}`);
+            node1 = new node(Ref, match.groups.typeName, currentSection, []);
         }
-        else if (startsWith(currentCommand[2], "cite")) {
-            //console.log("Cite " + currentCommand[4] + " is defined in " + currentSection);
-            node1 = new node(Cite, currentCommand[4], currentSection, []);
+        else if (startsWith(match.groups.type, "cite")) {
+            console.log(`Cite ${match.groups.typeName} is defined in ${currentSection}`);
+            node1 = new node(Cite, match.groups.typeName, currentSection, []);
         }
- 
-        if (currentCommand[5] == "newtheorem") {
-            let envName = String(currentCommand[6]).replace(/{|}/gm, '');
-            let group7 = String(currentCommand[7]);
-            let group8 = String(currentCommand[8]);
-            console.log("group 8: ", currentCommand[8])
+
+        if (match.groups.newtheorem == "newtheorem") {
+            console.log(`Theorem ${match.groups.newtheorem} is defined in ${currentSection}`);
+
+            let envName = String(match.groups.envName).replace(/{|}/gm, '');
+            let group7 = String(match.groups.arg2);
+            let group8 = String(match.groups.arg3);
+            console.log("group 8: ", match.groups.arg3)
             let envText;
             let counterName;
             if (group7.startsWith('{')) {
@@ -106,22 +108,22 @@ function searchFile(fileText) {
 
                 // check if there is a counter in the command
                 console.log(group8 != "undefined")
-                if(group8 != "undefined"){
+                if (group8 != "undefined") {
                     counterName = group8.replace(/\[|\]/gm, '');
-                     // add this new env to dict{counterName}.counterShouldReset
+                    // add this new env to dict{counterName}.counterShouldReset
                     if (counterName in env_dict) {
                         env_dict[counterName].countersShouldReset.push(envName);
                     } else {
                         console.warn("ENVIRONMENT that is referenced as counter does NOT exists 1 " + counterName + " " + group8);
                     }
                 }
-               
-            // The second argument (group7) starts with [, meaning its counter is dependent
-            // on the env called counterName
+
+                // The second argument (group7) starts with [, meaning its counter is dependent
+                // on the env called counterName
             } else {
                 envText = group8.replace(/{|}/gm, '');
 
-                
+
                 counterName = group7.replace(/\[|\]/gm, '');
                 // create env
                 // add env to env_dict
@@ -139,22 +141,18 @@ function searchFile(fileText) {
             }
         }
 
-        if(node1 == null) {
+        if (node1 == null) {
             continue;
         }
-        
-        
+
+
         console.log(node_dict);
-        if(currentSection in node_dict){
+        if (currentSection in node_dict) {
             let tmp = node_dict[currentSection];
-            add(tmp, currentCommand[4]);
+            add(tmp, match.groups.typeName);
         }
 
         node_dict[node1.name] = node1;
-    }
-
+    } while ((match = regex.exec(fileText)) !== null);
 }
-
-
-//  \\((ref|label|section|cite?(p|t|author|year)?\*){(.+?)})
 
