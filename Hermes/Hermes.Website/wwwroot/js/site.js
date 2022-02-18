@@ -16,16 +16,16 @@
 // by adding a field "informationNode"
 // for a normal label this would just be = null
 class node {
-    constructor(name, createdAt) {
+    constructor(name, createdAt, type) {
         this.name = name;
         this.createdAt = createdAt;
+        this.type = type;
     }
 }
 
-class envNode extends node{
-    constructor(name, createdAt, references, counter)
-    {
-        super(name,createdAt);
+class envNode extends node {
+    constructor(name, createdAt, type, references, counter) {
+        super(name, createdAt, type);
         this.references = references;
         this.counter = counter;
     }
@@ -38,6 +38,14 @@ class env {
         this.counter = counter;
         this.countersShouldReset = countersShouldReset;
         this.countersShouldUpdate = countersShouldUpdate;
+    }
+
+    addToCounterShouldReset(env) {
+        this.countersShouldReset.push(env);
+    }
+
+    addToCounterShouldUpdate(env) {
+        this.countersShouldUpdate.push(env);
     }
 }
 
@@ -121,15 +129,13 @@ function searchFile(fileText) {
     let match = regex.exec(fileText);
     do {
         let node1 = null;
-        console.log("TYPE: " +match.groups.type);
-        console.log("IS SUB SECTION : " + (startsWith(match.groups.type, "sub")));
         if (match.groups.type == "section") {
             //TODO What if sub-sections?
             //currentSection++;
-            console.log(`Section ${match.groups.typeName} is defined in ${createdAt}`);
+            console.log(`Section ${match.groups.typeName} is defined in ${outerEnv}`);
 
             // currentSection = this new env //TODO: counter should not be zero
-            let newEnvNode = new envNode(match.groups.typeName, outerEnv, [], envTypeDict["section"].counter);
+            let newEnvNode = new envNode(match.groups.typeName, outerEnv, match.groups.type, [], envTypeDict["section"].counter);
 
             // Update section counter and stuff that depends on it
             updateCounters("section");
@@ -149,57 +155,65 @@ function searchFile(fileText) {
             node_dict[match.groups.typeName] = newEnvNode;
         }
         else if (startsWith(match.groups.type, "sub")) {
-            console.log(`Sub...Section ${match.groups.typeName} is defined in ${createdAt}`);
+           
             // tjek hvor mange sub den har
-            let subCountSubsection = subCount(match.groups.type);
-            let subCountCreatedAt = subCount(createdAt);
+            let subCountSubsection = subCount(match.groups.type); //current
+            let subCountCreatedAt = subCount(node_dict[createdAt].type);
             let newSubSection = null;
-            console.log("SectionSubCount: " + subCountSubsection + " CreatedAtSubCount: " + subCountCreatedAt);
+            console.log(subCountSubsection + " " + subCountCreatedAt);
             if (subCountSubsection == subCountCreatedAt) {
                 // same sub amount
-
+                console.log("same");
                 
                 // Update Counters
-                newSubSection = new envNode(match.groups.typeName, createdAt, [], envTypeDict[match.groups.type].counter);
+                newSubSection = new envNode(match.groups.typeName, node_dict[createdAt].createdAt, match.groups.type, [], envTypeDict[match.groups.type].counter);
                 updateCounters(match.groups.type);
+                console.log(`SUB: ${match.groups.type} ${match.groups.typeName} is defined in ${node_dict[createdAt].createdAt}`);
+                createdAt = newSubSection.name;
+                
             }
             else if (subCountSubsection > subCountCreatedAt) {
+                console.log("current is higher");
                 // større sub amount
                 // hvis denne subsection IKKE findes i envTypeDict
                 if (!(match.groups.type in envTypeDict)) {
                     envTypeDict[match.groups.type] = new env(match.groups.type, match.groups.type, 1, [], []);
 
                     // skal vi adde den som afhængig af createdAt (counter)
-                    console.log(createdAt);
-                    add(envTypeDict[createdAt].countersShouldReset, match.group.type);
+                    //console.log(createdAt);
+                    let createdAtType = node_dict[createdAt].type;                    
+                    envTypeDict[createdAtType].addToCounterShouldReset(match.groups.type);
                 }
 
                 // newEnvNode() med createdAt som createdAt
-                newSubSection = new envNode(match.groups.typeName, createdAt, [], envTypeDict[match.groups.type]);
+                newSubSection = new envNode(match.groups.typeName, createdAt, match.groups.type, [], envTypeDict[match.groups.type].counter);
                     
                 // updateCounters
+                console.log(`SUB: ${match.groups.type} ${match.groups.typeName} is defined in ${createdAt}`);
                 updateCounters(match.groups.type);
                 createdAt = newSubSection.name;
+                
+                
+                
 
             } 
             else if (subCountSubsection < subCountCreatedAt) {
                 // mindre sub amount
                 // newEnvNode() med createdAt.createdAt
-                let differenceInSubCount = (subCountCreatedAt - subCountSubsection) -1;
+                let differenceInSubCount = (subCountCreatedAt - subCountSubsection);
+                console.log("GO UP");
                 let newCreatedAt = subSection2Section(createdAt, differenceInSubCount);
-                newSubSection = new envNode(match.groups.typeName, newCreatedAt);
+                newSubSection = new envNode(match.groups.typeName, newCreatedAt, match.groups.type, [], envTypeDict[match.groups.type].counter);
 
                 // updateCounters 
                 updateCounters(match.groups.type);
-
+                console.log(`SUB: ${match.groups.type} ${match.groups.typeName} is defined in ${newCreatedAt}`);
                 createdAt = newCreatedAt;
+                
                 
             }
 
             node_dict[match.groups.typeName] = newSubSection;
-            
-            
-
             
 
             
@@ -207,14 +221,14 @@ function searchFile(fileText) {
             
         }
         else if (match.groups.type == "label") {
-            console.log(`Label ${match.groups.typeName} is defined in ${createdAt}`);
-            node1 = new node(match.groups.typeName, createdAt);
+            //console.log(`Label ${match.groups.typeName} is defined in ${createdAt}`);
+            node1 = new node(match.groups.typeName, createdAt, match.groups.type);
         }
         else if (match.groups.type == "ref") {
+            //console.log(`Ref ${match.groups.typeName} is defined in ${createdAt}`);
             //TODO Ref should not create new node1 but should add a reference
             // from current env
             // if not in env then currentSection
-            console.log(`Ref ${match.groups.typeName} is defined in ${createdAt}`);
             //node1 = new node(Ref, match.groups.typeName, createdAt, []);
 
             // adding reference to the currentEnv references.
@@ -222,12 +236,12 @@ function searchFile(fileText) {
             add(node_dict[createdAt], match.groups.typeName);
         }
         else if (startsWith(match.groups.type, "cite")) {
-            console.log(`Cite ${match.groups.typeName} is defined in ${createdAt}`);
+            //console.log(`Cite ${match.groups.typeName} is defined in ${createdAt}`);
             
             add(node_dict[createdAt], match.groups.typeName);
         }
         else if (match.groups.type == "begin"){
-            console.log(`Begin ${match.groups.typeName} is defined in ${createdAt}`);
+            //console.log(`Begin ${match.groups.typeName} is defined in ${createdAt}`);
 
             // Make sure that stuff like enumerate isn't created as a node
             if(!(match.groups.typeName in envTypeDict)){
@@ -237,8 +251,8 @@ function searchFile(fileText) {
             let thisEnvCount = calTotalCount(createdAt) + envTypeDict[match.groups.typeName].counter;
 
             //Example of name: Lemma 1.2.4
-            let newEnvNodeName = match.groups.typeName+" "+thisEnvCount;
-            let newEnvNode = new envNode(newEnvNodeName, createdAt, [], thisEnvCount); 
+            let newEnvNodeName = match.groups.typeName + " " + thisEnvCount;
+            let newEnvNode = new envNode(newEnvNodeName, createdAt, match.groups.typeName, [], thisEnvCount); 
             node_dict[newEnvNodeName] = newEnvNode;
 
             // update counter
@@ -258,7 +272,7 @@ function searchFile(fileText) {
 
         }
         else if (match.groups.type == "end"){
-            console.log(`End ${match.groups.typeName} is defined in ${createdAt}`);
+            //console.log(`End ${match.groups.typeName} is defined in ${createdAt}`);
             
             // Makes sure that the end of types like eunemerate doesn't affect the current environment
             if(!(match.groups.typeName in envTypeDict)){
@@ -274,41 +288,43 @@ function searchFile(fileText) {
         }
 
         if (match.groups.newtheorem == "newtheorem") {
-            console.log(`Theorem ${match.groups.newtheorem} is defined in ${createdAt}`);
+            //console.log(`Theorem ${match.groups.newtheorem} is defined in ${createdAt}`);
 
             let envName = String(match.groups.envName).replace(/{|}/gm, '');
-            let group7 = String(match.groups.arg2);
-            let group8 = String(match.groups.arg3);
+            let arg2 = String(match.groups.arg2);
+            let arg3 = String(match.groups.arg3);
             let envText;
             let counterName;
-            if (group7.startsWith('{')) {
-                envText = group7.replace(/{|}/gm, '');
+            if (arg2.startsWith('{')) {
+                envText = arg2.replace(/{|}/gm, '');
 
                 // env should get own counter witch will reset each time the counterName is called
                 // this counterName could for example be \begin{theorem} or just \section
 
                 // check if there is a counter in the command
-                if (group8 != "undefined") {
-                    counterName = group8.replace(/\[|\]/gm, '');
+                if (arg3 != "undefined") {
+                    counterName = arg3.replace(/\[|\]/gm, '');
                     // add this new env to dict{counterName}.counterShouldReset
                     if (counterName in envTypeDict) {
-                        envTypeDict[counterName].countersShouldReset.push(envName);
+                        envTypeDict[counterName].addToCounterShouldReset(envName);
+                        //envTypeDict[counterName].countersShouldReset.push(envName);
                     } else {
-                        console.warn("ENVIRONMENT that is referenced as counter does NOT exists 1 " + counterName + " " + group8);
+                        console.warn("ENVIRONMENT that is referenced as counter does NOT exists 1 " + counterName + " " + arg3);
                     }
                 }
 
                 // The second argument (group7) starts with [, meaning its counter is dependent
                 // on the env called counterName
             } else {
-                envText = group8.replace(/{|}/gm, '');
+                envText = arg3.replace(/{|}/gm, '');
 
-                counterName = group7.replace(/\[|\]/gm, '');
+                counterName = arg2.replace(/\[|\]/gm, '');
                 // create env
                 // add env to env_dict
                 // add this to dict{counterName}.CounterShouldUpdate
                 if (counterName in envTypeDict) {
-                    envTypeDict[counterName].countersShouldUpdate.push(envText);
+                    envTypeDict[counterName].addToCounterShouldUpdate(envName);
+                    //envTypeDict[counterName].countersShouldUpdate.push(envText);
                 } else {
                     console.warn("ENVIRONMENT that is referenced as counter does NOT exists 2");
                 }
@@ -316,7 +332,7 @@ function searchFile(fileText) {
 
             envTypeDict[envName] = new env(envName, envText, 1, [], []);
             if ("theorem" in envTypeDict) {
-                console.log("added env: " + envTypeDict["theorem"].name);
+                //console.log("added env: " + envTypeDict["theorem"].name);
             }
         }
 
