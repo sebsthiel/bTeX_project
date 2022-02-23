@@ -3,8 +3,9 @@
     var fr = new FileReader();
     fr.onload = function () {
         test = fr.result
-        document.getElementById('output').textContent = test;
+        //document.getElementById('output').textContent = test;
         searchFile(test);
+        onLoadedFile();
     }
 
     fr.readAsText(this.files[0]);
@@ -126,9 +127,14 @@ function searchFile(fileText) {
     ///\\((ref|label|section|cite?(p|t|author|year)?\*?){(.+?)})|(newtheorem)({.+?})({.+?}|\[.+?\])({.+?}|\[.+?\])?/gm;
     let createdAt = outerEnv;
 
+    console.log("main method runs");
     let match = regex.exec(fileText);
+    console.log(match.length);
     do {
+        console.log("main loop runs");
         let node1 = null;
+        console.log(match.groups.type);
+        console.log(match.groups.typeName);
         if (match.groups.type == "section") {
             //TODO What if sub-sections?
             //currentSection++;
@@ -241,6 +247,7 @@ function searchFile(fileText) {
             add(node_dict[createdAt], match.groups.typeName);
         }
         else if (match.groups.type == "begin"){
+    
             //console.log(`Begin ${match.groups.typeName} is defined in ${createdAt}`);
 
             // Make sure that stuff like enumerate isn't created as a node
@@ -272,6 +279,7 @@ function searchFile(fileText) {
 
         }
         else if (match.groups.type == "end"){
+           
             //console.log(`End ${match.groups.typeName} is defined in ${createdAt}`);
             
             // Makes sure that the end of types like eunemerate doesn't affect the current environment

@@ -3,9 +3,17 @@
 @{
     ViewData["Title"] = "Home page";
 }
+
 <div class="text-center">
     <h1 class="display-4">Welcome to Hermes</h1>
     <p>Please upload file below </p>
     <input type="file" id="fileInput" name="fileInput" />
     <p id="output" name="output"></p>
 </div>
+
+<script src="~/js/site.js"></script>
+<script>
+    function onLoadedFile(){
+        console.log("file loaded");
+    }
+</script>
