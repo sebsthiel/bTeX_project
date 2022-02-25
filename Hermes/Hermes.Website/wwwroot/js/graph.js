@@ -234,7 +234,7 @@ function searchFile(fileText) {
             // this reference is a name of a node (label)
             add(node_dict[createdAt], match.groups.typeName);
             console.log("adding: " + createdAt + " -> " + match.groups.typeName );
-            linksList.push({"source": createdAt, "target": match.groups.typeName});
+            linksList.push({"source": createdAt, "target": match.groups.typeName, "type": "ref"});
         }
         else if (startsWith(match.groups.type, "cite")) {
             //console.log(`Cite ${match.groups.typeName} is defined in ${createdAt}`);
@@ -366,6 +366,8 @@ function makeGraph(){
     var width = 640,
         height = 480;
 
+    var nodeWidth = width/30;
+
     // Before we do anything else, let's define the data for the visualization.
 
     var dataNodes = [];
@@ -380,6 +382,9 @@ function makeGraph(){
     var svg = d3.select('#d3graph').append('svg')
         .attr('width', width)
         .attr('height', height);
+
+
+   
 
     // Extract the nodes and links from the data.
     var nodes = dataNodes,
@@ -445,10 +450,23 @@ function makeGraph(){
     // properties with references to the actual node objects
     // instead of indices.
 
+    svg.append("defs").append("marker")
+    .attr("id", "marker")
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", nodeWidth+10)
+    .attr("refY", 0)
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 6)
+    .attr("orient", "auto")
+    .append("path")
+    .attr("d", "M0,-5L10,0L0,5");
+
     var link = svg.selectAll('.link')
         .data(links)
         .enter().append('line')
+        .attr("marker-end", "url(#marker)")
         .attr('class', 'link');
+        
         // .attr('x1', function(d) { return d.source.x; })
         // .attr('y1', function(d) { return d.source.y; })
         // .attr('x2', function(d) { return d.target.x; })
@@ -467,7 +485,15 @@ function makeGraph(){
         .data(nodes)
         .enter().append('circle')
         .attr('class', 'node')
-        .attr('r', width/100);
+        .attr('r', nodeWidth);
+
+    var text = svg.append("g")
+        .attr("class", "labels")
+        .selectAll("text")
+        .data(nodes)
+        .enter().append("text")
+        .attr()
+        .text(function(d) { return d.name });
         // .attr('cx', function(d) { return d.x; })
         // .attr('cy', function(d) { return d.y; });
 
@@ -526,6 +552,8 @@ function makeGraph(){
             .attr('x2', function(d) { return d.target.x; })
             .attr('y2', function(d) { return d.target.y; });
 
+        text.attr('dx', function(d) { return d.x; })
+        .attr('dy', function(d) { return d.y; })
         
     };
 
