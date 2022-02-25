@@ -21,6 +21,7 @@ class node {
         this.name = name;
         this.createdAt = createdAt;
         this.type = type;
+        this.id = name;
     }
 }
 
@@ -29,6 +30,7 @@ class envNode extends node {
         super(name, createdAt, type);
         this.references = references;
         this.counter = counter;
+        this.id = name;
     }
 }
 
@@ -74,7 +76,7 @@ function startsWith(str1, str2) {
 
 // node_name -> node dict
 var node_dict = {};
-
+var linksList = [];
 
 var sectionEnv = new env("section", "section", 0, [], []);
 // list of env made with the \newtheorem command
@@ -91,6 +93,7 @@ function calTotalCount(createdAt)
         acc = String(node_dict[newCreatedAt].counter) + "." + acc;
         newCreatedAt = node_dict[newCreatedAt].createdAt;
     }
+    return acc;
 }
 
 function subCount(section) {
@@ -127,33 +130,23 @@ function searchFile(fileText) {
     ///\\((ref|label|section|cite?(p|t|author|year)?\*?){(.+?)})|(newtheorem)({.+?})({.+?}|\[.+?\])({.+?}|\[.+?\])?/gm;
     let createdAt = outerEnv;
 
-    console.log("main method runs");
+   
     let match = regex.exec(fileText);
-    console.log(match.length);
+    
     do {
-        console.log("main loop runs");
+        
         let node1 = null;
-        console.log(match.groups.type);
-        console.log(match.groups.typeName);
+       
         if (match.groups.type == "section") {
             //TODO What if sub-sections?
             //currentSection++;
-            console.log(`Section ${match.groups.typeName} is defined in ${outerEnv}`);
+            //console.log(`Section ${match.groups.typeName} is defined in ${outerEnv}`);
 
             // currentSection = this new env //TODO: counter should not be zero
             let newEnvNode = new envNode(match.groups.typeName, outerEnv, match.groups.type, [], envTypeDict["section"].counter);
 
             // Update section counter and stuff that depends on it
             updateCounters("section");
-            //envTypeDict["section"].counter = envTypeDict["section"].counter + 1;
-            
-            //envTypeDict["section"].countersShouldUpdate.forEach(element => {
-            //    envTypeDict[element].counter = envTypeDict["section"].counter;
-            //});
-            
-            //envTypeDict["section"].countersShouldReset.forEach(element => {
-            //    envTypeDict[element].counter = 1;
-            //});
 
             createdAt = match.groups.typeName; 
             
@@ -169,17 +162,17 @@ function searchFile(fileText) {
             console.log(subCountSubsection + " " + subCountCreatedAt);
             if (subCountSubsection == subCountCreatedAt) {
                 // same sub amount
-                console.log("same");
+                
                 
                 // Update Counters
                 newSubSection = new envNode(match.groups.typeName, node_dict[createdAt].createdAt, match.groups.type, [], envTypeDict[match.groups.type].counter);
                 updateCounters(match.groups.type);
-                console.log(`SUB: ${match.groups.type} ${match.groups.typeName} is defined in ${node_dict[createdAt].createdAt}`);
+                //console.log(`SUB: ${match.groups.type} ${match.groups.typeName} is defined in ${node_dict[createdAt].createdAt}`);
                 createdAt = newSubSection.name;
                 
             }
             else if (subCountSubsection > subCountCreatedAt) {
-                console.log("current is higher");
+                
                 // større sub amount
                 // hvis denne subsection IKKE findes i envTypeDict
                 if (!(match.groups.type in envTypeDict)) {
@@ -195,7 +188,7 @@ function searchFile(fileText) {
                 newSubSection = new envNode(match.groups.typeName, createdAt, match.groups.type, [], envTypeDict[match.groups.type].counter);
                     
                 // updateCounters
-                console.log(`SUB: ${match.groups.type} ${match.groups.typeName} is defined in ${createdAt}`);
+                //console.log(`SUB: ${match.groups.type} ${match.groups.typeName} is defined in ${createdAt}`);
                 updateCounters(match.groups.type);
                 createdAt = newSubSection.name;
                 
@@ -207,13 +200,13 @@ function searchFile(fileText) {
                 // mindre sub amount
                 // newEnvNode() med createdAt.createdAt
                 let differenceInSubCount = (subCountCreatedAt - subCountSubsection);
-                console.log("GO UP");
+               
                 let newCreatedAt = subSection2Section(createdAt, differenceInSubCount);
                 newSubSection = new envNode(match.groups.typeName, newCreatedAt, match.groups.type, [], envTypeDict[match.groups.type].counter);
 
                 // updateCounters 
                 updateCounters(match.groups.type);
-                console.log(`SUB: ${match.groups.type} ${match.groups.typeName} is defined in ${newCreatedAt}`);
+                //console.log(`SUB: ${match.groups.type} ${match.groups.typeName} is defined in ${newCreatedAt}`);
                 createdAt = newCreatedAt;
                 
                 
@@ -240,6 +233,8 @@ function searchFile(fileText) {
             // adding reference to the currentEnv references.
             // this reference is a name of a node (label)
             add(node_dict[createdAt], match.groups.typeName);
+            console.log("adding: " + createdAt + " -> " + match.groups.typeName );
+            linksList.push({"source": createdAt, "target": match.groups.typeName});
         }
         else if (startsWith(match.groups.type, "cite")) {
             //console.log(`Cite ${match.groups.typeName} is defined in ${createdAt}`);
@@ -255,8 +250,8 @@ function searchFile(fileText) {
                 continue;
             }
                 
-            let thisEnvCount = calTotalCount(createdAt) + envTypeDict[match.groups.typeName].counter;
-
+            let thisEnvCount = calTotalCount(createdAt) + String(envTypeDict[match.groups.typeName].counter);
+            console.log("thisEnvCount: " + thisEnvCount)
             //Example of name: Lemma 1.2.4
             let newEnvNodeName = match.groups.typeName + " " + thisEnvCount;
             let newEnvNode = new envNode(newEnvNodeName, createdAt, match.groups.typeName, [], thisEnvCount); 
@@ -377,7 +372,6 @@ function makeGraph(){
     for(let key in node_dict){
         dataNodes.push(node_dict[key])
     }
-    var dataLinks = [];
 
     // Here's were the code begins. We start off by creating an SVG
     // container to hold the visualization. We only need to specify
@@ -389,8 +383,26 @@ function makeGraph(){
 
     // Extract the nodes and links from the data.
     var nodes = dataNodes,
-        links = dataLinks;
+        links = linksList;
+
+    for (var i = 0, leni = links.length; i < leni; i++) {
+        for (var j = 0, lenj = nodes.length; j < lenj; j++) {
+            if (links[i].source == nodes[j].id) {
+            links[i].source = j;
+            }
+            if (links[i].target == nodes[j].id) {
+            links[i].target = j;
+            }
+        }
+    }
+
+    
+    // linksList.forEach(element => {
+    //     console.log(element)
+    //     console.log(element.target in dataNodes)
+    // });
     console.log("amount of nodes " + nodes.length)
+    console.log("amount of links " + links.length)
     // Now we create a force layout object and define its properties.
     // Those include the dimensions of the visualization and the arrays
     // of nodes and links.
@@ -398,7 +410,10 @@ function makeGraph(){
     var force = d3.layout.force()
         .size([width, height])
         .nodes(nodes)
-       // .links(links);
+        .links(links)
+        .on("tick", tick)
+        .linkDistance(width/3.5)
+        .charge(-300);
 
     // There's one more property of the layout we need to define,
     // its `linkDistance`. That's generally a configurable value and,
@@ -409,9 +424,7 @@ function makeGraph(){
     // nodes that are connected. (It is, thus, the length we'd
     // like our links to have.)
 
-    force.linkDistance(width/3.5);
-
-    //force.gravity(0.9);
+    force.gravity(0.5);
 
     // Next we'll add the nodes and links to the visualization.
     // Note that we're just sticking them into the SVG container
@@ -432,14 +445,14 @@ function makeGraph(){
     // properties with references to the actual node objects
     // instead of indices.
 
-    // var link = svg.selectAll('.link')
-    //     .data(links)
-    //     .enter().append('line')
-    //     .attr('class', 'link')
-    //     .attr('x1', function(d) { return nodes[d.source].x; })
-    //     .attr('y1', function(d) { return nodes[d.source].y; })
-    //     .attr('x2', function(d) { return nodes[d.target].x; })
-    //     .attr('y2', function(d) { return nodes[d.target].y; });
+    var link = svg.selectAll('.link')
+        .data(links)
+        .enter().append('line')
+        .attr('class', 'link');
+        // .attr('x1', function(d) { return d.source.x; })
+        // .attr('y1', function(d) { return d.source.y; })
+        // .attr('x2', function(d) { return d.target.x; })
+        // .attr('y2', function(d) { return d.target.y; });
 
     // Now it's the nodes turn. Each node is drawn as a circle and
     // given a radius and initial position within the SVG container.
@@ -451,19 +464,23 @@ function makeGraph(){
     // before we start the layout executing.
 
     var noded3 = svg.selectAll('.node')
-        .data((nodes))
+        .data(nodes)
         .enter().append('circle')
         .attr('class', 'node')
-        .attr('r', width/100)
-        .attr('cx', function(d) { return d.x; })
-        .attr('cy', function(d) { return d.y; });
+        .attr('r', width/100);
+        // .attr('cx', function(d) { return d.x; })
+        // .attr('cy', function(d) { return d.y; });
 
 
     // Next we define a function that executes at each
     // iteration of the force layout.
 
-    force.on("tick", tick);
-
+    noded3.each(function(d){
+        if (d.type) {
+            console.log("HEY: " + d.type)
+            d3.select(this).classed(d.type, true)
+        }
+    });
 
     function tick(e) {
 
@@ -504,11 +521,10 @@ function makeGraph(){
         // one iteration, the indices have been replaced by
         // references to the node objects.
 
-        // link.transition().ease('linear').duration(animationStep)
-        //     .attr('x1', function(d) { return d.source.x; })
-        //     .attr('y1', function(d) { return d.source.y; })
-        //     .attr('x2', function(d) { return d.target.x; })
-        //     .attr('y2', function(d) { return d.target.y; });
+        link.attr('x1', function(d) { return d.source.x; })
+            .attr('y1', function(d) { return d.source.y; })
+            .attr('x2', function(d) { return d.target.x; })
+            .attr('y2', function(d) { return d.target.y; });
 
         
     };
