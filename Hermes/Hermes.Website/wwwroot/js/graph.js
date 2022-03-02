@@ -233,14 +233,17 @@ function searchFile(fileText) {
 
             // adding reference to the currentEnv references.
             // this reference is a name of a node (label)
-            add(node_dict[createdAt], match.groups.typeName);
+            
+            //add(node_dict[createdAt], match.groups.typeName);
             console.log("adding: " + createdAt + " -> " + match.groups.typeName );
             linksList.push({"source": createdAt, "target": match.groups.typeName, "type": "ref"});
         }
         else if (startsWith(match.groups.type, "cite")) {
             //console.log(`Cite ${match.groups.typeName} is defined in ${createdAt}`);
             
-            add(node_dict[createdAt], match.groups.typeName);
+            //add(node_dict[createdAt], match.groups.typeName);
+            //console.log("adding: " + createdAt + " -> " + match.groups.typeName );
+            //linksList.push({"source": createdAt, "target": match.groups.typeName, "type": "cite"});
         }
         else if (match.groups.type == "begin"){
     
@@ -347,7 +350,9 @@ function searchFile(fileText) {
         // Add current node to section
         if (createdAt in node_dict) {
             let tmp = node_dict[createdAt];
-            add(tmp, match.groups.typeName);
+            //add(tmp, match.groups.typeName);
+            console.log("adding: " + createdAt + " -> " + match.groups.typeName );
+            linksList.push({"source": createdAt, "target": match.groups.typeName, "type": "createdIn"});
         }
 
         node_dict[node1.name] = node1;
@@ -419,7 +424,7 @@ function makeGraph(){
         .links(links)
         .on("tick", tick)
         .linkDistance(width/2.5)
-        .charge(-3000);
+        .charge(-300);
 
     // There's one more property of the layout we need to define,
     // its `linkDistance`. That's generally a configurable value and,
