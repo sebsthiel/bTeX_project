@@ -6,6 +6,7 @@ document.getElementById("fileInput").addEventListener("change", function () {
         //document.getElementById('output').textContent = test;
         searchFile(test);
         makeGraph();
+        console.log("HEJSA");
     }
 
     fr.readAsText(this.files[0]);
@@ -366,7 +367,7 @@ function makeGraph(){
     var width = 640,
         height = 480;
 
-    var nodeWidth = width/30;
+    var nodeWidth = width/50;
 
     // Before we do anything else, let's define the data for the visualization.
 
@@ -417,8 +418,8 @@ function makeGraph(){
         .nodes(nodes)
         .links(links)
         .on("tick", tick)
-        .linkDistance(width/3.5)
-        .charge(-300);
+        .linkDistance(width/2.5)
+        .charge(-3000);
 
     // There's one more property of the layout we need to define,
     // its `linkDistance`. That's generally a configurable value and,
@@ -487,13 +488,25 @@ function makeGraph(){
         .attr('class', 'node')
         .attr('r', nodeWidth);
 
-    var text = svg.append("g")
-        .attr("class", "labels")
-        .selectAll("text")
-        .data(nodes)
-        .enter().append("text")
-        .attr()
-        .text(function(d) { return d.name });
+    var text2 = svg.selectAll("textCircle")
+    .data(nodes)
+    .enter()
+    .append("text")
+    .attr("class", "labels")
+    .text(function(d) { return d.name })
+    // .style("text-anchor", "middle")
+    // .style("font-weight", "bold")
+    // .style("font-size", "10pt")
+    // .style("fill", "#344761");
+
+    // var text = svg.append("g")
+    //     .attr("class", "labels")
+    //     .selectAll("text")
+    //     .data(nodes)
+    //     .enter().append("text")
+    //     .attr()
+    //     .text(function(d) { return d.name });
+
         // .attr('cx', function(d) { return d.x; })
         // .attr('cy', function(d) { return d.y; });
 
@@ -552,7 +565,7 @@ function makeGraph(){
             .attr('x2', function(d) { return d.target.x; })
             .attr('y2', function(d) { return d.target.y; });
 
-        text.attr('dx', function(d) { return d.x; })
+        text2.attr('dx', function(d) { return d.x; })
         .attr('dy', function(d) { return d.y; })
         
     };
