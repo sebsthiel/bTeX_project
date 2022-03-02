@@ -1,3 +1,5 @@
+import {} from d3
+
 document.getElementById("fileInput").addEventListener("change", function () {
     let test;
     var fr = new FileReader();
