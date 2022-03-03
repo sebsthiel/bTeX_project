@@ -1,4 +1,3 @@
-import {} from d3
 
 document.getElementById("fileInput").addEventListener("change", function () {
     let test;
@@ -9,6 +8,7 @@ document.getElementById("fileInput").addEventListener("change", function () {
         searchFile(test);
         makeGraph();
         console.log("HEJSA");
+        
     }
 
     fr.readAsText(this.files[0]);
@@ -390,9 +390,6 @@ function makeGraph(){
     var svg = d3.select('#d3graph').append('svg')
         .attr('width', width)
         .attr('height', height);
-
-
-   
 
     // Extract the nodes and links from the data.
     var nodes = dataNodes,

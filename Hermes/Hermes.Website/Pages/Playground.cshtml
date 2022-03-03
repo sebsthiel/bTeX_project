@@ -53,6 +53,7 @@
 </style>
 
 
+
 <div class="text-center">
     <h2 class="display-4">Welcome to the Playground</h2>
 
@@ -64,8 +65,27 @@
 <body>
     <div id="d3graph"></div>
 
+    <div id="pdfviewer">
+        <embed id= "test" src="~/pdfs/Graph_theory.pdf" width="500" height="375" type="application/pdf">
+
+    </div>
+
+    <div id="fileUpload">
+        <form method="post" enctype="multipart/form-data">
+            <input id="uploadFile" type = "file" name="uploadFile">
+            <input type="submit" asp-page-handler="Upload" class="btn" value="uploadFile">
+
+        </form>
+       
+    </div>
+
+    
+
 </body>
 
 <script src="https://d3js.org/d3.v3.min.js"></script>
-<script src="~/js/graph.js" ></script>
+<script type="module" src="~/js/graph.js" ></script>
+
+
+
 
