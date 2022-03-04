@@ -4,4 +4,15 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Services\" />
+    <None Remove="serverPdfs\" />
+    <None Remove="Controllers\" />
+    <None Remove="Microsoft.VisualStudio.LiveShare" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="serverPdfs\" />
+    <Folder Include="Controllers\" />
+  </ItemGroup>
 </Project>

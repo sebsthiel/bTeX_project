@@ -1,5 +1,4 @@
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.csproj.AssemblyReference.cache
-/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.GeneratedMSBuildEditorConfig.editorconfig
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.AssemblyInfoInputs.cache
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.AssemblyInfo.cs
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.csproj.CoreCompileInputs.cache
@@ -10,8 +9,6 @@
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.pdb
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/appsettings.Development.json
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/appsettings.json
-/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/Hermes.Website.StaticWebAssets.xml
-/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/Hermes.Website
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/Hermes.Website.deps.json
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/Hermes.Website.runtimeconfig.json
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/Hermes.Website.runtimeconfig.dev.json
@@ -36,3 +33,5 @@
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.Views.pdb
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.genruntimeconfig.cache
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.csproj.CopyComplete
+/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/Hermes.Website
+/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.GeneratedMSBuildEditorConfig.editorconfig
