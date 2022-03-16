@@ -8,6 +8,7 @@ obj/
 .tools/
 .vs/
 .vscode/
+papers/
 node_modules/
 BenchmarkDotNet.Artifacts/
 .gradle/
@@ -24,6 +25,7 @@ modules/
 *.idb
 *.lib
 *.log
+*.out
 *.pch
 *.pdb
 *.pidb
