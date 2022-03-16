@@ -19,7 +19,8 @@ namespace Hermes.Website.Services
 
         public string PdfFileName
         {
-            get { return Path.Combine(WebHostEnvironment.ContentRootPath, "papers/pdfs", "article.pdf"); }
+            //TODO Make dynamic
+            get { return Path.Combine(WebHostEnvironment.ContentRootPath, "papers/pdfs/article/", "article.pdf"); }
         }
 
         private string pdfFileName;
@@ -37,27 +38,33 @@ namespace Hermes.Website.Services
             {
                 // Create and set Directory for where zip file should be saved
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/papers/zips/");
-                var zipFilePath = Directory.GetCurrentDirectory() + "/papers/zips/" + uploadFile.FileName;
 
+                var projectName = Path.GetFileNameWithoutExtension(uploadFile.FileName);
+                
+                var zipFileDir = Directory.GetCurrentDirectory() + "/papers/zips/"+projectName +"/";
+                var zipFilePath = zipFileDir + uploadFile.FileName;
+                Directory.CreateDirectory(zipFileDir);
+                //Deleting all files for that zipfilename
+                Console.WriteLine("-------------zipFilePath-----------_: " + projectName);
+                DeleteContentInDir(zipFileDir);
                 // Create zip file at {zipfilePath}
                 using (var stream = System.IO.File.Create(zipFilePath))
                 {
                     await uploadFile.CopyToAsync(stream);
                 }
-                
-                var texFilePath = Directory.GetCurrentDirectory() + "/papers/tex/" + Path.GetFileNameWithoutExtension(zipFilePath) +"/";
-                Directory.CreateDirectory(texFilePath);
-                dirForTex = texFilePath;
-               
-                // unzip zip file from {zipFilePath} to {texFilePath}
-                ZipFile.ExtractToDirectory(zipFilePath, texFilePath);
 
-                // TODO FIND A WAY TO FIND main.tex or something -> which .tex file to compile?
-                fileToCompile = texFilePath + "article.tex";
+                dirForTex = Directory.GetCurrentDirectory() + "/papers/tex/" + Path.GetFileNameWithoutExtension(zipFilePath) + "/";
+                Directory.CreateDirectory(dirForTex);
+                DeleteContentInDir(dirForTex);
+                // unzip zip file from {zipFilePath} to {dirForTex}
+                ZipFile.ExtractToDirectory(zipFilePath, dirForTex);
 
-            } else
+                //TODO FIND A WAY TO FIND main.tex or something -> which .tex file to compile?
+                fileToCompile = dirForTex + "article.tex";
+            }
+            else
             {
-                var texFilePath = Directory.GetCurrentDirectory() + "/papers/tex/single/" + "outputFile.txt";
+                var texFilePath = Directory.GetCurrentDirectory() + "/papers/tex/single/" + "outputFile.tex";
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/papers/tex/single/");
                 using (var stream = System.IO.File.Create(texFilePath))
                 {
@@ -79,93 +86,31 @@ namespace Hermes.Website.Services
                 }
             };
             process.Start();
-            var compiledPdfPath = Directory.GetCurrentDirectory() + "/papers/pdfs/";
+            var compiledPdfPath = Directory.GetCurrentDirectory() + "/papers/pdfs/" + Path.GetFileNameWithoutExtension(fileToCompile)+"/";
             Directory.CreateDirectory(compiledPdfPath);
+            DeleteContentInDir(compiledPdfPath);
             Console.WriteLine("Current path: " + Directory.GetCurrentDirectory());
             Console.WriteLine("File: " + fileToCompile);
             Console.WriteLine("output: " + compiledPdfPath);
-            await process.StandardInput.WriteLineAsync("echo hej");
             await process.StandardInput.WriteLineAsync("cd " + dirForTex);
-            await process.StandardInput.WriteLineAsync("echo bye");
             await process.StandardInput.WriteLineAsync("pdflatex -output-directory="+ compiledPdfPath + " " + fileToCompile);
+            pdfFileName = compiledPdfPath;
 
 
         }
 
-        public async Task GetPdf2Async(IFormFile uploadFile)
+        private static void DeleteContentInDir(string zipFilePath)
         {
-            long size = uploadFile.Length;
-
-            var currentTempPath = Directory.GetCurrentDirectory() + "/testfolder/";
-            var uploaded_files = currentTempPath + "/uploaded_files";
-            var compiledPdfPath = currentTempPath + "/pdfs";
-            var rawFilePath = uploaded_files + "/testZip.zip";
-            Directory.CreateDirectory(currentTempPath);
-            Directory.CreateDirectory(uploaded_files);
-            Directory.CreateDirectory(compiledPdfPath);
-            Console.WriteLine("zipPath = " + currentTempPath);
-
-            if(uploadFile.ContentType == "application/zip")
+            System.IO.DirectoryInfo di = new DirectoryInfo(zipFilePath);
+            foreach (FileInfo file in di.EnumerateFiles())
             {
-                Console.WriteLine("Uploaded file was a ZIP file");
-                using (var stream = System.IO.File.Create(rawFilePath))
-                {
-                    await uploadFile.CopyToAsync(stream);
-                }
-                ZipFile.ExtractToDirectory(rawFilePath, compiledPdfPath);
-                Console.WriteLine("TEST");
-                Process process = new Process
-                    {
-                        StartInfo = new ProcessStartInfo
-                        {
-                            FileName = "bash",
-                            RedirectStandardInput = true,
-                            RedirectStandardOutput = true,
-                            RedirectStandardError = true,
-                            UseShellExecute = false
-                        }
-                    };
-                    process.Start();
-                    var test = Directory.GetCurrentDirectory() + "/serverPdfs/";
-                    Console.WriteLine("WHICH ");
-                    await process.StandardInput.WriteLineAsync("which pdflatex");
-                    //await process.StandardInput.WriteLineAsync("pdflatex -output-directory="+ test+ " " + compiledPdfPath + "/article.tex");
-                    //Console.WriteLine("DONE");
-                return;
-            } 
-
-            if (uploadFile.Length > 0)
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in di.EnumerateDirectories())
             {
-                var filePath = Directory.GetCurrentDirectory() + "/serverPdfs/outputFile.tex";//Path.GetTempFileName();
-                var test = Directory.GetCurrentDirectory() + "/serverPdfs/";
-                //UploadFilePath = filePath;
-                //Console.WriteLine("FILEPATH: " + filePath);
-                using (var stream = System.IO.File.Create(filePath))
-                {
-                    await uploadFile.CopyToAsync(stream);
-                    //Console.WriteLine("wd: " + Directory.GetCurrentDirectory());
-                    // Start the child process.
-                    Process process = new Process
-                    {
-                        StartInfo = new ProcessStartInfo
-                        {
-                            FileName = "bash",
-                            RedirectStandardInput = true,
-                            RedirectStandardOutput = true,
-                            RedirectStandardError = true,
-                            UseShellExecute = false
-                        }
-                    };
-                    process.Start();
-                    await process.StandardInput.WriteLineAsync("pdflatex -output-directory="+ test+ " " + filePath);
-                    //Console.WriteLine("DONE");
-                   
-                }
+                dir.Delete(true);
             }
         }
-
-
-
     }
 
 }
