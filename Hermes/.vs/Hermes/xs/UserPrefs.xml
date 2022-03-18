@@ -1,22 +1,21 @@
 ﻿<Properties StartupConfiguration="{F40B3BCD-4DE2-4227-8331-F9EDE52002A3}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Hermes.Website/Pages/Playground.cshtml.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../../../../../.nuget/packages/npm/3.5.2/readme.txt">
     <Files>
       <File FileName="Hermes.Website/Program.cs" Line="16" Column="1" />
-      <File FileName="Hermes.Website/Pages/Playground.cshtml" Line="71" Column="9" />
-      <File FileName="Hermes.Website/Pages/Playground.cshtml.cs" Line="92" Column="25" />
-      <File FileName="Hermes.Website/Services/TexCompilerService.cs" Line="9" Column="10" />
-      <File FileName="Hermes.Website/Controllers/PdfController.cs" Line="23" Column="27" />
+      <File FileName="Hermes.Website/Pages/Playground.cshtml" />
+      <File FileName="Hermes.Website/Pages/Playground.cshtml.cs" />
+      <File FileName="Hermes.Website/Services/TexCompilerService.cs" />
+      <File FileName="Hermes.Website/Controllers/PdfController.cs" />
+      <File FileName="../../../../../../.nuget/packages/npm/3.5.2/readme.txt" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Hermes" expanded="True">
-            <Node name="Hermes.Website" expanded="True">
+            <Node name="Hermes.Website" expanded="True" selected="True">
               <Node name="Controllers" expanded="True" />
               <Node name="Pages" expanded="True">
-                <Node name="Playground.cshtml" expanded="True">
-                  <Node name="Playground.cshtml.cs" selected="True" />
-                </Node>
+                <Node name="Playground.cshtml" expanded="True" />
               </Node>
               <Node name="Services" expanded="True" />
             </Node>

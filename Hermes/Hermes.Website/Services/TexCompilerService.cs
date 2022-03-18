@@ -23,6 +23,12 @@ namespace Hermes.Website.Services
             get { return Path.Combine(WebHostEnvironment.ContentRootPath, "papers/pdfs/article/", "article.pdf"); }
         }
 
+         public string TexFileName
+         {
+             get {return Path.Combine(WebHostEnvironment.ContentRootPath, "papers/tex/Archive/", "article.tex");}
+
+         }
+
         private string pdfFileName;
 
         public async Task GetPdfAsync(IFormFile uploadFile){
@@ -60,7 +66,11 @@ namespace Hermes.Website.Services
                 ZipFile.ExtractToDirectory(zipFilePath, dirForTex);
 
                 //TODO FIND A WAY TO FIND main.tex or something -> which .tex file to compile?
-                fileToCompile = dirForTex + "article.tex";
+                var texFiles = Directory.GetFiles(dirForTex, "*.tex", SearchOption.TopDirectoryOnly);
+                if(texFiles.Length > 1){
+                    Console.WriteLine("MORE THAN 1 TEX");
+                }
+                fileToCompile = dirForTex + Path.GetFileName(texFiles[0]);
             }
             else
             {

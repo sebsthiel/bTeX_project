@@ -9,10 +9,14 @@
     <None Remove="serverPdfs\" />
     <None Remove="Controllers\" />
     <None Remove="Microsoft.VisualStudio.LiveShare" />
+    <None Remove="Npm" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="serverPdfs\" />
     <Folder Include="Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Npm" Version="3.5.2" />
   </ItemGroup>
 </Project>

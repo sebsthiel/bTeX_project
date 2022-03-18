@@ -71,7 +71,7 @@
     </div>
 
     <div id="fileUpload">
-        <form method="post" enctype="multipart/form-data">
+        <form id="stuff" method="post" enctype="multipart/form-data" onsubmit="makeStuff()">
             <input id="uploadFile" type = "file" name="uploadFile">
             <input type="submit" asp-page-handler="Upload" class="btn" value="uploadFile">
 
