@@ -10,13 +10,18 @@
     <None Remove="Controllers\" />
     <None Remove="Microsoft.VisualStudio.LiveShare" />
     <None Remove="Npm" />
+    <None Remove="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="serverPdfs\" />
     <Folder Include="Controllers\" />
+<<<<<<< HEAD
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BibtexLibrary" Version="1.3.0" />
     <PackageReference Include="Npm" Version="3.5.2" />
+=======
+    <Folder Include="Models\" />
+>>>>>>> csharp_build
   </ItemGroup>
 </Project>

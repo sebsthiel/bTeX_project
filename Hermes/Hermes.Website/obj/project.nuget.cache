@@ -1,5 +1,6 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "z9GDMJiErXMzBt9Y1fNiCQShl87gnVRBW5MJlCX4Uf6M2JBoLVe2+pXofiEMpeSbI+utvWqSRNjHvXadqHY2lg==",
   "success": true,
   "projectFilePath": "C:\\Users\\jaffa\\OneDrive\\Skrivebord\\Bachelor\\GitRepo\\bTeX_project\\Hermes\\Hermes.Website\\Hermes.Website.csproj",
@@ -8,6 +9,12 @@
     "C:\\Users\\jaffa\\.nuget\\packages\\node.js\\0.12.7\\node.js.0.12.7.nupkg.sha512",
     "C:\\Users\\jaffa\\.nuget\\packages\\nogit\\0.1.0\\nogit.0.1.0.nupkg.sha512",
     "C:\\Users\\jaffa\\.nuget\\packages\\npm\\3.5.2\\npm.3.5.2.nupkg.sha512",
+=======
+  "dgSpecHash": "uHsLLEWJ5Or2dj4uo276+HuqF4ibEYsYW2I/M///ckxPZ3xWvfZX1pVi4EcWhkUowqE8ta2/OUFctOp064vg3w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\jaffa\\OneDrive\\Skrivebord\\Bachelor\\GitRepo\\bTeX_project\\Hermes\\Hermes.Website\\Hermes.Website.csproj",
+  "expectedPackageFiles": [
+>>>>>>> csharp_build
     "C:\\Users\\jaffa\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512"
   ],
   "logs": [

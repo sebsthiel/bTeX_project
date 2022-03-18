@@ -1,23 +1,24 @@
 ﻿<Properties StartupConfiguration="{F40B3BCD-4DE2-4227-8331-F9EDE52002A3}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../../../../../.nuget/packages/npm/3.5.2/readme.txt">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Hermes.Website/Models/Environment.cs">
     <Files>
-      <File FileName="Hermes.Website/Program.cs" Line="16" Column="1" />
-      <File FileName="Hermes.Website/Pages/Playground.cshtml" />
-      <File FileName="Hermes.Website/Pages/Playground.cshtml.cs" />
-      <File FileName="Hermes.Website/Services/TexCompilerService.cs" />
-      <File FileName="Hermes.Website/Controllers/PdfController.cs" />
-      <File FileName="../../../../../../.nuget/packages/npm/3.5.2/readme.txt" Line="1" Column="1" />
+      <File FileName="Hermes.Website/Services/TexParserService.cs" Line="35" Column="133" />
+      <File FileName="Hermes.Website/Models/Node.cs" Line="11" Column="31" />
+      <File FileName="Hermes.Website/Models/EnvNode.cs" Line="10" Column="36" />
+      <File FileName="Hermes.Website/Models/Environment.cs" Line="18" Column="13" />
+      <File FileName="Hermes.Website/wwwroot/js/graph.js" Line="147" Column="77" NotebookId="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Hermes" expanded="True">
-            <Node name="Hermes.Website" expanded="True" selected="True">
-              <Node name="Controllers" expanded="True" />
-              <Node name="Pages" expanded="True">
-                <Node name="Playground.cshtml" expanded="True" />
+            <Node name="Hermes.Website" expanded="True">
+              <Node name="Models" expanded="True">
+                <Node name="Environment.cs" selected="True" />
               </Node>
               <Node name="Services" expanded="True" />
+              <Node name="wwwroot" expanded="True">
+                <Node name="js" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>

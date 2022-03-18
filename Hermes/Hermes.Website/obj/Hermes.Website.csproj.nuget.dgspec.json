@@ -44,6 +44,7 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+<<<<<<< HEAD
           "dependencies": {
             "BibtexLibrary": {
               "target": "Package",
@@ -54,6 +55,8 @@
               "version": "[3.5.2, )"
             }
           },
+=======
+>>>>>>> csharp_build
           "imports": [
             "net461",
             "net462",
