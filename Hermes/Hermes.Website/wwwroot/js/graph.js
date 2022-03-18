@@ -1,4 +1,4 @@
-document.getElementById("uploadFile").addEventListener("change", function () {
+document.getElementById("fileInput").addEventListener("change", function () {
     let test;
     var fr = new FileReader();
     fr.onload = function () {
@@ -13,18 +13,6 @@ document.getElementById("uploadFile").addEventListener("change", function () {
     fr.readAsText(this.files[0]);
 
 })
-
-
-let test;
-var fr = new FileReader();
-fr.onload = function () {
-    test = fr.result
-    searchFile(test);
-    makeGraph();
-}
-let file = "api/texfile"
-
-fr.readAsText($.get(file));
 
 
 
@@ -178,7 +166,6 @@ function searchFile(fileText) {
             console.log(subCountSubsection + " " + subCountCreatedAt);
             if (subCountSubsection == subCountCreatedAt) {
                 // same sub amount
-                
                 
                 // Update Counters
                 newSubSection = new envNode(match.groups.typeName, node_dict[createdAt].createdAt, match.groups.type, [], envTypeDict[match.groups.type].counter);

@@ -1,15 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aHjsYjITlB50JyauiJv87q+HCRcEiyfMWxzfJYUFgxgm5RxLxfvuMH9D9RaaoE51dN7x6fyp3CwvrVqaZaOlGA==",
+  "dgSpecHash": "PL6z4quBNpBbG2cbrSRH8x8Nf4BftuIcg2cEjpQbIFjCepjyokcwtTKb4cPh4sP7u3TDLwpdU10wh/HyDMtMCA==",
   "success": true,
   "projectFilePath": "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/Hermes.Website.csproj",
-  "expectedPackageFiles": [
-    "/Users/sebs/.nuget/packages/node.js/0.12.7/node.js.0.12.7.nupkg.sha512",
-    "/Users/sebs/.nuget/packages/nogit/0.1.0/nogit.0.1.0.nupkg.sha512",
-    "/Users/sebs/.nuget/packages/npm/3.5.2/npm.3.5.2.nupkg.sha512",
-    "/Users/sebs/.nuget/packages/microsoft.netcore.app.ref/3.1.0/microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
-    "/Users/sebs/.nuget/packages/microsoft.aspnetcore.app.ref/3.1.10/microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
-    "/Users/sebs/.nuget/packages/microsoft.netcore.app.host.osx-x64/3.1.22/microsoft.netcore.app.host.osx-x64.3.1.22.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }
