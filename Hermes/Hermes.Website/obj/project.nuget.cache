@@ -1,15 +1,25 @@
 {
   "version": 2,
-  "dgSpecHash": "aHjsYjITlB50JyauiJv87q+HCRcEiyfMWxzfJYUFgxgm5RxLxfvuMH9D9RaaoE51dN7x6fyp3CwvrVqaZaOlGA==",
+  "dgSpecHash": "z9GDMJiErXMzBt9Y1fNiCQShl87gnVRBW5MJlCX4Uf6M2JBoLVe2+pXofiEMpeSbI+utvWqSRNjHvXadqHY2lg==",
   "success": true,
-  "projectFilePath": "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/Hermes.Website.csproj",
+  "projectFilePath": "C:\\Users\\jaffa\\OneDrive\\Skrivebord\\Bachelor\\GitRepo\\bTeX_project\\Hermes\\Hermes.Website\\Hermes.Website.csproj",
   "expectedPackageFiles": [
-    "/Users/sebs/.nuget/packages/node.js/0.12.7/node.js.0.12.7.nupkg.sha512",
-    "/Users/sebs/.nuget/packages/nogit/0.1.0/nogit.0.1.0.nupkg.sha512",
-    "/Users/sebs/.nuget/packages/npm/3.5.2/npm.3.5.2.nupkg.sha512",
-    "/Users/sebs/.nuget/packages/microsoft.netcore.app.ref/3.1.0/microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
-    "/Users/sebs/.nuget/packages/microsoft.aspnetcore.app.ref/3.1.10/microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
-    "/Users/sebs/.nuget/packages/microsoft.netcore.app.host.osx-x64/3.1.22/microsoft.netcore.app.host.osx-x64.3.1.22.nupkg.sha512"
+    "C:\\Users\\jaffa\\.nuget\\packages\\bibtexlibrary\\1.3.0\\bibtexlibrary.1.3.0.nupkg.sha512",
+    "C:\\Users\\jaffa\\.nuget\\packages\\node.js\\0.12.7\\node.js.0.12.7.nupkg.sha512",
+    "C:\\Users\\jaffa\\.nuget\\packages\\nogit\\0.1.0\\nogit.0.1.0.nupkg.sha512",
+    "C:\\Users\\jaffa\\.nuget\\packages\\npm\\3.5.2\\npm.3.5.2.nupkg.sha512",
+    "C:\\Users\\jaffa\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'BibtexLibrary 1.3.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "BibtexLibrary",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }

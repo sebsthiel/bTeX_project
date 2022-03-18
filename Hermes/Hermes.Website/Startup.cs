@@ -27,7 +27,8 @@ namespace Hermes.Website
             services.AddRazorPages();
             services.AddControllers();
             services.AddTransient<TexCompilerService>(); // adding Our Service so its available
-            
+
+            services.AddTransient<BibParserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

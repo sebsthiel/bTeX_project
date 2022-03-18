@@ -31,6 +31,7 @@
     ".NETCoreApp,Version=v3.1": {
       "Hermes.Website/1.0.0": {
         "dependencies": {
+          "BibtexLibrary": "1.3.0",
           "Npm": "3.5.2",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
@@ -320,6 +321,17 @@
         },
         "compile": {
           "Hermes.Website.dll": {}
+        }
+      },
+      "BibtexLibrary/1.3.0": {
+        "runtime": {
+          "lib/net45/BibtexLibrary.dll": {
+            "assemblyVersion": "1.3.0.0",
+            "fileVersion": "1.3.0.0"
+          }
+        },
+        "compile": {
+          "lib/net45/BibtexLibrary.dll": {}
         }
       },
       "Node.js/0.12.7": {},
@@ -2033,6 +2045,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "BibtexLibrary/1.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pYsemivdBEdo2UwVx3SdhvcuqcOb7ZrcJvRaud+ovqbpRZjFG2Cbw6hLw7cmRDjDrQzsXE/MiksUc2RWIEiguA==",
+      "path": "bibtexlibrary/1.3.0",
+      "hashPath": "bibtexlibrary.1.3.0.nupkg.sha512"
     },
     "Node.js/0.12.7": {
       "type": "package",

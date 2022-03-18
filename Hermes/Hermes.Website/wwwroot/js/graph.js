@@ -14,20 +14,6 @@ document.getElementById("uploadFile").addEventListener("change", function () {
 
 })
 
-
-let test;
-var fr = new FileReader();
-fr.onload = function () {
-    test = fr.result
-    searchFile(test);
-    makeGraph();
-}
-let file = "api/texfile"
-
-fr.readAsText($.get(file));
-
-
-
 //Label
 // ccould use this node for referencing articles
 // by adding a field "informationNode"

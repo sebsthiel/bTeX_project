@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "BibtexLibrary/1.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/BibtexLibrary.dll": {}
+        },
+        "runtime": {
+          "lib/net45/BibtexLibrary.dll": {}
+        }
+      },
       "Node.js/0.12.7": {
         "type": "package"
       },
@@ -21,6 +30,18 @@
     }
   },
   "libraries": {
+    "BibtexLibrary/1.3.0": {
+      "sha512": "pYsemivdBEdo2UwVx3SdhvcuqcOb7ZrcJvRaud+ovqbpRZjFG2Cbw6hLw7cmRDjDrQzsXE/MiksUc2RWIEiguA==",
+      "type": "package",
+      "path": "bibtexlibrary/1.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bibtexlibrary.1.3.0.nupkg.sha512",
+        "bibtexlibrary.nuspec",
+        "lib/net45/BibtexLibrary.dll"
+      ]
+    },
     "Node.js/0.12.7": {
       "sha512": "15c78ckXi3Zv6FWU5/1XrcIPiE+a+oK3xZLAEAHXWbHv2dy/ILBG2qGFPGW92dei3/JJ11mHWhB941tQ465A6w==",
       "type": "package",
@@ -3867,29 +3888,38 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "BibtexLibrary >= 1.3.0",
       "Npm >= 3.5.2"
     ]
   },
   "packageFolders": {
-    "/Users/sebs/.nuget/packages/": {}
+    "C:\\Users\\jaffa\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/Hermes.Website.csproj",
+      "projectUniqueName": "C:\\Users\\jaffa\\OneDrive\\Skrivebord\\Bachelor\\GitRepo\\bTeX_project\\Hermes\\Hermes.Website\\Hermes.Website.csproj",
       "projectName": "Hermes.Website",
-      "projectPath": "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/Hermes.Website.csproj",
-      "packagesPath": "/Users/sebs/.nuget/packages/",
-      "outputPath": "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/",
+      "projectPath": "C:\\Users\\jaffa\\OneDrive\\Skrivebord\\Bachelor\\GitRepo\\bTeX_project\\Hermes\\Hermes.Website\\Hermes.Website.csproj",
+      "packagesPath": "C:\\Users\\jaffa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jaffa\\OneDrive\\Skrivebord\\Bachelor\\GitRepo\\bTeX_project\\Hermes\\Hermes.Website\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/sebs/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\jaffa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nuget.pkg.github.com/jesper-bengtson/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
@@ -3907,6 +3937,10 @@
       "netcoreapp3.1": {
         "targetAlias": "netcoreapp3.1",
         "dependencies": {
+          "BibtexLibrary": {
+            "target": "Package",
+            "version": "[1.3.0, )"
+          },
           "Npm": {
             "target": "Package",
             "version": "[3.5.2, )"
@@ -3924,16 +3958,8 @@
         "warn": true,
         "downloadDependencies": [
           {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[3.1.10, 3.1.10]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.osx-x64",
+            "name": "Microsoft.NETCore.App.Host.win-x64",
             "version": "[3.1.22, 3.1.22]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[3.1.0, 3.1.0]"
           }
         ],
         "frameworkReferences": {
@@ -3944,8 +3970,20 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.200/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'BibtexLibrary 1.3.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "BibtexLibrary",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }

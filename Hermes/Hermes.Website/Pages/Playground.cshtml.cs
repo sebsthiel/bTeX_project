@@ -17,14 +17,17 @@ namespace Hermes.Website.Pages
 
         IWebHostEnvironment environment;
         public TexCompilerService CompilerService;
+        public BibParserService BibService;
 
 
         public PlaygroundModel(
             IWebHostEnvironment environment,
-            TexCompilerService compilerService)
+            TexCompilerService compilerService,
+            BibParserService bibService)
         {
             this.environment = environment;
             CompilerService = compilerService;
+            BibService = bibService;
            
         }
 
@@ -45,6 +48,7 @@ namespace Hermes.Website.Pages
         public async Task OnPostUploadAsync(IFormFile uploadFile)
         {
             await CompilerService.GetPdfAsync(uploadFile);
+            await BibService.ParseBibAsync(uploadFile);
 
             // //Pdf = CompilerService.GetPdf()
 
