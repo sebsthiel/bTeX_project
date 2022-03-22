@@ -30,6 +30,7 @@ namespace Hermes.Website.Services
          }
 
         private string pdfFileName;
+        private string texFileName;
 
         public async Task GetPdfAsync(IFormFile uploadFile){
             long size = uploadFile.Length;
@@ -104,7 +105,9 @@ namespace Hermes.Website.Services
             Console.WriteLine("output: " + compiledPdfPath);
             await process.StandardInput.WriteLineAsync("cd " + dirForTex);
             await process.StandardInput.WriteLineAsync("pdflatex -output-directory="+ compiledPdfPath + " " + fileToCompile);
-            pdfFileName = compiledPdfPath;
+            
+            pdfFileName = Path.GetFileNameWithoutExtension(fileToCompile) + ".pdf";
+            texFileName = Path.GetFileName(fileToCompile);
 
 
         }

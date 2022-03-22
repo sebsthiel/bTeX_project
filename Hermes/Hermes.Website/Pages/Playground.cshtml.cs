@@ -44,6 +44,7 @@ namespace Hermes.Website.Pages
 
         public async Task OnPostUploadAsync(IFormFile uploadFile)
         {
+            Console.WriteLine("WRONG");
             await CompilerService.GetPdfAsync(uploadFile);
 
             // //Pdf = CompilerService.GetPdf()
