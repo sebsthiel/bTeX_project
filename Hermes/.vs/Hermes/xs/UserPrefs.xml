@@ -1,32 +1,32 @@
 ﻿<Properties StartupConfiguration="{F40B3BCD-4DE2-4227-8331-F9EDE52002A3}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Hermes.Website/Services/TexParserService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Hermes.Website/Models/links.cs">
     <Files>
-      <File FileName="Hermes.Website/Services/TexParserService.cs" Line="34" Column="1" />
-      <File FileName="Hermes.Website/Models/Node.cs" Line="19" Column="10" />
-      <File FileName="Hermes.Website/Models/EnvNode.cs" Line="10" Column="36" />
-      <File FileName="Hermes.Website/Services/TexCompilerService.cs" Line="29" Column="1" />
-      <File FileName="Hermes.Website/Pages/Playground.cshtml.cs" Line="46" Column="10" />
-      <File FileName="Hermes.Website/Pages/Playground2.cshtml" Line="4" Column="38" />
-      <File FileName="Hermes.Website/Pages/Playground2.cshtml.cs" Line="19" Column="29" />
+      <File FileName="Hermes.Website/Services/TexParserService.cs" Line="40" Column="13" />
+      <File FileName="Hermes.Website/Models/Node.cs" Line="27" Column="25" />
+      <File FileName="Hermes.Website/Models/EnvNode.cs" Line="8" Column="17" />
+      <File FileName="Hermes.Website/Services/TexCompilerService.cs" />
+      <File FileName="Hermes.Website/Pages/Playground.cshtml.cs" />
+      <File FileName="Hermes.Website/Pages/Playground2.cshtml" />
+      <File FileName="Hermes.Website/Pages/Playground2.cshtml.cs" />
+      <File FileName="Hermes.Website/Models/ID_Generator.cs" Line="15" Column="25" />
+      <File FileName="Hermes.Website/Models/links.cs" Line="7" Column="18" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Hermes" expanded="True">
             <Node name="Hermes.Website" expanded="True">
-              <Node name="Models" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="links.cs" selected="True" />
+              </Node>
               <Node name="Pages" expanded="True">
                 <Node name="Playground.cshtml" expanded="True" />
                 <Node name="Playground2.cshtml" expanded="True" />
               </Node>
               <Node name="papers" expanded="True">
-                <Node name="tex" expanded="True">
-                  <Node name="single" expanded="True" />
-                </Node>
+                <Node name="tex" expanded="True" />
               </Node>
-              <Node name="Services" expanded="True">
-                <Node name="TexParserService.cs" selected="True" />
-              </Node>
+              <Node name="Services" expanded="True" />
               <Node name="wwwroot" expanded="True">
                 <Node name="js" expanded="True" />
               </Node>

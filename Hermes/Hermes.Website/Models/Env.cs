@@ -5,11 +5,11 @@ namespace Hermes.Website.Models
 {
     public class Env
     {
-        string name;
-        string text;
+        public string name;
+        public string text;
         public int counter;
-        List<string> countersShouldReset;
-        List<string> countersShouldUpdate;
+        public List<string> countersShouldReset;
+        public List<string> countersShouldUpdate;
 
         public Env(string name, string text, int counter, List<string> countersShouldReset, List<string> countersShouldUpdate)
         {

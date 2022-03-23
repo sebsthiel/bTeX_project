@@ -4,18 +4,32 @@ namespace Hermes.Website.Models
    
     public class Node
     {
-
+        public long ID { get; }
         protected string name;
-        protected Guid ID { get; }
-        protected Guid createdAt;
+        protected string createdAt;
         protected string type;
 
-        public Node(string name, Guid createdAt, string type)
+        public Node(string name, string createdAt, string type)
         {
             this.name = name;
-            ID = Guid.NewGuid();
+            ID = ID_Generator.GenerateID();
             this.createdAt = createdAt;
             this.type = type;
+        }
+
+        public string GetName()
+        {
+            return name;
+        }
+
+        public new string GetType()
+        {
+            return type;
+        }
+
+        internal string GetCreatedAt()
+        {
+            throw new NotImplementedException();
         }
     }
 }
