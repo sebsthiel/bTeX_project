@@ -1,0 +1,32 @@
+﻿@page
+@model Hermes.Website.Pages.BibParserModel
+@{
+    ViewData["Title"] = "BibParser";
+}
+
+<div class="text-center">
+    <h2 class="display-4">BibParser</h2>
+
+</div>
+
+<body>
+
+    <div id="fileUpload">
+        <form id="stuff" method="post" enctype="multipart/form-data" onsubmit="makeStuff()">
+            <input id="uploadFile" type = "file" name="uploadFile">
+            <input type="submit" asp-page-handler="Upload" class="btn" value="uploadFile">
+        </form>
+       
+    </div>
+
+    
+
+</body>
+
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<!--script type="module" src="~/js/graph.js" ></script>-->
+
+
+
+
+

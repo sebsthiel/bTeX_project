@@ -1,0 +1,72 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.Diagnostics;
+using Hermes.Website.Services;
+using Hermes.Website.Models;
+using System.Text.Json;
+using Newtonsoft.Json;
+
+namespace Hermes.Website.Pages
+{
+    public class BibParserModel : PageModel
+    {
+
+        IWebHostEnvironment environment;
+
+        public BibParserService BibService;
+
+        public BibParserModel(
+            IWebHostEnvironment environment,
+            BibParserService bibService)
+        {
+            this.environment = environment;
+            BibService = bibService;
+           
+        }
+
+        public string UploadFilePath { get; set; }
+       
+        public void OnGet()
+        {
+            Console.WriteLine("Testing from BibParser 123");
+            //BibService.ParseBib();
+            
+        }
+
+
+        public async Task OnPostUploadAsync(IFormFile uploadFile)
+        {
+            
+            List<PaperNode> paperNodes = await BibService.ParseBibAsync(uploadFile);
+            Console.WriteLine("=========================");
+            PrintPaperNodes(paperNodes);
+
+            //foreach(PaperNode node in paperNodes)
+            //{
+            //    Console.WriteLine(node.);
+            //}
+
+            string json = JsonConvert.SerializeObject(paperNodes.ToArray(), Formatting.Indented);
+            System.IO.File.WriteAllText(@"papers\bib\test.json", json);
+            
+        }
+
+        private void PrintPaperNodes(List<PaperNode> paperNodes)
+        {
+            foreach (PaperNode node in paperNodes)
+            {
+                Console.WriteLine("Node: " + node.title);
+            }
+        }
+
+    }
+
+} 
+

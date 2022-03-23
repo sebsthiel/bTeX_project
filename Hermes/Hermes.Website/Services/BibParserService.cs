@@ -1,15 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
+using System.Text;
 using System.Threading.Tasks;
 using BibtexLibrary;
+using imbSCI.BibTex;
+using Hermes.Website.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
+using imbSCI.Core.extensions.text;
+using imbSCI.Core.style.preset;
+using imbSCI.Data.enums.fields;
+using imbSCI.DataComplex.data;
+using imbSCI.DataComplex.extensions.data.formats;
+using imbSCI.DataComplex.tables;
+using System;
+using System.Data;
+using System.Drawing;
+using System.IO;
+
 namespace Hermes.Website.Services
 {
-    public class BibParserService
+    public class BibParserService : TestMicroEnvironmentBase
     {
         public BibParserService(IWebHostEnvironment webHostEnvironment)
         {
@@ -18,23 +32,12 @@ namespace Hermes.Website.Services
 
         public IWebHostEnvironment WebHostEnvironment { get; }
 
-        public string PdfFileName
+        public String testString = "**TestString Defined in BibParserService**";
+
+        public void ParseBib()
         {
-            //TODO Make dynamic
-            get { return Path.Combine(WebHostEnvironment.ContentRootPath, "papers/pdfs/article/", "article.pdf"); }
-        }
 
-        public string TexFileName
-        {
-            get { return Path.Combine(WebHostEnvironment.ContentRootPath, "papers/tex/Archive/", "article.tex"); }
-
-        }
-
-        private string pdfFileName;
-
-        public async Task ParseBibAsync(IFormFile file)
-        {
-            BibtexFile f = BibtexLibrary.BibtexImporter.FromString(@"@book{ aaker:1981a,
+            /*BibtexFile f = BibtexLibrary.BibtexImporter.FromString(@"@book{ aaker:1981a,
                                                                       author = {David A. Aaker},
                                                                       title = {Multivariate Analysis in Marketing},
                                                                       edition = {2},
@@ -43,67 +46,66 @@ namespace Hermes.Website.Services
                                                                       address = {Palo Alto},
                                                                       topic = {multivariate-statistics;market-research;}
                                                                      }");
-
+            //imbSCI.BibTex.
             foreach (BibtexEntry entry in f.Entries)
             {
                 Console.WriteLine(entry.Tags["author"]);
-            }
+            }*/
+
         }
 
-        public async Task GetPdfAsync(IFormFile uploadFile)
+        /*public async Task<List<PaperNode>> NewParseBibAsync(IFormFile uploadFile)
         {
-            long size = uploadFile.Length;
+            Console.WriteLine("Hello from BibParserService!");
+            BibTexDataFile bib_1 = new BibTexDataFile("papers/bib/test.bib");
+            //BibTexDataFile bib_2 = uploadFile;
+            // Converting BibTex data into object model dictionary
+            BibTexCollection<BibTexEntryModel> model = bib_1.ConvertToModel<BibTexEntryModel>(log);
+            Console.WriteLine("Bib1 : " + bib_1.name);
+            //Console.WriteLine("Bib1 2 : " + bib_1);
 
-            if (size <= 0) return;
-
-            var fileToCompile = "";
-            var dirForTex = "";
-
-            var texFilePath = Directory.GetCurrentDirectory() + "/papers/tex/single/" + "outputFile.tex";
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/papers/tex/single/");
-            using (var stream = System.IO.File.Create(texFilePath))
+            // Printing [Author : Title] to a ILogBuilder log builder
+            foreach (var pair in model)
             {
-                await uploadFile.CopyToAsync(stream);
+                Console.WriteLine("*pair*");
+                log.log(pair.author.or("Unknown") + ": " + pair.title);
             }
-            fileToCompile = texFilePath;
-
-            Process process = new Process
-            {
-                StartInfo = new ProcessStartInfo
-                {
-                    FileName = "bash",
-                    RedirectStandardInput = true,
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    UseShellExecute = false
-                }
-            };
-            process.Start();
-            var compiledPdfPath = Directory.GetCurrentDirectory() + "/papers/pdfs/" + Path.GetFileNameWithoutExtension(fileToCompile) + "/";
-            Directory.CreateDirectory(compiledPdfPath);
-            DeleteContentInDir(compiledPdfPath);
-            Console.WriteLine("Current path: " + Directory.GetCurrentDirectory());
-            Console.WriteLine("File: " + fileToCompile);
-            Console.WriteLine("output: " + compiledPdfPath);
-            await process.StandardInput.WriteLineAsync("cd " + dirForTex);
-            await process.StandardInput.WriteLineAsync("pdflatex -output-directory=" + compiledPdfPath + " " + fileToCompile);
-            pdfFileName = compiledPdfPath;
+            Console.WriteLine("LogContent: " + log.logContent);
+            
+        }*/
 
 
-        }
-
-        private static void DeleteContentInDir(string zipFilePath)
+        public async Task<List<PaperNode>> ParseBibAsync(IFormFile uploadFile)
         {
-            System.IO.DirectoryInfo di = new DirectoryInfo(zipFilePath);
-            foreach (FileInfo file in di.EnumerateFiles())
-            {
-                file.Delete();
-            }
-            foreach (DirectoryInfo dir in di.EnumerateDirectories())
-            {
-                dir.Delete(true);
-            }
+            string fileAsString = await ReadAsStringAsync(uploadFile);
+            List<PaperNode> paperNodes = makePaperNode(fileAsString);
+
+            return paperNodes;
         }
+
+        private List<PaperNode> makePaperNode(string fileString)
+        {
+            List<PaperNode> paperNodes = new List<PaperNode>();
+            BibtexFile f = BibtexImporter.FromString(fileString);
+            foreach (BibtexEntry entry in f.Entries)
+            {
+                PaperNode pn = new PaperNode(entry.Key, Guid.NewGuid(), "paper", entry.Type, entry.Tags["TITLE"]);
+                paperNodes.Add(pn);
+            }
+            return paperNodes;
+        }
+
+        public static async Task<string> ReadAsStringAsync(IFormFile file)
+        {
+            var result = new StringBuilder();
+            using (var reader = new StreamReader(file.OpenReadStream()))
+            {
+                while (reader.Peek() >= 0)
+                    result.AppendLine(await reader.ReadLineAsync());
+            }
+            return result.ToString();
+        }
+
     }
 
 }
