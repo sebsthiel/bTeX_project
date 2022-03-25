@@ -14,8 +14,6 @@ document.getElementById("fileInput").addEventListener("change", function () {
 
 })
 
-
-
 //Label
 // ccould use this node for referencing articles
 // by adding a field "informationNode"

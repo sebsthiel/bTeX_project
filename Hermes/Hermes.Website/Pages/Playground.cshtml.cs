@@ -18,24 +18,26 @@ namespace Hermes.Website.Pages
         IWebHostEnvironment environment;
         public TexCompilerService CompilerService;
 
+        public BibParserService BibService;
 
         public PlaygroundModel(
             IWebHostEnvironment environment,
-            TexCompilerService compilerService)
+            TexCompilerService compilerService,
+            BibParserService bibService)
         {
             this.environment = environment;
             CompilerService = compilerService;
-           
+            BibService = bibService;
         }
 
 
-        public FileStream pdf{get; private set;}
+        public FileStream pdf { get; private set; }
 
         //public String testString {get; set; }
 
         //[BindProperty]
         public string UploadFilePath { get; set; }
-       
+
         public void OnGet()
         {
         }
@@ -44,8 +46,13 @@ namespace Hermes.Website.Pages
 
         public async Task OnPostUploadAsync(IFormFile uploadFile)
         {
+<<<<<<< HEAD
             Console.WriteLine("WRONG");
             await CompilerService.GetPdf2Async(uploadFile);
+=======
+            
+            await CompilerService.GetPdfAsync(uploadFile);
+>>>>>>> origin/bib_csharp
 
             // //Pdf = CompilerService.GetPdf()
 
@@ -104,5 +111,4 @@ namespace Hermes.Website.Pages
 
     }
 
-} 
-
+}

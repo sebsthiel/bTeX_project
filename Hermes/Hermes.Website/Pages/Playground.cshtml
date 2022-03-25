@@ -4,14 +4,13 @@
     ViewData["Title"] = "Playground";
 }
 <style>
-
     .node {
         fill: #ccc;
         stroke: black;
         stroke-width: 2px;
     }
 
-    .labels{
+    .labels {
         font-size: 13px;
         text-anchor: middle;
         font-weight: "bold";
@@ -24,7 +23,6 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-
     }
 
     .link {
@@ -32,7 +30,7 @@
         stroke-width: 2px;
     }
 
-    .node.section{
+    .node.section {
         fill: blue;
     }
 
@@ -40,16 +38,18 @@
         position: absolute;
         width: 30px;
     }
-    button#slow {
-        margin-top: 28px;
-    }
-    button#play {
-        margin-top: 54px;
-    }
-    button#reset {
-        margin-top: 80px;
-    }
 
+        button#slow {
+            margin-top: 28px;
+        }
+
+        button#play {
+            margin-top: 54px;
+        }
+
+        button#reset {
+            margin-top: 80px;
+        }
 </style>
 
 
@@ -66,26 +66,22 @@
     <div id="d3graph"></div>
 
     <div id="pdfviewer">
-        <embed id= "outputPdf" src="api/pdf" width="500" height="375" type="application/pdf">
+        <embed id="outputPdf" src="api/pdf" width="500" height="375" type="application/pdf">
 
     </div>
 
     <div id="fileUpload">
         <form id="stuff" method="post" enctype="multipart/form-data" onsubmit="makeStuff()">
-            <input id="uploadFile" type = "file" name="uploadFile">
+            <input id="uploadFile" type="file" name="uploadFile">
             <input type="submit" asp-page-handler="Upload" class="btn" value="uploadFile">
 
         </form>
-       
+
     </div>
 
-    
+
 
 </body>
 
 <script src="https://d3js.org/d3.v3.min.js"></script>
-<script type="module" src="~/js/graph.js" ></script>
-
-
-
-
+<script type="module" src="~/js/graph.js"></script>
