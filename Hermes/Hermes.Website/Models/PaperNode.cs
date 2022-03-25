@@ -4,15 +4,22 @@ namespace Hermes.Website.Models
 {
     public class PaperNode : Node
     {
-        public string paperType { get; }
-        public string title { get; }
+        public string paperType, author, title, note, journal, fJournal, volume, year, pages, issn, 
+                      mrClass, mrNumber, doi, url, key, series, month, number, isbn, organization, 
+                      publisher, mrReviewer, booktitle;
         /*tilføj anden information vi vil vide om en Article*/
 
-        public PaperNode(string name, Guid createdAt, string type, string paperType, string title)
+        public string getName()
+        {
+            return name;
+        }
+
+        public PaperNode(string name, Guid createdAt, string type)
             : base(name, createdAt, type)
         {
-            this.paperType = paperType;
-            this.title = title;
+
         }
+        
+
     }
 }

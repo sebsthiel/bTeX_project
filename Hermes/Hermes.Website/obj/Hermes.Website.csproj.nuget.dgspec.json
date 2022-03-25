@@ -45,10 +45,6 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
-            "BibtexLibrary": {
-              "target": "Package",
-              "version": "[1.3.0, )"
-            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
@@ -56,10 +52,6 @@
             "Npm": {
               "target": "Package",
               "version": "[3.5.2, )"
-            },
-            "imbSCI.BibTex": {
-              "target": "Package",
-              "version": "[0.9.9, )"
             }
           },
           "imports": [

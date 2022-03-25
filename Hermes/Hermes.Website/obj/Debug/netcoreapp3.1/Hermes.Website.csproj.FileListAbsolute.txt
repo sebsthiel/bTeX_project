@@ -74,14 +74,6 @@ C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.W
 C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\obj\Debug\netcoreapp3.1\Hermes.Website.pdb
 C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\obj\Debug\netcoreapp3.1\Hermes.Website.genruntimeconfig.cache
 C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\obj\Debug\netcoreapp3.1\Hermes.Website.csproj.CopyComplete
-C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\bin\Debug\netcoreapp3.1\BibtexLibrary.dll
-C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\obj\Debug\netcoreapp3.1\Razor\Pages\BibParser.cshtml.g.cs
 C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
-C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\bin\Debug\netcoreapp3.1\EPPlus.dll
-C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\bin\Debug\netcoreapp3.1\imbSCI.BibTex.dll
-C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\bin\Debug\netcoreapp3.1\imbSCI.Core.dll
-C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\bin\Debug\netcoreapp3.1\imbSCI.Data.dll
-C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\bin\Debug\netcoreapp3.1\imbSCI.DataComplex.dll
-C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\bin\Debug\netcoreapp3.1\MathNet.Numerics.dll
-C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
 C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\bin\Debug\netcoreapp3.1\papers\bib\test.json
+C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\obj\Debug\netcoreapp3.1\Razor\Pages\MyBibParser.cshtml.g.cs

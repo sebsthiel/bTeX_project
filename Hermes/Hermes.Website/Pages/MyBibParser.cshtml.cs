@@ -35,34 +35,35 @@ namespace Hermes.Website.Pages
        
         public void OnGet()
         {
-            Console.WriteLine("Testing from BibParser 123");
-            //BibService.ParseBib();
+            Console.WriteLine("Got BibParserPage");
+            //BibService.NewParseBibAsync();
+            Console.WriteLine("Done Parsing file");
             
         }
 
 
         public async Task OnPostUploadAsync(IFormFile uploadFile)
         {
-            
-            List<PaperNode> paperNodes = await BibService.ParseBibAsync(uploadFile);
-            Console.WriteLine("=========================");
+            Console.WriteLine("Posted Someting in BibParser");
+
+            List<PaperNode> paperNodes = await BibService.ParseBibFile(uploadFile);
+            //List<PaperNode> paperNodes = await BibService.ParseBibAsync(uploadFile);
+            //PrintPaperNodes(paperNodes);
+
+            //string json = JsonConvert.SerializeObject(paperNodes.ToArray(), Formatting.Indented);
+            //System.IO.File.WriteAllText(@"papers\bib\test.json", json);
             PrintPaperNodes(paperNodes);
-
-            //foreach(PaperNode node in paperNodes)
-            //{
-            //    Console.WriteLine(node.);
-            //}
-
-            string json = JsonConvert.SerializeObject(paperNodes.ToArray(), Formatting.Indented);
-            System.IO.File.WriteAllText(@"papers\bib\test.json", json);
-            
         }
 
         private void PrintPaperNodes(List<PaperNode> paperNodes)
         {
             foreach (PaperNode node in paperNodes)
             {
-                Console.WriteLine("Node: " + node.title);
+                Console.WriteLine("============================");
+                Console.WriteLine("|ID   | " + node.getName());
+                Console.WriteLine("|TYPE | " + node.paperType);
+                Console.WriteLine("|TITLE| " + node.title);
+                
             }
         }
 
