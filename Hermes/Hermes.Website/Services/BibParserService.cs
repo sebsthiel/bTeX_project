@@ -62,7 +62,7 @@ namespace Hermes.Website.Services
                 {
                     Console.WriteLine("PaperID: " + paperId);
                     if (currentPaper != null){ paperList.Add(currentPaper);}
-                    currentPaper = new PaperNode(paperId, Guid.NewGuid(), "Paper");
+                    currentPaper = new PaperNode(paperId, "BibFile", "Paper");
                 }
                 if (paperType != null && paperType != "") 
                 {
@@ -152,118 +152,7 @@ namespace Hermes.Website.Services
             if (currentPaper != null) { paperList.Add(currentPaper); }
             return paperList;
         }
-        /*function searchFile(fileText)
-        {
-            
-
-            let match = regex.exec(fileText);
-                    let currentPaper = null;
-                    do
-                    {
-                        if (match.groups.type != null)
-                        {
-
-                            //Adds the previous paper to the list
-                            if (currentPaper != null) { paperList.push(currentPaper); }
-
-                            //Creates new paper with type and ID
-                            currentPaper = new paper(match.groups.type);
-                            currentPaper.id = match.groups.id;
-
-                            //console.log(`A new paper of type ${match.groups.type} with name/id ${match.groups.id} has been defined`);
-                        }
-                        else if (match.groups.artInfo != null)
-                        {
-                            //Adds the paper info (such as title, year etc) to the current paper with the value of the info
-                            let artInfo = match.groups.artInfo.toLowerCase();
-                            let artInfoValue = match.groups.artInfoValue;
-                            switch (artInfo)
-                            {
-                                case "author":
-                                    currentPaper.setAuthor(artInfoValue);
-                                    break;
-                                case "title":
-                                    currentPaper.setTitle(artInfoValue);
-                                    break;
-                                case "note":
-                                    currentPaper.setNote(artInfoValue);
-                                    break;
-                                case "journal":
-                                    currentPaper.setJournal(artInfoValue);
-                                    break;
-                                case "fjournal":
-                                    currentPaper.setFjournal(artInfoValue);
-                                    break;
-                                case "volume":
-                                    currentPaper.setVolume(artInfoValue);
-                                    break;
-                                case "year":
-                                    currentPaper.setYear(artInfoValue);
-                                    break;
-                                case "pages":
-                                    currentPaper.setPages(artInfoValue);
-                                    break;
-                                case "issn":
-                                    currentPaper.setISSN(artInfoValue);
-                                    break;
-                                case "mrclass":
-                                    currentPaper.setMrClass(artInfoValue);
-                                    break;
-                                case "mrnumber":
-                                    currentPaper.setMrNumber(artInfoValue);
-                                    break;
-                                case "mrreviewer":
-                                    currentPaper.setMrReviewer(artInfoValue);
-                                    break;
-                                case "doi":
-                                    currentPaper.setDOI(artInfoValue);
-                                    break;
-                                case "url":
-                                    currentPaper.setURL(artInfoValue);
-                                    break;
-                                case "key":
-                                    currentPaper.setKey(artInfoValue);
-                                    break;
-                                case "organization":
-                                    currentPaper.setOrganization(artInfoValue);
-                                    break;
-                                case "publisher":
-                                    currentPaper.setPublisher(artInfoValue);
-                                    break;
-                                case "series":
-                                    currentPaper.setSeries(artInfoValue);
-                                    break;
-                                case "booktitle":
-                                    currentPaper.setBookTitle(artInfoValue);
-                                    break;
-                                case "month":
-                                    currentPaper.setMonth(artInfoValue);
-                                    break;
-                                case "number":
-                                    currentPaper.setNumber(artInfoValue);
-                                    break;
-                                case "isbn":
-                                    currentPaper.setISBN(artInfoValue);
-                                    break;
-                                default:
-                                    //console.log(`${artInfo} doesn't match any cases`);
-                            }
-                            //console.log(`Paper ${currentPaper.id} has the ${artInfo} with value ${artInfoValue}`);
-
-                        }
-
-
-                    } while ((match = regex.exec(fileText)) !== null);
-                    // Adds the last paper to the list
-                    if (currentPaper != null) { paperList.push(currentPaper); }
-                    console.log(paperList.length);
-                    for (let i = 0; i < paperList.length; i++)
-                    {
-                        console.log(`PaperList[${ i}]: ${ paperList[i].id}`);
-                }
-            }
-        }*/
-
+       
 
         public static async Task<string> ReadAsStringAsync(IFormFile file)
         {

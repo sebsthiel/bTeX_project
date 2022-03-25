@@ -26,15 +26,12 @@ namespace Hermes.Website
         {
             services.AddRazorPages();
             services.AddControllers();
-<<<<<<< HEAD
             services.AddSingleton<TexCompilerService>(); // adding Our Service so its available
             services.AddTransient<TexParserService>();
             
-=======
-            services.AddTransient<TexCompilerService>(); // adding Our Service so its available
+    
 
             services.AddTransient<BibParserService>();
->>>>>>> origin/bib_csharp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

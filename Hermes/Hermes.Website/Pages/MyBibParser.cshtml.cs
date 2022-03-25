@@ -11,7 +11,6 @@ using System.Diagnostics;
 using Hermes.Website.Services;
 using Hermes.Website.Models;
 using System.Text.Json;
-using Newtonsoft.Json;
 
 namespace Hermes.Website.Pages
 {
