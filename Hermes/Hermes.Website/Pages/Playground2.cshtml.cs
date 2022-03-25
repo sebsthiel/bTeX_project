@@ -41,18 +41,40 @@ namespace Hermes.Website.Pages
 
         public void OnGet()
         {
+            Console.WriteLine("HELLO");
         }
 
+        public string PdfPath;
 
 
-        public async Task OnPostUploadAsync(IFormFile uploadFile)
+
+        public async Task<IActionResult> OnPostUploadAsync(IFormFile uploadFile)
         {
-            Console.WriteLine("Hallo");
-            await CompilerService.GetPdfAsync(uploadFile);
+            Console.WriteLine("USER: ");
+            /*
+                Når vi laver en post request med en upload fil laver vi også en Guid
+                Som kommer til at fungere som key for at få vores pdf fil i dictionary
 
-            ParserService.ParseTex(CompilerService.TexFileName);
+                Hvis det ikke virker så se om der er en måde at identificere brugere ellers
+
+
+            */
+            //https://www.pragimtech.com/blog/blazor/asp.net-core-rest-api-get-by-id/
+            // create Guid which is the key and ID for httpget[id]
+
+
+            // 
+            Console.WriteLine("POST");
+            await CompilerService.GetPdf2Async(uploadFile);
+            PdfPath = CompilerService.GetPdf;
+            //var t = CompilerService.PdfFileName;
+
+            //ParserService.ParseTex(CompilerService.TexFileName);
+
+            return RedirectToPage("./Playground2");
 
         }
+
 
     }
 

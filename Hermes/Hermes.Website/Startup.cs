@@ -26,7 +26,7 @@ namespace Hermes.Website
         {
             services.AddRazorPages();
             services.AddControllers();
-            services.AddTransient<TexCompilerService>(); // adding Our Service so its available
+            services.AddSingleton<TexCompilerService>(); // adding Our Service so its available
             services.AddTransient<TexParserService>();
             
         }

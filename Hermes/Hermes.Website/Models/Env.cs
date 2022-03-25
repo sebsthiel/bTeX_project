@@ -20,6 +20,7 @@ namespace Hermes.Website.Models
             this.countersShouldUpdate = countersShouldUpdate;
         }
 
+
         public void AddToCounterShouldReset(string envName)
         {
             countersShouldReset.Add(envName);

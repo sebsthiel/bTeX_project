@@ -1,12 +1,12 @@
 ﻿using System;
 namespace Hermes.Website.Models
 {
-    public class links
+    public class Link
     {
 
         public string source, target, type;
 
-        public links(string source, string target, string type)
+        public Link(string source, string target, string type)
         {
             this.source = source;
             this.target = target;

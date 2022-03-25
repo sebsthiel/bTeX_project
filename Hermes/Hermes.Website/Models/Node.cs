@@ -27,9 +27,9 @@ namespace Hermes.Website.Models
             return type;
         }
 
-        internal string GetCreatedAt()
+        public string GetCreatedAt()
         {
-            throw new NotImplementedException();
+            return createdAt;
         }
     }
 }

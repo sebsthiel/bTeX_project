@@ -3,8 +3,8 @@ namespace Hermes.Website.Models
 {
     public class EnvNode : Node
     {
-        int counter;
-        public EnvNode(string name, long createdAt, string type, int counter)
+        public int counter;
+        public EnvNode(string name, string createdAt, string type, int counter)
             : base(name, createdAt, type)
         {
             this.counter = counter;

@@ -24,9 +24,7 @@ namespace Hermes.Website.Services
 
         Dictionary<string, Node> nodeDict = new Dictionary<string, Node>();
 
-        List<Link> linksList = new();
-
-        
+        List<Link> linksList = new List<Link>();
 
         string outerEnv;
         string createdAt;
@@ -52,6 +50,9 @@ namespace Hermes.Website.Services
             
             foreach (Match match in Regex.Matches(text, pattern, options))
             {
+
+                
+
                 Node node1;
                 GroupCollection groups = match.Groups;
                 if(groups["type"].Value == "section")
@@ -61,8 +62,10 @@ namespace Hermes.Website.Services
 
                     UpdateCounters("section");
 
-                    var createdAtName = groups["typeName"].Value;
-                    createdAt = nodeDict[createdAtName].GetName();
+                    createdAt = groups["typeName"].Value;
+
+                    //var createdAtName = groups["typeName"].Value;
+                    //createdAt = nodeDict[createdAtName].GetName();
 
                     //add section to dict
                     nodeDict.Add(newEnvNode.GetName(), newEnvNode);
@@ -103,8 +106,6 @@ namespace Hermes.Website.Services
                         createdAt = newSubSection.GetName();
 
 
-
-
                     }
                     else
                     {
@@ -138,9 +139,9 @@ namespace Hermes.Website.Services
                 }
                 else if (groups["type"].Value.StartsWith("cite"))
                 {
-                    throw new Exception("Not implemented -> test when parsed bib");
-                    Link link = new Link(createdAt, groups["typeName"].Value, "cite");
-                    linksList.Add(link);
+                    //throw new Exception("Not implemented -> test when parsed bib");
+                    //Link link = new Link(createdAt, groups["typeName"].Value, "cite");
+                    //linksList.Add(link);
                 }
                 else if (groups["type"].Value == "begin")
                 {
@@ -150,13 +151,14 @@ namespace Hermes.Website.Services
                         continue;
                     }
 
-                    var thisEnvCount = calTotalCount(createdAt) + envTypeDict[groups["typeName"].Value].counter;
+                    var thisEnvCount = CalTotalCount(createdAt) + envTypeDict[groups["typeName"].Value].counter;
 
                     var newEnvNodeName = groups["typeName"].Value + " " + thisEnvCount;
 
                     // TODO what do we do about counter?? should it be string or what?
                     //var newEnvNode = new EnvNode(newEnvNodeName, createdAt, groups["typeName"].Value, thisEnvCount);
-                    var newEnvNode = new EnvNode(newEnvNodeName, createdAt, groups["typeName"].Value, envTypeDict[groups["type"].Value].counter);
+                    Console.WriteLine(groups["type"].Value + " " + groups["typeName"].Value );
+                    var newEnvNode = new EnvNode(newEnvNodeName, createdAt, groups["typeName"].Value, envTypeDict[groups["typeName"].Value].counter);
 
                     nodeDict[newEnvNodeName] = newEnvNode;
 
@@ -233,33 +235,42 @@ namespace Hermes.Website.Services
 
                 }
 
-
-
-                
-                
-
             }
 
             Console.WriteLine("DONE PARSING");
 
 
 
-
         }
 
-        private string calTotalCount(string createdAt)
+        private string CalTotalCount(string createdAt)
         {
-            throw new NotImplementedException();
+            var newCreatedAt = createdAt;
+            string acc = "";
+            while( nodeDict.ContainsKey( newCreatedAt))
+            {
+                EnvNode t = (EnvNode)nodeDict[newCreatedAt];
+                acc = t.counter + "." + acc;
+                newCreatedAt = nodeDict[newCreatedAt].GetCreatedAt();
+            }
+            return acc;
         }
 
         private string subSection2Section(string createdAt, int differenceInSubCount)
         {
-            throw new NotImplementedException();
+            var newCreatedAt = createdAt;
+            for (int i = 0; i < differenceInSubCount; i++)
+            {
+                newCreatedAt = nodeDict[newCreatedAt].GetCreatedAt();
+            }
+            return nodeDict[newCreatedAt].GetCreatedAt();
         }
 
-        private int subCount(string value)
+        private int subCount(string section)
         {
-            throw new NotImplementedException();
+            var regex = @"sub";
+            return Regex.Matches(section, regex).Count;
+
         }
 
         private void UpdateCounters(string envName)

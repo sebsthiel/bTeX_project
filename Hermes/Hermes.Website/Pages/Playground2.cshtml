@@ -66,20 +66,24 @@
     <div id="d3graph"></div>
 
     <div id="pdfviewer">
-        <embed id= "outputPdf" src="api/pdf" width="500" height="375" type="application/pdf">
+        <embed id="outputPdf" src="api/pdf" width="500" height="375" type="application/pdf">
 
     </div>
 
     <div id="fileUpload">
-        <form id="stuff" method="post" enctype="multipart/form-data" onsubmit="makeStuff()">
-            <input id="uploadFile" type = "file" name="uploadFile">
+        <form id="stuff" method="post" enctype="multipart/form-data">
+            <input id="uploadFile" type="file" name="uploadFile">
             <input type="submit" asp-page-handler="Upload" class="btn" value="uploadFile">
 
         </form>
-       
+        
+
     </div>
 
+
     
+
+
 
 </body>
 

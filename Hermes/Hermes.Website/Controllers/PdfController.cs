@@ -27,8 +27,16 @@ namespace Hermes.Website.Controllers
         public IActionResult Get()
         {
             //return CompilerService.GetPdf();
-            Console.WriteLine("PDFFileName: " + CompilerService.PdfFileName);
-            FileStream stream = new FileStream(CompilerService.PdfFileName, FileMode.Open);
+            var tmp = CompilerService.GetPdf;
+            Console.WriteLine("Get PDF: " + tmp );
+            FileStream stream;
+            if (tmp == null){
+                stream = new FileStream("/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/tester/main.pdf", FileMode.Open);
+            }
+            else{
+                 stream = new FileStream(tmp, FileMode.Open);
+            }
+           
             
             return new FileStreamResult(stream, "application/pdf");
             
