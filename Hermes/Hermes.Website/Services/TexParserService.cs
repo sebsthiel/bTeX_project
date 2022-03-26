@@ -140,8 +140,8 @@ namespace Hermes.Website.Services
                 else if (groups["type"].Value.StartsWith("cite"))
                 {
                     //throw new Exception("Not implemented -> test when parsed bib");
-                    //Link link = new Link(createdAt, groups["typeName"].Value, "cite");
-                    //linksList.Add(link);
+                    Link link = new Link(createdAt, groups["typeName"].Value, "cite");
+                    linksList.Add(link);
                 }
                 else if (groups["type"].Value == "begin")
                 {
@@ -237,6 +237,12 @@ namespace Hermes.Website.Services
 
             }
 
+
+
+            foreach (var key in nodeDict.Keys){
+                Console.WriteLine(nodeDict[key].GetName());
+            }
+            
             Console.WriteLine("DONE PARSING");
 
 
@@ -285,6 +291,25 @@ namespace Hermes.Website.Services
             }
 
             
+        }
+
+
+        public Dictionary<string,Node> GetNodes(){
+            return nodeDict;
+        }
+
+        public List<Link> GetLinks(){
+            return linksList;
+        }
+
+
+        public void AddToNodeDict(List<Node> newNodes){
+
+            foreach (Node node in newNodes)
+            {
+                nodeDict.Add(node.GetName(),node);
+            }
+
         }
     }
 }

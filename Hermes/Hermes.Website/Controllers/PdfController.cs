@@ -26,10 +26,12 @@ namespace Hermes.Website.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            //return CompilerService.GetPdf();
+            
             var tmp = CompilerService.GetPdf;
             Console.WriteLine("Get PDF: " + tmp );
             FileStream stream;
+
+            // tmp code. If no pdf uploaded return test.pdf
             if (tmp == null){
                 stream = new FileStream("/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/tester/main.pdf", FileMode.Open);
             }

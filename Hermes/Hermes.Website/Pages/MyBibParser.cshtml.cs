@@ -45,7 +45,7 @@ namespace Hermes.Website.Pages
         {
             Console.WriteLine("Posted Someting in BibParser");
 
-            List<PaperNode> paperNodes = await BibService.ParseBibFile(uploadFile);
+            List<Node> paperNodes = await BibService.ParseBibFile("uploadFile");
             //List<PaperNode> paperNodes = await BibService.ParseBibAsync(uploadFile);
             //PrintPaperNodes(paperNodes);
 
@@ -54,7 +54,7 @@ namespace Hermes.Website.Pages
             PrintPaperNodes(paperNodes);
         }
 
-        private void PrintPaperNodes(List<PaperNode> paperNodes)
+        private void PrintPaperNodes(List<Node> paperNodes)
         {
             foreach (PaperNode node in paperNodes)
             {

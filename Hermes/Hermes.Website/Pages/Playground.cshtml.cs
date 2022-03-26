@@ -44,10 +44,10 @@ namespace Hermes.Website.Pages
 
 
 
-        public async Task OnPostUploadAsync(IFormFile uploadFile)
+        public void Test(IFormFile uploadFile)
         {
             Console.WriteLine("WRONG");
-            await CompilerService.GetPdf2Async(uploadFile);
+            //await CompilerService.GetPdf2Async(uploadFile);
 
             // //Pdf = CompilerService.GetPdf()
 

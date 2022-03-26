@@ -1,6 +1,5 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "rBAR2wacSiaT5RNS7NesVoaYzkp21PJ2Ig+zWMQqED5CZx2wWLX8Iyuh6UfB9YbhyeVQVb+GNa8x6/XmJxcV+Q==",
   "success": true,
   "projectFilePath": "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/Hermes.Website.csproj",
@@ -8,17 +7,6 @@
     "/Users/sebs/.nuget/packages/microsoft.netcore.app.ref/3.1.0/microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
     "/Users/sebs/.nuget/packages/microsoft.aspnetcore.app.ref/3.1.10/microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
     "/Users/sebs/.nuget/packages/microsoft.netcore.app.host.osx-x64/3.1.22/microsoft.netcore.app.host.osx-x64.3.1.22.nupkg.sha512"
-=======
-  "dgSpecHash": "OODufRAjQIyvwqsEaUry5k2rO07lrAsxigV7BwsHKXZY/0uRFey4DLAE5fG83qdKtB8vtuHq+PwRPS4uTyUpUw==",
-  "success": true,
-  "projectFilePath": "C:\\Users\\jaffa\\OneDrive\\Skrivebord\\Bachelor\\GitRepo\\bTeX_project\\Hermes\\Hermes.Website\\Hermes.Website.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\jaffa\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
-    "C:\\Users\\jaffa\\.nuget\\packages\\node.js\\0.12.7\\node.js.0.12.7.nupkg.sha512",
-    "C:\\Users\\jaffa\\.nuget\\packages\\nogit\\0.1.0\\nogit.0.1.0.nupkg.sha512",
-    "C:\\Users\\jaffa\\.nuget\\packages\\npm\\3.5.2\\npm.3.5.2.nupkg.sha512",
-    "C:\\Users\\jaffa\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512"
->>>>>>> origin/bib_csharp
   ],
   "logs": []
 }

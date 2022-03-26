@@ -27,8 +27,8 @@ namespace Hermes.Website.Controllers
         public IActionResult Get()
         {
             //return CompilerService.GetPdf();
-            Console.WriteLine("PDFFileName: " + CompilerService.TexFileName);
-            FileStream stream = new FileStream(CompilerService.TexFileName, FileMode.Open);
+            Console.WriteLine("PDFFileName: " + CompilerService.TexFile);
+            FileStream stream = new FileStream(CompilerService.TexFile, FileMode.Open);
             
             return new FileStreamResult(stream, "application/pdf");
             

@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.Diagnostics;
 using Hermes.Website.Services;
+using Hermes.Website.Models;
+using System.IO.Compression;
+using System.Text.Json;
 
 namespace Hermes.Website.Pages
 {
@@ -18,16 +21,20 @@ namespace Hermes.Website.Pages
         IWebHostEnvironment environment;
         public TexCompilerService CompilerService;
         public TexParserService ParserService;
+        public BibParserService BibService;
+
 
 
         public PlaygroundModel2(
             IWebHostEnvironment environment,
             TexCompilerService compilerService,
-            TexParserService texParserService)
+            TexParserService texParserService,
+            BibParserService bibService)
         {
             this.environment = environment;
             CompilerService = compilerService;
             ParserService = texParserService;
+            BibService = bibService;
 
         }
 
@@ -44,33 +51,131 @@ namespace Hermes.Website.Pages
             Console.WriteLine("HELLO");
         }
 
-        public string PdfPath;
+        
+        public string PdfPath {get; set;}
 
 
-
+        
         public async Task<IActionResult> OnPostUploadAsync(IFormFile uploadFile)
         {
-            Console.WriteLine("USER: ");
-            /*
-                Når vi laver en post request med en upload fil laver vi også en Guid
-                Som kommer til at fungere som key for at få vores pdf fil i dictionary
+            
 
-                Hvis det ikke virker så se om der er en måde at identificere brugere ellers
+            Console.WriteLine("POST Request in Playground2");
+            long size = uploadFile.Length;
+
+            if (size <= 0)
+                return RedirectToPage("./Playground2");
+
+            // creating paths and directory for the new files that will be saved
+            var projectName = Path.GetFileNameWithoutExtension(uploadFile.FileName);
+            Console.WriteLine("project name: " + projectName);
+            string texDir = environment.ContentRootPath + "/papers/tex/" + projectName + "/";
+            string zipDir = environment.ContentRootPath + "/papers/zips/" + projectName + "/";
+            string pdfDir = environment.ContentRootPath + "/papers/pdfs/" + projectName + "/";
+            string jsonDir = environment.ContentRootPath + "/papers/jsons/" + projectName + "/";
+
+            Directory.CreateDirectory(texDir);
+            Directory.CreateDirectory(zipDir);
+            Directory.CreateDirectory(pdfDir);
+
+            string zipFile = zipDir + uploadFile.FileName;
+
+            // checking for zip
+            if (uploadFile.ContentType == "application/zip")
+            {
+                TexCompilerService.DeleteContentInDir(zipDir);
+                using (var stream = System.IO.File.Create(zipFile))
+                {
+                    await uploadFile.CopyToAsync(stream);
+                }
+                TexCompilerService.DeleteContentInDir(texDir);
+                ZipFile.ExtractToDirectory(zipFile, texDir);
 
 
-            */
-            //https://www.pragimtech.com/blog/blazor/asp.net-core-rest-api-get-by-id/
-            // create Guid which is the key and ID for httpget[id]
+                //TODO FIND A WAY TO FIND main.tex or something -> which .tex file to compile?
+                var texFiles = Directory.GetFiles(texDir, "*.tex", SearchOption.TopDirectoryOnly);
+                if (texFiles.Length > 1)
+                {
+                    Console.WriteLine("MORE THAN 1 TEX");
+                }
+                CompilerService.TexFile = texFiles[0];
+                Console.WriteLine("TexFile: " + CompilerService.TexFile);
 
 
-            // 
-            Console.WriteLine("POST");
-            await CompilerService.GetPdf2Async(uploadFile);
+                // call bib parser
+                var bibFiles = Directory.GetFiles(zipDir, "*.bib", SearchOption.TopDirectoryOnly);
+                if (bibFiles.Length > 1)
+                {
+                    Console.WriteLine("MORE THAN 1 BIB");
+                }
+                if(bibFiles.Length != 0)
+                {
+                    List<Node> paperNodes = await BibService.ParseBibFile(bibFiles[0]);
+
+                    // add to nodeDict
+                    ParserService.AddToNodeDict(paperNodes);
+
+                }
+
+
+                Console.WriteLine("Done with UnZip and bib");
+
+            }
+            else
+            {
+                // Save single tex file
+                string singleTexFile = texDir + uploadFile.FileName;
+                using (var stream = System.IO.File.Create(singleTexFile))
+                {
+                    await uploadFile.CopyToAsync(stream);
+                }
+                CompilerService.TexFile = singleTexFile;
+
+            }
+
+            // -----------------------------------------
+
+            // compiling the texfile to pdf
+            await CompilerService.CompileTexAsync(texDir, pdfDir);
+                
             PdfPath = CompilerService.GetPdf;
-            //var t = CompilerService.PdfFileName;
 
-            //ParserService.ParseTex(CompilerService.TexFileName);
+            // parsing tex to get dict of Nodes and list of Edges (links)
+            ParserService.ParseTex(CompilerService.TexFile);
 
+            var nodeDict = ParserService.GetNodes();
+            var links = ParserService.GetLinks();
+
+            //Convert to json
+            string JsonFileName = "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/tester/some.json";//jsonDir + "some.json";
+            using(var test = System.IO.File.OpenWrite(JsonFileName))
+            {
+
+
+
+            }
+            
+            //TODO JsonFile
+            /*
+             * Parse BibFile and get PaperNodes                     DONE
+             * 
+             * Put these papernodes into NodeDict in TexParser      Done
+             * 
+             * (Implement Cite)                                     Done
+             * 
+             * Have ParserTex return Nodes and Links Dict           DONE
+             * 
+             * Create JsonFile at some path
+             * 
+             * Find a way to send json back to client
+             * Find a way to send pdf back to client
+             * 
+             * 
+             * 
+             */
+
+           
+          
             return RedirectToPage("./Playground2");
 
         }

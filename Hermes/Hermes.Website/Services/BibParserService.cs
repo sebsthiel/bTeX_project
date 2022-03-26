@@ -29,16 +29,17 @@ namespace Hermes.Website.Services
         mrreviewer, doi, url, key, organization, publisher, series, booktitle, 
             */
 
-        List<PaperNode> paperList = new List<PaperNode>();
+        List<Node> paperList = new List<Node>();
 
-        public async Task<List<PaperNode>> ParseBibFile(IFormFile file) 
+        public async Task<List<Node>> ParseBibFile(string filePath) 
         {
-            string fileAsString = await ReadAsStringAsync(file);
-            List<PaperNode> paperNodes = SearchFile(fileAsString);
+
+            string fileAsString = await System.IO.File.ReadAllTextAsync(filePath); //ReadAsStringAsync(file);
+            List<Node> paperNodes = SearchFile(fileAsString);
             return paperNodes;
         }
 
-        private List<PaperNode> SearchFile(string fileAsText)
+        private List<Node> SearchFile(string fileAsText)
         {
             string pattern = @"(@(?<type>article|manual|book|incollection) *{(?<id>[^,]+),)|( *(?<artInfo>[^ \n]*) *= *({|""|)(?<artInfoValue>.*)(}|""),?)";
             Regex rx = new Regex(pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);

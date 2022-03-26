@@ -14432,6 +14432,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/Pages/MyBibParser.cshtml",
+      "TargetPath": "Pages\\MyBibParser.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/Pages/Playground2.cshtml",
       "TargetPath": "Pages\\Playground2.cshtml",
       "FileKind": "mvc"
