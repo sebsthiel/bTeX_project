@@ -113,6 +113,13 @@ namespace Hermes.Website.Controllers
 
                 Console.WriteLine("Done with UnZip and bib");
 
+<<<<<<< HEAD
+=======
+            // tmp code. If no pdf uploaded return test.pdf
+            //TODO change path
+            if (tmp == null){
+                stream = new FileStream("C:/Users/jaffa/OneDrive/Skrivebord/Bachelor/GitRepo/bTeX_project/Hermes/Hermes.Website/tester/main.pdf", FileMode.Open);
+>>>>>>> origin/json
             }
             else
             {
