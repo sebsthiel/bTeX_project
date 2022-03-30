@@ -1,3 +1,61 @@
 {
-    "hej": "wow"
+  "nodes": [
+    {
+      "counter": 1,
+      "name": "Section A",
+      "createdAt": "DOCUMENT",
+      "type": "section",
+      "ID": 1
+    },
+    {
+      "counter": 1,
+      "name": "SubSection A.A",
+      "createdAt": "Section A",
+      "type": "subsection",
+      "ID": 2
+    },
+    {
+      "counter": 1,
+      "name": "SubSection A.B",
+      "createdAt": "Section A",
+      "type": "subsection",
+      "ID": 3
+    },
+    {
+      "counter": 1,
+      "name": "SubSubSection A.B.A",
+      "createdAt": "SubSection A.B",
+      "type": "subsubsection",
+      "ID": 4
+    },
+    {
+      "counter": 1,
+      "name": "Section B",
+      "createdAt": "DOCUMENT",
+      "type": "section",
+      "ID": 5
+    },
+    {
+      "counter": 1,
+      "name": "SubSection B.A",
+      "createdAt": "Section B",
+      "type": "subsection",
+      "ID": 6
+    },
+    {
+      "counter": 1,
+      "name": "SubSection B.A.A",
+      "createdAt": "SubSection B.A",
+      "type": "subsubsection",
+      "ID": 7
+    },
+    {
+      "counter": 1,
+      "name": "SubSection B.B",
+      "createdAt": "Section B",
+      "type": "subsection",
+      "ID": 8
+    }
+  ],
+  "links": []
 }

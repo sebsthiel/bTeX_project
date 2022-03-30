@@ -32,8 +32,9 @@ namespace Hermes.Website.Controllers
             FileStream stream;
 
             // tmp code. If no pdf uploaded return test.pdf
+            //TODO change path
             if (tmp == null){
-                stream = new FileStream("/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/tester/main.pdf", FileMode.Open);
+                stream = new FileStream("C:/Users/jaffa/OneDrive/Skrivebord/Bachelor/GitRepo/bTeX_project/Hermes/Hermes.Website/tester/main.pdf", FileMode.Open);
             }
             else{
                  stream = new FileStream(tmp, FileMode.Open);

@@ -29,9 +29,8 @@ namespace Hermes.Website
             services.AddSingleton<TexCompilerService>(); // adding Our Service so its available
             services.AddTransient<TexParserService>();
             
-    
-
             services.AddTransient<BibParserService>();
+            services.AddTransient<JsonCreaterService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
