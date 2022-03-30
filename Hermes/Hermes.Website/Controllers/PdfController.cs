@@ -23,6 +23,7 @@ namespace Hermes.Website.Controllers
         public TexCompilerService CompilerService;
         public TexParserService ParserService;
         public BibParserService BibService;
+        public JsonCreaterService JsonService;
 
 
 
@@ -30,12 +31,14 @@ namespace Hermes.Website.Controllers
             IWebHostEnvironment environment,
             TexCompilerService compilerService,
             TexParserService texParserService,
-            BibParserService bibService)
+            BibParserService bibService,
+            JsonCreaterService jsonService)
         {
             this.environment = environment;
             CompilerService = compilerService;
             ParserService = texParserService;
             BibService = bibService;
+            JsonService = jsonService;
 
         }
 
@@ -133,42 +136,14 @@ namespace Hermes.Website.Controllers
             // Parsing tex to get dict of Nodes and list of Edges (links)
             ParserService.ParseTex(texFile);
 
-            #region jsonCode
 
-            var nodeDict = ParserService.GetNodes();
+
+            //Create Jsonfile for d3.js
+            var nodes = ParserService.GetNodes().Values.ToList();
             var links = ParserService.GetLinks();
-
-            //Convert to json
-            string JsonFileName = "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/tester/some.json";//jsonDir + "some.json";
-            using (var test = System.IO.File.OpenWrite(JsonFileName))
-            {
+            JsonService.CreateJsonFile(nodes, links, jsonDir + "some.json");
 
 
-
-            }
-
-
-
-            //TODO JsonFile
-            /*
-             * Parse BibFile and get PaperNodes                     DONE
-             * 
-             * Put these papernodes into NodeDict in TexParser      Done
-             * 
-             * (Implement Cite)                                     Done
-             * 
-             * Have ParserTex return Nodes and Links Dict           DONE
-             * 
-             * Create JsonFile at some path
-             * 
-             * Find a way to send json back to client
-             * Find a way to send pdf back to client
-             * 
-             * 
-             * 
-             */
-
-            #endregion
 
 
             await Task.Delay(2000);

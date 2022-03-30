@@ -150,7 +150,7 @@ namespace Hermes.Website.Pages
             //Create Jsonfile for graphQL
             var nodes = ParserService.GetNodes().Values.ToList();
             var links = ParserService.GetLinks();
-            JsonService.CreateJsonFile(nodes, links);
+            JsonService.CreateJsonFile(nodes, links, "");
 
 
             return RedirectToPage("./Playground2");

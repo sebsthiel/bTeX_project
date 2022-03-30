@@ -90,3 +90,4 @@ C:/Users/jaffa/OneDrive/Skrivebord/Bachelor/GitRepo/bTeX_project/Hermes/Hermes.W
 C:/Users/jaffa/OneDrive/Skrivebord/Bachelor/GitRepo/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Razor/Pages/Playground2.cshtml.g.cs
 >>>>>>> origin/json
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/Newtonsoft.Json.dll
+/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/Archive/some.json
