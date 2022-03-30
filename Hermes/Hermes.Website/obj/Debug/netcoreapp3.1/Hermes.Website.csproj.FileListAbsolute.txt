@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.csproj.AssemblyReference.cache
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.AssemblyInfoInputs.cache
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.AssemblyInfo.cs
@@ -34,7 +35,6 @@
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.Views.pdb
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.genruntimeconfig.cache
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.csproj.CopyComplete
-<<<<<<< HEAD
 =======
 C:/Users/jaffa/OneDrive/Skrivebord/Bachelor/GitRepo/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/appsettings.Development.json
 C:/Users/jaffa/OneDrive/Skrivebord/Bachelor/GitRepo/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/appsettings.json
@@ -86,3 +86,7 @@ C:/Users/jaffa/OneDrive/Skrivebord/Bachelor/GitRepo/bTeX_project/Hermes/Hermes.W
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.GeneratedMSBuildEditorConfig.editorconfig
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/tester/some.json
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Razor/Pages/AnalyzePaper.cshtml.g.cs
+C:/Users/jaffa/OneDrive/Skrivebord/Bachelor/GitRepo/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/tester/some.json
+C:/Users/jaffa/OneDrive/Skrivebord/Bachelor/GitRepo/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Razor/Pages/Playground2.cshtml.g.cs
+>>>>>>> origin/json
+/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/Newtonsoft.Json.dll

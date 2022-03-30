@@ -4,10 +4,10 @@ namespace Hermes.Website.Models
    
     public class Node
     {
-        public long ID { get; }
-        protected string name;
-        protected string createdAt;
-        protected string type;
+        public long ID;
+        public string name;
+        public string createdAt;
+        public string type;
 
         public Node(string name, string createdAt, string type)
         {

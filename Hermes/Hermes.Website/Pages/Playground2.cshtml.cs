@@ -12,6 +12,7 @@ using Hermes.Website.Services;
 using Hermes.Website.Models;
 using System.IO.Compression;
 using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace Hermes.Website.Pages
 {
@@ -22,6 +23,7 @@ namespace Hermes.Website.Pages
         public TexCompilerService CompilerService;
         public TexParserService ParserService;
         public BibParserService BibService;
+        public JsonCreaterService JsonService;
 
 
 
@@ -29,12 +31,14 @@ namespace Hermes.Website.Pages
             IWebHostEnvironment environment,
             TexCompilerService compilerService,
             TexParserService texParserService,
-            BibParserService bibService)
+            BibParserService bibService,
+            JsonCreaterService jsonService)
         {
             this.environment = environment;
             CompilerService = compilerService;
             ParserService = texParserService;
             BibService = bibService;
+            JsonService = jsonService;
 
         }
 
@@ -51,14 +55,14 @@ namespace Hermes.Website.Pages
             Console.WriteLine("HELLO");
         }
 
-        
-        public string PdfPath {get; set;}
+
+        public string PdfPath { get; set; }
 
 
-        
+
         public async Task<IActionResult> OnPostUploadAsync(IFormFile uploadFile)
         {
-            
+
 
             Console.WriteLine("POST Request in Playground2");
             long size = uploadFile.Length;
@@ -108,7 +112,7 @@ namespace Hermes.Website.Pages
                 {
                     Console.WriteLine("MORE THAN 1 BIB");
                 }
-                if(bibFiles.Length != 0)
+                if (bibFiles.Length != 0)
                 {
                     List<Node> paperNodes = await BibService.ParseBibFile(bibFiles[0]);
 
@@ -143,45 +147,15 @@ namespace Hermes.Website.Pages
             // parsing tex to get dict of Nodes and list of Edges (links)
             ParserService.ParseTex(CompilerService.TexFile);
 
-            var nodeDict = ParserService.GetNodes();
+            //Create Jsonfile for graphQL
+            var nodes = ParserService.GetNodes().Values.ToList();
             var links = ParserService.GetLinks();
-
-            //Convert to json
-            string JsonFileName = "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/tester/some.json";//jsonDir + "some.json";
-            using(var test = System.IO.File.OpenWrite(JsonFileName))
-            {
+            JsonService.CreateJsonFile(nodes, links);
 
 
-
-            }
-            
-            //TODO JsonFile
-            /*
-             * Parse BibFile and get PaperNodes                     DONE
-             * 
-             * Put these papernodes into NodeDict in TexParser      Done
-             * 
-             * (Implement Cite)                                     Done
-             * 
-             * Have ParserTex return Nodes and Links Dict           DONE
-             * 
-             * Create JsonFile at some path
-             * 
-             * Find a way to send json back to client
-             * Find a way to send pdf back to client
-             * 
-             * 
-             * 
-             */
-
-           
-          
             return RedirectToPage("./Playground2");
-
         }
 
-
     }
-
 }
 
