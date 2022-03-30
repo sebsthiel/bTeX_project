@@ -39,7 +39,7 @@ namespace Hermes.Website.Pages
         }
 
 
-        public FileStream pdf { get; private set; }
+        public FileStream pdf { get; set; }
 
         //public String testString {get; set; }
 
@@ -136,7 +136,7 @@ namespace Hermes.Website.Pages
             // -----------------------------------------
 
             // compiling the texfile to pdf
-            await CompilerService.CompileTexAsync(texDir, pdfDir);
+            await CompilerService.CompileTexAsync(texDir, pdfDir, "");
                 
             PdfPath = CompilerService.GetPdf;
 
