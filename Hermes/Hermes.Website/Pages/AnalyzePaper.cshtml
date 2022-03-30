@@ -1,0 +1,61 @@
+﻿@page
+@model Hermes.Website.Pages.AnalyzePaperModel
+@{
+    ViewData["Title"] = "Analyze Paper";
+}
+
+<script>
+
+
+    async function uploadFile() {
+        console.log("test hej");
+
+        let file = document.getElementById("uploadFile").files[0];
+
+        console.log("len: " + file.size);
+        console.log("type " + typeof(file));
+
+        let formData = new FormData();
+
+        formData.append("file", file);
+
+        let response = await fetch("/api/pdf", {
+            method: 'POST',
+            body: formData
+        });
+
+        let pdfBlob = await response.blob();
+       
+        let fileUrl = URL.createObjectURL(pdfBlob);
+
+
+        document.getElementById("outputPdf").src = fileUrl;
+
+        
+
+    }
+
+
+</script>
+
+
+<div class="text-center">
+    <h2 class="display-4">Welcome to the Hermes</h2>
+</div>
+
+<body>
+    <div id="d3graph"></div>
+
+    <div id="pdfviewer">
+        <embed id="outputPdf" src="" width="500" height="375" type="application/pdf">
+
+    </div>
+
+
+
+    <input id="uploadFile" type="file" name="uploadFile" onchange="uploadFile()">
+
+ 
+
+
+</body>
