@@ -4,7 +4,7 @@ namespace Hermes.Website.Models
    
     public class Node
     {
-        public long ID;
+        //public long id;
         public string name;
         public string createdAt;
         public string type;
@@ -12,7 +12,7 @@ namespace Hermes.Website.Models
         public Node(string name, string createdAt, string type)
         {
             this.name = name;
-            ID = ID_Generator.GenerateID();
+            //id = ID_Generator.GenerateID();
             this.createdAt = createdAt;
             this.type = type;
         }

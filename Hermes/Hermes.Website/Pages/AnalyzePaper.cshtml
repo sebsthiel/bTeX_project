@@ -3,8 +3,101 @@
 @{
     ViewData["Title"] = "Analyze Paper";
 }
+<style>
+    .node {
+        fill: #ccc;
+        stroke: black;
+        stroke-width: 2px;
+    }
 
+    .labels {
+        font-size: 13px;
+        text-anchor: middle;
+        font-weight: "bold";
+        fill: black;
+        /* Not selcect text */
+        pointer-events: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .link {
+        stroke: #777;
+        stroke-width: 2px;
+    }
+
+    .node.section {
+        fill: blue;
+    }
+
+    button {
+        position: absolute;
+        width: 30px;
+    }
+
+        button#slow {
+            margin-top: 28px;
+        }
+
+        button#play {
+            margin-top: 54px;
+        }
+
+        button#reset {
+            margin-top: 80px;
+        }
+</style>
+<script src="~/js/createGraph.js" asp-append-version="true"></script>
 <script>
+
+
+
+    async function getPdf(guid) {
+
+        let formData = new FormData();
+
+        formData.append("guid", guid);
+
+        let response = await fetch("/api/pdf/pdf", {
+            method: 'POST',
+            body: formData
+        });
+
+        let pdfBlob = await response.blob();
+
+
+        console.log("TYpe: " + typeof (pdfBlob));
+
+        let fileUrl = URL.createObjectURL(pdfBlob);
+
+        return fileUrl;
+
+    }
+
+    async function getJson(guid) {
+
+        let formData = new FormData();
+
+        formData.append("guid", guid);
+
+        let response = await fetch("/api/pdf/json", {
+            method: 'POST',
+            body: formData
+        });
+
+        let json = await response.json();
+
+        console.log(json.nodes[1]);
+
+        console.log("TYpe: " + typeof (json));
+
+        return json;
+
+    }
 
 
     async function uploadFile() {
@@ -24,12 +117,30 @@
             body: formData
         });
 
-        let pdfBlob = await response.blob();
-       
-        let fileUrl = URL.createObjectURL(pdfBlob);
+        // THIS NEEDS TO BE ASYNC
+        response.json().then(async data => {
 
 
-        document.getElementById("outputPdf").src = fileUrl;
+            console.log("guid: " + await data.guid);
+            let guid = await data.guid;
+            let pdf = await getPdf(guid);
+            let json = await getJson(guid);
+
+            document.getElementById("outputPdf").src = pdf;
+            createGraph(json);
+
+            // Load json into d3 graph
+
+
+
+        });
+
+        //let pdfBlob = await response.blob();
+
+        //let fileUrl = URL.createObjectURL(pdfBlob);
+
+
+        //document.getElementById("outputPdf").src = fileUrl;
     }
 
 
@@ -52,7 +163,7 @@
 
     <input id="uploadFile" type="file" name="uploadFile" onchange="uploadFile()">
 
- 
+
 
 
 </body>

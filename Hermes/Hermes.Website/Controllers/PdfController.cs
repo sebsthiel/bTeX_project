@@ -42,24 +42,36 @@ namespace Hermes.Website.Controllers
 
         }
 
-        private string pdfPath;
 
-        private string texFile;
+        
 
-    
-     
+       
+
+
+
         [HttpPost]
         public async Task<IActionResult> PostAsync(IFormFile file)
         {
+            string pdfPath;
+
+            string texFile;
+
             Console.WriteLine("POST REQUEST");
 
+            var userId = Guid.NewGuid();
+
+            var guid = new ContentResult
+            {
+                Content = "{\"guid\" :" + "\"" + userId + "\"}",
+                ContentType = "application/json"
+            };
 
 
             long size = file.Length;
             if (size <= 0) return null;
 
             // creating paths and directory for the new files that will be saved
-            var projectName = Path.GetFileNameWithoutExtension(file.FileName);
+            var projectName = userId;//Path.GetFileNameWithoutExtension(file.FileName);
             Console.WriteLine("project name: " + projectName);
             string texDir = environment.ContentRootPath + "/papers/tex/" + projectName + "/";
             string zipDir = environment.ContentRootPath + "/papers/zips/" + projectName + "/";
@@ -146,9 +158,12 @@ namespace Hermes.Website.Controllers
 
 
 
+           
+
             await Task.Delay(2000);
-            FileStream pdf = new FileStream(pdfPath, FileMode.Open);
-            return new FileStreamResult(pdf, "application/pdf");
+            return guid;
+            //FileStream pdf = new FileStream(pdfPath, FileMode.Open);
+            //return new FileStreamResult(pdf, "application/pdf");
 
 
 
@@ -156,10 +171,36 @@ namespace Hermes.Website.Controllers
         }
 
 
+        [HttpPost]
+        [Route("pdf")]
+        public IActionResult PostFileAsync(string guid)
+        {
+            string pdfDir = environment.ContentRootPath + "/papers/pdfs/" + guid + "/";
+
+            var pdfPath = Directory.GetFiles(pdfDir, "*.pdf", SearchOption.TopDirectoryOnly)[0];
+            
+            FileStream pdf = new FileStream(pdfPath, FileMode.Open);
+            return new FileStreamResult(pdf, "application/pdf");
+        }
+
+
+        [HttpPost]
+        [Route("json")]
+        public IActionResult PostJsonAsync(string guid)
+        {
+            string jsonDir = environment.ContentRootPath + "/papers/jsons/" + guid + "/";
+
+            var jsonPath = Directory.GetFiles(jsonDir, "*.json", SearchOption.TopDirectoryOnly)[0];
+
+            FileStream jsonFile = new FileStream(jsonPath, FileMode.Open);
+            return new FileStreamResult(jsonFile, "application/json");
+        }
 
 
 
-  
+
+
+
 
 
 

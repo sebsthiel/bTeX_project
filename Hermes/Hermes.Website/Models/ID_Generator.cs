@@ -10,7 +10,6 @@ namespace Hermes.Website.Models
 
         public static long GenerateID()
         {
-
             ID++;
             ids.Add(ID);
             if(ID == long.MinValue)

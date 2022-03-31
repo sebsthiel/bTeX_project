@@ -23,7 +23,7 @@ namespace Hermes.Website.Controllers
 
 
         // GET: api/values
-        [HttpGet]
+        [HttpPost]
         public IActionResult Get()
         {
             //return CompilerService.GetPdf();

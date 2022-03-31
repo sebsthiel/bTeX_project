@@ -128,6 +128,7 @@ namespace Hermes.Website.Services
                 else if (groups["type"].Value == "label")
                 {
                     node1 = new Node(groups["typeName"].Value, createdAt, groups["type"].Value);
+                    nodeDict[node1.name] = node1;
                     
 
                 }
@@ -141,7 +142,7 @@ namespace Hermes.Website.Services
                 {
                     //throw new Exception("Not implemented -> test when parsed bib");
                     Link link = new Link(createdAt, groups["typeName"].Value, "cite");
-                    linksList.Add(link);
+                    //TODO linksList.Add(link);
                 }
                 else if (groups["type"].Value == "begin")
                 {
