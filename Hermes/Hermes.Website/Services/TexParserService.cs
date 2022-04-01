@@ -35,7 +35,7 @@ namespace Hermes.Website.Services
         {
             envTypeDict.Add("section", sectionEnv);
 
-            Console.WriteLine("PATH: " + pathToTex);
+            //Console.WriteLine("PATH: " + pathToTex);
 
 
 
@@ -43,18 +43,18 @@ namespace Hermes.Website.Services
             // Go through file
             string text = System.IO.File.ReadAllText(pathToTex);
 
-            string pattern = @"\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+?)})|(?<newtheorem>newtheorem)(?<envName>{.+?})(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?";
+            string pattern = @"\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+?)})|(?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)})|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?";
+            //@"\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+?)})|(?<newtheorem>newtheorem)(?<envName>{.+?})(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?";
             RegexOptions options = RegexOptions.Multiline;
             Console.WriteLine("START PARSING");
             
             
             foreach (Match match in Regex.Matches(text, pattern, options))
             {
-
                 
-
                 Node node1;
                 GroupCollection groups = match.Groups;
+                //Console.WriteLine("MATCH: " + match);
                 if(groups["type"].Value == "section")
                 {
 
@@ -158,7 +158,7 @@ namespace Hermes.Website.Services
 
                     // TODO what do we do about counter?? should it be string or what?
                     //var newEnvNode = new EnvNode(newEnvNodeName, createdAt, groups["typeName"].Value, thisEnvCount);
-                    Console.WriteLine(groups["type"].Value + " " + groups["typeName"].Value );
+                    //Console.WriteLine(groups["type"].Value + " " + groups["typeName"].Value );
                     var newEnvNode = new EnvNode(newEnvNodeName, createdAt, groups["typeName"].Value, envTypeDict[groups["typeName"].Value].counter);
 
                     nodeDict[newEnvNodeName] = newEnvNode;
@@ -183,9 +183,27 @@ namespace Hermes.Website.Services
                         createdAt = nodeDict[createdAt].GetCreatedAt();
                     }
                     
-                }
+                }   
+                if (groups["bibitem"].Value == "bibitem")
+                {
+                    
+                    string arg1 = groups["bibArg1"].Value;
+                    string arg2 = groups["bibArg2"].Value;
+                    //Console.WriteLine("bibitem has arguments: " + arg1 + " & " + arg2);
+                    PaperNode pNode = new PaperNode(arg2, createdAt, "paper");
+                    if (arg1 != "") 
+                    { 
+                        if(arg1.Contains(System.Environment.NewLine))
+                        {
+                            Console.WriteLine("Title contains newline");
+                        }
+                        pNode.title = arg1.Replace(System.Environment.NewLine," ");
+                    } 
+                    nodeDict[pNode.name] = pNode;
+                     
 
-                // Creating EnvType from the newtheorem command
+                }
+                    // Creating EnvType from the newtheorem command
 
                 if (groups["newtheorem"].Value == "newtheorem")
                 {
@@ -232,7 +250,7 @@ namespace Hermes.Website.Services
 
                     //TODO Create smart constructer for env such that we dont have to pass 1, new list...
                     envTypeDict[envName] = new Env(envName, envText, 1, new List<string>(), new List<string>());
-                    Console.WriteLine($"Added new Environment: {envName}");
+                    //Console.WriteLine($"Added new Environment: {envName}");
 
                 }
 
@@ -241,7 +259,7 @@ namespace Hermes.Website.Services
 
 
             foreach (var key in nodeDict.Keys){
-                Console.WriteLine(nodeDict[key].GetName());
+                //Console.WriteLine(nodeDict[key].GetName());
             }
             
             Console.WriteLine("DONE PARSING");

@@ -1,61 +1,273 @@
-{
-  "nodes": [
-    {
-      "counter": 1,
-      "name": "Section A",
-      "createdAt": "DOCUMENT",
-      "type": "section",
-      "ID": 1
-    },
-    {
-      "counter": 1,
-      "name": "SubSection A.A",
-      "createdAt": "Section A",
-      "type": "subsection",
-      "ID": 2
-    },
-    {
-      "counter": 1,
-      "name": "SubSection A.B",
-      "createdAt": "Section A",
-      "type": "subsection",
-      "ID": 3
-    },
-    {
-      "counter": 1,
-      "name": "SubSubSection A.B.A",
-      "createdAt": "SubSection A.B",
-      "type": "subsubsection",
-      "ID": 4
-    },
-    {
-      "counter": 1,
-      "name": "Section B",
-      "createdAt": "DOCUMENT",
-      "type": "section",
-      "ID": 5
-    },
-    {
-      "counter": 1,
-      "name": "SubSection B.A",
-      "createdAt": "Section B",
-      "type": "subsection",
-      "ID": 6
-    },
-    {
-      "counter": 1,
-      "name": "SubSection B.A.A",
-      "createdAt": "SubSection B.A",
-      "type": "subsubsection",
-      "ID": 7
-    },
-    {
-      "counter": 1,
-      "name": "SubSection B.B",
-      "createdAt": "Section B",
-      "type": "subsection",
-      "ID": 8
-    }
-  ],
-  "links": []
-}
+[
+  {
+    "id": "0",
+    "parentIds": []
+  },
+  { 
+    "id": "1",
+    "parentIds": [
+      "0"
+    ]
+  },
+  {
+    "id": "2",
+    "parentIds": [
+      "0",
+      "7",
+      "11",
+      "16"
+    ]
+  },
+  {
+    "id": "3",
+    "parentIds": [
+      "0",
+      "27"
+    ]
+  },
+  {
+    "id": "4",
+    "parentIds": [
+      "0",
+      "27",
+      "42"
+    ]
+  },
+  {
+    "id": "5",
+    "parentIds": [
+      "0",
+      "27",
+      "42"
+    ]
+  },
+  {
+    "id": "6",
+    "parentIds": [
+      "0"
+    ]
+  },
+  {
+    "id": "7",
+    "parentIds": []
+  },
+  {
+    "id": "8",
+    "parentIds": []
+  },
+  {
+    "id": "9",
+    "parentIds": [
+      "8"
+    ]
+  },
+  {
+    "id": "10",
+    "parentIds": [
+      "8",
+      "31"
+    ]
+  },
+  {
+    "id": "11",
+    "parentIds": []
+  },
+  {
+    "id": "12",
+    "parentIds": []
+  },
+  {
+    "id": "13",
+    "parentIds": [
+      "12",
+      "16"
+    ]
+  },
+  {
+    "id": "14",
+    "parentIds": [
+      "11"
+    ]
+  },
+  {
+    "id": "15",
+    "parentIds": [
+      "12",
+      "16",
+      "37"
+    ]
+  },
+  {
+    "id": "16",
+    "parentIds": []
+  },
+  {
+    "id": "17",
+    "parentIds": [
+      "16",
+      "42"
+    ]
+  },
+  {
+    "id": "18",
+    "parentIds": [
+      "16",
+      "42"
+    ]
+  },
+  {
+    "id": "19",
+    "parentIds": [
+      "16"
+    ]
+  },
+  {
+    "id": "20",
+    "parentIds": []
+  },
+  {
+    "id": "21",
+    "parentIds": [
+      "20"
+    ]
+  },
+  {
+    "id": "22",
+    "parentIds": []
+  },
+  {
+    "id": "23",
+    "parentIds": [
+      "22"
+    ]
+  },
+  {
+    "id": "24",
+    "parentIds": [
+      "22"
+    ]
+  },
+  {
+    "id": "25",
+    "parentIds": []
+  },
+  {
+    "id": "26",
+    "parentIds": [
+      "25"
+    ]
+  },
+  {
+    "id": "27",
+    "parentIds": []
+  },
+  {
+    "id": "28",
+    "parentIds": []
+  },
+  {
+    "id": "29",
+    "parentIds": [
+      "28"
+    ]
+  },
+  {
+    "id": "30",
+    "parentIds": [
+      "28"
+    ]
+  },
+  {
+    "id": "31",
+    "parentIds": []
+  },
+  {
+    "id": "32",
+    "parentIds": []
+  },
+  {
+    "id": "33",
+    "parentIds": [
+      "32"
+    ]
+  },
+  {
+    "id": "34",
+    "parentIds": [
+      "32"
+    ]
+  },
+  {
+    "id": "35",
+    "parentIds": [
+      "32"
+    ]
+  },
+  {
+    "id": "36",
+    "parentIds": [
+      "32"
+    ]
+  },
+  {
+    "id": "37",
+    "parentIds": []
+  },
+  {
+    "id": "38",
+    "parentIds": [
+      "37"
+    ]
+  },
+  {
+    "id": "39",
+    "parentIds": [
+      "37"
+    ]
+  },
+  {
+    "id": "40",
+    "parentIds": [
+      "37"
+    ]
+  },
+  {
+    "id": "41",
+    "parentIds": [
+      "37"
+    ]
+  },
+  {
+    "id": "42",
+    "parentIds": []
+  },
+  {
+    "id": "43",
+    "parentIds": [
+      "42"
+    ]
+  },
+  {
+    "id": "44",
+    "parentIds": [
+      "42",
+      "45"
+    ]
+  },
+  {
+    "id": "45",
+    "parentIds": []
+  },
+  {
+    "id": "46",
+    "parentIds": [
+      "45"
+    ]
+  },
+  {
+    "id": "47",
+    "parentIds": [
+      "45"
+    ]
+  }
+]

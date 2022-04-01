@@ -11,6 +11,7 @@ using System.Diagnostics;
 using Hermes.Website.Services;
 using Hermes.Website.Models;
 using System.Text.Json;
+using System.Text;
 
 namespace Hermes.Website.Pages
 {
@@ -20,13 +21,20 @@ namespace Hermes.Website.Pages
         IWebHostEnvironment environment;
 
         public BibParserService BibService;
+        public TexParserService TexService;
+        public JsonCreaterService JsonService;
+
 
         public BibParserModel(
             IWebHostEnvironment environment,
-            BibParserService bibService)
+            BibParserService bibService,
+            TexParserService texService,
+            JsonCreaterService jsonService)
         {
             this.environment = environment;
             BibService = bibService;
+            TexService = texService;
+            JsonService = jsonService;
            
         }
 
@@ -44,14 +52,30 @@ namespace Hermes.Website.Pages
         public async Task OnPostUploadAsync(IFormFile uploadFile)
         {
             Console.WriteLine("Posted Someting in BibParser");
+            string path = SaveFileToPath(uploadFile);
+            
+            TexService.ParseTex(path);
+            Dictionary<string,Node> nodes = TexService.GetNodes();
+            
+            PrintNodes(nodes);
 
-            List<Node> paperNodes = await BibService.ParseBibFile("uploadFile");
-            //List<PaperNode> paperNodes = await BibService.ParseBibAsync(uploadFile);
-            //PrintPaperNodes(paperNodes);
+            List<DagNode> dNodes = makeDagNodes(TexService.GetNodes(), TexService.GetLinks());
+            string jsonPath = Path.Combine(environment.ContentRootPath + "\\tester\\", "some.json");
+            JsonService.CreateDagJson(dNodes, jsonPath);
+            
+            
+        }
 
-            //string json = JsonConvert.SerializeObject(paperNodes.ToArray(), Formatting.Indented);
-            //System.IO.File.WriteAllText(@"papers\bib\test.json", json);
-            PrintPaperNodes(paperNodes);
+        public string SaveFileToPath(IFormFile file)
+        {
+            string path = environment.ContentRootPath + "\\tester\\";
+            string filePath = Path.Combine(path, file.FileName);
+            using (Stream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+            {
+                file.CopyTo(fileStream);
+            }
+            
+            return filePath;
         }
 
         private void PrintPaperNodes(List<Node> paperNodes)
@@ -64,6 +88,58 @@ namespace Hermes.Website.Pages
                 Console.WriteLine("|TITLE| " + node.title);
                 
             }
+        }
+
+        private void PrintNodes(Dictionary<string, Node> nodes)
+        {
+            foreach (Node node in nodes.Values) 
+            {
+                if (node.type == "paper")
+                {
+                    PaperNode tmp = (PaperNode) node;
+                    Console.WriteLine("NodeName " + tmp.name + " NodeTitle: " + tmp.title);
+                }
+                
+            }
+        }
+        
+        public static string ReadAsList(IFormFile file)
+        {
+            var result = new StringBuilder();
+            using (var reader = new StreamReader(file.OpenReadStream()))
+            {
+                while (reader.Peek() >= 0)
+                    result.AppendLine(reader.ReadLine());
+            }
+            return result.ToString();
+        }
+
+        private List<DagNode> makeDagNodes(Dictionary<string, Node> nodes, List<Link> links)
+        {
+            Dictionary<string, DagNode> dNodes = new Dictionary<string, DagNode>();
+            Dictionary<string, string> toId = new Dictionary<string, string>();
+            int idCounter = -1;
+            foreach (Link link in links)
+            {
+                //TODO: Write better code
+                if (!dNodes.ContainsKey(link.source))
+                {
+                    idCounter++;
+                    toId[link.source] = idCounter + "";
+                    dNodes[link.source] = new DagNode(idCounter+"");
+                }
+                if (!dNodes.ContainsKey(link.target))
+                {
+                    idCounter++;
+                    toId[link.target] = idCounter + "";
+                    dNodes[link.target] = new DagNode(idCounter+"");
+                }
+                if (!dNodes[link.target].parentIds.Contains(toId[link.source]))
+                    dNodes[link.target].addParent(toId[link.source]);
+
+            }
+
+            return dNodes.Values.ToList();
         }
 
     }
