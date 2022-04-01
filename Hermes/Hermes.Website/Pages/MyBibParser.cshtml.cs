@@ -60,7 +60,7 @@ namespace Hermes.Website.Pages
             PrintNodes(nodes);
 
             List<DagNode> dNodes = makeDagNodes(TexService.GetNodes(), TexService.GetLinks());
-            string jsonPath = Path.Combine(environment.ContentRootPath + "\\tester\\", "some.json");
+            string jsonPath = Path.Combine(environment.ContentRootPath + "/tester/", "some.json");
             JsonService.CreateDagJson(dNodes, jsonPath);
             
             
