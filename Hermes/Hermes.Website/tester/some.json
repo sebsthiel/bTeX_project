@@ -3,7 +3,7 @@
     "id": "0",
     "parentIds": []
   },
-  { 
+  {
     "id": "1",
     "parentIds": [
       "0"

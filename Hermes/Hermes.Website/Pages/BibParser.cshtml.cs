@@ -23,18 +23,21 @@ namespace Hermes.Website.Pages
         public BibParserService BibService;
         public TexParserService TexService;
         public JsonCreaterService JsonService;
+        public BBLParserService BBLParser;
 
 
         public BibParserModel(
             IWebHostEnvironment environment,
             BibParserService bibService,
             TexParserService texService,
-            JsonCreaterService jsonService)
+            JsonCreaterService jsonService,
+            BBLParserService bblParser)
         {
             this.environment = environment;
             BibService = bibService;
             TexService = texService;
             JsonService = jsonService;
+            BBLParser = bblParser;
            
         }
 
@@ -42,26 +45,24 @@ namespace Hermes.Website.Pages
        
         public void OnGet()
         {
-            Console.WriteLine("Got BibParserPage");
-            //BibService.NewParseBibAsync();
-            Console.WriteLine("Done Parsing file");
             
         }
 
 
         public async Task OnPostUploadAsync(IFormFile uploadFile)
         {
-            Console.WriteLine("Posted Someting in BibParser");
+            //Console.WriteLine("Posted Someting in BibParser");
             string path = SaveFileToPath(uploadFile);
-            
-            TexService.ParseTex(path);
-            Dictionary<string,Node> nodes = TexService.GetNodes();
-            
-            PrintNodes(nodes);
 
-            List<DagNode> dNodes = makeDagNodes(TexService.GetNodes(), TexService.GetLinks());
-            string jsonPath = Path.Combine(environment.ContentRootPath + "/tester/", "some.json");
-            JsonService.CreateDagJson(dNodes, jsonPath);
+            List<Node> nodes = await BBLParser.ParseBBLFile(path);
+            //TexService.ParseTex(path);
+            //Dictionary<string,Node> nodes = TexService.GetNodes();
+            
+            PrintPaperNodes(nodes);
+
+            //List<DagNode> dNodes = makeDagNodes(TexService.GetNodes(), TexService.GetLinks());
+            //string jsonPath = Path.Combine(environment.ContentRootPath + "/tester/", "some.json");
+            //JsonService.CreateDagJson(dNodes, jsonPath);
             
             
         }
@@ -80,13 +81,15 @@ namespace Hermes.Website.Pages
 
         private void PrintPaperNodes(List<Node> paperNodes)
         {
-            foreach (PaperNode node in paperNodes)
+            foreach (BBLNode node in paperNodes)
             {
+
                 Console.WriteLine("============================");
-                Console.WriteLine("|ID   | " + node.getName());
-                Console.WriteLine("|TYPE | " + node.paperType);
-                Console.WriteLine("|TITLE| " + node.title);
-                
+                Console.WriteLine("Name: " + node.name);
+                Console.WriteLine("Author: " + node.author);
+                //Console.WriteLine("Information:");
+                //foreach (string s in node.information)
+                //    Console.WriteLine("item: " + s);
             }
         }
 
