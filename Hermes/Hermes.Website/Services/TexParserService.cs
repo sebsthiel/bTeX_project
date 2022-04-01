@@ -146,7 +146,7 @@ namespace Hermes.Website.Services
                 }
                 else if (groups["type"].Value == "begin")
                 {
-
+                    
                     // make sure that stuff like enumerate isnt created as a node
                     if (!(envTypeDict.ContainsKey(groups["typeName"].Value))){
                         continue;

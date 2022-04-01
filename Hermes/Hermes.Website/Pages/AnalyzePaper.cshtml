@@ -52,11 +52,7 @@
         }
 </style>
 <script src="~/js/createGraph.js" asp-append-version="true"></script>
-<script>
-
-
-
-    async function getPdf(guid) {
+<script>async function getPdf(guid) {
 
         let formData = new FormData();
 
@@ -106,7 +102,7 @@
         let file = document.getElementById("uploadFile").files[0];
 
         console.log("len: " + file.size);
-        console.log("type " + typeof(file));
+        console.log("type " + typeof (file));
 
         let formData = new FormData();
 
@@ -141,10 +137,7 @@
 
 
         //document.getElementById("outputPdf").src = fileUrl;
-    }
-
-
-</script>
+    }</script>
 
 
 <div class="text-center">
@@ -163,7 +156,11 @@
 
     <input id="uploadFile" type="file" name="uploadFile" onchange="uploadFile()">
 
+    <div class='svgHolder' id="force"></div>
+    <div class='svgHolder' id="dag"></div>
+
 
 
 
 </body>
+
