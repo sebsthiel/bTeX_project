@@ -54,7 +54,7 @@ namespace Hermes.Website.Controllers
         {
             string pdfPath;
 
-            string texFile;
+            string texFile = "";
 
             Console.WriteLine("POST REQUEST");
 
@@ -104,9 +104,23 @@ namespace Hermes.Website.Controllers
                 if (texFiles.Length > 1)
                 {
                     Console.WriteLine("MORE THAN 1 TEX");
+                    foreach(string v in texFiles){
+
+                        if (Path.GetFileNameWithoutExtension(v) == "main")
+                        {
+                            texFile = v;
+                            break;
+
+                        }
+                    }
+                    
                 }
-                texFile = texFiles[0];
-                Console.WriteLine("TexFile: " + texFile);
+                else
+                {
+                    texFile = texFiles[0];
+                }
+               
+                //Console.WriteLine("TexFile: " + texFile);
 
 
                 // Parsing bibfile if there is a bib file
@@ -146,13 +160,29 @@ namespace Hermes.Website.Controllers
             pdfPath = await CompilerService.CompileTexAsync(texDir, pdfDir, texFile);
 
             // Parsing tex to get dict of Nodes and list of Edges (links)
-            ParserService.ParseTex(texFile);
+            //ParserService.ParseTex(texFile);
+
+            var tmpFiles = Directory.GetFiles(texDir, "*.tex", SearchOption.AllDirectories);
+           
+                
+            foreach (string v in tmpFiles)
+            {
+                Console.WriteLine("Should parse: " + v);
+                ParserService.ParseTex(v);
+            }
+
+            
 
 
 
             //Create Jsonfile for d3.js
             var nodes = ParserService.GetNodes().Values.ToList();
             var links = ParserService.GetLinks();
+
+
+            var dagNodes = makeDagNodes(ParserService.GetNodes(), links);
+
+            JsonService.CreateDagJson(dagNodes, "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/tester/some.json");
             JsonService.CreateJsonFile(nodes, links, jsonDir + "some.json");
 
 
@@ -194,6 +224,36 @@ namespace Hermes.Website.Controllers
 
             FileStream jsonFile = new FileStream(jsonPath, FileMode.Open);
             return new FileStreamResult(jsonFile, "application/json");
+        }
+
+
+
+        private List<DagNode> makeDagNodes(Dictionary<string, Node> nodes, List<Link> links)
+        {
+            Dictionary<string, DagNode> dNodes = new Dictionary<string, DagNode>();
+            Dictionary<string, string> toId = new Dictionary<string, string>();
+            int idCounter = -1;
+            foreach (Link link in links)
+            {
+                //TODO: Write better code
+                if (!dNodes.ContainsKey(link.source))
+                {
+                    idCounter++;
+                    toId[link.source] = idCounter + "";
+                    dNodes[link.source] = new DagNode(idCounter + "");
+                }
+                if (!dNodes.ContainsKey(link.target))
+                {
+                    idCounter++;
+                    toId[link.target] = idCounter + "";
+                    dNodes[link.target] = new DagNode(idCounter + "");
+                }
+                if (!dNodes[link.target].parentIds.Contains(toId[link.source]))
+                    dNodes[link.target].addParent(toId[link.source]);
+
+            }
+
+            return dNodes.Values.ToList();
         }
 
 

@@ -29,13 +29,18 @@ namespace Hermes.Website.Services
         string outerEnv;
         string createdAt;
 
+
         Env sectionEnv = new Env("section", "section", 1, new List<string>(), new List<string>());
         
         public void ParseTex(string pathToTex)
         {
-            envTypeDict.Add("section", sectionEnv);
+            
 
-            //Console.WriteLine("PATH: " + pathToTex);
+
+            if (!envTypeDict.ContainsKey("section"))
+            {
+                envTypeDict.Add("section", sectionEnv);
+            }
 
 
 
@@ -43,8 +48,7 @@ namespace Hermes.Website.Services
             // Go through file
             string text = System.IO.File.ReadAllText(pathToTex);
 
-            string pattern = @"\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+?)})|(?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)})|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?";
-            //@"\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+?)})|(?<newtheorem>newtheorem)(?<envName>{.+?})(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?";
+            string pattern = @"\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+?)})|(?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)})|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?";
             RegexOptions options = RegexOptions.Multiline;
             Console.WriteLine("START PARSING");
             
@@ -52,10 +56,10 @@ namespace Hermes.Website.Services
             foreach (Match match in Regex.Matches(text, pattern, options))
             {
                 
-                Node node1;
+                
                 GroupCollection groups = match.Groups;
                 //Console.WriteLine("MATCH: " + match);
-                if(groups["type"].Value == "section")
+                if (groups["type"].Value == "section")
                 {
 
                     EnvNode newEnvNode = new EnvNode(groups["typeName"].Value, outerEnv, groups["type"].Value, envTypeDict["section"].counter);
@@ -68,6 +72,7 @@ namespace Hermes.Website.Services
                     //createdAt = nodeDict[createdAtName].GetName();
 
                     //add section to dict
+                    Console.WriteLine("Adding section: " + newEnvNode.GetName());
                     nodeDict.Add(newEnvNode.GetName(), newEnvNode);
                 }
                 else if (groups["type"].Value.StartsWith("sub"))
@@ -77,7 +82,7 @@ namespace Hermes.Website.Services
                     var subCountCreatedAt = subCount(nodeDict[createdAt].GetType());
                     EnvNode newSubSection = null;
 
-                    if(subCountSubsection == subCountCreatedAt)
+                    if (subCountSubsection == subCountCreatedAt)
                     {
                         // same sub amount
                         newSubSection = new EnvNode(groups["typeName"].Value, nodeDict[createdAt].GetCreatedAt(), groups["type"].Value, envTypeDict[groups["type"].Value].counter);
@@ -95,7 +100,11 @@ namespace Hermes.Website.Services
 
                             // should add it as dependent of createdAt (counter)
                             var createdAtType = nodeDict[createdAt].GetType();
-                            envTypeDict[createdAtType].AddToCounterShouldReset(groups["type"].Value);
+                            if (createdAtType != null) // If DOCUMENT
+                            {
+                                envTypeDict[createdAtType].AddToCounterShouldReset(groups["type"].Value);
+                            }
+
                         }
 
 
@@ -121,20 +130,26 @@ namespace Hermes.Website.Services
                         createdAt = newCreatedAt;
 
                     }
-
+                    Console.WriteLine("Adding subsection: " + newSubSection.GetName());
                     nodeDict[groups["typeName"].Value] = newSubSection;
 
                 }
                 else if (groups["type"].Value == "label")
                 {
-                    node1 = new Node(groups["typeName"].Value, createdAt, groups["type"].Value);
+                    Node node1 = new Node(groups["typeName"].Value, createdAt, groups["type"].Value);
                     nodeDict[node1.name] = node1;
-                    
+                    Console.WriteLine("Adding label: " + node1.GetName());
+
 
                 }
-                else if (groups["type"].Value == "ref")
+                else if (groups["type"].Value.EndsWith("ref"))
                 {
-
+                    if(groups["type"].Value == "href")
+                    {
+                        Node hyperLinkNode = new Node(groups["typeName"].Value, createdAt, "href");
+                        nodeDict[hyperLinkNode.name] = hyperLinkNode;
+                    }
+                    Console.WriteLine("Adding ref: "+ groups["typeName"].Value);
                     Link link = new Link(createdAt, groups["typeName"].Value, "ref");
                     linksList.Add(link);
                 }
@@ -161,6 +176,7 @@ namespace Hermes.Website.Services
                     //Console.WriteLine(groups["type"].Value + " " + groups["typeName"].Value );
                     var newEnvNode = new EnvNode(newEnvNodeName, createdAt, groups["typeName"].Value, envTypeDict[groups["typeName"].Value].counter);
 
+                    Console.WriteLine("Adding envNode: " + newEnvNode.GetName());
                     nodeDict[newEnvNodeName] = newEnvNode;
 
                     //update counter
@@ -198,7 +214,8 @@ namespace Hermes.Website.Services
                             Console.WriteLine("Title contains newline");
                         }
                         pNode.title = arg1.Replace(System.Environment.NewLine," ");
-                    } 
+                    }
+                    Console.WriteLine("Adding bibitem:" + pNode.name);
                     nodeDict[pNode.name] = pNode;
                      
 
@@ -214,20 +231,43 @@ namespace Hermes.Website.Services
 
                     string envText;
                     string counterName;
+
+                    
+
                     if (arg2.StartsWith('{'))
                     {
                         envText = arg2.Trim(new char[] { '{', '}' });
 
                         //TODO is arg3 in this case always []?
-                        counterName = arg3.Trim(new char[] { '[', ']' });
-
-                        if (envTypeDict.ContainsKey(counterName))
+                        if(arg3 == "")
+                        {
+                            if(createdAt == outerEnv)
+                            {
+                                counterName = null;
+                            }else
+                            {
+                                counterName = nodeDict[createdAt].GetType();
+                            }
+                            
+                        }
+                        else
+                        {
+                            counterName = arg3.Trim(new char[] { '[', ']' });
+                        }
+                       
+                        if(counterName == null)
+                        {
+                            //TODO Find a better way
+                            Console.WriteLine("Handle exception better");
+                        }
+                        else if (envTypeDict.ContainsKey(counterName))
                         {
                             envTypeDict[counterName].AddToCounterShouldReset(envName);
                         }
                         else
                         {
-                            throw new Exception("ENVIRONMENT that is referenced as counter does NOT exists 1 " + counterName + " " + arg3);
+
+                            throw new Exception($"{envName} \n ENVIRONMENT that is referenced as counter does NOT exists 1 " + counterName + " " + arg3);
                         }
                     }
                     else
@@ -274,6 +314,7 @@ namespace Hermes.Website.Services
             string acc = "";
             while( nodeDict.ContainsKey( newCreatedAt))
             {
+                Console.WriteLine("NewCreatedAt: " +newCreatedAt);
                 EnvNode t = (EnvNode)nodeDict[newCreatedAt];
                 acc = t.counter + "." + acc;
                 newCreatedAt = nodeDict[newCreatedAt].GetCreatedAt();
@@ -293,6 +334,10 @@ namespace Hermes.Website.Services
 
         private int subCount(string section)
         {
+            if(section == null)
+            {
+                return 0;
+            }
             var regex = @"sub";
             return Regex.Matches(section, regex).Count;
 

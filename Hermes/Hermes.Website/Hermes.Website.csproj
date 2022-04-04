@@ -10,6 +10,7 @@
     <None Remove="Controllers\" />
     <None Remove="Microsoft.VisualStudio.LiveShare" />
     <None Remove="Npm" />
+    <None Remove="latexparse-csharp" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="serverPdfs\" />
