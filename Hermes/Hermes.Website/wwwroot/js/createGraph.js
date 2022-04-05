@@ -22,42 +22,13 @@ function createGraph(json) {
 }
 
 
+
+
 // uses d3 v4
 function funGraph(nodes, links) {
 
-    //nodes = [
-    //    { id: "mammal", group: 0, label: "Mammals", level: 1 },
-    //    { id: "dog", group: 0, label: "Dogs", level: 2 },
-    //    { id: "cat", group: 0, label: "Cats", level: 2 },
-    //    { id: "fox", group: 0, label: "Foxes", level: 2 },
-    //    { id: "elk", group: 0, label: "Elk", level: 2 },
-    //    { id: "insect", group: 1, label: "Insects", level: 1 },
-    //    { id: "ant", group: 1, label: "Ants", level: 2 },
-    //    { id: "bee", group: 1, label: "Bees", level: 2 },
-    //    { id: "fish", group: 2, label: "Fish", level: 1 },
-    //    { id: "carp", group: 2, label: "Carp", level: 2 },
-    //    { id: "pike", group: 2, label: "Pikes", level: 2 }
-    //];
-
-    //links = [
-    //    { target: "mammal", source: "dog", strength: 0.7 },
-    //    { target: "mammal", source: "cat", strength: 0.7 },
-    //    { target: "mammal", source: "fox", strength: 0.7 },
-    //    { target: "mammal", source: "elk", strength: 0.7 },
-    //    { target: "insect", source: "ant", strength: 0.7 },
-    //    { target: "insect", source: "bee", strength: 0.7 },
-    //    { target: "fish", source: "carp", strength: 0.7 },
-    //    { target: "fish", source: "pike", strength: 0.7 },
-    //    { target: "cat", source: "elk", strength: 0.1 },
-    //    { target: "carp", source: "ant", strength: 0.1 },
-    //    { target: "elk", source: "bee", strength: 0.1 },
-    //    { target: "dog", source: "cat", strength: 0.1 },
-    //    { target: "fox", source: "ant", strength: 0.1 },
-    //    { target: "pike", source: "dog", strength: 0.1 }
-    //];
-
-    const width = 900;
-    const height = 900;
+    const width = 500;
+    const height = 400;
 
     var svg = d3.select('#d3graph').append('svg')
         .attr('width', width)
@@ -67,12 +38,14 @@ function funGraph(nodes, links) {
     var linkForce = d3
         .forceLink()
         .id(function (link) { return link.name })
-        .strength(function (link) { return 0.1 })
+        .strength(function (link) { return 0.5 })
 
     var simulation = d3.forceSimulation()
         .force('link', linkForce)
-        .force('charge', d3.forceManyBody().strength(-120))
+        .force('charge', d3.forceManyBody().strength(-30))
         .force('center', d3.forceCenter(width / 2, height / 2));
+
+    console.log("Gravity: " + (width / 2)+  " "+ (height / 2));
 
 
 
@@ -108,7 +81,7 @@ function funGraph(nodes, links) {
         .selectAll('circle')
         .data(nodes)
         .enter().append('circle')
-        .attr('r', 10)
+        .attr('r', 5)
         .attr('fill', "gray")
         .call(dragDrop)
         .on('click', selectNode);
