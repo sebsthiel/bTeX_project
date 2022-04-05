@@ -182,7 +182,7 @@ namespace Hermes.Website.Controllers
 
             var dagNodes = makeDagNodes(ParserService.GetNodes(), links);
 
-            JsonService.CreateDagJson(dagNodes, "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/tester/some.json");
+            //JsonService.CreateDagJson(dagNodes, "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/tester/some.json");
             JsonService.CreateJsonFile(nodes, links, jsonDir + "some.json");
 
 
@@ -206,6 +206,7 @@ namespace Hermes.Website.Controllers
         public IActionResult PostFileAsync(string guid)
         {
             string pdfDir = environment.ContentRootPath + "/papers/pdfs/" + guid + "/";
+            Console.WriteLine("HELLO : " + environment.ContentRootPath + "/papers/pdfs/" + guid + "/");
 
             var pdfPath = Directory.GetFiles(pdfDir, "*.pdf", SearchOption.TopDirectoryOnly)[0];
             

@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  hermes.website:
+    image: ${DOCKER_REGISTRY-}hermes
+    build:
+      context: .
+      dockerfile: Hermes.Website/Dockerfile
+    ports:
+      - "8080:80"
+      - "8081:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+;http://+
+    volumes:
+      - ~/.aspnet/https:/root/.aspnet/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
