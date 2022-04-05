@@ -74,6 +74,9 @@ function funGraph(nodes, links) {
         .force('charge', d3.forceManyBody().strength(-120))
         .force('center', d3.forceCenter(width / 2, height / 2));
 
+
+
+    // method for drag and drop
     const dragDrop = d3.drag()
         .on('start', node => {
             node.fx = node.x
@@ -107,7 +110,8 @@ function funGraph(nodes, links) {
         .enter().append('circle')
         .attr('r', 10)
         .attr('fill', "gray")
-        .call(dragDrop);
+        .call(dragDrop)
+        .on('click', selectNode);
 
     var textElements = svg.append('g')
         .selectAll('text')
@@ -137,10 +141,56 @@ function funGraph(nodes, links) {
     simulation.force("link").links(links);
 
 
+    function getNeighbors(node) {
+        return links.reduce(function (neighbors, link) {
+            if (link.target.name === node.name) {
+                neighbors.push(link.source.name)
+            } else if (link.source.name === node.name) {
+                neighbors.push(link.target.name)
+            }
+            return neighbors
+        },
+            [node.id]
+        )
+    }
+
+    function isNeighborLink(node, link) {
+        return link.target.name === node.name || link.source.name === node.name
+    }
+
+    function selectNode(selectedNode) {
+        var neighbors = getNeighbors(selectedNode)
+
+        // we modify the styles to highlight selected nodes
+        nodeElements.attr('fill', function (node) { return getNodeColor(node, neighbors) })
+        textElements.attr('fill', function (node) { return getTextColor(node, neighbors) })
+        linkElements.attr('stroke', function (link) { return getLinkColor(selectedNode, link) })
+    }
+
+    function getNodeColor(node, neighbors) {
+        if (Array.isArray(neighbors) && neighbors.indexOf(node.name) > -1) {
+            return 'green';
+        }
+
+        return 'gray';
+    }
+
+
+    function getLinkColor(node, link) {
+        return isNeighborLink(node, link) ? 'green' : '#E5E5E5'
+    }
+
+    function getTextColor(node, neighbors) {
+        return Array.isArray(neighbors) && neighbors.indexOf(node.name) > -1 ? 'green' : 'black'
+    }
+
+
 
  
 
 }
+
+
 
 function newGraph(nodes, links) {
 
