@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   hermes.website:
-    image: ${DOCKER_REGISTRY-}hermes
+    image: hermestexregistry.azurecr.io/hermes:latest
     build:
       context: .
       dockerfile: Hermes.Website/Dockerfile

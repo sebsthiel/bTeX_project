@@ -1,11 +1,12 @@
 ﻿<Properties StartupConfiguration="{9A9EA368-1655-436A-9CC1-6F087649B677}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
   <MonoDevelop.Ide.Workbench ActiveDocument="Hermes.Website/Controllers/PdfController.cs">
     <Files>
-      <File FileName="Hermes.Website/Startup.cs" Line="1" Column="1" />
-      <File FileName="Hermes.Website/Dockerfile" Line="12" Column="58" />
-      <File FileName="Hermes.Website/Services/TexParserService.cs" Line="1" Column="1" />
-      <File FileName="Hermes.Website/Services/TexCompilerService.cs" Line="1" Column="1" />
-      <File FileName="Hermes.Website/Controllers/PdfController.cs" Line="187" Column="1" />
+      <File FileName="docker-compose.yml" Line="14" Column="7" />
+      <File FileName="Hermes.Website/Dockerfile" Line="14" Column="30" />
+      <File FileName="Hermes.Website/Startup.cs" Line="35" Column="1" />
+      <File FileName="Hermes.Website/Program.cs" Line="8" Column="36" />
+      <File FileName="Hermes.Website/Services/TexCompilerService.cs" Line="43" Column="18" />
+      <File FileName="Hermes.Website/Controllers/PdfController.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,12 +17,7 @@
               <Node name="Controllers" expanded="True">
                 <Node name="PdfController.cs" selected="True" />
               </Node>
-              <Node name="Pages" expanded="True" />
-              <Node name="Properties" expanded="True" />
               <Node name="Services" expanded="True" />
-              <Node name="wwwroot" expanded="True">
-                <Node name="js" expanded="True" />
-              </Node>
             </Node>
           </Node>
         </State>

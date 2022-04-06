@@ -44,7 +44,7 @@ namespace Hermes.Website.Services
             };
             process.Start();
             await process.StandardInput.WriteLineAsync("cd " + texDir);
-            await process.StandardInput.WriteLineAsync("pdflatex -output-directory="+ pdfDir + " " + texFile);
+            await process.StandardInput.WriteLineAsync("latexmk -output-directory=" + pdfDir + " " + texFile);
            
             pdfFile = pdfDir + Path.GetFileNameWithoutExtension(texFile) + ".pdf";
             Console.WriteLine("HEY: " + pdfFile);
