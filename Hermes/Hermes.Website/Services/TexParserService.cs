@@ -29,6 +29,7 @@ namespace Hermes.Website.Services
         string outerEnv;
         string createdAt;
 
+
         Env sectionEnv = new Env("section", "section", 1, new List<string>(), new List<string>());
         
         public void ParseTexFromFile(string pathToTex)
@@ -56,8 +57,6 @@ namespace Hermes.Website.Services
 
             foreach (Match match in Regex.Matches(text, pattern, options))
             {
-
-
                 GroupCollection groups = match.Groups;
                 //Console.WriteLine("MATCH: " + match);
                 if (groups["type"].Value == "section")
@@ -267,31 +266,28 @@ namespace Hermes.Website.Services
                     string envText;
                     string counterName;
 
-
-
                     if (arg2.StartsWith('{'))
                     {
                         envText = arg2.Trim(new char[] { '{', '}' });
 
                         //TODO is arg3 in this case always []?
-                        if (arg3 == "")
+                        if(arg3 == "")
                         {
-                            if (createdAt == outerEnv)
+                            if(createdAt == outerEnv)
                             {
                                 counterName = null;
-                            }
-                            else
+                            }else
                             {
                                 counterName = nodeDict[createdAt].GetType();
                             }
-
+                            
                         }
                         else
                         {
                             counterName = arg3.Trim(new char[] { '[', ']' });
                         }
 
-                        if (counterName == null)
+                        if(counterName == null)
                         {
                             //TODO Find a better way
                             Console.WriteLine("Handle exception better");
@@ -351,6 +347,7 @@ namespace Hermes.Website.Services
             string acc = "";
             while( nodeDict.ContainsKey( newCreatedAt))
             {
+                Console.WriteLine("NewCreatedAt: " +newCreatedAt);
                 EnvNode t = (EnvNode)nodeDict[newCreatedAt];
                 acc = t.counter + "." + acc;
                 newCreatedAt = nodeDict[newCreatedAt].GetCreatedAt();
@@ -370,6 +367,10 @@ namespace Hermes.Website.Services
 
         private int subCount(string section)
         {
+            if(section == null)
+            {
+                return 0;
+            }
             var regex = @"sub";
             return Regex.Matches(section, regex).Count;
 
@@ -388,7 +389,6 @@ namespace Hermes.Website.Services
 
             
         }
-
 
         public Dictionary<string,Node> GetNodes(){
             return nodeDict;

@@ -15,9 +15,155 @@ function createGraph(json) {
 
 
     //makeGraph(nodes, links);
-    newGraph(nodes, links);
+    //newGraph(nodes, links);
+
+    funGraph(nodes, links);
 
 }
+
+
+
+
+// uses d3 v4
+function funGraph(nodes, links) {
+
+    const width = 500;
+    const height = 400;
+
+    var svg = d3.select('#d3graph').append('svg')
+        .attr('width', width)
+        .attr('height', height);
+
+    // simulation setup with all forces
+    var linkForce = d3
+        .forceLink()
+        .id(function (link) { return link.name })
+        .strength(function (link) { return 0.5 })
+
+    var simulation = d3.forceSimulation()
+        .force('link', linkForce)
+        .force('charge', d3.forceManyBody().strength(-30))
+        .force('center', d3.forceCenter(width / 2, height / 2));
+
+    console.log("Gravity: " + (width / 2)+  " "+ (height / 2));
+
+
+
+    // method for drag and drop
+    const dragDrop = d3.drag()
+        .on('start', node => {
+            node.fx = node.x
+            node.fy = node.y
+        })
+        .on('drag', node => {
+            simulation.alphaTarget(0.7).restart()
+            node.fx = d3.event.x
+            node.fy = d3.event.y
+        })
+        .on('end', node => {
+            if (!d3.event.active) {
+                simulation.alphaTarget(0)
+            }
+            node.fx = null
+            node.fy = null
+        });
+
+
+    const linkElements = svg.append('g')
+        .selectAll('line')
+        .data(links)
+        .enter().append('line')
+        .attr('stroke-width', 1)
+        .attr('stroke', '#E5E5E5');
+
+
+    var nodeElements = svg.append('g')
+        .selectAll('circle')
+        .data(nodes)
+        .enter().append('circle')
+        .attr('r', 5)
+        .attr('fill', "gray")
+        .call(dragDrop)
+        .on('click', selectNode);
+
+    var textElements = svg.append('g')
+        .selectAll('text')
+        .data(nodes)
+        .enter().append('text')
+        .text(node => node.name)
+        .attr('font-size', 15)
+        .attr('dx', 15)
+        .attr('dy', 4);
+
+    
+
+    simulation.nodes(nodes).on('tick', () => {
+        nodeElements
+            .attr('cx', function (node) { return node.x })
+            .attr('cy', function (node) { return node.y })
+        textElements
+            .attr('x', function (node) { return node.x })
+            .attr('y', function (node) { return node.y })
+        linkElements
+            .attr('x1', function (link) { return link.source.x })
+            .attr('y1', function (link) { return link.source.y })
+            .attr('x2', function (link) { return link.target.x })
+            .attr('y2', function (link) { return link.target.y })
+    })
+
+    simulation.force("link").links(links);
+
+
+    function getNeighbors(node) {
+        return links.reduce(function (neighbors, link) {
+            if (link.target.name === node.name) {
+                neighbors.push(link.source.name)
+            } else if (link.source.name === node.name) {
+                neighbors.push(link.target.name)
+            }
+            return neighbors
+        },
+            [node.id]
+        )
+    }
+
+    function isNeighborLink(node, link) {
+        return link.target.name === node.name || link.source.name === node.name
+    }
+
+    function selectNode(selectedNode) {
+        var neighbors = getNeighbors(selectedNode)
+
+        // we modify the styles to highlight selected nodes
+        nodeElements.attr('fill', function (node) { return getNodeColor(node, neighbors) })
+        textElements.attr('fill', function (node) { return getTextColor(node, neighbors) })
+        linkElements.attr('stroke', function (link) { return getLinkColor(selectedNode, link) })
+    }
+
+    function getNodeColor(node, neighbors) {
+        if (Array.isArray(neighbors) && neighbors.indexOf(node.name) > -1) {
+            return 'green';
+        }
+
+        return 'gray';
+    }
+
+
+    function getLinkColor(node, link) {
+        return isNeighborLink(node, link) ? 'green' : '#E5E5E5'
+    }
+
+    function getTextColor(node, neighbors) {
+        return Array.isArray(neighbors) && neighbors.indexOf(node.name) > -1 ? 'green' : 'black'
+    }
+
+
+
+ 
+
+}
+
+
 
 function newGraph(nodes, links) {
 
@@ -26,7 +172,7 @@ function newGraph(nodes, links) {
     var width = 640,
         height = 480;
 
-    var nodeWidth = width/50;
+    var nodeWidth = 5;
 
     // Before we do anything else, let's define the data for the visualization.
 
@@ -49,25 +195,25 @@ function newGraph(nodes, links) {
         for (var j = 0, lenj = nodes.length; j < lenj; j++) {
 
             //console.log("Source : "+links[i].source)
-            console.log("Target : "+ links[i].target)
-            console.log("nodeName : " + nodes[j].name)
+            //console.log("Target : "+ links[i].target)
+            //console.log("nodeName : " + nodes[j].name)
             
             if (links[i].source == nodes[j].name) {
                 links[i].source = j;
             }
             
             if (links[i].target == nodes[j].name) {
-                console.log("TARGET");
+                //console.log("TARGET");
                 links[i].target = j;
             }
         }
     }
 
-    
-    // linksList.forEach(element => {
-    //     console.log(element)
-    //     console.log(element.target in dataNodes)
-    // });
+        
+     //links.forEach(element => {
+     //    console.log(element)
+     //    console.log(element.target in dataNodes)
+     //});
     console.log("amount of nodes " + nodes.length)
     console.log("amount of links " + links.length)
     // Now we create a force layout object and define its properties.
@@ -79,8 +225,8 @@ function newGraph(nodes, links) {
         .nodes(nodes)
         .links(links)
         .on("tick", tick)
-        .linkDistance(width/2.5)
-        .charge(-300);
+        .charge(-200)
+        .linkDistance(50)
 
     // There's one more property of the layout we need to define,
     // its `linkDistance`. That's generally a configurable value and,
@@ -148,13 +294,14 @@ function newGraph(nodes, links) {
         .enter().append('circle')
         .attr('class', 'node')
         .attr('r', nodeWidth);
-
+    
     var text2 = svg.selectAll("textCircle")
     .data(nodes)
     .enter()
     .append("text")
     .attr("class", "labels")
     .text(function(d) { return d.name })
+    
     // .style("text-anchor", "middle")
     // .style("font-weight", "bold")
     // .style("font-size", "10pt")
@@ -177,7 +324,6 @@ function newGraph(nodes, links) {
 
     noded3.each(function(d){
         if (d.type) {
-            console.log("HEY: " + d.type)
             d3.select(this).classed(d.type, true)
         }
     });
@@ -282,7 +428,7 @@ function makeGraph(nodes, links) {
         }
     }
 
-    console.log("HEYA");
+    
 
     links.forEach(print);
 
