@@ -45,6 +45,15 @@ namespace Hermes.Website.Pages
        
         public void OnGet()
         {
+            //(string tmp1, string tmp2) = TexService.CheckForCommandsInName(@"proposition \label{abc} \texit{def} some}");
+            //\textit{State}
+            //Console.WriteLine("TMP1: " + tmp1 + " TMP2: " + tmp2);
+            //string tmpR = TexService.RemoveCommand(@"proposition \ref{abc} \texit{def} some");
+            //Console.WriteLine(tmpR);
+            //string tmp = TexService.RemoveCommand(@"abc \texit");
+            //Console.WriteLine(tmp);
+            //TexService.ParseTex(@"\section{Proof of Proposition 1} en-proof-proposition-1}");
+            PrintNodes(TexService.GetNodes());
             
         }
 
@@ -54,17 +63,19 @@ namespace Hermes.Website.Pages
             //Console.WriteLine("Posted Someting in BibParser");
             string path = SaveFileToPath(uploadFile);
 
-            List<Node> nodes = await BBLParser.ParseBBLFile(path);
-            //TexService.ParseTex(path);
-            //Dictionary<string,Node> nodes = TexService.GetNodes();
-            
-            PrintPaperNodes(nodes);
 
+
+            //List<Node> nodes = await BBLParser.ParseBBLFile(path);
+            TexService.ParseTexFromFile(path);
+            Dictionary<string,Node> nodes = TexService.GetNodes();
+            
+            PrintNodes(nodes);
+            //\subsection{\textit{State}}
             //List<DagNode> dNodes = makeDagNodes(TexService.GetNodes(), TexService.GetLinks());
             //string jsonPath = Path.Combine(environment.ContentRootPath + "/tester/", "some.json");
             //JsonService.CreateDagJson(dNodes, jsonPath);
-            
-            
+
+
         }
 
         public string SaveFileToPath(IFormFile file)
@@ -97,11 +108,8 @@ namespace Hermes.Website.Pages
         {
             foreach (Node node in nodes.Values) 
             {
-                if (node.type == "paper")
-                {
-                    PaperNode tmp = (PaperNode) node;
-                    Console.WriteLine("NodeName " + tmp.name + " NodeTitle: " + tmp.title);
-                }
+                Console.WriteLine("NodeName: " + node.name + " | NodeType: " + node.type + " | CreatedAt: " + node.createdAt);
+                
                 
             }
         }
