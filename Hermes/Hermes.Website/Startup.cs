@@ -31,6 +31,7 @@ namespace Hermes.Website
             
             services.AddTransient<BibParserService>();
             services.AddTransient<JsonCreaterService>();
+            services.AddTransient<BBLParserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

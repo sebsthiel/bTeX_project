@@ -23,18 +23,21 @@ namespace Hermes.Website.Pages
         public BibParserService BibService;
         public TexParserService TexService;
         public JsonCreaterService JsonService;
+        public BBLParserService BBLParser;
 
 
         public BibParserModel(
             IWebHostEnvironment environment,
             BibParserService bibService,
             TexParserService texService,
-            JsonCreaterService jsonService)
+            JsonCreaterService jsonService,
+            BBLParserService bblParser)
         {
             this.environment = environment;
             BibService = bibService;
             TexService = texService;
             JsonService = jsonService;
+            BBLParser = bblParser;
            
         }
 
@@ -42,28 +45,37 @@ namespace Hermes.Website.Pages
        
         public void OnGet()
         {
-            Console.WriteLine("Got BibParserPage");
-            //BibService.NewParseBibAsync();
-            Console.WriteLine("Done Parsing file");
+            //(string tmp1, string tmp2) = TexService.CheckForCommandsInName(@"proposition \label{abc} \texit{def} some}");
+            //\textit{State}
+            //Console.WriteLine("TMP1: " + tmp1 + " TMP2: " + tmp2);
+            //string tmpR = TexService.RemoveCommand(@"proposition \ref{abc} \texit{def} some");
+            //Console.WriteLine(tmpR);
+            //string tmp = TexService.RemoveCommand(@"abc \texit");
+            //Console.WriteLine(tmp);
+            //TexService.ParseTex(@"\section{Proof of Proposition 1} en-proof-proposition-1}");
+            PrintNodes(TexService.GetNodes());
             
         }
 
 
         public async Task OnPostUploadAsync(IFormFile uploadFile)
         {
-            Console.WriteLine("Posted Someting in BibParser");
+            //Console.WriteLine("Posted Someting in BibParser");
             string path = SaveFileToPath(uploadFile);
-            
-            TexService.ParseTex(path);
+
+
+
+            //List<Node> nodes = await BBLParser.ParseBBLFile(path);
+            TexService.ParseTexFromFile(path);
             Dictionary<string,Node> nodes = TexService.GetNodes();
             
             PrintNodes(nodes);
+            //\subsection{\textit{State}}
+            //List<DagNode> dNodes = makeDagNodes(TexService.GetNodes(), TexService.GetLinks());
+            //string jsonPath = Path.Combine(environment.ContentRootPath + "/tester/", "some.json");
+            //JsonService.CreateDagJson(dNodes, jsonPath);
 
-            List<DagNode> dNodes = makeDagNodes(TexService.GetNodes(), TexService.GetLinks());
-            string jsonPath = Path.Combine(environment.ContentRootPath + "/tester/", "some.json");
-            JsonService.CreateDagJson(dNodes, jsonPath);
-            
-            
+
         }
 
         public string SaveFileToPath(IFormFile file)
@@ -80,13 +92,15 @@ namespace Hermes.Website.Pages
 
         private void PrintPaperNodes(List<Node> paperNodes)
         {
-            foreach (PaperNode node in paperNodes)
+            foreach (BBLNode node in paperNodes)
             {
+
                 Console.WriteLine("============================");
-                Console.WriteLine("|ID   | " + node.getName());
-                Console.WriteLine("|TYPE | " + node.paperType);
-                Console.WriteLine("|TITLE| " + node.title);
-                
+                Console.WriteLine("Name: " + node.name);
+                Console.WriteLine("Author: " + node.author);
+                //Console.WriteLine("Information:");
+                //foreach (string s in node.information)
+                //    Console.WriteLine("item: " + s);
             }
         }
 
@@ -94,11 +108,8 @@ namespace Hermes.Website.Pages
         {
             foreach (Node node in nodes.Values) 
             {
-                if (node.type == "paper")
-                {
-                    PaperNode tmp = (PaperNode) node;
-                    Console.WriteLine("NodeName " + tmp.name + " NodeTitle: " + tmp.title);
-                }
+                Console.WriteLine("NodeName: " + node.name + " | NodeType: " + node.type + " | CreatedAt: " + node.createdAt);
+                
                 
             }
         }
