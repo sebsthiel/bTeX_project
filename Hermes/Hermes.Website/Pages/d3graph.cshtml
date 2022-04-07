@@ -1,0 +1,17 @@
+﻿@page
+@{
+    ViewData["Title"] = "Graph Playground";
+}
+
+
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="~/js/createGraph.js" asp-append-version="true"></script>
+
+<h1> Graph playground </h1>
+
+<body>
+    <div id="d3graph"></div>
+</body>
+
+<script>createLine();</script>
