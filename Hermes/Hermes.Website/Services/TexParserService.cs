@@ -52,7 +52,7 @@ namespace Hermes.Website.Services
             //@"\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+?)})|(?<newtheorem>newtheorem)(?<envName>{.+?})(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?";
             
             RegexOptions options = RegexOptions.Multiline;
-            Console.WriteLine("START PARSING");
+            //Console.WriteLine("START PARSING");
 
 
             foreach (Match match in Regex.Matches(text, pattern, options))
@@ -150,7 +150,6 @@ namespace Hermes.Website.Services
                 else if (groups["type"].Value == "label")
                 {
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
-
                     Node node1 = new Node(typeNameWithoutRefs, createdAt, groups["type"].Value);
                     nodeDict[node1.name] = node1;
                     //Console.WriteLine("Adding label: " + node1.GetName());
@@ -160,7 +159,9 @@ namespace Hermes.Website.Services
                 }
                 else if (groups["type"].Value.EndsWith("ref"))
                 {
+                    
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
+                    //Console.WriteLine("NAME: " + typeNameWithoutRefs + " REM: " + remainingString);
                     if (groups["type"].Value == "href")
                     {
                         Node hyperLinkNode = new Node(typeNameWithoutRefs, createdAt, "href");
@@ -186,11 +187,14 @@ namespace Hermes.Website.Services
                 }
                 else if (groups["type"].Value == "begin")
                 {
+                    //Console.WriteLine("PREV TYPENAME: " + groups["typeName"].Value);
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
 
                     // make sure that stuff like enumerate isnt created as a node
                     if (!(envTypeDict.ContainsKey(typeNameWithoutRefs)))
                     {
+                        if (remainingString != "")
+                            ParseTex(remainingString);
                         continue;
                     }
 
@@ -211,7 +215,11 @@ namespace Hermes.Website.Services
 
                     createdAt = newEnvNodeName;
 
-                    if (remainingString != "")
+                    //Console.WriteLine("TYPENAMEWITHOUTREFS: " + typeNameWithoutRefs);
+                    //if (typeNameWithoutRefs == "align")
+                        //Console.WriteLine("ALIGN: " + typeNameWithoutRefs + "REMAINGS: " + remainingString);
+                    
+                    if (remainingString != "") 
                         ParseTex(remainingString);
 
                 }
@@ -330,12 +338,12 @@ namespace Hermes.Website.Services
 
 
 
-            foreach (var key in nodeDict.Keys)
-            {
+            //foreach (Link link in nodeDict.Keys)
+            //{
                 //Console.WriteLine(nodeDict[key].GetName());
-            }
+            //}
 
-            Console.WriteLine("DONE PARSING");
+            //Console.WriteLine("DONE PARSING");
 
 
 
@@ -347,7 +355,7 @@ namespace Hermes.Website.Services
             string acc = "";
             while( nodeDict.ContainsKey( newCreatedAt))
             {
-                Console.WriteLine("NewCreatedAt: " +newCreatedAt);
+                //Console.WriteLine("NewCreatedAt: " +newCreatedAt);
                 EnvNode t = (EnvNode)nodeDict[newCreatedAt];
                 acc = t.counter + "." + acc;
                 newCreatedAt = nodeDict[newCreatedAt].GetCreatedAt();
@@ -410,7 +418,7 @@ namespace Hermes.Website.Services
 
         //Only public for testing purposes pt.
         //Use String builder instead of += on string
-        private (string, string) CheckForCommandsInName(string input)
+        public (string, string) CheckForCommandsInName(string input)
         {
             //nameWithCommands is the actual name of the i.e. section, but still possibly with commands such as \texit{abc}
             //remainingString is the the string that follows the name (and is parsed later in the parseText method) i.e. section{abc} "label{}"
@@ -420,6 +428,10 @@ namespace Hermes.Website.Services
             ParseTex(nameWithCommands);
 
             //Remove whatever command was before the curly brackets I.e \texit{abc}
+            //if (nameWithCommands == "align")
+            //{
+            //    Console.WriteLine("Begin: " + nameWithCommands + " REMAING: " + remainingString);
+            //}
             return (RemoveCommand(nameWithCommands), remainingString);
         }
         private (string, string) CountBrackets(string input)
@@ -441,7 +453,7 @@ namespace Hermes.Website.Services
                     {
                         //return the actual typename (without brackets and so on)
                         //input[i..] is the remainder of the string, which could contain other latex elements
-                        return (tmp, input[(i+1)..]);
+                        return (tmp, input[(i + 1)..] +'}');
                     }
                 }
                 tmp += c;
@@ -450,7 +462,7 @@ namespace Hermes.Website.Services
         }
 
         //Removes any command such as \ref and \label and \texit from the actual name of the i.e section
-        private string RemoveCommand(string command)
+        public string RemoveCommand(string command)
         {
             string tmp = "";
             bool isDeletingCommand = false;

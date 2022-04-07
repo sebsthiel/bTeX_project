@@ -19,44 +19,41 @@ namespace Hermes.Website.Controllers
     public class PdfController : Controller
     {
 
+        //TODO: private services right?
         IWebHostEnvironment environment;
         public TexCompilerService CompilerService;
         public TexParserService ParserService;
         public BibParserService BibService;
         public JsonCreaterService JsonService;
-
-
+        private MultiTexService MultiService;
 
         public PdfController(
             IWebHostEnvironment environment,
             TexCompilerService compilerService,
             TexParserService texParserService,
             BibParserService bibService,
-            JsonCreaterService jsonService)
+            JsonCreaterService jsonService,
+            MultiTexService multiService)
         {
             this.environment = environment;
             CompilerService = compilerService;
             ParserService = texParserService;
             BibService = bibService;
             JsonService = jsonService;
-
+            MultiService = multiService;
         }
 
-
-        
-
-       
-
-
-
         [HttpPost]
-        public async Task<IActionResult> PostAsync(IFormFile file)
+        public async Task<IActionResult> PostAsync(IFormFile file, string mainName)
         {
+
             string pdfPath;
 
             string texFile = "";
 
             Console.WriteLine("POST REQUEST");
+
+            
 
             var userId = Guid.NewGuid();
 
@@ -73,10 +70,14 @@ namespace Hermes.Website.Controllers
             // creating paths and directory for the new files that will be saved
             var projectName = userId;//Path.GetFileNameWithoutExtension(file.FileName);
             Console.WriteLine("project name: " + projectName);
-            string texDir = environment.ContentRootPath + "/papers/tex/" + projectName + "/";
-            string zipDir = environment.ContentRootPath + "/papers/zips/" + projectName + "/";
-            string pdfDir = environment.ContentRootPath + "/papers/pdfs/" + projectName + "/";
-            string jsonDir = environment.ContentRootPath + "/papers/jsons/" + projectName + "/";
+            string texDir = Path.Combine(new string[] {environment.ContentRootPath, "papers", "tex", projectName+"", " "}).Trim(); 
+            //environment.ContentRootPath + "/papers/tex/" + projectName + "/";
+            string zipDir = Path.Combine(new string[] { environment.ContentRootPath, "papers", "zips", projectName + "", " " }).Trim();
+            //environment.ContentRootPath + "/papers/zips/" + projectName + "/";
+            string pdfDir = Path.Combine(new string[] { environment.ContentRootPath, "papers", "pdfs", projectName + "", " " }).Trim();
+            //environment.ContentRootPath + "/papers/pdfs/" + projectName + "/";
+            string jsonDir = Path.Combine(new string[] { environment.ContentRootPath, "papers", "jsons", projectName + "", " " }).Trim();
+            //environment.ContentRootPath + "/papers/jsons/" + projectName + "/";
 
             Directory.CreateDirectory(texDir);
             Directory.CreateDirectory(zipDir);
@@ -86,13 +87,16 @@ namespace Hermes.Website.Controllers
 
             string zipFile = zipDir + file.FileName;
 
+            Console.WriteLine(file.ContentType);
+
             // checking for zip
-            if (file.ContentType == "application/zip")
+            if (file.ContentType == "application/zip" || file.ContentType == "application/x-zip-compressed")
             {
                 // save zip file and unzip at zipDir location
                 TexCompilerService.DeleteContentInDir(zipDir);
                 using (var stream = System.IO.File.Create(zipFile))
                 {
+                    Console.WriteLine("ZipFile: " + zipFile);
                     await file.CopyToAsync(stream);
                 }
                 TexCompilerService.DeleteContentInDir(texDir);
@@ -163,13 +167,20 @@ namespace Hermes.Website.Controllers
             //ParserService.ParseTex(texFile);
 
             var tmpFiles = Directory.GetFiles(texDir, "*.tex", SearchOption.AllDirectories);
-           
+
+            /***********ADD MultiTexService here****************/
+            //TODO: maybe add a sort of default value if that is possible in c#
+            if (mainName == null)
+                mainName = "";
+            string allTexFilesAsString = MultiService.ScanMultipleFiles(tmpFiles, mainName);
+            Console.WriteLine(allTexFilesAsString);
+            ParserService.ParseTex(allTexFilesAsString);
                 
-            foreach (string v in tmpFiles)
-            {
-                Console.WriteLine("Should parse: " + v);
-                ParserService.ParseTex(v);
-            }
+            //foreach (string v in tmpFiles)
+            //{
+            //    Console.WriteLine("Should parse: " + v);
+            //    ParserService.ParseTexFromFile(v);
+            //}
 
             
 
@@ -182,7 +193,7 @@ namespace Hermes.Website.Controllers
 
             var dagNodes = makeDagNodes(ParserService.GetNodes(), links);
 
-            JsonService.CreateDagJson(dagNodes, "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/tester/some.json");
+           // JsonService.CreateDagJson(dagNodes, "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/tester/some.json");
             JsonService.CreateJsonFile(nodes, links, jsonDir + "some.json");
 
 

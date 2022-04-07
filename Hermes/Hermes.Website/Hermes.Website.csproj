@@ -13,6 +13,7 @@
     <None Remove="latexparse-csharp" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="papers\" />
     <Folder Include="serverPdfs\" />
   </ItemGroup>
   <ItemGroup>

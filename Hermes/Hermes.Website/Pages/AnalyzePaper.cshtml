@@ -11,7 +11,7 @@
     }
 
     #d3graph{
-        float:right
+        
     }
 
     #pdfviewer{
@@ -108,6 +108,8 @@
         console.log("test hej");
 
         let file = document.getElementById("uploadFile").files[0];
+        let mainName = document.getElementById("mainName").value;
+        console.log("mainName: " + mainName);
 
         console.log("len: " + file.size);
         console.log("type " + typeof (file));
@@ -115,6 +117,13 @@
         let formData = new FormData();
 
         formData.append("file", file);
+
+        if (mainName == null)
+            mainName = "";
+
+        console.log("Some123: " + mainName);
+
+        formData.append("mainName", mainName);
 
         let response = await fetch("/api/pdf", {
             method: 'POST',
@@ -127,10 +136,10 @@
 
             console.log("guid: " + await data.guid);
             let guid = await data.guid;
-            let pdf = await getPdf(guid);
+            //let pdf = await getPdf(guid);
             let json = await getJson(guid);
 
-            document.getElementById("outputPdf").src = pdf;
+            //document.getElementById("outputPdf").src = pdf;
             createGraph(json);
 
             // Load json into d3 graph
@@ -154,15 +163,28 @@
 
 <body>
     <div id="d3graph"></div>
+    <!--
+             <div id="pdfviewer">
+            <embed id="outputPdf" src="" width="500" height="375" type="application/pdf">
 
-    <div id="pdfviewer">
-        <embed id="outputPdf" src="" width="500" height="375" type="application/pdf">
+        </div>
 
-    </div>
+    -->
+    <!--
+        <input id="uploadFile" type="file" name="uploadFile" onchange="uploadFile()">
 
+        -->
 
+    <input id="uploadFile" name="uploadFile" type="file">
+    <input id="mainName" name="mainName" type="text" placeholder="Name of the main file" value="">
+    <input type="submit" asp-page-handler="Upload" class="btn" onclick="uploadFile()">
 
-    <input id="uploadFile" type="file" name="uploadFile" onchange="uploadFile()">
+    <!--form id="stuff" method="post" enctype="multipart/form-data" onsubmit="uploadFile()">
+        <input id="uploadFile" type="file" name="uploadFile">
+        <!--<input id="mainName" name="mainName" type="text" placeholder="Name of the main file" />
+        <input type="submit" asp-page-handler="Upload" class="btn" onclick="uploadFile()">
+    </form>-->
+
 
     <div class='svgHolder' id="force"></div>
     <div class='svgHolder' id="dag"></div>

@@ -20,10 +20,11 @@ namespace Hermes.Website.Pages
 
         IWebHostEnvironment environment;
 
-        public BibParserService BibService;
-        public TexParserService TexService;
-        public JsonCreaterService JsonService;
-        public BBLParserService BBLParser;
+        private BibParserService BibService;
+        private TexParserService TexService;
+        private JsonCreaterService JsonService;
+        private BBLParserService BBLParser;
+        private MultiTexService MultiService;
 
 
         public BibParserModel(
@@ -31,45 +32,40 @@ namespace Hermes.Website.Pages
             BibParserService bibService,
             TexParserService texService,
             JsonCreaterService jsonService,
-            BBLParserService bblParser)
+            BBLParserService bblParser,
+            MultiTexService multiService)
         {
             this.environment = environment;
             BibService = bibService;
             TexService = texService;
             JsonService = jsonService;
             BBLParser = bblParser;
-           
+            MultiService = multiService;
         }
 
         public string UploadFilePath { get; set; }
        
         public void OnGet()
         {
-            //(string tmp1, string tmp2) = TexService.CheckForCommandsInName(@"proposition \label{abc} \texit{def} some}");
-            //\textit{State}
-            //Console.WriteLine("TMP1: " + tmp1 + " TMP2: " + tmp2);
-            //string tmpR = TexService.RemoveCommand(@"proposition \ref{abc} \texit{def} some");
-            //Console.WriteLine(tmpR);
-            //string tmp = TexService.RemoveCommand(@"abc \texit");
-            //Console.WriteLine(tmp);
-            //TexService.ParseTex(@"\section{Proof of Proposition 1} en-proof-proposition-1}");
-            PrintNodes(TexService.GetNodes());
-            
+            //(string tmp1, string tmp2) = TexService.CheckForCommandsInName(@"align}\label{kd:eq:a");
+
+
         }
 
 
-        public async Task OnPostUploadAsync(IFormFile uploadFile)
+        public async Task OnPostUploadAsync(IFormFile uploadFile, string mainName)
         {
             //Console.WriteLine("Posted Someting in BibParser");
-            string path = SaveFileToPath(uploadFile);
-
+            //string path = SaveFileToPath(uploadFile);
+            Console.WriteLine(uploadFile.FileName);
+            Console.WriteLine(mainName);
 
 
             //List<Node> nodes = await BBLParser.ParseBBLFile(path);
-            TexService.ParseTexFromFile(path);
-            Dictionary<string,Node> nodes = TexService.GetNodes();
+            //TexService.ParseTexFromFile(path);
+            //Dictionary<string,Node> nodes = TexService.GetNodes();
             
-            PrintNodes(nodes);
+            //PrintNodes(nodes);
             //\subsection{\textit{State}}
             //List<DagNode> dNodes = makeDagNodes(TexService.GetNodes(), TexService.GetLinks());
             //string jsonPath = Path.Combine(environment.ContentRootPath + "/tester/", "some.json");

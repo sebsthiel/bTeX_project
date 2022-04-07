@@ -84,15 +84,17 @@ namespace Hermes.Website.Pages
 
             string zipFile = zipDir + uploadFile.FileName;
 
+            string texFile = "";
+
             // checking for zip
             if (uploadFile.ContentType == "application/zip")
             {
-                TexCompilerService.DeleteContentInDir(zipDir);
+                //TexCompilerService.DeleteContentInDir(zipDir);
                 using (var stream = System.IO.File.Create(zipFile))
                 {
                     await uploadFile.CopyToAsync(stream);
                 }
-                TexCompilerService.DeleteContentInDir(texDir);
+                //TexCompilerService.DeleteContentInDir(texDir);
                 ZipFile.ExtractToDirectory(zipFile, texDir);
 
 
@@ -102,8 +104,11 @@ namespace Hermes.Website.Pages
                 {
                     Console.WriteLine("MORE THAN 1 TEX");
                 }
-                CompilerService.TexFile = texFiles[0];
-                Console.WriteLine("TexFile: " + CompilerService.TexFile);
+                //CompilerService.TexFile = texFiles[0];
+                //Console.WriteLine("TexFile: " + CompilerService.TexFile);
+                texFile = texFiles[0];
+
+
 
 
                 // call bib parser
@@ -133,19 +138,20 @@ namespace Hermes.Website.Pages
                 {
                     await uploadFile.CopyToAsync(stream);
                 }
-                CompilerService.TexFile = singleTexFile;
+                //CompilerService.TexFile = singleTexFile;
 
+                texFile = singleTexFile;
             }
 
             // -----------------------------------------
 
             // compiling the texfile to pdf
-            await CompilerService.CompileTexAsync(texDir, pdfDir, "");
+            //await CompilerService.CompileTexAsync(texDir, pdfDir, "");
                 
-            PdfPath = CompilerService.GetPdf;
+            //PdfPath = CompilerService.GetPdf;
 
             // parsing tex to get dict of Nodes and list of Edges (links)
-            ParserService.ParseTex(CompilerService.TexFile);
+            ParserService.ParseTex(texFile);
 
             //Create Jsonfile for graphQL
             var nodes = ParserService.GetNodes().Values.ToList();
