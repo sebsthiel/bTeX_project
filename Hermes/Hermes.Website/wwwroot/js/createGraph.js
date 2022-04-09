@@ -38,7 +38,7 @@ function lineGraph() {
 
     var allNodes = [
         { name: "node1", lineNumber: 55, type: "section" },
-        { name: "node2", lineNumber: 100, type: "label" },
+        { name: "citat af bob", lineNumber: 100, type: "label" },
         { name: "node3", lineNumber: 150, type: "section" },
         { name: "node4", lineNumber: 300, type: "label" },
         { name: "node5", lineNumber: 500, type: "section" },
@@ -51,13 +51,14 @@ function lineGraph() {
         { name: "refNode1", lineNumber: 500, type: "refNode" },
         { name: "refNode2", lineNumber: 70, type: "refNode" },
         { name: "refNode3", lineNumber: 460, type: "refNode" },
+       
 
     ];
 
     var links = [
-        { source: "node2", target: "node4", type: "" },
+        { source: "citat af bob", target: "node4", type: "" },
         { source: "node4", target: "node6", type: "" },
-        { source: "node6", target: "node2", type: "" },
+        { source: "node6", target: "citat af bob", type: "" },
 
         { source: "refNode1", target: "node7", type: "" },
         { source: "refNode2", target: "node7", type: "" },
@@ -113,6 +114,7 @@ function lineGraph() {
     const height = 500;
     const xaxisHeight = 10;
     var nodeYIndex = 10;
+    const nodeColor = "gray"
 
     // select the svg for creating the graph
     // and configure the width and height
@@ -158,29 +160,33 @@ function lineGraph() {
         .attr("marker-end", "url(#triangle)");
 
 
-    var svgNodes = svg.append('g')
+    var svgNodes = svg
         .selectAll('circle')
         .data(normalNodes)
-        .enter()
-        .append('circle')
+        .enter().append('g')
+
+    var nodeCircles = svgNodes.append('circle')
         .attr('r', getRadiusNode)
         .attr('fill', "gray")
         .attr('cx', getLineNumber)
-        .attr('cy', getRandomNodeY)
+        .attr('cy', getRandomNodeY);
 
-    svgNodes.on("click", function (d) {
-        var thisNode = d.name
-        console.log(d);
-        var connected = links.filter(function (e) {
-            return e.source === thisNode || e.target === thisNode
-        });
-        svgNodes.attr("opacity", function (d) {
-            return (connected.map(d => d.source).indexOf(d.name) > -1 || connected.map(d => d.target).indexOf(d.name) > -1) ? 1 : 0.1
-        });
+    var textElements = svgNodes
+        .append('text')
+        .text(node => node.name)
+        .attr('font-size', 15)
+        .attr("dx", node => node.lineNumber + 10)
+        .attr("dy", node => nodeDict[node.name].y)
+        .attr("visibility", "hidden");
 
-        path.attr("opacity", function (d) {
-            return (d.source.name == thisNode || d.target.name == thisNode) ? 1 : 0.1
-        });
+    
+
+    nodeCircles.on("click", function (selected) {
+        
+        console.log(selected);
+
+        textElements.attr("visibility", function (node) { return showName(node, selected) });
+        nodeCircles.attr("fill", function (node) { return selectNode(node, selected) });
     })
 
     console.log(sectionNodes)
@@ -249,6 +255,28 @@ function lineGraph() {
         nodeDict[node.name].y = xaxisHeight + nodeYIndex;
 
         return xaxisHeight + nodeYIndex;
+    }
+
+    function selectNode(node, selected) {
+
+        if (node.name == selected.name) {
+            return "green";
+        }
+        else {
+            return nodeColor;
+
+        }
+
+    }
+
+    function showName(node, selected) {
+        if (node.name == selected.name) {
+            return "visible";
+        }
+        else {
+            return "hidden";
+
+        }
     }
 
     
@@ -322,7 +350,7 @@ function funGraph(nodes, links) {
         .call(dragDrop)
         .on('click', selectNode);
 
-    var textElements = svg.append('g')
+    var textElements = node.append('g')
         .selectAll('text')
         .data(nodes)
         .enter().append('text')
