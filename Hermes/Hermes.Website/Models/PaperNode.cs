@@ -14,8 +14,8 @@ namespace Hermes.Website.Models
             return name;
         }
 
-        public PaperNode(string name, string createdAt, string type)
-            : base(name, createdAt, type)
+        public PaperNode(string name, string createdAt, string type, int lineCount)
+            : base(name, createdAt, type, lineCount)
         {
 
         }

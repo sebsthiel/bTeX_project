@@ -67,7 +67,8 @@ namespace Hermes.Website.Services
                     string name = arg2;
                     if (arg2 == "")
                         name = arg1;
-                    currentPaper = new BBLNode(name, "BBL", outerEnv);
+                    //TODO: figure out what to do with linecount within BBL files
+                    currentPaper = new BBLNode(name, "BBL", outerEnv, -1);
                 }
                 if (author != "")
                 {

@@ -8,13 +8,15 @@ namespace Hermes.Website.Models
         public string name;
         public string createdAt;
         public string type;
+        public int lineCount;
 
-        public Node(string name, string createdAt, string type)
+        public Node(string name, string createdAt, string type, int lineCount)
         {
             this.name = name;
             //id = ID_Generator.GenerateID();
             this.createdAt = createdAt;
             this.type = type;
+            this.lineCount = lineCount;
         }
 
         public string GetName()

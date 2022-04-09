@@ -173,7 +173,6 @@ namespace Hermes.Website.Controllers
             if (mainName == null)
                 mainName = "";
             string allTexFilesAsString = MultiService.ScanMultipleFiles(tmpFiles, mainName);
-            Console.WriteLine(allTexFilesAsString);
             ParserService.ParseTex(allTexFilesAsString);
                 
             //foreach (string v in tmpFiles)
