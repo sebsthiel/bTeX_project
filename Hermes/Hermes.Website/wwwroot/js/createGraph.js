@@ -17,14 +17,278 @@ function createGraph(json) {
     //makeGraph(nodes, links);
     //newGraph(nodes, links);
 
-    funGraph(nodes, links);
+    //funGraph(nodes, links);
+    //lineGraph(nodes, links);
+
+}
+
+function createLine() {
+    lineGraph();
+}
+
+// inclusive min and exclusive max
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
+
+}
+
+function lineGraph() {
+
+    var allNodes = [
+        { name: "node1", lineNumber: 55, type: "section" },
+        { name: "citat af bob", lineNumber: 100, type: "label" },
+        { name: "node3", lineNumber: 150, type: "section" },
+        { name: "node4", lineNumber: 300, type: "label" },
+        { name: "node5", lineNumber: 500, type: "section" },
+        { name: "node6", lineNumber: 520, type: "label" },
+
+        { name: "node7", lineNumber: 250, type: "label" },
+        { name: "node8", lineNumber: 280, type: "label" },
+        { name: "node9", lineNumber: 400, type: "label" },
+
+        { name: "refNode1", lineNumber: 500, type: "refNode" },
+        { name: "refNode2", lineNumber: 70, type: "refNode" },
+        { name: "refNode3", lineNumber: 460, type: "refNode" },
+       
+
+    ];
+
+    var links = [
+        { source: "citat af bob", target: "node4", type: "" },
+        { source: "node4", target: "node6", type: "" },
+        { source: "node6", target: "citat af bob", type: "" },
+
+        { source: "refNode1", target: "node7", type: "" },
+        { source: "refNode2", target: "node7", type: "" },
+        { source: "refNode3", target: "node7", type: "" }
+    ];
+
+    function compare(a, b) {
+        if (a.lineNumber < b.lineNumber) {
+            return -1;
+        }
+        if (a.lineNumber > b.lineNumber) {
+            return 1;
+        }
+        return 0;
+    }
+
+
+    allNodes.sort(compare);
+
+    // create dict of nodes for lookup later
+    nodeDict = {}
+    allNodes.forEach(node => {
+        nodeDict[node.name] = node;
+        nodeDict[node.name].refSize = 1;
+        nodeDict[node.name].y = 1;
+    })
+
+    
+    // for each ref make target Bigger
+    links.forEach(link => {
+        nodeDict[link.target].refSize += 2;
+
+    });
+
+    var sectionNodes = [];
+    var normalNodes = [];
+
+    // filter for sections and other nodes
+    allNodes.forEach(node => {
+        if (node.type == "section") {
+            console.log("section");
+            sectionNodes.push(node);
+        }
+        else {
+            normalNodes.push(node);
+        }
+    });
+
+    console.log(allNodes[0].lineNumber)
+
+
+    const width = window.innerWidth;
+    const height = 500;
+    const xaxisHeight = 10;
+    var nodeYIndex = 10;
+    const nodeColor = "gray"
+
+    // select the svg for creating the graph
+    // and configure the width and height
+    var svg = d3.select("#d3graph")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height);
+
+
+    // create arrow-head 
+    svg.append("svg:defs").append("svg:marker")
+        .attr("id", "triangle")
+        .attr("refX", 6)
+        .attr("refY", 6)
+        .attr("markerWidth", 30)
+        .attr("markerHeight", 30)
+        .attr("orient", "auto")
+        .append("path")
+        .attr("d", "M 0 0 12 6 0 12 3 6")
+        .style("fill", "black");
+
+    // link arrow
+    var linkarrow = svg.append("svg:defs").append("svg:marker")
+        .attr("id", "linkArrow")
+        .attr("refX", 12)
+        .attr("refY", 3)
+        .attr("markerWidth", 15)
+        .attr("markerHeight", 15)
+        .attr("orient", "auto")
+        .append("path")
+        .attr("d", "M 0 0 6 3 0 6 2 3")
+        .style("fill", "black");
+
+    // create xaxis (line + arrow) 
+    var xaxis = svg.append('g')
+        .append("line")
+        .attr('stroke-width', 2)
+        .attr('stroke', 'black')
+        .attr("x1", 50)
+        .attr("y1", xaxisHeight)
+        .attr("x2", width - 50)
+        .attr("y2", xaxisHeight)
+        .attr("marker-end", "url(#triangle)");
+
+
+    var svgNodes = svg
+        .selectAll('circle')
+        .data(normalNodes)
+        .enter().append('g')
+
+    var nodeCircles = svgNodes.append('circle')
+        .attr('r', getRadiusNode)
+        .attr('fill', "gray")
+        .attr('cx', getLineNumber)
+        .attr('cy', getRandomNodeY);
+
+    var textElements = svgNodes
+        .append('text')
+        .text(node => node.name)
+        .attr('font-size', 15)
+        .attr("dx", node => node.lineNumber + 10)
+        .attr("dy", node => nodeDict[node.name].y)
+        .attr("visibility", "hidden");
+
+    
+
+    nodeCircles.on("click", function (selected) {
+        
+        console.log(selected);
+
+        textElements.attr("visibility", function (node) { return showName(node, selected) });
+        nodeCircles.attr("fill", function (node) { return selectNode(node, selected) });
+    })
+
+    console.log(sectionNodes)
+
+    var svgSection = svg.append('g')
+        .selectAll("#sectionLine")
+        .data(sectionNodes)
+        .enter()
+        .append('line')
+        .attr('stroke-width', 2)
+        .attr('stroke', 'red')
+        .attr("x1", getLineNumber)
+        .attr("y1", xaxisHeight - 10)
+        .attr("x2", getLineNumber)
+        .attr("y2", xaxisHeight + 10)
+
+
+    var links = svg
+        .selectAll('mylinks')
+        .data(links)
+        .enter()
+        .append('path')
+        .attr('d', createArc)
+        .attr("stroke", randomColor)
+        .attr('stroke-width', 2)
+        .style("fill", "none")
+        .attr("marker-end", "url(#linkArrow)");
+
+    function getRadiusNode(node) {
+        if (node.type == "refNode") {
+            return 3;
+        }
+        return node.refSize +5;
+    }
+
+    function getLineNumber(node) {
+        return node.lineNumber;
+
+    }
+    function randomColor() {
+        return "#" + Math.floor(Math.random() * 16777215).toString(16);
+    }
+    
+
+    function createArc(d) {
+
+        start = nodeDict[d.source].lineNumber    // X position of start node on the X axis
+        end = nodeDict[d.target].lineNumber      // X position of end node
+
+        startY = nodeDict[d.source].y
+        endY = nodeDict[d.target].y
+        return ['M', start, startY,    // the arc starts at the coordinate x=start, y=height-10 (where the starting node is)
+            'A',                            // This means we're gonna build an elliptical arc 
+            (start - end) , ',',         // Next 2 lines are the coordinates of the inflexion point. Height of this point is proportional with start - end distance 
+            (start - end) , 0, 0, ',',
+            start < end ? 1 : 1, end, ',', endY] // We always want the arc on top. So if end is before start, putting 0 here turn the arc upside down.
+            .join(' ');
+
+    }
+
+    function getRandomNodeY(node) {
+
+        //let randomInt = getRandomInt(0, 200);
+        nodeYIndex += 10;
+
+        nodeDict[node.name].y = xaxisHeight + nodeYIndex;
+
+        return xaxisHeight + nodeYIndex;
+    }
+
+    function selectNode(node, selected) {
+
+        if (node.name == selected.name) {
+            return "green";
+        }
+        else {
+            return nodeColor;
+
+        }
+
+    }
+
+    function showName(node, selected) {
+        if (node.name == selected.name) {
+            return "visible";
+        }
+        else {
+            return "hidden";
+
+        }
+    }
+
+    
+   
+
 
 }
 
 
 
 
-// uses d3 v4
+// uses d3 v4 
 function funGraph(nodes, links) {
 
     const width = 500;
@@ -86,7 +350,7 @@ function funGraph(nodes, links) {
         .call(dragDrop)
         .on('click', selectNode);
 
-    var textElements = svg.append('g')
+    var textElements = node.append('g')
         .selectAll('text')
         .data(nodes)
         .enter().append('text')

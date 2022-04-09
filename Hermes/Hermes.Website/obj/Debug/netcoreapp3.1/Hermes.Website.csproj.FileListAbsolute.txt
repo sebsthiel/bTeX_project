@@ -142,6 +142,7 @@ C:/Users/jaffa/OneDrive/Skrivebord/Bachelor/GitRepo/bTeX_project/Hermes/Hermes.W
 >>>>>>> origin/json
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/Newtonsoft.Json.dll
 >>>>>>> origin/csharp_build
+<<<<<<< HEAD
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/030a0277-6d31-41ed-9bec-6baec5d918c1/some.json
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/03db54b4-623f-4db5-9cb1-d524f46e27bf/some.json
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/13b20096-e874-49c3-8ab4-f5574e13e631/some.json
@@ -180,3 +181,8 @@ C:/Users/jaffa/OneDrive/Skrivebord/Bachelor/GitRepo/bTeX_project/Hermes/Hermes.W
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/f95db26f-628a-48ac-b71a-a073a5832349/some.json
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/fce590bf-9fe7-4eeb-ab78-2038a0b0a6a7/some.json
 >>>>>>> csharp_build
+=======
+/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/6d5c3afd-f779-4739-82c6-73d7434aa135/some.json
+/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/faeed5b2-5fa0-4aab-a849-b52fd6cd5488/some.json
+/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Razor/Pages/d3graph.cshtml.g.cs
+>>>>>>> working_csharp_build
