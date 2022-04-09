@@ -64,7 +64,8 @@ namespace Hermes.Website.Services
                 {
                     Console.WriteLine("PaperID: " + paperId);
                     if (currentPaper != null){ paperList.Add(currentPaper);}
-                    currentPaper = new PaperNode(paperId, "BibFile", "Paper");
+                    //TODO: figure out what to do with linecount within Bib files
+                    currentPaper = new PaperNode(paperId, "BibFile", "Paper", -1);
                 }
                 if (paperType != null && paperType != "") 
                 {

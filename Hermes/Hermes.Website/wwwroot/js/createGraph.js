@@ -17,7 +17,7 @@ function createGraph(json) {
     //makeGraph(nodes, links);
     //newGraph(nodes, links);
 
-    //funGraph(nodes, links);
+    funGraph(nodes, links);
     //lineGraph(nodes, links);
 
 }
@@ -350,7 +350,7 @@ function funGraph(nodes, links) {
         .call(dragDrop)
         .on('click', selectNode);
 
-    var textElements = node.append('g')
+    var textElements = nodeElements.append('g')
         .selectAll('text')
         .data(nodes)
         .enter().append('text')

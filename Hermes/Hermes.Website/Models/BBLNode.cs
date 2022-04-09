@@ -9,8 +9,8 @@ namespace Hermes.Website.Models
     {
         public List<string> information;
         public string author;
-        public BBLNode(string name, string createdAt, string type)
-            : base(name, createdAt, type)
+        public BBLNode(string name, string createdAt, string type, int lineCount)
+            : base(name, createdAt, type, lineCount)
         {
             information = new List<string>();
         }

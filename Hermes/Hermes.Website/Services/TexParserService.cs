@@ -29,6 +29,9 @@ namespace Hermes.Website.Services
         string outerEnv;
         string createdAt;
 
+        int lineCount = 0;
+        bool inComment = false;
+
 
         Env sectionEnv = new Env("section", "section", 1, new List<string>(), new List<string>());
         
@@ -46,25 +49,42 @@ namespace Hermes.Website.Services
 
             // Go through file
 
-            string pattern = @"\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+)})|(?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)})|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?";
+            string pattern = @"(?<comment>([^\\]|\n)%)|\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
+                
+                //@"(?<comment>%)?\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
+                
+                //@"\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+)})|(?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)})|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
             // Non-greedy:
             //\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+?)})|(?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)})|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?
             //@"\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+?)})|(?<newtheorem>newtheorem)(?<envName>{.+?})(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?";
             
             RegexOptions options = RegexOptions.Multiline;
-            Console.WriteLine("START PARSING");
+            //Console.WriteLine("START PARSING");
 
 
             foreach (Match match in Regex.Matches(text, pattern, options))
             {
                 GroupCollection groups = match.Groups;
                 //Console.WriteLine("MATCH: " + match);
+                if (groups["comment"].Value.EndsWith("%"))
+                    inComment = true;
+                    
+                    
+                if (groups["newLine"].Value == "\n")
+                {
+                    inComment = false;
+                    lineCount++;
+                }
+                if (inComment)
+                    continue;
+
+
                 if (groups["type"].Value == "section")
                 {
                     //Console.WriteLine("TypeName: " + groups["typeName"].Value);
                     (string typeNameWithoutRefs,string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
 
-                    EnvNode newEnvNode = new EnvNode(typeNameWithoutRefs, outerEnv, groups["type"].Value, envTypeDict["section"].counter);
+                    EnvNode newEnvNode = new EnvNode(typeNameWithoutRefs, outerEnv, groups["type"].Value, envTypeDict["section"].counter, lineCount);
 
                     UpdateCounters("section");
 
@@ -94,7 +114,7 @@ namespace Hermes.Website.Services
                     if (subCountSubsection == subCountCreatedAt)
                     {
                         // same sub amount
-                        newSubSection = new EnvNode(typeNameWithoutRefs, nodeDict[createdAt].GetCreatedAt(), groups["type"].Value, envTypeDict[groups["type"].Value].counter);
+                        newSubSection = new EnvNode(typeNameWithoutRefs, nodeDict[createdAt].GetCreatedAt(), groups["type"].Value, envTypeDict[groups["type"].Value].counter, lineCount);
                         UpdateCounters(groups["type"].Value);
 
                         createdAt = newSubSection.GetName();
@@ -117,7 +137,7 @@ namespace Hermes.Website.Services
                         }
 
 
-                        newSubSection = new EnvNode(typeNameWithoutRefs, createdAt, groups["type"].Value, envTypeDict[groups["type"].Value].counter);
+                        newSubSection = new EnvNode(typeNameWithoutRefs, createdAt, groups["type"].Value, envTypeDict[groups["type"].Value].counter, lineCount);
 
                         // updateCounters
                         UpdateCounters(groups["type"].Value);
@@ -132,7 +152,7 @@ namespace Hermes.Website.Services
                         var differenceInSubCount = (subCountCreatedAt - subCountSubsection);
 
                         var newCreatedAt = subSection2Section(createdAt, differenceInSubCount);
-                        newSubSection = new EnvNode(typeNameWithoutRefs, newCreatedAt, groups["type"].Value, envTypeDict[groups["type"].Value].counter);
+                        newSubSection = new EnvNode(typeNameWithoutRefs, newCreatedAt, groups["type"].Value, envTypeDict[groups["type"].Value].counter, lineCount);
 
                         UpdateCounters(groups["type"].Value);
 
@@ -150,8 +170,7 @@ namespace Hermes.Website.Services
                 else if (groups["type"].Value == "label")
                 {
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
-
-                    Node node1 = new Node(typeNameWithoutRefs, createdAt, groups["type"].Value);
+                    Node node1 = new Node(typeNameWithoutRefs, createdAt, groups["type"].Value, lineCount);
                     nodeDict[node1.name] = node1;
                     //Console.WriteLine("Adding label: " + node1.GetName());
 
@@ -160,10 +179,12 @@ namespace Hermes.Website.Services
                 }
                 else if (groups["type"].Value.EndsWith("ref"))
                 {
+                    
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
+                    //Console.WriteLine("NAME: " + typeNameWithoutRefs + " REM: " + remainingString);
                     if (groups["type"].Value == "href")
                     {
-                        Node hyperLinkNode = new Node(typeNameWithoutRefs, createdAt, "href");
+                        Node hyperLinkNode = new Node(typeNameWithoutRefs, createdAt, "href", lineCount);
                         nodeDict[hyperLinkNode.name] = hyperLinkNode;
                     }
                     //Console.WriteLine("Adding ref: " + groups["typeName"].Value);
@@ -186,11 +207,14 @@ namespace Hermes.Website.Services
                 }
                 else if (groups["type"].Value == "begin")
                 {
+                    //Console.WriteLine("PREV TYPENAME: " + groups["typeName"].Value);
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
 
                     // make sure that stuff like enumerate isnt created as a node
                     if (!(envTypeDict.ContainsKey(typeNameWithoutRefs)))
                     {
+                        if (remainingString != "")
+                            ParseTex(remainingString);
                         continue;
                     }
 
@@ -201,7 +225,7 @@ namespace Hermes.Website.Services
                     // TODO what do we do about counter?? should it be string or what?
                     //var newEnvNode = new EnvNode(newEnvNodeName, createdAt, groups["typeName"].Value, thisEnvCount);
                     //Console.WriteLine(groups["type"].Value + " " + groups["typeName"].Value );
-                    var newEnvNode = new EnvNode(newEnvNodeName, createdAt, typeNameWithoutRefs, envTypeDict[typeNameWithoutRefs].counter);
+                    var newEnvNode = new EnvNode(newEnvNodeName, createdAt, typeNameWithoutRefs, envTypeDict[typeNameWithoutRefs].counter, lineCount);
 
                     //Console.WriteLine("Adding envNode: " + newEnvNode.GetName());
                     nodeDict[newEnvNodeName] = newEnvNode;
@@ -211,7 +235,11 @@ namespace Hermes.Website.Services
 
                     createdAt = newEnvNodeName;
 
-                    if (remainingString != "")
+                    //Console.WriteLine("TYPENAMEWITHOUTREFS: " + typeNameWithoutRefs);
+                    //if (typeNameWithoutRefs == "align")
+                        //Console.WriteLine("ALIGN: " + typeNameWithoutRefs + "REMAINGS: " + remainingString);
+                    
+                    if (remainingString != "") 
                         ParseTex(remainingString);
 
                 }
@@ -240,7 +268,7 @@ namespace Hermes.Website.Services
                     string arg1 = groups["bibArg1"].Value;
                     string arg2 = groups["bibArg2"].Value;
                     //Console.WriteLine("bibitem has arguments: " + arg1 + " & " + arg2);
-                    PaperNode pNode = new PaperNode(arg2, createdAt, "paper");
+                    PaperNode pNode = new PaperNode(arg2, createdAt, "paper", lineCount);
                     if (arg1 != "")
                     {
                         if (arg1.Contains(System.Environment.NewLine))
@@ -254,8 +282,8 @@ namespace Hermes.Website.Services
 
 
                 }
+                
                 // Creating EnvType from the newtheorem command
-
                 if (groups["newtheorem"].Value == "newtheorem")
                 {
 
@@ -330,12 +358,12 @@ namespace Hermes.Website.Services
 
 
 
-            foreach (var key in nodeDict.Keys)
-            {
+            //foreach (Link link in nodeDict.Keys)
+            //{
                 //Console.WriteLine(nodeDict[key].GetName());
-            }
+            //}
 
-            Console.WriteLine("DONE PARSING");
+            //Console.WriteLine("DONE PARSING");
 
 
 
@@ -347,7 +375,7 @@ namespace Hermes.Website.Services
             string acc = "";
             while( nodeDict.ContainsKey( newCreatedAt))
             {
-                Console.WriteLine("NewCreatedAt: " +newCreatedAt);
+                //Console.WriteLine("NewCreatedAt: " +newCreatedAt);
                 EnvNode t = (EnvNode)nodeDict[newCreatedAt];
                 acc = t.counter + "." + acc;
                 newCreatedAt = nodeDict[newCreatedAt].GetCreatedAt();
@@ -410,7 +438,7 @@ namespace Hermes.Website.Services
 
         //Only public for testing purposes pt.
         //Use String builder instead of += on string
-        private (string, string) CheckForCommandsInName(string input)
+        public (string, string) CheckForCommandsInName(string input)
         {
             //nameWithCommands is the actual name of the i.e. section, but still possibly with commands such as \texit{abc}
             //remainingString is the the string that follows the name (and is parsed later in the parseText method) i.e. section{abc} "label{}"
@@ -420,6 +448,10 @@ namespace Hermes.Website.Services
             ParseTex(nameWithCommands);
 
             //Remove whatever command was before the curly brackets I.e \texit{abc}
+            //if (nameWithCommands == "align")
+            //{
+            //    Console.WriteLine("Begin: " + nameWithCommands + " REMAING: " + remainingString);
+            //}
             return (RemoveCommand(nameWithCommands), remainingString);
         }
         private (string, string) CountBrackets(string input)
@@ -441,7 +473,7 @@ namespace Hermes.Website.Services
                     {
                         //return the actual typename (without brackets and so on)
                         //input[i..] is the remainder of the string, which could contain other latex elements
-                        return (tmp, input[(i+1)..]);
+                        return (tmp, input[(i + 1)..] +'}');
                     }
                 }
                 tmp += c;
@@ -450,7 +482,7 @@ namespace Hermes.Website.Services
         }
 
         //Removes any command such as \ref and \label and \texit from the actual name of the i.e section
-        private string RemoveCommand(string command)
+        public string RemoveCommand(string command)
         {
             string tmp = "";
             bool isDeletingCommand = false;
