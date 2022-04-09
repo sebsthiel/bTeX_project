@@ -53,3 +53,4 @@
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/c43af708-ed8c-4a84-a4fc-8cc1ce534b8d/some.json
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/e0d1e64f-25be-40b7-af8a-28d084e4fbb6/some.json
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/f4330891-4687-4026-8320-a2939e032a07/some.json
+/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/5b785ba2-6e1b-4014-9ce0-4db8973bf4f3/some.json
