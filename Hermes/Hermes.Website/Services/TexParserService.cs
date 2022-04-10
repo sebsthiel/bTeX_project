@@ -188,7 +188,10 @@ namespace Hermes.Website.Services
                         nodeDict[hyperLinkNode.name] = hyperLinkNode;
                     }
                     //Console.WriteLine("Adding ref: " + groups["typeName"].Value);
-                    Link link = new Link(createdAt, typeNameWithoutRefs, "ref");
+                    var nodeId = ID_Generator.GenerateID().ToString();
+                    Node node = new Node(nodeId, createdAt, groups["type"].Value, lineCount);
+                    nodeDict.Add(nodeId, node);
+                    Link link = new Link(nodeId, typeNameWithoutRefs, "ref");
                     linksList.Add(link);
 
                     if (remainingString != "")
@@ -198,9 +201,22 @@ namespace Hermes.Website.Services
                 {
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
 
+                    var tmps = typeNameWithoutRefs.Split(',');
+                    var nodeId = ID_Generator.GenerateID().ToString();
+                    Node node = new Node(nodeId, createdAt, groups["type"].Value, lineCount);
+                    nodeDict.Add(nodeId, node);
+                    foreach (string citation in tmps)
+                    {
+                        
+                        
+                        Link link = new Link(nodeId, citation.Trim(), "cite");
+                        linksList.Add(link);
+
+                    }
+
                     //throw new Exception("Not implemented -> test when parsed bib");
-                    Link link = new Link(createdAt, typeNameWithoutRefs, "cite");
-                    //TODO linksList.Add(link);
+                    
+                   
 
                     if (remainingString != "")
                         ParseTex(remainingString);
@@ -209,6 +225,8 @@ namespace Hermes.Website.Services
                 {
                     //Console.WriteLine("PREV TYPENAME: " + groups["typeName"].Value);
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
+
+                    Console.WriteLine("type: "+ typeNameWithoutRefs);
 
                     // make sure that stuff like enumerate isnt created as a node
                     if (!(envTypeDict.ContainsKey(typeNameWithoutRefs)))
@@ -253,10 +271,17 @@ namespace Hermes.Website.Services
                         continue;
                     }
 
+                    EnvNode tmpNode = (EnvNode)nodeDict[createdAt];
+                    tmpNode.lineCountEnd = lineCount;
+
+                    nodeDict[createdAt] = tmpNode;
+
                     if (createdAt != outerEnv)
                     {
+
                         createdAt = nodeDict[createdAt].GetCreatedAt();
                     }
+
 
                     if (remainingString != "")
                         ParseTex(remainingString);
