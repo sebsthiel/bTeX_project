@@ -187,12 +187,13 @@ namespace Hermes.Website.Controllers
             //Create Jsonfile for d3.js
             var nodes = ParserService.GetNodes().Values.ToList();
             var links = ParserService.GetLinks();
+            var environments = ParserService.GetEnvs().Values.ToList();
 
 
             var dagNodes = makeDagNodes(ParserService.GetNodes(), links);
 
            // JsonService.CreateDagJson(dagNodes, "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/tester/some.json");
-            JsonService.CreateJsonFile(nodes, links, jsonDir + "some.json");
+            JsonService.CreateJsonFile(nodes, links, environments, jsonDir + "some.json");
 
 
 
