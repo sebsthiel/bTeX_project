@@ -1,16 +1,17 @@
 ﻿<Properties StartupConfiguration="{F40B3BCD-4DE2-4227-8331-F9EDE52002A3}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Hermes.Website/papers/jsons/00314240-24ab-41a8-8b37-8ea3a41f20be/some.json">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Hermes.Website/Services/TexParserService.cs">
     <Files>
-      <File FileName="Hermes.Website/wwwroot/js/createGraph.js" Line="53" Column="54" />
-      <File FileName="Hermes.Website/Pages/AnalyzePaper.cshtml" Line="46" Column="22" />
-      <File FileName="Hermes.Website/Pages/Playground.cshtml" Line="53" Column="9" />
-      <File FileName="Hermes.Website/Models/ID_Generator.cs" Line="14" Column="25" />
-      <File FileName="Hermes.Website/Models/Node.cs" Line="17" Column="30" />
-      <File FileName="Hermes.Website/Services/TexParserService.cs" Line="145" Column="48" />
-      <File FileName="Hermes.Website/Models/Link.cs" Line="6" Column="1" />
-      <File FileName="Hermes.Website/Models/JsonObject.cs" Line="1" Column="1" />
-      <File FileName="Hermes.Website/Services/TexCompilerService.cs" Line="1" Column="1" />
-      <File FileName="Hermes.Website/papers/jsons/00314240-24ab-41a8-8b37-8ea3a41f20be/some.json" Line="1" Column="1" />
+      <File FileName="Hermes.Website/wwwroot/js/createGraph.js" Line="2427" Column="25" />
+      <File FileName="Hermes.Website/Pages/AnalyzePaper.cshtml" />
+      <File FileName="Hermes.Website/Pages/Playground.cshtml" />
+      <File FileName="Hermes.Website/Models/ID_Generator.cs" />
+      <File FileName="Hermes.Website/Models/Node.cs" />
+      <File FileName="Hermes.Website/Services/TexParserService.cs" Line="171" Column="18" />
+      <File FileName="Hermes.Website/Models/Link.cs" />
+      <File FileName="Hermes.Website/Models/JsonObject.cs" />
+      <File FileName="Hermes.Website/Services/TexCompilerService.cs" />
+      <File FileName="Hermes.Website/Pages/Shared/_ValidationScriptsPartial.cshtml" />
+      <File FileName="Hermes.Website/Models/EnvNode.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -19,17 +20,10 @@
             <Node name="Hermes.Website" expanded="True">
               <Node name="Controllers" expanded="True" />
               <Node name="Models" expanded="True" />
-              <Node name="Pages" expanded="True">
-                <Node name="Shared" expanded="True" />
+              <Node name="Pages" expanded="True" />
+              <Node name="Services" expanded="True">
+                <Node name="TexParserService.cs" selected="True" />
               </Node>
-              <Node name="papers" expanded="True">
-                <Node name="jsons" expanded="True">
-                  <Node name="00314240-24ab-41a8-8b37-8ea3a41f20be" expanded="True">
-                    <Node name="some.json" selected="True" />
-                  </Node>
-                </Node>
-              </Node>
-              <Node name="Services" expanded="True" />
               <Node name="wwwroot" expanded="True">
                 <Node name="js" expanded="True" />
               </Node>

@@ -2373,7 +2373,7 @@ function lineGraph(nodes, linksw) {
     allNodes.forEach(node => {
         nodeDict[node.name] = node;
         nodeDict[node.name].refSize = 1;
-        nodeDict[node.name].y = 100;
+        nodeDict[node.name].y = 1;
     })
 
     
@@ -2410,7 +2410,7 @@ function lineGraph(nodes, linksw) {
     const width = 10000//window.innerWidth;
     const height = 10000;
     const xaxisHeight = 100;
-    var nodeYIndex = 100;
+    var nodeYIndex = 10;
     const nodeColor = "gray"
 
     // select the svg for creating the graph

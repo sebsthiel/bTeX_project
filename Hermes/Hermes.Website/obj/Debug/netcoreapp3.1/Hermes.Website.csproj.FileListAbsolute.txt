@@ -45,3 +45,4 @@
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/Debug/netcoreapp3.1/Hermes.Website.genruntimeconfig.cache
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/e8e938b9-99b3-4ccb-8bba-471ccf63a1cf/some.json
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/8e8d25ff-f518-4808-8f9b-f9886431b29a/some.json
+/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/4a08ec9e-dc61-464a-9e0d-1a9155cd18b2/some.json
