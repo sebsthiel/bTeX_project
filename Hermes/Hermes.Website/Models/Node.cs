@@ -9,6 +9,7 @@ namespace Hermes.Website.Models
         public string createdAt;
         public string type;
         public int lineCount;
+        public int? lineCountEnd;
 
         public Node(string name, string createdAt, string type, int lineCount)
         {
@@ -17,6 +18,7 @@ namespace Hermes.Website.Models
             this.createdAt = createdAt;
             this.type = type;
             this.lineCount = lineCount;
+            lineCountEnd = null;
         }
 
         public string GetName()
