@@ -12,13 +12,14 @@ function createGraph(json) {
 
     nodes = json.nodes;
     links = json.links;
+    envs = json.environments;
 
 
     //makeGraph(nodes, links);
     //newGraph(nodes, links);
 
     //funGraph(nodes, links);
-    lineGraph(nodes, links);
+    lineGraph(nodes, links, envs);
 
 }
 
@@ -30,583 +31,615 @@ function createLine(json) {
                 "name": "Introduction",
                 "createdAt": "DOCUMENT",
                 "type": "section",
-                "lineCount": 51
+                "lineCount": 51,
+                "lineCountEnd": null
             },
             {
                 "name": "sec:introduction",
                 "createdAt": "Introduction",
                 "type": "label",
-                "lineCount": 51
+                "lineCount": 51,
+                "lineCountEnd": null
             },
             {
-                "name": "1",
+                "name": "89",
                 "createdAt": "Introduction",
                 "type": "citep",
-                "lineCount": 53
+                "lineCount": 53,
+                "lineCountEnd": null
             },
             {
-                "name": "2",
+                "name": "90",
                 "createdAt": "Introduction",
                 "type": "citep",
-                "lineCount": 53
+                "lineCount": 53,
+                "lineCountEnd": null
             },
             {
-                "name": "3",
+                "name": "91",
                 "createdAt": "Introduction",
                 "type": "citep",
-                "lineCount": 53
+                "lineCount": 53,
+                "lineCountEnd": null
             },
             {
-                "name": "4",
+                "name": "92",
                 "createdAt": "Introduction",
                 "type": "citep",
-                "lineCount": 53
+                "lineCount": 53,
+                "lineCountEnd": null
             },
             {
-                "name": "5",
+                "name": "93",
                 "createdAt": "Introduction",
                 "type": "citep",
-                "lineCount": 53
+                "lineCount": 55,
+                "lineCountEnd": null
             },
             {
-                "name": "6",
+                "name": "94",
                 "createdAt": "Introduction",
                 "type": "citep",
-                "lineCount": 53
+                "lineCount": 57,
+                "lineCountEnd": null
             },
             {
-                "name": "7",
+                "name": "95",
                 "createdAt": "Introduction",
                 "type": "citep",
-                "lineCount": 55
+                "lineCount": 57,
+                "lineCountEnd": null
             },
             {
-                "name": "8",
+                "name": "96",
                 "createdAt": "Introduction",
                 "type": "citep",
-                "lineCount": 57
-            },
-            {
-                "name": "9",
-                "createdAt": "Introduction",
-                "type": "citep",
-                "lineCount": 57
-            },
-            {
-                "name": "10",
-                "createdAt": "Introduction",
-                "type": "citep",
-                "lineCount": 57
-            },
-            {
-                "name": "11",
-                "createdAt": "Introduction",
-                "type": "citep",
-                "lineCount": 57
+                "lineCount": 57,
+                "lineCountEnd": null
             },
             {
                 "name": "fig:kdtree",
                 "createdAt": "Introduction",
                 "type": "label",
-                "lineCount": 63
+                "lineCount": 63,
+                "lineCountEnd": null
             },
             {
-                "name": "12",
+                "name": "97",
                 "createdAt": "Introduction",
                 "type": "ref",
-                "lineCount": 66
+                "lineCount": 66,
+                "lineCountEnd": null
             },
             {
-                "name": "13",
+                "name": "98",
                 "createdAt": "Introduction",
                 "type": "citep",
-                "lineCount": 66
+                "lineCount": 66,
+                "lineCountEnd": null
             },
             {
-                "name": "14",
+                "name": "99",
                 "createdAt": "Introduction",
                 "type": "citep",
-                "lineCount": 66
+                "lineCount": 66,
+                "lineCountEnd": null
             },
             {
-                "name": "15",
+                "name": "100",
                 "createdAt": "Introduction",
                 "type": "citep",
-                "lineCount": 68
+                "lineCount": 68,
+                "lineCountEnd": null
             },
             {
-                "name": "16",
+                "name": "101",
                 "createdAt": "Introduction",
                 "type": "citep",
-                "lineCount": 68
+                "lineCount": 68,
+                "lineCountEnd": null
             },
             {
-                "name": "17",
+                "name": "102",
                 "createdAt": "Introduction",
                 "type": "citep",
-                "lineCount": 68
+                "lineCount": 68,
+                "lineCountEnd": null
             },
             {
-                "name": "18",
+                "name": "103",
                 "createdAt": "Introduction",
                 "type": "citep",
-                "lineCount": 68
+                "lineCount": 68,
+                "lineCountEnd": null
             },
             {
-                "name": "19",
+                "name": "104",
                 "createdAt": "Introduction",
                 "type": "citep",
-                "lineCount": 68
+                "lineCount": 68,
+                "lineCountEnd": null
             },
             {
-                "name": "20",
+                "name": "105",
                 "createdAt": "Introduction",
                 "type": "citep",
-                "lineCount": 68
+                "lineCount": 68,
+                "lineCountEnd": null
             },
             {
-                "name": "21",
+                "name": "106",
                 "createdAt": "Introduction",
                 "type": "citep",
-                "lineCount": 68
+                "lineCount": 68,
+                "lineCountEnd": null
             },
             {
-                "name": "22",
-                "createdAt": "Introduction",
-                "type": "citep",
-                "lineCount": 68
-            },
-            {
-                "name": "23",
-                "createdAt": "Introduction",
-                "type": "citep",
-                "lineCount": 68
-            },
-            {
-                "name": "24",
-                "createdAt": "Introduction",
-                "type": "citep",
-                "lineCount": 68
-            },
-            {
-                "name": "25",
-                "createdAt": "Introduction",
-                "type": "citep",
-                "lineCount": 68
-            },
-            {
-                "name": "26",
-                "createdAt": "Introduction",
-                "type": "citep",
-                "lineCount": 68
-            },
-            {
-                "name": "27",
-                "createdAt": "Introduction",
-                "type": "citep",
-                "lineCount": 68
-            },
-            {
-                "name": "28",
+                "name": "107",
                 "createdAt": "Introduction",
                 "type": "ref",
-                "lineCount": 70
+                "lineCount": 70,
+                "lineCountEnd": null
             },
             {
-                "name": "29",
+                "name": "108",
                 "createdAt": "Introduction",
                 "type": "ref",
-                "lineCount": 70
+                "lineCount": 70,
+                "lineCountEnd": null
             },
             {
-                "name": "30",
+                "name": "109",
                 "createdAt": "Introduction",
                 "type": "ref",
-                "lineCount": 70
+                "lineCount": 70,
+                "lineCountEnd": null
             },
             {
-                "name": "31",
+                "name": "110",
                 "createdAt": "Introduction",
                 "type": "ref",
-                "lineCount": 70
+                "lineCount": 70,
+                "lineCountEnd": null
             },
             {
-                "name": "32",
+                "name": "111",
                 "createdAt": "Introduction",
                 "type": "ref",
-                "lineCount": 70
+                "lineCount": 70,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Intuition underlying k-d tree construction in parallel, distributed environments",
                 "createdAt": "DOCUMENT",
                 "type": "section",
-                "lineCount": 72
+                "lineCount": 72,
+                "lineCountEnd": null
             },
             {
                 "name": "sec:intution",
                 "createdAt": "Intuition underlying k-d tree construction in parallel, distributed environments",
                 "type": "label",
-                "lineCount": 72
+                "lineCount": 72,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Main results",
                 "createdAt": "DOCUMENT",
                 "type": "section",
-                "lineCount": 108
+                "lineCount": 108,
+                "lineCountEnd": null
             },
             {
                 "name": "sec:main",
                 "createdAt": "Main results",
                 "type": "label",
-                "lineCount": 108
+                "lineCount": 108,
+                "lineCountEnd": null
             },
             {
-                "name": "33",
+                "name": "112",
                 "createdAt": "Main results",
                 "type": "citet",
-                "lineCount": 110
+                "lineCount": 110,
+                "lineCountEnd": null
             },
             {
-                "name": "34",
+                "name": "113",
                 "createdAt": "Main results",
                 "type": "ref",
-                "lineCount": 110
+                "lineCount": 110,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Approximation of indicator functions",
                 "createdAt": "Main results",
                 "type": "subsection",
-                "lineCount": 112
+                "lineCount": 112,
+                "lineCountEnd": null
             },
             {
                 "name": "subsec:approx",
                 "createdAt": "Approximation of indicator functions",
                 "type": "label",
-                "lineCount": 112
+                "lineCount": 112,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "lemma 1.1.1",
                 "createdAt": "Proof of Theorem chev:thm:main",
                 "type": "lemma",
-                "lineCount": 867
+                "lineCount": 867,
+                "lineCountEnd": 872
             },
             {
                 "name": "lemma:1d:exp",
                 "createdAt": "lemma 1.1.1",
                 "type": "label",
-                "lineCount": 121
+                "lineCount": 121,
+                "lineCountEnd": null
             },
             {
-                "name": "35",
+                "name": "114",
                 "createdAt": "Approximation of indicator functions",
                 "type": "ref",
-                "lineCount": 136
+                "lineCount": 136,
+                "lineCountEnd": null
             },
             {
-                "name": "36",
+                "name": "115",
                 "createdAt": "Approximation of indicator functions",
                 "type": "ref",
-                "lineCount": 139
+                "lineCount": 139,
+                "lineCountEnd": null
             },
             {
                 "name": "lemma:1d:unif",
                 "createdAt": "lemma 1.1.1",
                 "type": "label",
-                "lineCount": 150
+                "lineCount": 150,
+                "lineCountEnd": null
             },
             {
-                "name": "37",
+                "name": "116",
                 "createdAt": "Approximation of indicator functions",
                 "type": "ref",
-                "lineCount": 157
+                "lineCount": 157,
+                "lineCountEnd": null
             },
             {
                 "name": "lemma:pd:unif",
                 "createdAt": "lemma 1.1.1",
                 "type": "label",
-                "lineCount": 176
+                "lineCount": 176,
+                "lineCountEnd": null
             },
             {
-                "name": "38",
+                "name": "117",
                 "createdAt": "Approximation of indicator functions",
                 "type": "ref",
-                "lineCount": 183
+                "lineCount": 183,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Stochastic bounds on accuracy",
                 "createdAt": "Main results",
                 "type": "subsection",
-                "lineCount": 186
+                "lineCount": 186,
+                "lineCountEnd": null
             },
             {
                 "name": "subsec:stoch",
                 "createdAt": "Stochastic bounds on accuracy",
                 "type": "label",
-                "lineCount": 186
+                "lineCount": 186,
+                "lineCountEnd": null
             },
             {
                 "name": "kd:eq:a",
                 "createdAt": "Stochastic bounds on accuracy",
                 "type": "label",
-                "lineCount": 200
+                "lineCount": 200,
+                "lineCountEnd": null
             },
             {
-                "name": "39",
+                "name": "118",
                 "createdAt": "Stochastic bounds on accuracy",
                 "type": "ref",
-                "lineCount": 203
+                "lineCount": 203,
+                "lineCountEnd": null
             },
             {
                 "name": "kd:eq:b",
                 "createdAt": "Stochastic bounds on accuracy",
                 "type": "label",
-                "lineCount": 209
+                "lineCount": 209,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "assumption 1.1.1",
                 "createdAt": "Stochastic bounds on accuracy",
                 "type": "assumption",
-                "lineCount": 235
+                "lineCount": 235,
+                "lineCountEnd": 239
             },
             {
                 "name": "assumption:positive_density",
                 "createdAt": "assumption 1.1.1",
                 "type": "label",
-                "lineCount": 231
+                "lineCount": 231,
+                "lineCountEnd": null
             },
             {
                 "name": "assumption:sup_null_set",
                 "createdAt": "assumption 1.1.1",
                 "type": "label",
-                "lineCount": 235
+                "lineCount": 235,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "theorem 1.1.1",
                 "createdAt": "Algorithmic approach",
                 "type": "theorem",
-                "lineCount": 760
+                "lineCount": 760,
+                "lineCountEnd": 765
             },
             {
                 "name": "thm:n_l=n_r",
                 "createdAt": "theorem 1.1.1",
                 "type": "label",
-                "lineCount": 243
+                "lineCount": 243,
+                "lineCountEnd": null
             },
             {
-                "name": "40",
+                "name": "119",
                 "createdAt": "theorem 1.1.1",
                 "type": "ref",
-                "lineCount": 244
+                "lineCount": 244,
+                "lineCountEnd": null
             },
             {
-                "name": "41",
+                "name": "120",
                 "createdAt": "Stochastic bounds on accuracy",
                 "type": "ref",
-                "lineCount": 254
+                "lineCount": 254,
+                "lineCountEnd": null
             },
             {
                 "name": "thm:n_l=n/2",
                 "createdAt": "theorem 1.1.1",
                 "type": "label",
-                "lineCount": 257
+                "lineCount": 257,
+                "lineCountEnd": null
             },
             {
-                "name": "42",
+                "name": "121",
                 "createdAt": "theorem 1.1.1",
                 "type": "ref",
-                "lineCount": 258
+                "lineCount": 258,
+                "lineCountEnd": null
             },
             {
-                "name": "43",
+                "name": "122",
                 "createdAt": "theorem 1.1.1",
                 "type": "ref",
-                "lineCount": 258
+                "lineCount": 258,
+                "lineCountEnd": null
             },
             {
-                "name": "44",
+                "name": "123",
                 "createdAt": "Stochastic bounds on accuracy",
                 "type": "ref",
-                "lineCount": 267
+                "lineCount": 267,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Constructing a balanced k-d tree from distributed data",
                 "createdAt": "DOCUMENT",
                 "type": "section",
-                "lineCount": 270
+                "lineCount": 270,
+                "lineCountEnd": null
             },
             {
                 "name": "sec:algorithm",
                 "createdAt": "Constructing a balanced k-d tree from distributed data",
                 "type": "label",
-                "lineCount": 270
+                "lineCount": 270,
+                "lineCountEnd": null
             },
             {
-                "name": "45",
+                "name": "124",
                 "createdAt": "Constructing a balanced k-d tree from distributed data",
                 "type": "ref",
-                "lineCount": 272
+                "lineCount": 272,
+                "lineCountEnd": null
             },
             {
-                "name": "46",
+                "name": "125",
                 "createdAt": "Constructing a balanced k-d tree from distributed data",
                 "type": "ref",
-                "lineCount": 276
+                "lineCount": 276,
+                "lineCountEnd": null
             },
             {
-                "name": "47",
+                "name": "126",
                 "createdAt": "Constructing a balanced k-d tree from distributed data",
                 "type": "ref",
-                "lineCount": 276
+                "lineCount": 276,
+                "lineCountEnd": null
             },
             {
-                "name": "48",
+                "name": "127",
                 "createdAt": "Constructing a balanced k-d tree from distributed data",
                 "type": "ref",
-                "lineCount": 282
+                "lineCount": 282,
+                "lineCountEnd": null
             },
             {
-                "name": "49",
+                "name": "128",
                 "createdAt": "Constructing a balanced k-d tree from distributed data",
                 "type": "ref",
-                "lineCount": 282
+                "lineCount": 282,
+                "lineCountEnd": null
             },
             {
-                "name": "50",
+                "name": "129",
                 "createdAt": "Constructing a balanced k-d tree from distributed data",
                 "type": "ref",
-                "lineCount": 282
+                "lineCount": 282,
+                "lineCountEnd": null
             },
             {
-                "name": "51",
+                "name": "130",
                 "createdAt": "Constructing a balanced k-d tree from distributed data",
                 "type": "ref",
-                "lineCount": 303
+                "lineCount": 303,
+                "lineCountEnd": null
             },
             {
-                "name": "52",
+                "name": "131",
                 "createdAt": "Constructing a balanced k-d tree from distributed data",
                 "type": "ref",
-                "lineCount": 303
+                "lineCount": 303,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Accuracy and computational scalability",
                 "createdAt": "DOCUMENT",
                 "type": "section",
-                "lineCount": 309
+                "lineCount": 309,
+                "lineCountEnd": null
             },
             {
                 "name": "sec:performance",
                 "createdAt": "Accuracy and computational scalability",
                 "type": "label",
-                "lineCount": 309
+                "lineCount": 309,
+                "lineCountEnd": null
             },
             {
-                "name": "53",
+                "name": "132",
                 "createdAt": "Accuracy and computational scalability",
                 "type": "ref",
-                "lineCount": 311
+                "lineCount": 311,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Assessment of accuracy",
                 "createdAt": "Accuracy and computational scalability",
                 "type": "subsection",
-                "lineCount": 315
+                "lineCount": 315,
+                "lineCountEnd": null
             },
             {
                 "name": "sec:accuracy",
                 "createdAt": "Assessment of accuracy",
                 "type": "label",
-                "lineCount": 315
+                "lineCount": 315,
+                "lineCountEnd": null
             },
             {
                 "name": "fig:norm_acc",
                 "createdAt": "Assessment of accuracy",
                 "type": "label",
-                "lineCount": 323
+                "lineCount": 323,
+                "lineCountEnd": null
             },
             {
-                "name": "54",
+                "name": "133",
                 "createdAt": "Assessment of accuracy",
                 "type": "ref",
-                "lineCount": 326
+                "lineCount": 326,
+                "lineCountEnd": null
             },
             {
-                "name": "55",
+                "name": "134",
                 "createdAt": "Assessment of accuracy",
                 "type": "ref",
-                "lineCount": 326
+                "lineCount": 326,
+                "lineCountEnd": null
             },
             {
-                "name": "56",
+                "name": "135",
                 "createdAt": "Assessment of accuracy",
                 "type": "ref",
-                "lineCount": 330
+                "lineCount": 330,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Computational scalability",
                 "createdAt": "Accuracy and computational scalability",
                 "type": "subsection",
-                "lineCount": 332
+                "lineCount": 332,
+                "lineCountEnd": null
             },
             {
                 "name": "sec:runtime",
                 "createdAt": "Computational scalability",
                 "type": "label",
-                "lineCount": 332
+                "lineCount": 332,
+                "lineCountEnd": null
             },
             {
                 "name": "fig:norm_run",
                 "createdAt": "Computational scalability",
                 "type": "label",
-                "lineCount": 338
+                "lineCount": 338,
+                "lineCountEnd": null
             },
             {
-                "name": "57",
+                "name": "136",
                 "createdAt": "Computational scalability",
                 "type": "ref",
-                "lineCount": 341
+                "lineCount": 341,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Discussion",
                 "createdAt": "DOCUMENT",
                 "type": "section",
-                "lineCount": 343
+                "lineCount": 343,
+                "lineCountEnd": null
             },
             {
                 "name": "sec:disc",
                 "createdAt": "Discussion",
                 "type": "label",
-                "lineCount": 343
+                "lineCount": 343,
+                "lineCountEnd": null
             },
             {
-                "name": "58",
+                "name": "137",
                 "createdAt": "Discussion",
                 "type": "ref",
-                "lineCount": 345
+                "lineCount": 345,
+                "lineCountEnd": null
             },
             {
-                "name": "59",
+                "name": "138",
                 "createdAt": "Discussion",
                 "type": "ref",
-                "lineCount": 345
+                "lineCount": 345,
+                "lineCountEnd": null
             },
             {
-                "name": "60",
+                "name": "139",
                 "createdAt": "Discussion",
                 "type": "ref",
-                "lineCount": 345
+                "lineCount": 345,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -635,7 +668,8 @@ function createLine(json) {
                 "name": "Ailon2009",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 350
+                "lineCount": 350,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -664,7 +698,8 @@ function createLine(json) {
                 "name": "Bayer1972",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 357
+                "lineCount": 357,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -693,7 +728,8 @@ function createLine(json) {
                 "name": "Bentley1975",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 362
+                "lineCount": 362,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -722,7 +758,8 @@ function createLine(json) {
                 "name": "Friedman1977",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 368
+                "lineCount": 368,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -751,7 +788,8 @@ function createLine(json) {
                 "name": "Bleloch2018",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 374
+                "lineCount": 374,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -780,7 +818,8 @@ function createLine(json) {
                 "name": "Brown2015",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 381
+                "lineCount": 381,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -809,7 +848,8 @@ function createLine(json) {
                 "name": "Brown2015b",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 387
+                "lineCount": 387,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -838,7 +878,8 @@ function createLine(json) {
                 "name": "Cao2020",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 391
+                "lineCount": 391,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -867,7 +908,8 @@ function createLine(json) {
                 "name": "Chakravorty2019",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 396
+                "lineCount": 396,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -896,7 +938,8 @@ function createLine(json) {
                 "name": "Chakravorty2021",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 401
+                "lineCount": 401,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -925,7 +968,8 @@ function createLine(json) {
                 "name": "Chen2018",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 406
+                "lineCount": 406,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -954,7 +998,8 @@ function createLine(json) {
                 "name": "Choi2010",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 412
+                "lineCount": 412,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -983,7 +1028,8 @@ function createLine(json) {
                 "name": "Dean2008",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 419
+                "lineCount": 419,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -1012,7 +1058,8 @@ function createLine(json) {
                 "name": "Guibas1978",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 425
+                "lineCount": 425,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -1041,7 +1088,8 @@ function createLine(json) {
                 "name": "Hunt2006",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 431
+                "lineCount": 431,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -1070,7 +1118,8 @@ function createLine(json) {
                 "name": "Hu2015",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 438
+                "lineCount": 438,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -1099,7 +1148,8 @@ function createLine(json) {
                 "name": "Pinkman2020",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 445
+                "lineCount": 445,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -1128,7 +1178,8 @@ function createLine(json) {
                 "name": "Procopiuc2003",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 452
+                "lineCount": 452,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -1157,7 +1208,8 @@ function createLine(json) {
                 "name": "Rudin1976",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 459
+                "lineCount": 459,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -1186,7 +1238,8 @@ function createLine(json) {
                 "name": "Shevtsov2007",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 464
+                "lineCount": 464,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -1215,7 +1268,8 @@ function createLine(json) {
                 "name": "Soupikov2008",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 471
+                "lineCount": 471,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -1244,7 +1298,8 @@ function createLine(json) {
                 "name": "Velskii1962",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 477
+                "lineCount": 477,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -1273,7 +1328,8 @@ function createLine(json) {
                 "name": "Wald2006",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 483
+                "lineCount": 483,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -1302,7 +1358,8 @@ function createLine(json) {
                 "name": "Wehr2018",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 490
+                "lineCount": 490,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -1331,7 +1388,8 @@ function createLine(json) {
                 "name": "Xiao2016",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 497
+                "lineCount": 497,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -1360,7 +1418,8 @@ function createLine(json) {
                 "name": "Zaharia2016",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 504
+                "lineCount": 504,
+                "lineCountEnd": null
             },
             {
                 "paperType": null,
@@ -1389,925 +1448,1079 @@ function createLine(json) {
                 "name": "Zhou2008",
                 "createdAt": "Discussion",
                 "type": "paper",
-                "lineCount": 511
+                "lineCount": 511,
+                "lineCountEnd": null
             },
             {
-                "name": "61",
+                "name": "140",
                 "createdAt": "Discussion",
                 "type": "ref",
-                "lineCount": 521
+                "lineCount": 521,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Proofs of results from section subsec:approx",
                 "createdAt": "DOCUMENT",
                 "type": "section",
-                "lineCount": 521
+                "lineCount": 521,
+                "lineCountEnd": null
             },
             {
                 "name": "ap:approx_proofs",
                 "createdAt": "Proofs of results from section subsec:approx",
                 "type": "label",
-                "lineCount": 521
+                "lineCount": 521,
+                "lineCountEnd": null
             },
             {
                 "name": "proof:eq:1",
                 "createdAt": "Proofs of results from section subsec:approx",
                 "type": "label",
-                "lineCount": 528
+                "lineCount": 528,
+                "lineCountEnd": null
             },
             {
-                "name": "62",
+                "name": "141",
                 "createdAt": "Proofs of results from section subsec:approx",
                 "type": "ref",
-                "lineCount": 536
+                "lineCount": 536,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Proof of Lemma lemma:1d:exp",
                 "createdAt": "Proofs of results from section subsec:approx",
                 "type": "subsection",
-                "lineCount": 536
+                "lineCount": 536,
+                "lineCountEnd": null
             },
             {
-                "name": "63",
+                "name": "142",
                 "createdAt": "Proof of Lemma lemma:1d:exp",
                 "type": "ref",
-                "lineCount": 538
+                "lineCount": 538,
+                "lineCountEnd": null
             },
             {
                 "name": "proof:eq:2",
                 "createdAt": "Proof of Lemma lemma:1d:exp",
                 "type": "label",
-                "lineCount": 539
+                "lineCount": 539,
+                "lineCountEnd": null
             },
             {
-                "name": "64",
+                "name": "143",
                 "createdAt": "Proof of Lemma lemma:1d:exp",
                 "type": "ref",
-                "lineCount": 547
+                "lineCount": 547,
+                "lineCountEnd": null
             },
             {
-                "name": "65",
+                "name": "144",
                 "createdAt": "Proof of Lemma lemma:1d:exp",
                 "type": "ref",
-                "lineCount": 547
+                "lineCount": 547,
+                "lineCountEnd": null
             },
             {
-                "name": "66",
+                "name": "145",
                 "createdAt": "Proof of Lemma lemma:1d:exp",
                 "type": "ref",
-                "lineCount": 566
+                "lineCount": 566,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Proof of Lemma lemma:1d:unif",
                 "createdAt": "Proofs of results from section subsec:approx",
                 "type": "subsection",
-                "lineCount": 566
+                "lineCount": 566,
+                "lineCountEnd": null
             },
             {
-                "name": "67",
+                "name": "146",
                 "createdAt": "Proof of Lemma lemma:1d:unif",
                 "type": "ref",
-                "lineCount": 574
+                "lineCount": 574,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Proof of Lemma lemma:pd:unif",
                 "createdAt": "Proofs of results from section subsec:approx",
                 "type": "subsection",
-                "lineCount": 574
+                "lineCount": 574,
+                "lineCountEnd": null
             },
             {
-                "name": "68",
+                "name": "147",
                 "createdAt": "Proof of Lemma lemma:pd:unif",
                 "type": "ref",
-                "lineCount": 588
+                "lineCount": 588,
+                "lineCountEnd": null
             },
             {
-                "name": "69",
+                "name": "148",
                 "createdAt": "Proof of Lemma lemma:pd:unif",
                 "type": "ref",
-                "lineCount": 592
+                "lineCount": 592,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Proofs of results from section subsec:stoch",
                 "createdAt": "DOCUMENT",
                 "type": "section",
-                "lineCount": 592
+                "lineCount": 592,
+                "lineCountEnd": null
             },
             {
                 "name": "ap:stoch_proofs",
                 "createdAt": "Proofs of results from section subsec:stoch",
                 "type": "label",
-                "lineCount": 592
+                "lineCount": 592,
+                "lineCountEnd": null
             },
             {
-                "name": "70",
+                "name": "149",
                 "createdAt": "Proofs of results from section subsec:stoch",
                 "type": "ref",
-                "lineCount": 594
+                "lineCount": 594,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Proof of Theorem thm:n_l=n_r",
                 "createdAt": "Proofs of results from section subsec:stoch",
                 "type": "subsection",
-                "lineCount": 594
+                "lineCount": 594,
+                "lineCountEnd": null
             },
             {
                 "name": "pf:n_l=n_r",
                 "createdAt": "Proof of Theorem thm:n_l=n_r",
                 "type": "label",
-                "lineCount": 594
+                "lineCount": 594,
+                "lineCountEnd": null
             },
             {
-                "name": "71",
+                "name": "150",
                 "createdAt": "Proof of Theorem thm:n_l=n_r",
                 "type": "ref",
-                "lineCount": 597
+                "lineCount": 597,
+                "lineCountEnd": null
             },
             {
-                "name": "72",
+                "name": "151",
                 "createdAt": "Proof of Theorem thm:n_l=n_r",
                 "type": "ref",
-                "lineCount": 599
+                "lineCount": 599,
+                "lineCountEnd": null
             },
             {
                 "name": "main:proof:eq:a",
                 "createdAt": "Proof of Theorem thm:n_l=n_r",
                 "type": "label",
-                "lineCount": 622
+                "lineCount": 622,
+                "lineCountEnd": null
             },
             {
                 "name": "main:proof:eq:b",
                 "createdAt": "Proof of Theorem thm:n_l=n_r",
                 "type": "label",
-                "lineCount": 631
+                "lineCount": 631,
+                "lineCountEnd": null
             },
             {
                 "name": "main:proof:eq:c",
                 "createdAt": "Proof of Theorem thm:n_l=n_r",
                 "type": "label",
-                "lineCount": 637
+                "lineCount": 637,
+                "lineCountEnd": null
             },
             {
-                "name": "73",
+                "name": "152",
                 "createdAt": "Proof of Theorem thm:n_l=n_r",
                 "type": "ref",
-                "lineCount": 642
+                "lineCount": 642,
+                "lineCountEnd": null
             },
             {
-                "name": "74",
+                "name": "153",
                 "createdAt": "Proof of Theorem thm:n_l=n_r",
                 "type": "ref",
-                "lineCount": 642
+                "lineCount": 642,
+                "lineCountEnd": null
             },
             {
-                "name": "75",
+                "name": "154",
                 "createdAt": "Proof of Theorem thm:n_l=n_r",
                 "type": "ref",
-                "lineCount": 642
+                "lineCount": 642,
+                "lineCountEnd": null
             },
             {
-                "name": "76",
+                "name": "155",
                 "createdAt": "Proof of Theorem thm:n_l=n_r",
                 "type": "ref",
-                "lineCount": 642
+                "lineCount": 642,
+                "lineCountEnd": null
             },
             {
-                "name": "77",
+                "name": "156",
                 "createdAt": "Proof of Theorem thm:n_l=n_r",
                 "type": "ref",
-                "lineCount": 642
+                "lineCount": 642,
+                "lineCountEnd": null
             },
             {
-                "name": "78",
+                "name": "157",
                 "createdAt": "Proof of Theorem thm:n_l=n_r",
                 "type": "ref",
-                "lineCount": 649
+                "lineCount": 649,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Proof of Theorem thm:n_l=n/2",
                 "createdAt": "Proofs of results from section subsec:stoch",
                 "type": "subsection",
-                "lineCount": 649
+                "lineCount": 649,
+                "lineCountEnd": null
             },
             {
                 "name": "pf:n_l=n/2",
                 "createdAt": "Proof of Theorem thm:n_l=n/2",
                 "type": "label",
-                "lineCount": 649
+                "lineCount": 649,
+                "lineCountEnd": null
             },
             {
                 "name": "main:proof:eq:d",
                 "createdAt": "Proof of Theorem thm:n_l=n/2",
                 "type": "label",
-                "lineCount": 665
+                "lineCount": 665,
+                "lineCountEnd": null
             },
             {
-                "name": "79",
+                "name": "158",
                 "createdAt": "Proof of Theorem thm:n_l=n/2",
                 "type": "ref",
-                "lineCount": 670
+                "lineCount": 670,
+                "lineCountEnd": null
             },
             {
-                "name": "80",
+                "name": "159",
                 "createdAt": "Proof of Theorem thm:n_l=n/2",
                 "type": "ref",
-                "lineCount": 675
+                "lineCount": 675,
+                "lineCountEnd": null
             },
             {
                 "name": "main:proof:eq:e",
                 "createdAt": "Proof of Theorem thm:n_l=n/2",
                 "type": "label",
-                "lineCount": 676
+                "lineCount": 676,
+                "lineCountEnd": null
             },
             {
                 "name": "main:proof:eq:f",
                 "createdAt": "Proof of Theorem thm:n_l=n/2",
                 "type": "label",
-                "lineCount": 682
+                "lineCount": 682,
+                "lineCountEnd": null
             },
             {
-                "name": "81",
+                "name": "160",
                 "createdAt": "Proof of Theorem thm:n_l=n/2",
                 "type": "ref",
-                "lineCount": 687
+                "lineCount": 687,
+                "lineCountEnd": null
             },
             {
                 "name": "main:proof:eq:g",
                 "createdAt": "Proof of Theorem thm:n_l=n/2",
                 "type": "label",
-                "lineCount": 688
+                "lineCount": 688,
+                "lineCountEnd": null
             },
             {
                 "name": "main:proof:eq:h",
                 "createdAt": "Proof of Theorem thm:n_l=n/2",
                 "type": "label",
-                "lineCount": 692
+                "lineCount": 692,
+                "lineCountEnd": null
             },
             {
-                "name": "82",
+                "name": "161",
                 "createdAt": "Proof of Theorem thm:n_l=n/2",
                 "type": "ref",
-                "lineCount": 696
+                "lineCount": 696,
+                "lineCountEnd": null
             },
             {
-                "name": "83",
+                "name": "162",
                 "createdAt": "Proof of Theorem thm:n_l=n/2",
                 "type": "ref",
-                "lineCount": 696
+                "lineCount": 696,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Implementing the proposed method of construction of a balanced k-d tree in practice",
                 "createdAt": "DOCUMENT",
                 "type": "section",
-                "lineCount": 731
+                "lineCount": 731,
+                "lineCountEnd": null
             },
             {
                 "name": "ap:construct",
                 "createdAt": "Implementing the proposed method of construction of a balanced k-d tree in practice",
                 "type": "label",
-                "lineCount": 731
+                "lineCount": 731,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Algorithmic approach",
                 "createdAt": "Implementing the proposed method of construction of a balanced k-d tree in practice",
                 "type": "subsection",
-                "lineCount": 733
+                "lineCount": 733,
+                "lineCountEnd": null
             },
             {
                 "name": "sec:eff",
                 "createdAt": "Algorithmic approach",
                 "type": "label",
-                "lineCount": 733
+                "lineCount": 733,
+                "lineCountEnd": null
             },
             {
-                "name": "84",
+                "name": "163",
                 "createdAt": "Algorithmic approach",
                 "type": "ref",
-                "lineCount": 735
+                "lineCount": 735,
+                "lineCountEnd": null
             },
             {
-                "name": "85",
+                "name": "164",
                 "createdAt": "Algorithmic approach",
                 "type": "ref",
-                "lineCount": 735
+                "lineCount": 735,
+                "lineCountEnd": null
             },
             {
-                "name": "86",
+                "name": "165",
                 "createdAt": "Algorithmic approach",
                 "type": "ref",
-                "lineCount": 735
+                "lineCount": 735,
+                "lineCountEnd": null
             },
             {
                 "name": "chev:thm:main",
                 "createdAt": "theorem 1.1.1",
                 "type": "label",
-                "lineCount": 760
+                "lineCount": 760,
+                "lineCountEnd": null
             },
             {
-                "name": "87",
+                "name": "166",
                 "createdAt": "Algorithmic approach",
                 "type": "ref",
-                "lineCount": 768
+                "lineCount": 768,
+                "lineCountEnd": null
             },
             {
-                "name": "88",
+                "name": "167",
                 "createdAt": "Algorithmic approach",
                 "type": "ref",
-                "lineCount": 773
+                "lineCount": 773,
+                "lineCountEnd": null
             },
             {
-                "name": "89",
+                "name": "168",
                 "createdAt": "Algorithmic approach",
                 "type": "ref",
-                "lineCount": 773
+                "lineCount": 773,
+                "lineCountEnd": null
             },
             {
-                "name": "90",
+                "name": "169",
                 "createdAt": "Algorithmic approach",
                 "type": "ref",
-                "lineCount": 773
+                "lineCount": 773,
+                "lineCountEnd": null
             },
             {
-                "name": "91",
+                "name": "170",
                 "createdAt": "Algorithmic approach",
                 "type": "ref",
-                "lineCount": 775
+                "lineCount": 775,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Map-reduce implementation",
                 "createdAt": "Implementing the proposed method of construction of a balanced k-d tree in practice",
                 "type": "subsection",
-                "lineCount": 777
+                "lineCount": 777,
+                "lineCountEnd": null
             },
             {
                 "name": "sec:MapReduce",
                 "createdAt": "Map-reduce implementation",
                 "type": "label",
-                "lineCount": 777
+                "lineCount": 777,
+                "lineCountEnd": null
             },
             {
-                "name": "92",
+                "name": "171",
                 "createdAt": "Map-reduce implementation",
                 "type": "citep",
-                "lineCount": 781
+                "lineCount": 781,
+                "lineCountEnd": null
             },
             {
-                "name": "93",
+                "name": "172",
                 "createdAt": "Map-reduce implementation",
                 "type": "ref",
-                "lineCount": 785
+                "lineCount": 785,
+                "lineCountEnd": null
             },
             {
                 "counter": 1,
                 "name": "Proof of Theorem chev:thm:main",
                 "createdAt": "Implementing the proposed method of construction of a balanced k-d tree in practice",
                 "type": "subsection",
-                "lineCount": 785
+                "lineCount": 785,
+                "lineCountEnd": null
             },
             {
                 "name": "pf:chev:thm:main",
                 "createdAt": "Proof of Theorem chev:thm:main",
                 "type": "label",
-                "lineCount": 785
+                "lineCount": 785,
+                "lineCountEnd": null
             },
             {
-                "name": "94",
+                "name": "173",
                 "createdAt": "Proof of Theorem chev:thm:main",
                 "type": "ref",
-                "lineCount": 787
+                "lineCount": 787,
+                "lineCountEnd": null
             },
             {
                 "name": "chev:lem:gen:1d",
                 "createdAt": "lemma 1.1.1",
                 "type": "label",
-                "lineCount": 807
+                "lineCount": 807,
+                "lineCountEnd": null
             },
             {
                 "name": "chev:lem:gen:pd",
                 "createdAt": "lemma 1.1.1",
                 "type": "label",
-                "lineCount": 867
+                "lineCount": 867,
+                "lineCountEnd": null
             },
             {
-                "name": "95",
+                "name": "174",
                 "createdAt": "Proof of Theorem chev:thm:main",
                 "type": "ref",
-                "lineCount": 875
+                "lineCount": 875,
+                "lineCountEnd": null
             },
             {
-                "name": "96",
+                "name": "175",
                 "createdAt": "Proof of Theorem chev:thm:main",
                 "type": "ref",
-                "lineCount": 920
+                "lineCount": 920,
+                "lineCountEnd": null
             },
             {
-                "name": "97",
+                "name": "176",
                 "createdAt": "Proof of Theorem chev:thm:main",
                 "type": "ref",
-                "lineCount": 923
+                "lineCount": 923,
+                "lineCountEnd": null
             }
         ],
         "links": [
             {
-                "source": "1",
+                "source": "89",
                 "target": "Zaharia2016",
                 "type": "cite"
             },
             {
-                "source": "2",
+                "source": "90",
                 "target": "Ailon2009",
                 "type": "cite"
             },
             {
-                "source": "3",
+                "source": "91",
                 "target": "Hu2015",
                 "type": "cite"
             },
             {
-                "source": "4",
+                "source": "91",
                 "target": "Chen2018",
                 "type": "cite"
             },
             {
-                "source": "5",
+                "source": "91",
                 "target": "Pinkman2020",
                 "type": "cite"
             },
             {
-                "source": "6",
+                "source": "92",
                 "target": "Xiao2016",
                 "type": "cite"
             },
             {
-                "source": "7",
+                "source": "93",
                 "target": "Bentley1975",
                 "type": "cite"
             },
             {
-                "source": "8",
+                "source": "94",
                 "target": "Friedman1977",
                 "type": "cite"
             },
             {
-                "source": "9",
+                "source": "95",
                 "target": "Velskii1962",
                 "type": "cite"
             },
             {
-                "source": "10",
+                "source": "96",
                 "target": "Bayer1972",
                 "type": "cite"
             },
             {
-                "source": "11",
+                "source": "96",
                 "target": "Guibas1978",
                 "type": "cite"
             },
             {
-                "source": "12",
+                "source": "97",
                 "target": "fig:kdtree",
                 "type": "ref"
             },
             {
-                "source": "13",
+                "source": "98",
                 "target": "Bentley1975",
                 "type": "cite"
             },
             {
-                "source": "14",
+                "source": "99",
                 "target": "Wald2006",
                 "type": "cite"
             },
             {
-                "source": "15",
+                "source": "100",
                 "target": "Dean2008",
                 "type": "cite"
             },
             {
-                "source": "16",
+                "source": "101",
                 "target": "Bleloch2018",
                 "type": "cite"
             },
             {
-                "source": "17",
+                "source": "102",
                 "target": "Wehr2018",
                 "type": "cite"
             },
             {
-                "source": "18",
+                "source": "103",
                 "target": "Brown2015b",
                 "type": "cite"
             },
             {
-                "source": "19",
+                "source": "103",
                 "target": "Cao2020",
                 "type": "cite"
             },
             {
-                "source": "20",
+                "source": "104",
                 "target": "Wald2006",
                 "type": "cite"
             },
             {
-                "source": "21",
+                "source": "105",
                 "target": "Procopiuc2003",
                 "type": "cite"
             },
             {
-                "source": "22",
+                "source": "105",
                 "target": "Brown2015",
                 "type": "cite"
             },
             {
-                "source": "23",
+                "source": "106",
                 "target": "Hunt2006",
                 "type": "cite"
             },
             {
-                "source": "24",
+                "source": "106",
                 "target": "Shevtsov2007",
                 "type": "cite"
             },
             {
-                "source": "25",
+                "source": "106",
                 "target": "Zhou2008",
                 "type": "cite"
             },
             {
-                "source": "26",
+                "source": "106",
                 "target": "Soupikov2008",
                 "type": "cite"
             },
             {
-                "source": "27",
+                "source": "106",
                 "target": "Choi2010",
                 "type": "cite"
             },
             {
-                "source": "28",
+                "source": "107",
                 "target": "sec:intution",
                 "type": "ref"
             },
             {
-                "source": "29",
+                "source": "108",
                 "target": "sec:main",
                 "type": "ref"
             },
             {
-                "source": "30",
+                "source": "109",
                 "target": "sec:algorithm",
                 "type": "ref"
             },
             {
-                "source": "31",
+                "source": "110",
                 "target": "sec:performance",
                 "type": "ref"
             },
             {
-                "source": "32",
+                "source": "111",
                 "target": "sec:disc",
                 "type": "ref"
             },
             {
-                "source": "33",
+                "source": "112",
                 "target": "Chakravorty2021",
                 "type": "cite"
             },
             {
-                "source": "34",
+                "source": "113",
                 "target": "sec:intution",
                 "type": "ref"
             },
             {
-                "source": "35",
+                "source": "114",
                 "target": "ap:approx_proofs",
                 "type": "ref"
             },
             {
-                "source": "36",
+                "source": "115",
                 "target": "lemma:1d:exp",
                 "type": "ref"
             },
             {
-                "source": "37",
+                "source": "116",
                 "target": "ap:approx_proofs",
                 "type": "ref"
             },
             {
-                "source": "38",
+                "source": "117",
                 "target": "ap:approx_proofs",
                 "type": "ref"
             },
             {
-                "source": "39",
+                "source": "118",
                 "target": "sec:intution",
                 "type": "ref"
             },
             {
-                "source": "40",
+                "source": "119",
                 "target": "assumption:positive_density",
                 "type": "ref"
             },
             {
-                "source": "41",
+                "source": "120",
                 "target": "ap:stoch_proofs",
                 "type": "ref"
             },
             {
-                "source": "42",
+                "source": "121",
                 "target": "assumption:positive_density",
                 "type": "ref"
             },
             {
-                "source": "43",
+                "source": "122",
                 "target": "assumption:sup_null_set",
                 "type": "ref"
             },
             {
-                "source": "44",
+                "source": "123",
                 "target": "ap:stoch_proofs",
                 "type": "ref"
             },
             {
-                "source": "45",
+                "source": "124",
                 "target": "sec:intution",
                 "type": "ref"
             },
             {
-                "source": "46",
+                "source": "125",
                 "target": "kd:eq:a",
                 "type": "ref"
             },
             {
-                "source": "47",
+                "source": "126",
                 "target": "kd:eq:b",
                 "type": "ref"
             },
             {
-                "source": "48",
+                "source": "127",
                 "target": "thm:n_l=n/2",
                 "type": "ref"
             },
             {
-                "source": "49",
+                "source": "128",
                 "target": "assumption:positive_density",
                 "type": "ref"
             },
             {
-                "source": "50",
+                "source": "129",
                 "target": "assumption:sup_null_set",
                 "type": "ref"
             },
             {
-                "source": "51",
+                "source": "130",
                 "target": "assumption:positive_density",
                 "type": "ref"
             },
             {
-                "source": "52",
+                "source": "131",
                 "target": "assumption:sup_null_set",
                 "type": "ref"
             },
             {
-                "source": "53",
+                "source": "132",
                 "target": "ap:construct",
                 "type": "ref"
             },
             {
-                "source": "54",
+                "source": "133",
                 "target": "fig:norm_acc",
                 "type": "ref"
             },
             {
-                "source": "55",
+                "source": "134",
                 "target": "sec:eff",
                 "type": "ref"
             },
             {
-                "source": "56",
+                "source": "135",
                 "target": "fig:norm_acc",
                 "type": "ref"
             },
             {
-                "source": "57",
+                "source": "136",
                 "target": "fig:norm_run",
                 "type": "ref"
             },
             {
-                "source": "58",
+                "source": "137",
                 "target": "sec:main",
                 "type": "ref"
             },
             {
-                "source": "59",
+                "source": "138",
                 "target": "sec:algorithm",
                 "type": "ref"
             },
             {
-                "source": "60",
+                "source": "139",
                 "target": "sec:performance",
                 "type": "ref"
             },
             {
-                "source": "61",
+                "source": "140",
                 "target": "subsec:approx",
                 "type": "ref"
             },
             {
-                "source": "62",
+                "source": "141",
                 "target": "lemma:1d:exp",
                 "type": "ref"
             },
             {
-                "source": "63",
+                "source": "142",
                 "target": "proof:eq:1",
                 "type": "ref"
             },
             {
-                "source": "64",
+                "source": "143",
                 "target": "proof:eq:2",
                 "type": "ref"
             },
             {
-                "source": "65",
+                "source": "144",
                 "target": "proof:eq:1",
                 "type": "ref"
             },
             {
-                "source": "66",
+                "source": "145",
                 "target": "lemma:1d:unif",
                 "type": "ref"
             },
             {
-                "source": "67",
+                "source": "146",
                 "target": "lemma:pd:unif",
                 "type": "ref"
             },
             {
-                "source": "68",
+                "source": "147",
                 "target": "lemma:1d:exp",
                 "type": "ref"
             },
             {
-                "source": "69",
+                "source": "148",
                 "target": "subsec:stoch",
                 "type": "ref"
             },
             {
-                "source": "70",
+                "source": "149",
                 "target": "thm:n_l=n_r",
                 "type": "ref"
             },
             {
-                "source": "71",
+                "source": "150",
                 "target": "lemma:pd:unif",
                 "type": "ref"
             },
             {
-                "source": "72",
+                "source": "151",
                 "target": "lemma:pd:unif",
                 "type": "ref"
             },
             {
-                "source": "73",
+                "source": "152",
                 "target": "main:proof:eq:c",
                 "type": "ref"
             },
             {
-                "source": "74",
+                "source": "153",
                 "target": "main:proof:eq:a",
                 "type": "ref"
             },
             {
-                "source": "75",
+                "source": "154",
                 "target": "main:proof:eq:b",
                 "type": "ref"
             },
             {
-                "source": "76",
+                "source": "155",
                 "target": "main:proof:eq:a",
                 "type": "ref"
             },
             {
-                "source": "77",
+                "source": "156",
                 "target": "main:proof:eq:b",
                 "type": "ref"
             },
             {
-                "source": "78",
+                "source": "157",
                 "target": "thm:n_l=n/2",
                 "type": "ref"
             },
             {
-                "source": "79",
+                "source": "158",
                 "target": "assumption:sup_null_set",
                 "type": "ref"
             },
             {
-                "source": "80",
+                "source": "159",
                 "target": "main:proof:eq:d",
                 "type": "ref"
             },
             {
-                "source": "81",
+                "source": "160",
                 "target": "thm:n_l=n_r",
                 "type": "ref"
             },
             {
-                "source": "82",
+                "source": "161",
                 "target": "main:proof:eq:e",
                 "type": "ref"
             },
             {
-                "source": "83",
+                "source": "162",
                 "target": "main:proof:eq:h",
                 "type": "ref"
             },
             {
-                "source": "84",
+                "source": "163",
                 "target": "sec:algorithm",
                 "type": "ref"
             },
             {
-                "source": "85",
+                "source": "164",
                 "target": "kd:eq:a",
                 "type": "ref"
             },
             {
-                "source": "86",
+                "source": "165",
                 "target": "kd:eq:b",
                 "type": "ref"
             },
             {
-                "source": "87",
+                "source": "166",
                 "target": "pf:chev:thm:main",
                 "type": "ref"
             },
             {
-                "source": "88",
+                "source": "167",
                 "target": "chev:thm:main",
                 "type": "ref"
             },
             {
-                "source": "89",
+                "source": "168",
                 "target": "kd:eq:a",
                 "type": "ref"
             },
             {
-                "source": "90",
+                "source": "169",
                 "target": "kd:eq:b",
                 "type": "ref"
             },
             {
-                "source": "91",
+                "source": "170",
                 "target": "sec:performance",
                 "type": "ref"
             },
             {
-                "source": "92",
+                "source": "171",
                 "target": "Zaharia2016",
                 "type": "cite"
             },
             {
-                "source": "93",
+                "source": "172",
                 "target": "chev:thm:main",
                 "type": "ref"
             },
             {
-                "source": "94",
+                "source": "173",
                 "target": "chev:thm:main",
                 "type": "ref"
             },
             {
-                "source": "95",
+                "source": "174",
                 "target": "chev:lem:gen:1d",
                 "type": "ref"
             },
             {
-                "source": "96",
+                "source": "175",
                 "target": "chev:thm:main",
                 "type": "ref"
             },
             {
-                "source": "97",
+                "source": "176",
                 "target": "chev:lem:gen:pd",
                 "type": "ref"
+            }
+        ],
+        "environments": [
+            {
+                "name": "section",
+                "text": "section",
+                "counter": 1,
+                "countersShouldReset": [
+                    "theorem",
+                    "subsection"
+                ],
+                "countersShouldUpdate": []
+            },
+            {
+                "name": "theorem",
+                "text": "Theorem",
+                "counter": 1,
+                "countersShouldReset": [],
+                "countersShouldUpdate": [
+                    "corollary",
+                    "lemma",
+                    "remark",
+                    "definition",
+                    "example",
+                    "assumption",
+                    "proposition"
+                ]
+            },
+            {
+                "name": "corollary",
+                "text": "Corollary",
+                "counter": 1,
+                "countersShouldReset": [],
+                "countersShouldUpdate": []
+            },
+            {
+                "name": "lemma",
+                "text": "Lemma",
+                "counter": 1,
+                "countersShouldReset": [],
+                "countersShouldUpdate": []
+            },
+            {
+                "name": "remark",
+                "text": "Remark",
+                "counter": 1,
+                "countersShouldReset": [],
+                "countersShouldUpdate": []
+            },
+            {
+                "name": "definition",
+                "text": "Definition",
+                "counter": 1,
+                "countersShouldReset": [],
+                "countersShouldUpdate": []
+            },
+            {
+                "name": "example",
+                "text": "Example",
+                "counter": 1,
+                "countersShouldReset": [],
+                "countersShouldUpdate": []
+            },
+            {
+                "name": "assumption",
+                "text": "Assumption",
+                "counter": 1,
+                "countersShouldReset": [],
+                "countersShouldUpdate": []
+            },
+            {
+                "name": "proposition",
+                "text": "Proposition",
+                "counter": 1,
+                "countersShouldReset": [],
+                "countersShouldUpdate": []
+            },
+            {
+                "name": "subsection",
+                "text": "subsection",
+                "counter": 1,
+                "countersShouldReset": [],
+                "countersShouldUpdate": []
             }
         ]
     };
     nodes = data.nodes;
     links = data.links;
-    lineGraph(nodes, links);
+    envs = data.environments;
+    lineGraph(nodes, links, envs);
 }
 
 
@@ -2319,40 +2532,12 @@ function getRandomInt(min, max) {
 
 }
 
-function lineGraph(nodes, linksw) {
+function lineGraph(nodes, links, envs) {
 
-    var allNodes = [
-        { name: "node1", lineCount: 55, type: "section" },
-        { name: "citat af bob", lineCount: 100, type: "label" },
-        { name: "node3", lineCount: 150, type: "section" },
-        { name: "node4", lineCount: 300, type: "label" },
-        { name: "node5", lineCount: 500, type: "section" },
-        { name: "node6", lineCount: 520, type: "label" },
-
-        { name: "node7", lineCount: 250, type: "label" },
-        { name: "node8", lineCount: 280, type: "label" },
-        { name: "node9", lineCount: 400, type: "label" },
-
-        { name: "refNode1", lineCount: 500, type: "refNode" },
-        { name: "refNode2", lineCount: 70, type: "refNode" },
-        { name: "refNode3", lineCount: 460, type: "refNode" },
-
-    ];
-   
-
-    var links = [
-        { source: "citat af bob", target: "node4", type: "" },
-        { source: "node4", target: "node6", type: "" },
-        { source: "node6", target: "citat af bob", type: "" },
-
-        { source: "refNode1", target: "node7", type: "" },
-        { source: "refNode2", target: "node7", type: "" },
-        { source: "refNode3", target: "node7", type: "" }
-    ];
 
     allNodes = nodes;
-    links = linksw;
-    //console.log("allNodes: " + allNodes[0]);
+    links = links;
+    console.log("env: " + envs[0]);
 
 
     function compare(a, b) {
@@ -2384,15 +2569,27 @@ function lineGraph(nodes, linksw) {
 
     });
 
+    // create dict for env
+    var envDict = {}
+    envs.forEach(env => {
+        envDict[env.name] = env;
+    });
+
     var sectionNodes = [];
     var normalNodes = [];
     var paperNodes = [];
+    var envNodes = [];
+
+    
 
     // filter for sections and other nodes
 
     allNodes.forEach(node => {
-       
-        if (node.type == "section") {
+        if (node.type in envDict && !node.type.includes("section")) {
+            console.log("WUHU " + node.name + "\n " + node.type + "\n" + node.lineCountEnd + "\n" + node.lineCount);
+            envNodes.push(node);
+        }
+        else if (node.type == "section") {
             console.log("section " + node.name);
             sectionNodes.push(node);
         }
@@ -2456,6 +2653,26 @@ function lineGraph(nodes, linksw) {
         .attr("y2", xaxisHeight)
         .attr("marker-end", "url(#triangle)");
 
+    var svgEnvs = svg
+        .selectAll('rect')
+        .data(envNodes)
+        .enter().append('g');
+
+    var nodeRect = svgEnvs
+        .append('rect')
+        .attr('width', getLinecountEnd)
+        .attr('height', 10)
+        .attr('fill', "gray")
+        .attr('x', getlineCount)
+        .attr('y', getRandomNodeY);
+
+    var textEnvNode = svgEnvs
+        .append('text')
+        .text(node => node.name)
+        .attr('font-size', 15)
+        .attr("dx", node => node.lineCount + 10)
+        .attr("dy", node => nodeDict[node.name].y)
+        .attr("visibility", "hidden");
 
     var svgNodes = svg
         .selectAll('circle')
@@ -2476,6 +2693,9 @@ function lineGraph(nodes, linksw) {
         .attr("dy", node => nodeDict[node.name].y)
         .attr("visibility", "hidden");
 
+
+    
+
     
 
     nodeCircles.on("click", function (selected) {
@@ -2484,6 +2704,14 @@ function lineGraph(nodes, linksw) {
 
         textElements.attr("visibility", function (node) { return showName(node, selected) });
         nodeCircles.attr("fill", function (node) { return selectNode(node, selected) });
+    });
+
+    nodeRect.on("click", function (selected) {
+
+        console.log(selected);
+
+        textEnvNode.attr("visibility", function (node) { return showName(node, selected) });
+        nodeRect.attr("fill", function (node) { return selectNode(node, selected) });
     });
 
     
@@ -2535,6 +2763,12 @@ function lineGraph(nodes, linksw) {
         .attr('stroke-width', 2)
         .style("fill", "none")
         .attr("marker-end", "url(#linkArrow)");
+
+
+    function getLinecountEnd(node) {
+        console.log("lineCount: " + node.lineCountEnd)
+        return node.lineCountEnd - node.lineCount;
+    }
 
     function getRadiusNode(node) {
         if (node.type == "refNode") {

@@ -216,12 +216,14 @@ namespace Hermes.Website.Services
                 }
                 else if (groups["type"].Value == "begin")
                 {
+                    Console.WriteLine("BEGIN: " + groups["typeName"].Value);
                     //Console.WriteLine("PREV TYPENAME: " + groups["typeName"].Value);
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
 
                     // make sure that stuff like enumerate isnt created as a node
                     if (!(envTypeDict.ContainsKey(typeNameWithoutRefs)))
                     {
+                        //Console.WriteLine("Skipping over BEGIN: " + typeNameWithoutRefs);
                         if (remainingString != "")
                             ParseTex(remainingString);
                         continue;
@@ -234,6 +236,7 @@ namespace Hermes.Website.Services
                     // TODO what do we do about counter?? should it be string or what?
                     //var newEnvNode = new EnvNode(newEnvNodeName, createdAt, groups["typeName"].Value, thisEnvCount);
                     //Console.WriteLine(groups["type"].Value + " " + groups["typeName"].Value );
+                    Console.WriteLine("lineCount in begin: " + lineCount);
                     var newEnvNode = new EnvNode(newEnvNodeName, createdAt, typeNameWithoutRefs, envTypeDict[typeNameWithoutRefs].counter, lineCount);
 
                     //Console.WriteLine("Adding envNode: " + newEnvNode.GetName());
@@ -254,17 +257,19 @@ namespace Hermes.Website.Services
                 }
                 else if (groups["type"].Value == "end")
                 {
+                    Console.WriteLine("END: " + groups["typeName"].Value);
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
 
                     // make sure that stuff like enumerate isnt created as a node
                     if (!(envTypeDict.ContainsKey(typeNameWithoutRefs)))
                     {
+                        //Console.WriteLine("Skipping over END: " + typeNameWithoutRefs);
                         continue;
                     }
 
                     EnvNode tmpNode = (EnvNode)nodeDict[createdAt];
                     tmpNode.lineCountEnd = lineCount;
-
+                    Console.WriteLine("Setting endLineCount: " + tmpNode.lineCountEnd);
                     nodeDict[createdAt] = tmpNode;
 
                     if (createdAt != outerEnv)

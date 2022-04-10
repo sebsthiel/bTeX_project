@@ -1,21 +1,18 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jaffa\\OneDrive\\Skrivebord\\Bachelor\\GitRepo\\bTeX_project\\Hermes\\Hermes.Website\\Hermes.Website.csproj": {}
+    "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/Hermes.Website.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jaffa\\OneDrive\\Skrivebord\\Bachelor\\GitRepo\\bTeX_project\\Hermes\\Hermes.Website\\Hermes.Website.csproj": {
+    "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/Hermes.Website.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jaffa\\OneDrive\\Skrivebord\\Bachelor\\GitRepo\\bTeX_project\\Hermes\\Hermes.Website\\Hermes.Website.csproj",
+        "projectUniqueName": "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/Hermes.Website.csproj",
         "projectName": "Hermes.Website",
-        "projectPath": "C:\\Users\\jaffa\\OneDrive\\Skrivebord\\Bachelor\\GitRepo\\bTeX_project\\Hermes\\Hermes.Website\\Hermes.Website.csproj",
-        "packagesPath": "C:\\Users\\jaffa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jaffa\\OneDrive\\Skrivebord\\Bachelor\\GitRepo\\bTeX_project\\Hermes\\Hermes.Website\\obj\\",
+        "projectPath": "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/Hermes.Website.csproj",
+        "packagesPath": "/Users/sebs/.nuget/packages/",
+        "outputPath": "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
           "/Users/sebs/.config/NuGet/NuGet.Config"
         ],
@@ -23,9 +20,7 @@
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.pkg.github.com/jesper-bengtson/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
