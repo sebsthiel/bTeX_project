@@ -2604,18 +2604,33 @@ function lineGraph(nodes, links, envs) {
     console.log(allNodes[0].lineCount)
 
     // TODO figure out what width and height
-    const width = 10000//window.innerWidth;
-    const height = 10000;
+    const width = window.innerWidth;
+    const height = 600;
     const xaxisHeight = 100;
     var nodeYIndex = 10;
     const nodeColor = "gray"
 
+    // TODO find max linecount
+    const maxLineCount = 1000;
+
+
+    var xAxisScale = d3.scaleLinear()
+        .domain([0, maxLineCount])
+        .range([0, width]);
+
+
+
+   
+
     // select the svg for creating the graph
     // and configure the width and height
-    var svg = d3.select("#d3graph")
+
+    var svgCanvas = d3.select("#d3graph")
                 .append("svg")
                 .attr("width", width)
-                .attr("height", height);
+        .attr("height", height);
+
+    var svg = svgCanvas.append("g");
 
 
     // create arrow-head  
@@ -2643,15 +2658,24 @@ function lineGraph(nodes, links, envs) {
         .style("fill", "black");
 
     // create xaxis (line + arrow) 
-    var xaxis = svg.append('g')
-        .append("line")
-        .attr('stroke-width', 2)
-        .attr('stroke', 'black')
-        .attr("x1", 50)
-        .attr("y1", xaxisHeight)
-        .attr("x2", width - 50)
-        .attr("y2", xaxisHeight)
-        .attr("marker-end", "url(#triangle)");
+    //var xaxis = svgCanvas.append("svg").append('g')
+    //    .append("line")
+    //    .attr('stroke-width', 2)
+    //    .attr('stroke', 'black')
+    //    .attr("x1", 0)
+    //    .attr("y1", xaxisHeight)
+    //    .attr("x2", width - 50)
+    //    .attr("y2", xaxisHeight)
+    //    .attr("marker-end", "url(#triangle)");
+
+
+
+    var xAxis = d3.axisBottom(xAxisScale);
+
+    var gX = svgCanvas.append("g")
+        .attr("class", "axis axis--x")
+        .attr("transform", "translate(0," + xaxisHeight + ")")
+        .call(xAxis);
 
     var svgEnvs = svg
         .selectAll('rect')
@@ -2664,13 +2688,13 @@ function lineGraph(nodes, links, envs) {
         .attr('height', 10)
         .attr('fill', "gray")
         .attr('x', getlineCount)
-        .attr('y', getRandomNodeY);
+        .attr('y', 0 /*getRandomNodeY*/);
 
     var textEnvNode = svgEnvs
         .append('text')
         .text(node => node.name)
         .attr('font-size', 15)
-        .attr("dx", node => node.lineCount + 10)
+        .attr("dx", node => xAxisScale(node.lineCount + 10))
         .attr("dy", node => nodeDict[node.name].y)
         .attr("visibility", "hidden");
 
@@ -2683,13 +2707,13 @@ function lineGraph(nodes, links, envs) {
         .attr('r', getRadiusNode)
         .attr('fill', "gray")
         .attr('cx', getlineCount)
-        .attr('cy', getRandomNodeY);
+        .attr('cy', 0 /*getRandomNodeY*/);
 
     var textElements = svgNodes
         .append('text')
         .text(node => node.name)
         .attr('font-size', 15)
-        .attr("dx", node => node.lineCount + 10)
+        .attr("dx", node => xAxisScale(node.lineCount + 10))
         .attr("dy", node => nodeDict[node.name].y)
         .attr("visibility", "hidden");
 
@@ -2733,13 +2757,13 @@ function lineGraph(nodes, links, envs) {
         .attr("x1", getlineCount)
         .attr("y1", xaxisHeight - 10)
         .attr("x2", getlineCount)
-        .attr("y2", height)
+        .attr("y2", height+ 1000)
 
     var textSection = svgSection
         .append('text')
         .text(node => node.name)
         .attr('font-size', 15)
-        .attr("dx", node => node.lineCount)
+        .attr("dx", getlineCount)
         .attr("dy", xaxisHeight)
         .attr("visibility", "hidden");
 
@@ -2767,7 +2791,7 @@ function lineGraph(nodes, links, envs) {
 
     function getLinecountEnd(node) {
         console.log("lineCount: " + node.lineCountEnd)
-        return node.lineCountEnd - node.lineCount;
+        return xAxisScale(node.lineCountEnd - node.lineCount);
     }
 
     function getRadiusNode(node) {
@@ -2778,7 +2802,7 @@ function lineGraph(nodes, links, envs) {
     }
 
     function getlineCount(node) {
-        return node.lineCount;
+        return xAxisScale(node.lineCount);
 
     }
 
@@ -2797,8 +2821,8 @@ function lineGraph(nodes, links, envs) {
 
     function createArc(d) {
 
-        start = nodeDict[d.source].lineCount    // X position of start node on the X axis
-        end = nodeDict[d.target].lineCount      // X position of end node
+        start = xAxisScale(nodeDict[d.source].lineCount )   // X position of start node on the X axis
+        end = xAxisScale(nodeDict[d.target].lineCount  )    // X position of end node
 
         startY = nodeDict[d.source].y
         endY = nodeDict[d.target].y
@@ -2842,6 +2866,32 @@ function lineGraph(nodes, links, envs) {
 
         }
     }
+
+    function handleZoom() {
+
+        console.log("transform: " + d3.event.transform.k);
+
+
+      
+        let newScale = d3.event.transform.rescaleX(xAxisScale)
+        //svgSectionLine.attr("y2", d3.event.transform.y + height)
+        var new_xScale = d3.event.transform.rescaleX(xAxisScale)
+        //var new_yScale = d3.event.transform.rescaleY(yAxisScale)
+        console.log(d3.event.transform)
+
+        // update axes
+        gX.call(xAxis.scale(new_xScale));
+        svg.attr('transform', d3.event.transform);
+       
+    }
+
+    let zoom = d3.zoom()
+        .on('zoom', handleZoom);
+
+
+    svgCanvas.call(zoom);
+
+
 
     
    
