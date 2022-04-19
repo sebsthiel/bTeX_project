@@ -78,8 +78,9 @@ namespace Hermes.Website.Services
                     (string typeNameWithoutRefs,string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
 
                     EnvNode newEnvNode = new EnvNode(typeNameWithoutRefs, outerEnv, groups["type"].Value, envTypeDict["section"].counter, lineCount);
-
+                    Console.WriteLine("Counter for " + groups["type"].Value + ": " + envTypeDict["section"].counter);
                     UpdateCounters("section");
+
 
                     createdAt = typeNameWithoutRefs; //groups["typeName"].Value;
 
@@ -108,7 +109,12 @@ namespace Hermes.Website.Services
                     {
                         // same sub amount
                         newSubSection = new EnvNode(typeNameWithoutRefs, nodeDict[createdAt].GetCreatedAt(), groups["type"].Value, envTypeDict[groups["type"].Value].counter, lineCount);
+                        Console.WriteLine("Counter for " + groups["type"].Value + ": " + envTypeDict[groups["type"].Value].counter);
                         UpdateCounters(groups["type"].Value);
+                        
+
+
+                        //UpdateCounters(groups["type"].Value);
 
                         createdAt = newSubSection.GetName();
                     }
@@ -119,6 +125,7 @@ namespace Hermes.Website.Services
                         if (!(envTypeDict.ContainsKey(groups["type"].Value)))
                         {
                             envTypeDict[groups["type"].Value] = new Env(groups["type"].Value, groups["type"].Value, 1, new List<string>(), new List<string>());
+                            Console.WriteLine("Counter for " + groups["type"].Value + ": (1)" + 1);
 
                             // should add it as dependent of createdAt (counter)
                             var createdAtType = nodeDict[createdAt].GetType();
@@ -133,7 +140,10 @@ namespace Hermes.Website.Services
                         newSubSection = new EnvNode(typeNameWithoutRefs, createdAt, groups["type"].Value, envTypeDict[groups["type"].Value].counter, lineCount);
 
                         // updateCounters
+
+                        Console.WriteLine("Counter for " + groups["type"].Value + ": " + envTypeDict[groups["type"].Value].counter);
                         UpdateCounters(groups["type"].Value);
+
                         createdAt = newSubSection.GetName();
 
 
@@ -147,6 +157,8 @@ namespace Hermes.Website.Services
                         var newCreatedAt = subSection2Section(createdAt, differenceInSubCount);
                         newSubSection = new EnvNode(typeNameWithoutRefs, newCreatedAt, groups["type"].Value, envTypeDict[groups["type"].Value].counter, lineCount);
 
+
+                        Console.WriteLine("Counter for " + groups["type"].Value + ": " + envTypeDict[groups["type"].Value].counter);
                         UpdateCounters(groups["type"].Value);
 
                         createdAt = newCreatedAt;
@@ -233,6 +245,7 @@ namespace Hermes.Website.Services
 
                     var newEnvNodeName = typeNameWithoutRefs + " " + thisEnvCount;
 
+                    //Console.WriteLine("EnvNode with count: " + newEnvNodeName);
                     // TODO what do we do about counter?? should it be string or what?
                     //var newEnvNode = new EnvNode(newEnvNodeName, createdAt, groups["typeName"].Value, thisEnvCount);
                     //Console.WriteLine(groups["type"].Value + " " + groups["typeName"].Value );
@@ -243,7 +256,9 @@ namespace Hermes.Website.Services
                     nodeDict[newEnvNodeName] = newEnvNode;
 
                     //update counter
+                    Console.WriteLine("Counter for " + typeNameWithoutRefs + ": " + envTypeDict[typeNameWithoutRefs].counter);
                     UpdateCounters(typeNameWithoutRefs);
+                    
 
                     createdAt = newEnvNodeName;
 
@@ -304,16 +319,19 @@ namespace Hermes.Website.Services
 
                 }
                 
-                // Creating EnvType from the newtheorem command
+                    // Creating EnvType from the newtheorem command
                 if (groups["newtheorem"].Value == "newtheorem")
                 {
-
+                    
                     string envName = groups["envName"].Value.Trim(new char[] { '{', '}' });
                     string arg2 = groups["arg2"].Value;
                     string arg3 = groups["arg3"].Value;
 
+                    Console.WriteLine("NewTheorem: " + envName + " " + arg2 + " " + arg3);
+
                     string envText;
                     string counterName;
+                    List<string> shouldUpdateList = new List<string>();
 
                     if (arg2.StartsWith('{'))
                     {
@@ -360,7 +378,11 @@ namespace Hermes.Website.Services
 
                         if (envTypeDict.ContainsKey(counterName))
                         {
+                            Console.WriteLine(counterName + " just got " + envName);
                             envTypeDict[counterName].AddToCounterShouldUpdate(envName);
+
+                            shouldUpdateList.Add(counterName);
+                            //envTypeDict[envName].AddToCounterShouldUpdate(counterName);
                         }
                         else
                         {
@@ -370,7 +392,7 @@ namespace Hermes.Website.Services
 
 
                     //TODO Create smart constructer for env such that we dont have to pass 1, new list...
-                    envTypeDict[envName] = new Env(envName, envText, 1, new List<string>(), new List<string>());
+                    envTypeDict[envName] = new Env(envName, envText, 1, new List<string>(), shouldUpdateList);
                     //Console.WriteLine($"Added new Environment: {envName}");
 
                 }
@@ -404,6 +426,7 @@ namespace Hermes.Website.Services
             return acc;
         }
 
+
         private string subSection2Section(string createdAt, int differenceInSubCount)
         {
             var newCreatedAt = createdAt;
@@ -414,6 +437,7 @@ namespace Hermes.Website.Services
             return nodeDict[newCreatedAt].GetCreatedAt();
         }
 
+        //Returns how many times "sub" appears in the input string
         private int subCount(string section)
         {
             if(section == null)
@@ -427,9 +451,12 @@ namespace Hermes.Website.Services
 
         private void UpdateCounters(string envName)
         {
+            envTypeDict[envName].counter++;
 
             foreach (string e in envTypeDict[envName].countersShouldUpdate){
                 envTypeDict[e].counter = envTypeDict[envName].counter;
+                //Also updates the environments connected to the updated environments
+                UpdateSecondHandEnvironments(e);
             }
 
             foreach (string e in envTypeDict[envName].countersShouldReset){
@@ -439,11 +466,22 @@ namespace Hermes.Website.Services
             
         }
 
-        public Dictionary<string,Node> GetNodes(){
+        private void UpdateSecondHandEnvironments(string envName)
+        {
+            foreach (string e in envTypeDict[envName].countersShouldUpdate)
+            {
+                envTypeDict[e].counter = envTypeDict[envName].counter;
+                
+            }
+        }
+
+        public Dictionary<string,Node> GetNodes()
+        {
             return nodeDict;
         }
 
-        public List<Link> GetLinks(){
+        public List<Link> GetLinks()
+        {
             return linksList;
         }
 
