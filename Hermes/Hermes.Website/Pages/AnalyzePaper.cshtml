@@ -74,7 +74,7 @@
         let pdfBlob = await response.blob();
 
 
-        console.log("TYpe: " + typeof (pdfBlob));
+        console.log("Type: " + typeof (pdfBlob));
 
         let fileUrl = URL.createObjectURL(pdfBlob);
 
@@ -136,10 +136,10 @@
 
             console.log("guid: " + await data.guid);
             let guid = await data.guid;
-            let pdf = await getPdf(guid);
+            //let pdf = await getPdf(guid);
             let json = await getJson(guid);
 
-            document.getElementById("outputPdf").src = pdf;
+            //document.getElementById("outputPdf").src = pdf;
            
 
             // Load json into d3 graph
