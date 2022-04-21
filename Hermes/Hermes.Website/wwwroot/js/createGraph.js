@@ -5002,8 +5002,8 @@ function lineGraph(nodes, links, envs) {
         }
 
 
-        if (bestLineCount < node.lineCount) {
-            bestLineCount = node.lineCount;
+        if (bestLineCount < node.lineCountEnd) {
+            bestLineCount = node.lineCountEnd;
         }
 
 
