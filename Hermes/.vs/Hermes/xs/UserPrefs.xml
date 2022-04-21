@@ -1,17 +1,11 @@
 ﻿<Properties StartupConfiguration="{F40B3BCD-4DE2-4227-8331-F9EDE52002A3}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="Hermes.Website/Services/TexParserService.cs">
     <Files>
-      <File FileName="Hermes.Website/wwwroot/js/createGraph.js" Line="2427" Column="25" />
-      <File FileName="Hermes.Website/Pages/AnalyzePaper.cshtml" />
-      <File FileName="Hermes.Website/Pages/Playground.cshtml" />
-      <File FileName="Hermes.Website/Models/ID_Generator.cs" />
-      <File FileName="Hermes.Website/Models/Node.cs" />
-      <File FileName="Hermes.Website/Services/TexParserService.cs" Line="171" Column="18" />
-      <File FileName="Hermes.Website/Models/Link.cs" />
-      <File FileName="Hermes.Website/Models/JsonObject.cs" />
+      <File FileName="Hermes.Website/wwwroot/js/createGraph.js" Line="5335" Column="2" />
+      <File FileName="Hermes.Website/Program.cs" />
       <File FileName="Hermes.Website/Services/TexCompilerService.cs" />
-      <File FileName="Hermes.Website/Pages/Shared/_ValidationScriptsPartial.cshtml" />
-      <File FileName="Hermes.Website/Models/EnvNode.cs" />
+      <File FileName="Hermes.Website/Services/TexParserService.cs" Line="93" Column="7" />
+      <File FileName="Hermes.Website/Services/MultiTexService.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -19,7 +13,6 @@
           <Node name="Hermes" expanded="True">
             <Node name="Hermes.Website" expanded="True">
               <Node name="Controllers" expanded="True" />
-              <Node name="Models" expanded="True" />
               <Node name="Pages" expanded="True" />
               <Node name="Services" expanded="True">
                 <Node name="TexParserService.cs" selected="True" />
@@ -36,8 +29,15 @@
   <MonoDevelop.Ide.ItemProperties.Hermes.Website PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.docker-compose PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/Services/TexParserService.cs" relfile="Hermes.Website/Services/TexParserService.cs" line="348" column="1" />
+      <Breakpoint file="/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/Services/TexParserService.cs" relfile="Hermes.Website/Services/TexParserService.cs" line="222" column="1" />
+      <Breakpoint file="/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/Services/TexParserService.cs" relfile="Hermes.Website/Services/TexParserService.cs" line="77" column="1" />
+      <Breakpoint file="/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/Services/TexParserService.cs" relfile="Hermes.Website/Services/TexParserService.cs" line="118" column="1" />
+      <Breakpoint file="/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/Services/TexParserService.cs" relfile="Hermes.Website/Services/TexParserService.cs" line="93" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>
