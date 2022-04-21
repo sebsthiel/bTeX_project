@@ -23,7 +23,7 @@ namespace Hermes.Website.Controllers
         [HttpGet]
         public string Get()
         {
-            Console.WriteLine("Testing from BibController");
+            //Console.WriteLine("Testing from BibController");
             return BibService.testString;
             //return CompilerService.GetPdf();
 
@@ -34,11 +34,8 @@ namespace Hermes.Website.Controllers
         [HttpPost]
         public void TestPrint()
         {
-            Console.WriteLine("ABC");
-            Console.WriteLine("ABC");
-            Console.WriteLine("ABC");
-            Console.WriteLine("ABC");
-            Console.WriteLine("ABC");
+            //Console.WriteLine("ABC");
+            
         }
 
             

@@ -51,7 +51,7 @@ namespace Hermes.Website.Services
             
             foreach (Match match in matches)
             {
-                Console.WriteLine("Match: " + match);
+                //Console.WriteLine("Match: " + match);
                 GroupCollection groups = match.Groups;
                 string artInfo = groups["artInfo"].Value.ToLower();
                 string paperId = groups["id"].Value;
@@ -62,7 +62,7 @@ namespace Hermes.Website.Services
                 
                 if (paperId != null && paperId != "")
                 {
-                    Console.WriteLine("PaperID: " + paperId);
+                    //Console.WriteLine("PaperID: " + paperId);
                     if (currentPaper != null){ paperList.Add(currentPaper);}
                     //TODO: figure out what to do with linecount within Bib files
                     currentPaper = new PaperNode(paperId, "BibFile", "Paper", -1);
@@ -73,7 +73,7 @@ namespace Hermes.Website.Services
                 }
                 if (artInfo != null && artInfo != "")
                 {
-                    Console.WriteLine("Art Info is: " + artInfo);
+                    //Console.WriteLine("Art Info is: " + artInfo);
                     switch (artInfo)
                     {
                         case "title":
@@ -143,7 +143,7 @@ namespace Hermes.Website.Services
                             currentPaper.isbn = artInfoValue;
                             break;
                         default:
-                            //Console.WriteLine(artInfo + " doesn't match any cases");
+                            Console.WriteLine(artInfo + " doesn't match any cases");
                             break;
 
                     }
