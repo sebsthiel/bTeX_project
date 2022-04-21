@@ -1,20 +1,20 @@
 # Folders
-artifacts/
-bin/
-obj/
-.dotnet/
-.nuget/
-.packages/
-.tools/
-.vs/
-.vscode/
-papers/
-node_modules/
-BenchmarkDotNet.Artifacts/
-.gradle/
-src/SignalR/clients/**/dist/
-modules/
-.ionide/
+**/artifacts/
+**/bin/
+**/obj/
+**/.dotnet/
+**/.nuget/
+**/.packages/
+**/.tools/
+**/.vs/
+**/.vscode/
+**/papers/
+**/node_modules/
+**/BenchmarkDotNet.Artifacts/
+**/.gradle/
+**/src/SignalR/clients/**/dist/
+**/modules/
+**/.ionide/
 
 # File extensions
 *.aps
