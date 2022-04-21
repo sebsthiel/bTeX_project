@@ -1,0 +1,130 @@
+﻿@page
+@model Hermes.Website.Pages.ViewPageModel
+@{
+    ViewData["Title"] = "View Page";
+}
+
+<body>
+
+    <div class="topnav">
+        <a href="./">Back</a>
+        <div class="file-info">
+            <input id="uploadFile" name="uploadFile" type="file">
+            <input id="mainName" name="mainName" type="text" placeholder="Name of the main file" value="">
+            <input type="submit" asp-page-handler="Upload" class="btn" onclick="uploadFile()">
+        </div>
+    </div>
+
+    <div>
+
+        <div class="split pdf">
+            <div class="centered" id="pdfviewer">
+                <embed id="outputPdf" src="" width="500" height="375" type="application/pdf">
+                <h1>*PDF*</h1>
+            </div>
+        </div>
+
+        <div class="split graph">
+            <div class="centered" id="d3graph">
+                <!--<h1>*GRAPH*</h1>-->
+
+            </div>
+        </div>
+
+        <div class="vertical-line"></div>
+
+    </div>
+
+
+</body>
+
+<style>
+    .topnav {
+        background-color: #f2f2f2;
+        overflow: hidden;
+        position: absolute;
+        width: 100%;
+        height: 7%;
+        left: 0;
+        box-shadow: 3px 3px 10px 1px #4b4b4b;
+        z-index: 2
+    }
+
+        .topnav a {
+            float: left;
+            color: #1b1b1b;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+            .topnav a:hover {
+                background-color: #00ff90;
+                color: black;
+            }
+
+    .file-info {
+        float: right;
+        color: #1b1b1b;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .vertical-line {
+        height: 93%;
+        width: 6px;
+        left: 50%;
+        top: 7%;
+        background-color: #f2f2f2;
+        box-shadow: 3px 3px 10px 1px #4b4b4b;
+        /*border-left: 4px solid white;*/
+        position: fixed;
+        margin-left: -2px;
+        z-index: 2;
+    }
+
+    .split {
+        height: 93%;
+        width: 50%;
+        top: 7%;
+        position: fixed;
+        z-index: 1;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+
+    /* Control the left side */
+    .pdf {
+        left: 0;
+    }
+
+    /* Control the right side */
+    .graph {
+        right: 0;
+    }
+
+    /* If you want the content centered horizontally and vertically */
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    /* Style the image inside the centered container, if needed */
+    .centered img {
+        width: 150px;
+        border-radius: 50%;
+    }
+</style>
+
+<script src="~/js/fileUpload.js"></script>
+<script src="~/js/createGraph.js" asp-append-version="true"></script>
+
+
+<!--script src="https://d3js.org/d3.v3.min.js"></script-->
+<!--script type="module" src="~/js/graph.js" ></script>-->

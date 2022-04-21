@@ -6,14 +6,28 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome to Hermes</h1>
-    <p>Please upload file below </p>
-    <input type="file" id="fileInput" name="fileInput" />
-    <p id="output" name="output"></p>
+    <p>
+        Hermes is a website with the purpose of giving you a better overview of your scientific latex documents.
+        Just upload the zip file of the project, and specify the name of the main .tex file.
+        Then click the send button and you are good to go!
+    </p>
+
+    <div class="blackbox">
+        <a class="nav-link text-dark" asp-area="" asp-page="ViewPage">Get started!</a>
+    </div>
 </div>
 
-<script src="~/js/site.js"></script>
-<script>
-    function onLoadedFile(){
-        console.log("file loaded");
+<style>
+    .blackbox {
+        display:inline-block;
+        border: solid black 3px;
     }
-</script>
+
+    .blackbox a:hover {
+        background-color: #00ff90;
+        color: black;
+    }
+
+</style>
+
+
