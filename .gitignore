@@ -53,3 +53,11 @@ UpgradeLog.htm
 *.svclog
 mono_crash.*.json
 mono_crash.*.blob
+
+Hermes/.vs/Hermes/xs/UserPrefs.xml
+Hermes/.vs/Hermes/xs/project-cache/Hermes.Website-Debug.json
+Hermes/Hermes.Website/obj/Hermes.Website.csproj.nuget.dgspec.json
+Hermes/Hermes.Website/obj/Hermes.Website.csproj.nuget.g.props
+Hermes/Hermes.Website/obj/Hermes.Website.csproj.nuget.g.targets
+Hermes/Hermes.Website/obj/project.assets.json
+Hermes/Hermes.Website/obj/project.nuget.cache
