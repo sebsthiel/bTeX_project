@@ -35,252 +35,252 @@ function createLine(json) {
                 "lineCountEnd": 212
             },
             {
-                "name": "1",
+                "name": "341",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 137,
                 "lineCountEnd": null
             },
             {
-                "name": "2",
+                "name": "342",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 138,
                 "lineCountEnd": null
             },
             {
-                "name": "3",
+                "name": "343",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 144,
                 "lineCountEnd": null
             },
             {
-                "name": "4",
+                "name": "344",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 145,
                 "lineCountEnd": null
             },
             {
-                "name": "5",
+                "name": "345",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 147,
                 "lineCountEnd": null
             },
             {
-                "name": "6",
+                "name": "346",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 147,
                 "lineCountEnd": null
             },
             {
-                "name": "7",
+                "name": "347",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 148,
                 "lineCountEnd": null
             },
             {
-                "name": "8",
+                "name": "348",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 148,
                 "lineCountEnd": null
             },
             {
-                "name": "9",
+                "name": "349",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 151,
                 "lineCountEnd": null
             },
             {
-                "name": "10",
+                "name": "350",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 152,
                 "lineCountEnd": null
             },
             {
-                "name": "11",
+                "name": "351",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 153,
                 "lineCountEnd": null
             },
             {
-                "name": "12",
+                "name": "352",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 166,
                 "lineCountEnd": null
             },
             {
-                "name": "13",
+                "name": "353",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 169,
                 "lineCountEnd": null
             },
             {
-                "name": "14",
+                "name": "354",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 169,
                 "lineCountEnd": null
             },
             {
-                "name": "15",
+                "name": "355",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 169,
                 "lineCountEnd": null
             },
             {
-                "name": "16",
+                "name": "356",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 172,
                 "lineCountEnd": null
             },
             {
-                "name": "17",
+                "name": "357",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 172,
                 "lineCountEnd": null
             },
             {
-                "name": "18",
+                "name": "358",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 186,
                 "lineCountEnd": null
             },
             {
-                "name": "19",
+                "name": "359",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 187,
                 "lineCountEnd": null
             },
             {
-                "name": "20",
+                "name": "360",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 192,
                 "lineCountEnd": null
             },
             {
-                "name": "21",
+                "name": "361",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 194,
                 "lineCountEnd": null
             },
             {
-                "name": "22",
+                "name": "362",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 196,
                 "lineCountEnd": null
             },
             {
-                "name": "23",
+                "name": "363",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 197,
                 "lineCountEnd": null
             },
             {
-                "name": "24",
+                "name": "364",
                 "createdAt": "INTRODUCTION",
                 "type": "refNode",
                 "lineCount": 199,
                 "lineCountEnd": null
             },
             {
-                "name": "25",
+                "name": "365",
                 "createdAt": "INTRODUCTION",
                 "type": "refNode",
                 "lineCount": 199,
                 "lineCountEnd": null
             },
             {
-                "name": "26",
+                "name": "366",
                 "createdAt": "INTRODUCTION",
                 "type": "refNode",
                 "lineCount": 199,
                 "lineCountEnd": null
             },
             {
-                "name": "27",
+                "name": "367",
                 "createdAt": "INTRODUCTION",
                 "type": "refNode",
                 "lineCount": 199,
                 "lineCountEnd": null
             },
             {
-                "name": "28",
+                "name": "368",
                 "createdAt": "INTRODUCTION",
                 "type": "refNode",
                 "lineCount": 199,
                 "lineCountEnd": null
             },
             {
-                "name": "29",
+                "name": "369",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 201,
                 "lineCountEnd": null
             },
             {
-                "name": "30",
+                "name": "370",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 201,
                 "lineCountEnd": null
             },
             {
-                "name": "31",
+                "name": "371",
                 "createdAt": "INTRODUCTION",
                 "type": "refNode",
                 "lineCount": 201,
                 "lineCountEnd": null
             },
             {
-                "name": "32",
+                "name": "372",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 201,
                 "lineCountEnd": null
             },
             {
-                "name": "33",
+                "name": "373",
                 "createdAt": "INTRODUCTION",
                 "type": "refNode",
                 "lineCount": 201,
                 "lineCountEnd": null
             },
             {
-                "name": "34",
+                "name": "374",
                 "createdAt": "INTRODUCTION",
                 "type": "citeNode",
                 "lineCount": 201,
                 "lineCountEnd": null
             },
             {
-                "name": "35",
+                "name": "375",
                 "createdAt": "INTRODUCTION",
                 "type": "refNode",
                 "lineCount": 202,
                 "lineCountEnd": null
             },
             {
-                "name": "36",
+                "name": "376",
                 "createdAt": "INTRODUCTION",
                 "type": "refNode",
                 "lineCount": 202,
@@ -317,21 +317,21 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "37",
+                "name": "377",
                 "createdAt": "Signed graphs and signed Laplacians",
                 "type": "citeNode",
                 "lineCount": 237,
                 "lineCountEnd": null
             },
             {
-                "name": "38",
+                "name": "378",
                 "createdAt": "Signed graphs and signed Laplacians",
                 "type": "citeNode",
                 "lineCount": 237,
                 "lineCountEnd": null
             },
             {
-                "name": "39",
+                "name": "379",
                 "createdAt": "Signed graphs and signed Laplacians",
                 "type": "citeNode",
                 "lineCount": 237,
@@ -346,14 +346,14 @@ function createLine(json) {
                 "lineCountEnd": 278
             },
             {
-                "name": "40",
+                "name": "380",
                 "createdAt": "Matrix theory",
                 "type": "citeNode",
                 "lineCount": 269,
                 "lineCountEnd": null
             },
             {
-                "name": "41",
+                "name": "381",
                 "createdAt": "Matrix theory",
                 "type": "citeNode",
                 "lineCount": 272,
@@ -391,7 +391,7 @@ function createLine(json) {
                 "lineCountEnd": 288
             },
             {
-                "name": "42",
+                "name": "382",
                 "createdAt": "Perron-Frobenius property and eventual positivity",
                 "type": "citeNode",
                 "lineCount": 289,
@@ -413,7 +413,7 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "43",
+                "name": "383",
                 "createdAt": "theorem 2.3.1",
                 "type": "citeNode",
                 "lineCount": 293,
@@ -435,14 +435,14 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "44",
+                "name": "384",
                 "createdAt": "lemma 2.3.1",
                 "type": "citeNode",
                 "lineCount": 304,
                 "lineCountEnd": null
             },
             {
-                "name": "45",
+                "name": "385",
                 "createdAt": "Perron-Frobenius property and eventual positivity",
                 "type": "citeNode",
                 "lineCount": 309,
@@ -479,7 +479,7 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "46",
+                "name": "386",
                 "createdAt": "lemma 2.3.2",
                 "type": "citeNode",
                 "lineCount": 316,
@@ -502,21 +502,21 @@ function createLine(json) {
                 "lineCountEnd": 330
             },
             {
-                "name": "47",
+                "name": "387",
                 "createdAt": "Eventually stochastic matrices",
                 "type": "citeNode",
                 "lineCount": 332,
                 "lineCountEnd": null
             },
             {
-                "name": "48",
+                "name": "388",
                 "createdAt": "Eventually stochastic matrices",
                 "type": "refNode",
                 "lineCount": 332,
                 "lineCountEnd": null
             },
             {
-                "name": "49",
+                "name": "389",
                 "createdAt": "Eventually stochastic matrices",
                 "type": "refNode",
                 "lineCount": 332,
@@ -576,7 +576,7 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "50",
+                "name": "390",
                 "createdAt": "theorem 2.5.2",
                 "type": "citeNode",
                 "lineCount": 366,
@@ -658,7 +658,7 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "51",
+                "name": "391",
                 "createdAt": "Problem formulation",
                 "type": "refNode",
                 "lineCount": 433,
@@ -680,14 +680,14 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "52",
+                "name": "392",
                 "createdAt": "Continuous-time case",
                 "type": "refNode",
                 "lineCount": 446,
                 "lineCountEnd": null
             },
             {
-                "name": "53",
+                "name": "393",
                 "createdAt": "Continuous-time case",
                 "type": "refNode",
                 "lineCount": 446,
@@ -724,7 +724,7 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "54",
+                "name": "394",
                 "createdAt": "Continuous-time case",
                 "type": "refNode",
                 "lineCount": 470,
@@ -739,14 +739,14 @@ function createLine(json) {
                 "lineCountEnd": 520
             },
             {
-                "name": "55",
+                "name": "395",
                 "createdAt": "Signed undirected graph case",
                 "type": "citeNode",
                 "lineCount": 494,
                 "lineCountEnd": null
             },
             {
-                "name": "56",
+                "name": "396",
                 "createdAt": "Signed undirected graph case",
                 "type": "citeNode",
                 "lineCount": 495,
@@ -768,14 +768,14 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "57",
+                "name": "397",
                 "createdAt": "Signed undirected graph case",
                 "type": "citeNode",
                 "lineCount": 511,
                 "lineCountEnd": null
             },
             {
-                "name": "58",
+                "name": "398",
                 "createdAt": "Signed undirected graph case",
                 "type": "citeNode",
                 "lineCount": 511,
@@ -787,7 +787,7 @@ function createLine(json) {
                 "createdAt": "Continuous-time case",
                 "type": "subsubsection",
                 "lineCount": 520,
-                "lineCountEnd": null
+                "lineCountEnd": 706
             },
             {
                 "name": "sec:signed_digraph",
@@ -812,7 +812,7 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "59",
+                "name": "399",
                 "createdAt": "Signed digraph case",
                 "type": "refNode",
                 "lineCount": 550,
@@ -827,7 +827,7 @@ function createLine(json) {
                 "lineCountEnd": 556
             },
             {
-                "name": "60",
+                "name": "400",
                 "createdAt": "remark 3.2.2.1",
                 "type": "refNode",
                 "lineCount": 554,
@@ -894,7 +894,7 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "61",
+                "name": "401",
                 "createdAt": "Signed digraph case",
                 "type": "refNode",
                 "lineCount": 618,
@@ -909,42 +909,42 @@ function createLine(json) {
                 "lineCountEnd": 626
             },
             {
-                "name": "62",
+                "name": "402",
                 "createdAt": "remark 3.2.2.2",
                 "type": "citeNode",
                 "lineCount": 623,
                 "lineCountEnd": null
             },
             {
-                "name": "63",
+                "name": "403",
                 "createdAt": "remark 3.2.2.2",
                 "type": "refNode",
                 "lineCount": 623,
                 "lineCountEnd": null
             },
             {
-                "name": "64",
+                "name": "404",
                 "createdAt": "remark 3.2.2.2",
                 "type": "refNode",
                 "lineCount": 624,
                 "lineCountEnd": null
             },
             {
-                "name": "65",
+                "name": "405",
                 "createdAt": "remark 3.2.2.2",
                 "type": "refNode",
                 "lineCount": 625,
                 "lineCountEnd": null
             },
             {
-                "name": "66",
+                "name": "406",
                 "createdAt": "remark 3.2.2.2",
                 "type": "refNode",
                 "lineCount": 625,
                 "lineCountEnd": null
             },
             {
-                "name": "67",
+                "name": "407",
                 "createdAt": "remark 3.2.2.2",
                 "type": "refNode",
                 "lineCount": 625,
@@ -966,7 +966,7 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "68",
+                "name": "408",
                 "createdAt": "Signed digraph case",
                 "type": "refNode",
                 "lineCount": 634,
@@ -1018,35 +1018,35 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "69",
+                "name": "409",
                 "createdAt": "Signed digraph case",
                 "type": "refNode",
                 "lineCount": 681,
                 "lineCountEnd": null
             },
             {
-                "name": "70",
+                "name": "410",
                 "createdAt": "Signed digraph case",
                 "type": "refNode",
                 "lineCount": 681,
                 "lineCountEnd": null
             },
             {
-                "name": "71",
+                "name": "411",
                 "createdAt": "Signed digraph case",
                 "type": "refNode",
                 "lineCount": 682,
                 "lineCountEnd": null
             },
             {
-                "name": "72",
+                "name": "412",
                 "createdAt": "Signed digraph case",
                 "type": "refNode",
                 "lineCount": 682,
                 "lineCountEnd": null
             },
             {
-                "name": "73",
+                "name": "413",
                 "createdAt": "Signed digraph case",
                 "type": "refNode",
                 "lineCount": 689,
@@ -1068,7 +1068,7 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "74",
+                "name": "414",
                 "createdAt": "Signed digraph case",
                 "type": "refNode",
                 "lineCount": 700,
@@ -1080,218 +1080,218 @@ function createLine(json) {
                 "createdAt": "Consensus on time-invariant signed digraphs",
                 "type": "subsection",
                 "lineCount": 706,
-                "lineCountEnd": null
+                "lineCountEnd": 870
             },
             {
                 "name": "sec:discrete",
-                "createdAt": "Consensus on time-invariant signed digraphs",
+                "createdAt": "Discrete-time protocol",
                 "type": "label",
                 "lineCount": 707,
                 "lineCountEnd": null
             },
             {
                 "counter": 8,
-                "name": "example 3.8",
-                "createdAt": "Consensus on time-invariant signed digraphs",
+                "name": "example 3.3.8",
+                "createdAt": "Discrete-time protocol",
                 "type": "example",
                 "lineCount": 712,
                 "lineCountEnd": 717
             },
             {
                 "name": "ex:Wcorank2",
-                "createdAt": "example 3.8",
+                "createdAt": "example 3.3.8",
                 "type": "label",
                 "lineCount": 713,
                 "lineCountEnd": null
             },
             {
-                "name": "75",
-                "createdAt": "example 3.8",
+                "name": "415",
+                "createdAt": "example 3.3.8",
                 "type": "refNode",
                 "lineCount": 714,
                 "lineCountEnd": null
             },
             {
                 "counter": 6,
-                "name": "lemma 3.6",
-                "createdAt": "Consensus on time-invariant signed digraphs",
+                "name": "lemma 3.3.6",
+                "createdAt": "Discrete-time protocol",
                 "type": "lemma",
                 "lineCount": 725,
                 "lineCountEnd": 727
             },
             {
                 "name": "le:nec:DT",
-                "createdAt": "lemma 3.6",
+                "createdAt": "lemma 3.3.6",
                 "type": "label",
                 "lineCount": 725,
                 "lineCountEnd": null
             },
             {
-                "name": "76",
-                "createdAt": "Consensus on time-invariant signed digraphs",
+                "name": "416",
+                "createdAt": "Discrete-time protocol",
                 "type": "refNode",
                 "lineCount": 728,
                 "lineCountEnd": null
             },
             {
                 "counter": 9,
-                "name": "example 3.9",
-                "createdAt": "Consensus on time-invariant signed digraphs",
+                "name": "example 3.3.9",
+                "createdAt": "Discrete-time protocol",
                 "type": "example",
                 "lineCount": 733,
                 "lineCountEnd": 739
             },
             {
                 "name": "W:corank-nostrictdom",
-                "createdAt": "example 3.9",
+                "createdAt": "example 3.3.9",
                 "type": "label",
                 "lineCount": 734,
                 "lineCountEnd": null
             },
             {
-                "name": "77",
-                "createdAt": "example 3.9",
+                "name": "417",
+                "createdAt": "example 3.3.9",
                 "type": "refNode",
                 "lineCount": 735,
                 "lineCountEnd": null
             },
             {
-                "name": "78",
-                "createdAt": "example 3.9",
+                "name": "418",
+                "createdAt": "example 3.3.9",
                 "type": "refNode",
                 "lineCount": 737,
                 "lineCountEnd": null
             },
             {
                 "counter": 1,
-                "name": "Signed undirected graph case :id: 79",
-                "createdAt": "Consensus on time-invariant signed digraphs",
+                "name": "Signed undirected graph case :id: 419",
+                "createdAt": "Discrete-time protocol",
                 "type": "subsubsection",
                 "lineCount": 756,
                 "lineCountEnd": 775
             },
             {
-                "name": "80",
-                "createdAt": "Signed undirected graph case :id: 79",
+                "name": "420",
+                "createdAt": "Signed undirected graph case :id: 419",
                 "type": "refNode",
                 "lineCount": 758,
                 "lineCountEnd": null
             },
             {
                 "counter": 5,
-                "name": "theorem 3.1.5",
-                "createdAt": "Signed undirected graph case :id: 79",
+                "name": "theorem 3.3.1.5",
+                "createdAt": "Signed undirected graph case :id: 419",
                 "type": "theorem",
                 "lineCount": 759,
                 "lineCountEnd": 765
             },
             {
                 "name": "thm:symm-sign",
-                "createdAt": "theorem 3.1.5",
+                "createdAt": "theorem 3.3.1.5",
                 "type": "label",
                 "lineCount": 760,
                 "lineCountEnd": null
             },
             {
-                "name": "81",
-                "createdAt": "Signed undirected graph case :id: 79",
+                "name": "421",
+                "createdAt": "Signed undirected graph case :id: 419",
                 "type": "refNode",
                 "lineCount": 766,
                 "lineCountEnd": null
             },
             {
                 "counter": 2,
-                "name": "Signed digraph case :id: 82",
-                "createdAt": "Consensus on time-invariant signed digraphs",
+                "name": "Signed digraph case :id: 422",
+                "createdAt": "Discrete-time protocol",
                 "type": "subsubsection",
                 "lineCount": 775,
                 "lineCountEnd": 870
             },
             {
                 "counter": 6,
-                "name": "theorem 3.2.6",
-                "createdAt": "Signed digraph case :id: 82",
+                "name": "theorem 3.3.2.6",
+                "createdAt": "Signed digraph case :id: 422",
                 "type": "theorem",
                 "lineCount": 781,
                 "lineCountEnd": 787
             },
             {
                 "name": "eq:ev-stoch-matrix",
-                "createdAt": "theorem 3.2.6",
+                "createdAt": "theorem 3.3.2.6",
                 "type": "label",
                 "lineCount": 782,
                 "lineCountEnd": null
             },
             {
-                "name": "83",
-                "createdAt": "Signed digraph case :id: 82",
+                "name": "423",
+                "createdAt": "Signed digraph case :id: 422",
                 "type": "refNode",
                 "lineCount": 788,
                 "lineCountEnd": null
             },
             {
-                "name": "84",
-                "createdAt": "Signed digraph case :id: 82",
+                "name": "424",
+                "createdAt": "Signed digraph case :id: 422",
                 "type": "refNode",
                 "lineCount": 792,
                 "lineCountEnd": null
             },
             {
                 "counter": 10,
-                "name": "example 3.2.10",
-                "createdAt": "Signed digraph case :id: 82",
+                "name": "example 3.3.2.10",
+                "createdAt": "Signed digraph case :id: 422",
                 "type": "example",
                 "lineCount": 793,
                 "lineCountEnd": 806
             },
             {
                 "counter": 11,
-                "name": "example 3.2.11",
-                "createdAt": "Signed digraph case :id: 82",
+                "name": "example 3.3.2.11",
+                "createdAt": "Signed digraph case :id: 422",
                 "type": "example",
                 "lineCount": 814,
                 "lineCountEnd": 835
             },
             {
                 "counter": 3,
-                "name": "corollary 3.2.3",
-                "createdAt": "Signed digraph case :id: 82",
+                "name": "corollary 3.3.2.3",
+                "createdAt": "Signed digraph case :id: 422",
                 "type": "corollary",
                 "lineCount": 840,
                 "lineCountEnd": 854
             },
             {
                 "name": "cor:weight-bal-DT",
-                "createdAt": "corollary 3.2.3",
+                "createdAt": "corollary 3.3.2.3",
                 "type": "label",
                 "lineCount": 841,
                 "lineCountEnd": null
             },
             {
-                "name": "85",
-                "createdAt": "Signed digraph case :id: 82",
+                "name": "425",
+                "createdAt": "Signed digraph case :id: 422",
                 "type": "refNode",
                 "lineCount": 855,
                 "lineCountEnd": null
             },
             {
                 "counter": 7,
-                "name": "lemma 3.2.7",
-                "createdAt": "Signed digraph case :id: 82",
+                "name": "lemma 3.3.2.7",
+                "createdAt": "Signed digraph case :id: 422",
                 "type": "lemma",
                 "lineCount": 860,
                 "lineCountEnd": 864
             },
             {
                 "name": "lem:irreduc_W_suff",
-                "createdAt": "lemma 3.2.7",
+                "createdAt": "lemma 3.3.2.7",
                 "type": "label",
                 "lineCount": 861,
                 "lineCountEnd": null
             },
             {
-                "name": "86",
-                "createdAt": "Signed digraph case :id: 82",
+                "name": "426",
+                "createdAt": "Signed digraph case :id: 422",
                 "type": "refNode",
                 "lineCount": 865,
                 "lineCountEnd": null
@@ -1313,7 +1313,7 @@ function createLine(json) {
             },
             {
                 "counter": 1,
-                "name": "Problem formulation :id: 87",
+                "name": "Problem formulation :id: 427",
                 "createdAt": "Consensus on time-varying signed digraphs",
                 "type": "subsection",
                 "lineCount": 873,
@@ -1321,28 +1321,28 @@ function createLine(json) {
             },
             {
                 "name": "eq:form_c",
-                "createdAt": "Problem formulation :id: 87",
+                "createdAt": "Problem formulation :id: 427",
                 "type": "label",
                 "lineCount": 889,
                 "lineCountEnd": null
             },
             {
-                "name": "88",
-                "createdAt": "Problem formulation :id: 87",
+                "name": "428",
+                "createdAt": "Problem formulation :id: 427",
                 "type": "citeNode",
                 "lineCount": 892,
                 "lineCountEnd": null
             },
             {
                 "name": "eq:form_d",
-                "createdAt": "Problem formulation :id: 87",
+                "createdAt": "Problem formulation :id: 427",
                 "type": "label",
                 "lineCount": 897,
                 "lineCountEnd": null
             },
             {
-                "name": "89",
-                "createdAt": "Problem formulation :id: 87",
+                "name": "429",
+                "createdAt": "Problem formulation :id: 427",
                 "type": "refNode",
                 "lineCount": 905,
                 "lineCountEnd": null
@@ -1350,7 +1350,7 @@ function createLine(json) {
             {
                 "counter": 8,
                 "name": "definition 4.1.8",
-                "createdAt": "Problem formulation :id: 87",
+                "createdAt": "Problem formulation :id: 427",
                 "type": "definition",
                 "lineCount": 907,
                 "lineCountEnd": 909
@@ -1371,7 +1371,7 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "90",
+                "name": "430",
                 "createdAt": "Continuous-time protocol",
                 "type": "refNode",
                 "lineCount": 918,
@@ -1393,21 +1393,21 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "91",
+                "name": "431",
                 "createdAt": "Continuous-time protocol",
                 "type": "refNode",
                 "lineCount": 925,
                 "lineCountEnd": null
             },
             {
-                "name": "92",
+                "name": "432",
                 "createdAt": "Continuous-time protocol",
                 "type": "refNode",
                 "lineCount": 925,
                 "lineCountEnd": null
             },
             {
-                "name": "93",
+                "name": "433",
                 "createdAt": "Continuous-time protocol",
                 "type": "refNode",
                 "lineCount": 925,
@@ -1422,7 +1422,7 @@ function createLine(json) {
                 "lineCountEnd": 929
             },
             {
-                "name": "94",
+                "name": "434",
                 "createdAt": "Continuous-time protocol",
                 "type": "refNode",
                 "lineCount": 936,
@@ -1451,14 +1451,14 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "95",
+                "name": "435",
                 "createdAt": "example 4.2.12",
                 "type": "refNode",
                 "lineCount": 958,
                 "lineCountEnd": null
             },
             {
-                "name": "96",
+                "name": "436",
                 "createdAt": "example 4.2.12",
                 "type": "refNode",
                 "lineCount": 963,
@@ -1480,7 +1480,7 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "97",
+                "name": "437",
                 "createdAt": "remark 4.2.3",
                 "type": "citeNode",
                 "lineCount": 981,
@@ -1502,7 +1502,7 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "98",
+                "name": "438",
                 "createdAt": "Continuous-time protocol",
                 "type": "refNode",
                 "lineCount": 988,
@@ -1524,21 +1524,21 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "99",
+                "name": "439",
                 "createdAt": "Continuous-time protocol",
                 "type": "refNode",
                 "lineCount": 996,
                 "lineCountEnd": null
             },
             {
-                "name": "100",
+                "name": "440",
                 "createdAt": "Continuous-time protocol",
                 "type": "citeNode",
                 "lineCount": 996,
                 "lineCountEnd": null
             },
             {
-                "name": "101",
+                "name": "441",
                 "createdAt": "Continuous-time protocol",
                 "type": "refNode",
                 "lineCount": 996,
@@ -1553,7 +1553,7 @@ function createLine(json) {
                 "lineCountEnd": 1036
             },
             {
-                "name": "102",
+                "name": "442",
                 "createdAt": "example 4.2.13",
                 "type": "refNode",
                 "lineCount": 1001,
@@ -1568,7 +1568,7 @@ function createLine(json) {
             },
             {
                 "counter": 3,
-                "name": "Discrete-time protocol :id: 103",
+                "name": "Discrete-time protocol :id: 443",
                 "createdAt": "Consensus on time-varying signed digraphs",
                 "type": "subsection",
                 "lineCount": 1041,
@@ -1577,7 +1577,7 @@ function createLine(json) {
             {
                 "counter": 9,
                 "name": "lemma 4.3.9",
-                "createdAt": "Discrete-time protocol :id: 103",
+                "createdAt": "Discrete-time protocol :id: 443",
                 "type": "lemma",
                 "lineCount": 1046,
                 "lineCountEnd": 1048
@@ -1590,29 +1590,29 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "104",
-                "createdAt": "Discrete-time protocol :id: 103",
+                "name": "444",
+                "createdAt": "Discrete-time protocol :id: 443",
                 "type": "refNode",
                 "lineCount": 1049,
                 "lineCountEnd": null
             },
             {
-                "name": "105",
-                "createdAt": "Discrete-time protocol :id: 103",
+                "name": "445",
+                "createdAt": "Discrete-time protocol :id: 443",
                 "type": "refNode",
                 "lineCount": 1050,
                 "lineCountEnd": null
             },
             {
-                "name": "106",
-                "createdAt": "Discrete-time protocol :id: 103",
+                "name": "446",
+                "createdAt": "Discrete-time protocol :id: 443",
                 "type": "refNode",
                 "lineCount": 1051,
                 "lineCountEnd": null
             },
             {
-                "name": "107",
-                "createdAt": "Discrete-time protocol :id: 103",
+                "name": "447",
+                "createdAt": "Discrete-time protocol :id: 443",
                 "type": "refNode",
                 "lineCount": 1051,
                 "lineCountEnd": null
@@ -1620,7 +1620,7 @@ function createLine(json) {
             {
                 "counter": 5,
                 "name": "corollary 4.3.5",
-                "createdAt": "Discrete-time protocol :id: 103",
+                "createdAt": "Discrete-time protocol :id: 443",
                 "type": "corollary",
                 "lineCount": 1054,
                 "lineCountEnd": 1056
@@ -1628,7 +1628,7 @@ function createLine(json) {
             {
                 "counter": 14,
                 "name": "example 4.3.14",
-                "createdAt": "Discrete-time protocol :id: 103",
+                "createdAt": "Discrete-time protocol :id: 443",
                 "type": "example",
                 "lineCount": 1060,
                 "lineCountEnd": 1080
@@ -1643,7 +1643,7 @@ function createLine(json) {
             {
                 "counter": 8,
                 "name": "theorem 4.3.8",
-                "createdAt": "Discrete-time protocol :id: 103",
+                "createdAt": "Discrete-time protocol :id: 443",
                 "type": "theorem",
                 "lineCount": 1084,
                 "lineCountEnd": 1086
@@ -1656,8 +1656,8 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "108",
-                "createdAt": "Discrete-time protocol :id: 103",
+                "name": "448",
+                "createdAt": "Discrete-time protocol :id: 443",
                 "type": "refNode",
                 "lineCount": 1087,
                 "lineCountEnd": null
@@ -1665,7 +1665,7 @@ function createLine(json) {
             {
                 "counter": 5,
                 "name": "remark 4.3.5",
-                "createdAt": "Discrete-time protocol :id: 103",
+                "createdAt": "Discrete-time protocol :id: 443",
                 "type": "remark",
                 "lineCount": 1090,
                 "lineCountEnd": 1092
@@ -1678,15 +1678,15 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "109",
+                "name": "449",
                 "createdAt": "remark 4.3.5",
                 "type": "refNode",
                 "lineCount": 1091,
                 "lineCountEnd": null
             },
             {
-                "name": "110",
-                "createdAt": "Discrete-time protocol :id: 103",
+                "name": "450",
+                "createdAt": "Discrete-time protocol :id: 443",
                 "type": "refNode",
                 "lineCount": 1094,
                 "lineCountEnd": null
@@ -1694,7 +1694,7 @@ function createLine(json) {
             {
                 "counter": 15,
                 "name": "example 4.3.15",
-                "createdAt": "Discrete-time protocol :id: 103",
+                "createdAt": "Discrete-time protocol :id: 443",
                 "type": "example",
                 "lineCount": 1096,
                 "lineCountEnd": 1109
@@ -1707,7 +1707,7 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "111",
+                "name": "451",
                 "createdAt": "example 4.3.15",
                 "type": "citeNode",
                 "lineCount": 1107,
@@ -1716,7 +1716,7 @@ function createLine(json) {
             {
                 "counter": 16,
                 "name": "example 4.3.16",
-                "createdAt": "Discrete-time protocol :id: 103",
+                "createdAt": "Discrete-time protocol :id: 443",
                 "type": "example",
                 "lineCount": 1113,
                 "lineCountEnd": 1116
@@ -1729,7 +1729,7 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "112",
+                "name": "452",
                 "createdAt": "example 4.3.16",
                 "type": "refNode",
                 "lineCount": 1114,
@@ -1751,21 +1751,21 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "113",
+                "name": "453",
                 "createdAt": "More general sufficient conditions for the time-varying case",
                 "type": "citeNode",
                 "lineCount": 1124,
                 "lineCountEnd": null
             },
             {
-                "name": "114",
+                "name": "454",
                 "createdAt": "More general sufficient conditions for the time-varying case",
                 "type": "refNode",
                 "lineCount": 1125,
                 "lineCountEnd": null
             },
             {
-                "name": "115",
+                "name": "455",
                 "createdAt": "More general sufficient conditions for the time-varying case",
                 "type": "refNode",
                 "lineCount": 1125,
@@ -1773,7 +1773,7 @@ function createLine(json) {
             },
             {
                 "counter": 1,
-                "name": "Continuous-time case :id: 116",
+                "name": "Continuous-time case :id: 456",
                 "createdAt": "More general sufficient conditions for the time-varying case",
                 "type": "subsection",
                 "lineCount": 1128,
@@ -1782,7 +1782,7 @@ function createLine(json) {
             {
                 "counter": 9,
                 "name": "theorem 5.1.9",
-                "createdAt": "Continuous-time case :id: 116",
+                "createdAt": "Continuous-time case :id: 456",
                 "type": "theorem",
                 "lineCount": 1134,
                 "lineCountEnd": 1141
@@ -1802,8 +1802,8 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "117",
-                "createdAt": "Continuous-time case :id: 116",
+                "name": "457",
+                "createdAt": "Continuous-time case :id: 456",
                 "type": "refNode",
                 "lineCount": 1142,
                 "lineCountEnd": null
@@ -1811,28 +1811,28 @@ function createLine(json) {
             {
                 "counter": 17,
                 "name": "example 5.1.17",
-                "createdAt": "Continuous-time case :id: 116",
+                "createdAt": "Continuous-time case :id: 456",
                 "type": "example",
                 "lineCount": 1145,
                 "lineCountEnd": 1174
             },
             {
-                "name": "118",
-                "createdAt": "Continuous-time case :id: 116",
+                "name": "458",
+                "createdAt": "Continuous-time case :id: 456",
                 "type": "citeNode",
                 "lineCount": 1176,
                 "lineCountEnd": null
             },
             {
-                "name": "119",
-                "createdAt": "Continuous-time case :id: 116",
+                "name": "459",
+                "createdAt": "Continuous-time case :id: 456",
                 "type": "citeNode",
                 "lineCount": 1176,
                 "lineCountEnd": null
             },
             {
-                "name": "120",
-                "createdAt": "Continuous-time case :id: 116",
+                "name": "460",
+                "createdAt": "Continuous-time case :id: 456",
                 "type": "refNode",
                 "lineCount": 1184,
                 "lineCountEnd": null
@@ -1840,7 +1840,7 @@ function createLine(json) {
             {
                 "counter": 6,
                 "name": "corollary 5.1.6",
-                "createdAt": "Continuous-time case :id: 116",
+                "createdAt": "Continuous-time case :id: 456",
                 "type": "corollary",
                 "lineCount": 1185,
                 "lineCountEnd": 1191
@@ -1855,13 +1855,13 @@ function createLine(json) {
             {
                 "counter": 18,
                 "name": "example 5.1.18",
-                "createdAt": "Continuous-time case :id: 116",
+                "createdAt": "Continuous-time case :id: 456",
                 "type": "example",
                 "lineCount": 1194,
                 "lineCountEnd": 1215
             },
             {
-                "name": "121",
+                "name": "461",
                 "createdAt": "example 5.1.18",
                 "type": "citeNode",
                 "lineCount": 1210,
@@ -1898,14 +1898,14 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "122",
+                "name": "462",
                 "createdAt": "Discrete-time case",
                 "type": "refNode",
                 "lineCount": 1230,
                 "lineCountEnd": null
             },
             {
-                "name": "123",
+                "name": "463",
                 "createdAt": "Discrete-time case",
                 "type": "refNode",
                 "lineCount": 1237,
@@ -1935,7 +1935,7 @@ function createLine(json) {
                 "lineCountEnd": 1270
             },
             {
-                "name": "124",
+                "name": "464",
                 "createdAt": "example 5.2.19",
                 "type": "citeNode",
                 "lineCount": 1265,
@@ -1978,7 +1978,7 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "125",
+                "name": "465",
                 "createdAt": "Extension to bipartite consensus",
                 "type": "citeNode",
                 "lineCount": 1297,
@@ -2000,14 +2000,14 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "126",
+                "name": "466",
                 "createdAt": "Extension to bipartite consensus",
                 "type": "citeNode",
                 "lineCount": 1303,
                 "lineCountEnd": null
             },
             {
-                "name": "127",
+                "name": "467",
                 "createdAt": "Extension to bipartite consensus",
                 "type": "refNode",
                 "lineCount": 1307,
@@ -2029,21 +2029,21 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "128",
+                "name": "468",
                 "createdAt": "Extension to bipartite consensus",
                 "type": "refNode",
                 "lineCount": 1320,
                 "lineCountEnd": null
             },
             {
-                "name": "129",
+                "name": "469",
                 "createdAt": "Extension to bipartite consensus",
                 "type": "refNode",
                 "lineCount": 1324,
                 "lineCountEnd": null
             },
             {
-                "name": "130",
+                "name": "470",
                 "createdAt": "Extension to bipartite consensus",
                 "type": "refNode",
                 "lineCount": 1324,
@@ -2066,7 +2066,7 @@ function createLine(json) {
                 "lineCountEnd": 1349
             },
             {
-                "name": "131",
+                "name": "471",
                 "createdAt": "remark 6.6",
                 "type": "citeNode",
                 "lineCount": 1345,
@@ -2096,14 +2096,14 @@ function createLine(json) {
                 "lineCountEnd": 1364
             },
             {
-                "name": "132",
+                "name": "472",
                 "createdAt": "Extension to bipartite consensus",
                 "type": "refNode",
                 "lineCount": 1366,
                 "lineCountEnd": null
             },
             {
-                "name": "133",
+                "name": "473",
                 "createdAt": "Extension to bipartite consensus",
                 "type": "refNode",
                 "lineCount": 1366,
@@ -2133,28 +2133,28 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "134",
+                "name": "474",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1434,
                 "lineCountEnd": null
             },
             {
-                "name": "135",
+                "name": "475",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1437,
                 "lineCountEnd": null
             },
             {
-                "name": "136",
+                "name": "476",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1437,
                 "lineCountEnd": null
             },
             {
-                "name": "137",
+                "name": "477",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1442,
@@ -2168,56 +2168,56 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "138",
+                "name": "478",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1498,
                 "lineCountEnd": null
             },
             {
-                "name": "139",
+                "name": "479",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1499,
                 "lineCountEnd": null
             },
             {
-                "name": "140",
+                "name": "480",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1502,
                 "lineCountEnd": null
             },
             {
-                "name": "141",
+                "name": "481",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1512,
                 "lineCountEnd": null
             },
             {
-                "name": "142",
+                "name": "482",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1513,
                 "lineCountEnd": null
             },
             {
-                "name": "143",
+                "name": "483",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1514,
                 "lineCountEnd": null
             },
             {
-                "name": "144",
+                "name": "484",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1517,
                 "lineCountEnd": null
             },
             {
-                "name": "145",
+                "name": "485",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1517,
@@ -2231,84 +2231,84 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "146",
+                "name": "486",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1545,
                 "lineCountEnd": null
             },
             {
-                "name": "147",
+                "name": "487",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1559,
                 "lineCountEnd": null
             },
             {
-                "name": "148",
+                "name": "488",
                 "createdAt": "Time-invariant digraphs",
                 "type": "citeNode",
                 "lineCount": 1561,
                 "lineCountEnd": null
             },
             {
-                "name": "149",
+                "name": "489",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1578,
                 "lineCountEnd": null
             },
             {
-                "name": "150",
+                "name": "490",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1588,
                 "lineCountEnd": null
             },
             {
-                "name": "151",
+                "name": "491",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1591,
                 "lineCountEnd": null
             },
             {
-                "name": "152",
+                "name": "492",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1599,
                 "lineCountEnd": null
             },
             {
-                "name": "153",
+                "name": "493",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1601,
                 "lineCountEnd": null
             },
             {
-                "name": "154",
+                "name": "494",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1603,
                 "lineCountEnd": null
             },
             {
-                "name": "155",
+                "name": "495",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1610,
                 "lineCountEnd": null
             },
             {
-                "name": "156",
+                "name": "496",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1617,
                 "lineCountEnd": null
             },
             {
-                "name": "157",
+                "name": "497",
                 "createdAt": "Time-invariant digraphs",
                 "type": "refNode",
                 "lineCount": 1618,
@@ -2320,7 +2320,7 @@ function createLine(json) {
                 "createdAt": "DOCUMENT",
                 "type": "section",
                 "lineCount": 1626,
-                "lineCountEnd": null
+                "lineCountEnd": 2068
             },
             {
                 "name": "app:TV",
@@ -2330,35 +2330,35 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "158",
+                "name": "498",
                 "createdAt": "Time-varying digraphs",
                 "type": "refNode",
                 "lineCount": 1628,
                 "lineCountEnd": null
             },
             {
-                "name": "159",
+                "name": "499",
                 "createdAt": "Time-varying digraphs",
                 "type": "refNode",
                 "lineCount": 1645,
                 "lineCountEnd": null
             },
             {
-                "name": "160",
+                "name": "500",
                 "createdAt": "Time-varying digraphs",
                 "type": "citeNode",
                 "lineCount": 1647,
                 "lineCountEnd": null
             },
             {
-                "name": "161",
+                "name": "501",
                 "createdAt": "Time-varying digraphs",
                 "type": "refNode",
                 "lineCount": 1657,
                 "lineCountEnd": null
             },
             {
-                "name": "162",
+                "name": "502",
                 "createdAt": "Time-varying digraphs",
                 "type": "refNode",
                 "lineCount": 1658,
@@ -2372,14 +2372,14 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "163",
+                "name": "503",
                 "createdAt": "Time-varying digraphs",
                 "type": "refNode",
                 "lineCount": 1724,
                 "lineCountEnd": null
             },
             {
-                "name": "164",
+                "name": "504",
                 "createdAt": "Time-varying digraphs",
                 "type": "refNode",
                 "lineCount": 1739,
@@ -2393,42 +2393,42 @@ function createLine(json) {
                 "lineCountEnd": null
             },
             {
-                "name": "165",
+                "name": "505",
                 "createdAt": "Time-varying digraphs",
                 "type": "refNode",
                 "lineCount": 1756,
                 "lineCountEnd": null
             },
             {
-                "name": "166",
+                "name": "506",
                 "createdAt": "Time-varying digraphs",
                 "type": "refNode",
                 "lineCount": 1776,
                 "lineCountEnd": null
             },
             {
-                "name": "167",
+                "name": "507",
                 "createdAt": "Time-varying digraphs",
                 "type": "refNode",
                 "lineCount": 1781,
                 "lineCountEnd": null
             },
             {
-                "name": "168",
+                "name": "508",
                 "createdAt": "Time-varying digraphs",
                 "type": "refNode",
                 "lineCount": 1782,
                 "lineCountEnd": null
             },
             {
-                "name": "169",
+                "name": "509",
                 "createdAt": "Time-varying digraphs",
                 "type": "refNode",
                 "lineCount": 1794,
                 "lineCountEnd": null
             },
             {
-                "name": "170",
+                "name": "510",
                 "createdAt": "Time-varying digraphs",
                 "type": "refNode",
                 "lineCount": 1796,
@@ -3847,962 +3847,962 @@ function createLine(json) {
         ],
         "links": [
             {
-                "source": "1",
+                "source": "341",
                 "target": "Altafini2013Consensus",
                 "type": "cite"
             },
             {
-                "source": "1",
+                "source": "341",
                 "target": "shi2019dynamics",
                 "type": "cite"
             },
             {
-                "source": "2",
+                "source": "342",
                 "target": "Song2018Network",
                 "type": "cite"
             },
             {
-                "source": "2",
+                "source": "342",
                 "target": "9137633",
                 "type": "cite"
             },
             {
-                "source": "3",
+                "source": "343",
                 "target": "shi2019dynamics",
                 "type": "cite"
             },
             {
-                "source": "4",
+                "source": "344",
                 "target": "bronski2014spectral",
                 "type": "cite"
             },
             {
-                "source": "5",
+                "source": "345",
                 "target": "Zelazo2014Definitness",
                 "type": "cite"
             },
             {
-                "source": "5",
+                "source": "345",
                 "target": "Chen2016Definitness",
                 "type": "cite"
             },
             {
-                "source": "5",
+                "source": "345",
                 "target": "Zelazo17Robustness",
                 "type": "cite"
             },
             {
-                "source": "5",
+                "source": "345",
                 "target": "9137633",
                 "type": "cite"
             },
             {
-                "source": "6",
+                "source": "346",
                 "target": "Altafini2015Predictable",
                 "type": "cite"
             },
             {
-                "source": "6",
+                "source": "346",
                 "target": "altafini2019investigating",
                 "type": "cite"
             },
             {
-                "source": "6",
+                "source": "346",
                 "target": "shi2013agreement",
                 "type": "cite"
             },
             {
-                "source": "7",
+                "source": "347",
                 "target": "Proskurnikov2014Consensus",
                 "type": "cite"
             },
             {
-                "source": "7",
+                "source": "347",
                 "target": "Xia16Structural",
                 "type": "cite"
             },
             {
-                "source": "7",
+                "source": "347",
                 "target": "Liu2017Exponential",
                 "type": "cite"
             },
             {
-                "source": "7",
+                "source": "347",
                 "target": "meng2018uniform",
                 "type": "cite"
             },
             {
-                "source": "8",
+                "source": "348",
                 "target": "Jiang2019Output",
                 "type": "cite"
             },
             {
-                "source": "9",
+                "source": "349",
                 "target": "Blondel2005Convergence",
                 "type": "cite"
             },
             {
-                "source": "10",
+                "source": "350",
                 "target": "Proskurnikov2014Consensus",
                 "type": "cite"
             },
             {
-                "source": "10",
+                "source": "350",
                 "target": "Xia16Structural",
                 "type": "cite"
             },
             {
-                "source": "10",
+                "source": "350",
                 "target": "Liu2017Exponential",
                 "type": "cite"
             },
             {
-                "source": "11",
+                "source": "351",
                 "target": "liberzon2003switching",
                 "type": "cite"
             },
             {
-                "source": "11",
+                "source": "351",
                 "target": "lin2009stability",
                 "type": "cite"
             },
             {
-                "source": "12",
+                "source": "352",
                 "target": "Johnson2004Matrices",
                 "type": "cite"
             },
             {
-                "source": "12",
+                "source": "352",
                 "target": "Noutsos2006Perron",
                 "type": "cite"
             },
             {
-                "source": "12",
+                "source": "352",
                 "target": "Noutsos2008Rechability",
                 "type": "cite"
             },
             {
-                "source": "13",
+                "source": "353",
                 "target": "Altafini2015Predictable",
                 "type": "cite"
             },
             {
-                "source": "13",
+                "source": "353",
                 "target": "altafini2019investigating",
                 "type": "cite"
             },
             {
-                "source": "14",
+                "source": "354",
                 "target": "Altafini2016Minimal",
                 "type": "cite"
             },
             {
-                "source": "15",
+                "source": "355",
                 "target": "fontan2021properties",
                 "type": "cite"
             },
             {
-                "source": "16",
+                "source": "356",
                 "target": "altafini2019investigating",
                 "type": "cite"
             },
             {
-                "source": "16",
+                "source": "356",
                 "target": "Chen2016Definitness",
                 "type": "cite"
             },
             {
-                "source": "16",
+                "source": "356",
                 "target": "Chen2016Characterization",
                 "type": "cite"
             },
             {
-                "source": "16",
+                "source": "356",
                 "target": "Zelazo2014Definitness",
                 "type": "cite"
             },
             {
-                "source": "17",
+                "source": "357",
                 "target": "altafini2019investigating",
                 "type": "cite"
             },
             {
-                "source": "18",
+                "source": "358",
                 "target": "Chesi1",
                 "type": "cite"
             },
             {
-                "source": "19",
+                "source": "359",
                 "target": "Meng2017Stability",
                 "type": "cite"
             },
             {
-                "source": "19",
+                "source": "359",
                 "target": "Valcher2016Stability",
                 "type": "cite"
             },
             {
-                "source": "20",
+                "source": "360",
                 "target": "Eger2016Limits",
                 "type": "cite"
             },
             {
-                "source": "21",
+                "source": "361",
                 "target": "Formasini2011Stability",
                 "type": "cite"
             },
             {
-                "source": "21",
+                "source": "361",
                 "target": "Meng2017Stability",
                 "type": "cite"
             },
             {
-                "source": "21",
+                "source": "361",
                 "target": "ZHENG2018294",
                 "type": "cite"
             },
             {
-                "source": "22",
+                "source": "362",
                 "target": "Altafini2013Consensus",
                 "type": "cite"
             },
             {
-                "source": "23",
+                "source": "363",
                 "target": "Altafini2013Consensus",
                 "type": "cite"
             },
             {
-                "source": "24",
+                "source": "364",
                 "target": "sec:pre",
                 "type": "ref"
             },
             {
-                "source": "25",
+                "source": "365",
                 "target": "sec:TI",
                 "type": "ref"
             },
             {
-                "source": "26",
+                "source": "366",
                 "target": "sec:TV",
                 "type": "ref"
             },
             {
-                "source": "27",
+                "source": "367",
                 "target": "sec:CLF",
                 "type": "ref"
             },
             {
-                "source": "28",
+                "source": "368",
                 "target": "sec:bipartite",
                 "type": "ref"
             },
             {
-                "source": "29",
+                "source": "369",
                 "target": "altafini2019investigating",
                 "type": "cite"
             },
             {
-                "source": "30",
+                "source": "370",
                 "target": "Wang22Multiagent",
                 "type": "cite"
             },
             {
-                "source": "31",
+                "source": "371",
                 "target": "sec:TI",
                 "type": "ref"
             },
             {
-                "source": "32",
+                "source": "372",
                 "target": "altafini2019investigating",
                 "type": "cite"
             },
             {
-                "source": "33",
+                "source": "373",
                 "target": "sec:TV",
                 "type": "ref"
             },
             {
-                "source": "34",
+                "source": "374",
                 "target": "Wang22Multiagent",
                 "type": "cite"
             },
             {
-                "source": "35",
+                "source": "375",
                 "target": "sec:CLF",
                 "type": "ref"
             },
             {
-                "source": "36",
+                "source": "376",
                 "target": "sec:bipartite",
                 "type": "ref"
             },
             {
-                "source": "37",
+                "source": "377",
                 "target": "shi2019dynamics",
                 "type": "cite"
             },
             {
-                "source": "38",
+                "source": "378",
                 "target": "shi2019dynamics",
                 "type": "cite"
             },
             {
-                "source": "39",
+                "source": "379",
                 "target": "Altafini2013Consensus",
                 "type": "cite"
             },
             {
-                "source": "39",
+                "source": "379",
                 "target": "Belardo2014Balancedness",
                 "type": "cite"
             },
             {
-                "source": "39",
+                "source": "379",
                 "target": "Hou2003Laplacian",
                 "type": "cite"
             },
             {
-                "source": "40",
+                "source": "380",
                 "target": "Hershkowitz1985Lyapunov",
                 "type": "cite"
             },
             {
-                "source": "41",
+                "source": "381",
                 "target": "Meyer2000",
                 "type": "cite"
             },
             {
-                "source": "42",
+                "source": "382",
                 "target": "Olesky2009Mv-matrices",
                 "type": "cite"
             },
             {
-                "source": "43",
+                "source": "383",
                 "target": "Noutsos2006Perron",
                 "type": "cite"
             },
             {
-                "source": "44",
+                "source": "384",
                 "target": "Altafini2015Predictable",
                 "type": "cite"
             },
             {
-                "source": "45",
+                "source": "385",
                 "target": "Noutsos2008Rechability",
                 "type": "cite"
             },
             {
-                "source": "46",
+                "source": "386",
                 "target": "Noutsos2008Rechability",
                 "type": "cite"
             },
             {
-                "source": "47",
+                "source": "387",
                 "target": "Altafini2015Predictable",
                 "type": "cite"
             },
             {
-                "source": "48",
+                "source": "388",
                 "target": "thm:PFforEvPos",
                 "type": "ref"
             },
             {
-                "source": "49",
+                "source": "389",
                 "target": "def:pf",
                 "type": "ref"
             },
             {
-                "source": "50",
+                "source": "390",
                 "target": "Altafini2015Predictable",
                 "type": "cite"
             },
             {
-                "source": "51",
+                "source": "391",
                 "target": "app:TI",
                 "type": "ref"
             },
             {
-                "source": "52",
+                "source": "392",
                 "target": "prop:signed-prop",
                 "type": "ref"
             },
             {
-                "source": "53",
+                "source": "393",
                 "target": "prop:signed-prop",
                 "type": "ref"
             },
             {
-                "source": "54",
+                "source": "394",
                 "target": "app:TI",
                 "type": "ref"
             },
             {
-                "source": "55",
+                "source": "395",
                 "target": "Chen2016Definitness",
                 "type": "cite"
             },
             {
-                "source": "55",
+                "source": "395",
                 "target": "Chen2016Characterization",
                 "type": "cite"
             },
             {
-                "source": "55",
+                "source": "395",
                 "target": "Zelazo2014Definitness",
                 "type": "cite"
             },
             {
-                "source": "56",
+                "source": "396",
                 "target": "altafini2019investigating",
                 "type": "cite"
             },
             {
-                "source": "57",
+                "source": "397",
                 "target": "altafini2019investigating",
                 "type": "cite"
             },
             {
-                "source": "58",
+                "source": "398",
                 "target": "9137633",
                 "type": "cite"
             },
             {
-                "source": "59",
+                "source": "399",
                 "target": "app:TI",
                 "type": "ref"
             },
             {
-                "source": "60",
+                "source": "400",
                 "target": "thm:signed-digraph1",
                 "type": "ref"
             },
             {
-                "source": "61",
+                "source": "401",
                 "target": "app:TI",
                 "type": "ref"
             },
             {
-                "source": "62",
+                "source": "402",
                 "target": "altafini2019investigating",
                 "type": "cite"
             },
             {
-                "source": "63",
+                "source": "403",
                 "target": "cor:weight-bal1",
                 "type": "ref"
             },
             {
-                "source": "64",
+                "source": "404",
                 "target": "lem:psd-EP",
                 "type": "ref"
             },
             {
-                "source": "65",
+                "source": "405",
                 "target": "example:Ls_nonpsd",
                 "type": "ref"
             },
             {
-                "source": "66",
+                "source": "406",
                 "target": "example:Ls_nonpsd_posdiag",
                 "type": "ref"
             },
             {
-                "source": "67",
+                "source": "407",
                 "target": "ex:norm-not-nec",
                 "type": "ref"
             },
             {
-                "source": "68",
+                "source": "408",
                 "target": "app:TI",
                 "type": "ref"
             },
             {
-                "source": "69",
+                "source": "409",
                 "target": "thm:signed-digraph1",
                 "type": "ref"
             },
             {
-                "source": "70",
+                "source": "410",
                 "target": "cor:weight-bal1",
                 "type": "ref"
             },
             {
-                "source": "71",
+                "source": "411",
                 "target": "prop:signed-prop",
                 "type": "ref"
             },
             {
-                "source": "72",
+                "source": "412",
                 "target": "ex:corank2",
                 "type": "ref"
             },
             {
-                "source": "73",
+                "source": "413",
                 "target": "cor:weight-bal1",
                 "type": "ref"
             },
             {
-                "source": "74",
+                "source": "414",
                 "target": "app:TI",
                 "type": "ref"
             },
             {
-                "source": "75",
+                "source": "415",
                 "target": "ex:corank2",
                 "type": "ref"
             },
             {
-                "source": "76",
+                "source": "416",
                 "target": "app:TI",
                 "type": "ref"
             },
             {
-                "source": "77",
+                "source": "417",
                 "target": "ex:corank2",
                 "type": "ref"
             },
             {
-                "source": "78",
+                "source": "418",
                 "target": "ex:Wcorank2",
                 "type": "ref"
             },
             {
-                "source": "80",
+                "source": "420",
                 "target": "thm:signed-undirected-cont",
                 "type": "ref"
             },
             {
-                "source": "81",
+                "source": "421",
                 "target": "app:TI",
                 "type": "ref"
             },
             {
-                "source": "83",
+                "source": "423",
                 "target": "app:TI",
                 "type": "ref"
             },
             {
-                "source": "84",
+                "source": "424",
                 "target": "eq:ev-stoch-matrix",
                 "type": "ref"
             },
             {
-                "source": "85",
+                "source": "425",
                 "target": "app:TI",
                 "type": "ref"
             },
             {
-                "source": "86",
+                "source": "426",
                 "target": "lemma:irreducible",
                 "type": "ref"
             },
             {
-                "source": "88",
+                "source": "428",
                 "target": "lin2009stability",
                 "type": "cite"
             },
             {
-                "source": "89",
+                "source": "429",
                 "target": "def:cons",
                 "type": "ref"
             },
             {
-                "source": "90",
+                "source": "430",
                 "target": "le:nec",
                 "type": "ref"
             },
             {
-                "source": "91",
+                "source": "431",
                 "target": "cor:weight-bal1",
                 "type": "ref"
             },
             {
-                "source": "92",
+                "source": "432",
                 "target": "lemma:irreducible",
                 "type": "ref"
             },
             {
-                "source": "93",
+                "source": "433",
                 "target": "tem:nec",
                 "type": "ref"
             },
             {
-                "source": "94",
+                "source": "434",
                 "target": "ex:ce1",
                 "type": "ref"
             },
             {
-                "source": "95",
+                "source": "435",
                 "target": "cor:weight-bal1",
                 "type": "ref"
             },
             {
-                "source": "96",
+                "source": "436",
                 "target": "fig:1",
                 "type": "ref"
             },
             {
-                "source": "97",
+                "source": "437",
                 "target": "horn2012matrix",
                 "type": "cite"
             },
             {
-                "source": "98",
+                "source": "438",
                 "target": "app:TV",
                 "type": "ref"
             },
             {
-                "source": "99",
+                "source": "439",
                 "target": "th:form_c",
                 "type": "ref"
             },
             {
-                "source": "100",
+                "source": "440",
                 "target": "olfati2004consensus",
                 "type": "cite"
             },
             {
-                "source": "101",
+                "source": "441",
                 "target": "sec:CLF",
                 "type": "ref"
             },
             {
-                "source": "102",
+                "source": "442",
                 "target": "ex:ce1",
                 "type": "ref"
             },
             {
-                "source": "104",
+                "source": "444",
                 "target": "le:nec:DT",
                 "type": "ref"
             },
             {
-                "source": "105",
+                "source": "445",
                 "target": "eq:ev-stoch-matrix",
                 "type": "ref"
             },
             {
-                "source": "106",
+                "source": "446",
                 "target": "lem:nec:DT",
                 "type": "ref"
             },
             {
-                "source": "107",
+                "source": "447",
                 "target": "lem:irreduc_W_suff",
                 "type": "ref"
             },
             {
-                "source": "108",
+                "source": "448",
                 "target": "app:TV",
                 "type": "ref"
             },
             {
-                "source": "109",
+                "source": "449",
                 "target": "re:cons",
                 "type": "ref"
             },
             {
-                "source": "110",
+                "source": "450",
                 "target": "th:form_d",
                 "type": "ref"
             },
             {
-                "source": "111",
+                "source": "451",
                 "target": "wu2007synchronization",
                 "type": "cite"
             },
             {
-                "source": "112",
+                "source": "452",
                 "target": "ex:cout_ex_d1",
                 "type": "ref"
             },
             {
-                "source": "113",
+                "source": "453",
                 "target": "liberzon2003switching",
                 "type": "cite"
             },
             {
-                "source": "113",
+                "source": "453",
                 "target": "lin2009stability",
                 "type": "cite"
             },
             {
-                "source": "114",
+                "source": "454",
                 "target": "th:form_c",
                 "type": "ref"
             },
             {
-                "source": "115",
+                "source": "455",
                 "target": "th:form_d",
                 "type": "ref"
             },
             {
-                "source": "117",
+                "source": "457",
                 "target": "app:TV",
                 "type": "ref"
             },
             {
-                "source": "118",
+                "source": "458",
                 "target": "Chesi1",
                 "type": "cite"
             },
             {
-                "source": "119",
+                "source": "459",
                 "target": "Cla-HPCLF1",
                 "type": "cite"
             },
             {
-                "source": "120",
+                "source": "460",
                 "target": "th:CLF1",
                 "type": "ref"
             },
             {
-                "source": "121",
+                "source": "461",
                 "target": "Dayawansa1",
                 "type": "cite"
             },
             {
-                "source": "122",
+                "source": "462",
                 "target": "app:TV",
                 "type": "ref"
             },
             {
-                "source": "123",
+                "source": "463",
                 "target": "cor:CLF2",
                 "type": "ref"
             },
             {
-                "source": "124",
+                "source": "464",
                 "target": "Theys2005",
                 "type": "cite"
             },
             {
-                "source": "125",
+                "source": "465",
                 "target": "Altafini2013Consensus",
                 "type": "cite"
             },
             {
-                "source": "126",
+                "source": "466",
                 "target": "Altafini2013Consensus",
                 "type": "cite"
             },
             {
-                "source": "127",
+                "source": "467",
                 "target": "prop:signed-prop",
                 "type": "ref"
             },
             {
-                "source": "128",
+                "source": "468",
                 "target": "app:TV",
                 "type": "ref"
             },
             {
-                "source": "129",
+                "source": "469",
                 "target": "thm:signed-digraph1",
                 "type": "ref"
             },
             {
-                "source": "130",
+                "source": "470",
                 "target": "cor:weight-bal1",
                 "type": "ref"
             },
             {
-                "source": "131",
+                "source": "471",
                 "target": "Altafini2013Consensus",
                 "type": "cite"
             },
             {
-                "source": "132",
+                "source": "472",
                 "target": "sec:CLF",
                 "type": "ref"
             },
             {
-                "source": "133",
+                "source": "473",
                 "target": "sec:bipartite",
                 "type": "ref"
             },
             {
-                "source": "134",
+                "source": "474",
                 "target": "prop:signed-prop",
                 "type": "ref"
             },
             {
-                "source": "135",
+                "source": "475",
                 "target": "ex:corank2",
                 "type": "ref"
             },
             {
-                "source": "136",
+                "source": "476",
                 "target": "example-PF-notPF_unstable",
                 "type": "ref"
             },
             {
-                "source": "137",
+                "source": "477",
                 "target": "le:nec",
                 "type": "ref"
             },
             {
-                "source": "138",
+                "source": "478",
                 "target": "thm:signed-digraph1",
                 "type": "ref"
             },
             {
-                "source": "139",
+                "source": "479",
                 "target": "lemma:ev_exp_pos",
                 "type": "ref"
             },
             {
-                "source": "140",
+                "source": "480",
                 "target": "lemma:no_two_pos-eig",
                 "type": "ref"
             },
             {
-                "source": "141",
+                "source": "481",
                 "target": "cor:weight-bal1",
                 "type": "ref"
             },
             {
-                "source": "142",
+                "source": "482",
                 "target": "thm:signed-digraph1",
                 "type": "ref"
             },
             {
-                "source": "143",
+                "source": "483",
                 "target": "thm:signed-digraph1",
                 "type": "ref"
             },
             {
-                "source": "144",
+                "source": "484",
                 "target": "thm:PFforEvPos",
                 "type": "ref"
             },
             {
-                "source": "145",
+                "source": "485",
                 "target": "lemma:ev_exp_pos",
                 "type": "ref"
             },
             {
-                "source": "146",
+                "source": "486",
                 "target": "lem:psd-EP",
                 "type": "ref"
             },
             {
-                "source": "147",
+                "source": "487",
                 "target": "lemma:irreducible",
                 "type": "ref"
             },
             {
-                "source": "148",
+                "source": "488",
                 "target": "Bullo-Lectures",
                 "type": "cite"
             },
             {
-                "source": "149",
+                "source": "489",
                 "target": "lemma:ev_exp_pos",
                 "type": "ref"
             },
             {
-                "source": "150",
+                "source": "490",
                 "target": "le:nec:DT",
                 "type": "ref"
             },
             {
-                "source": "151",
+                "source": "491",
                 "target": "le:nec",
                 "type": "ref"
             },
             {
-                "source": "152",
+                "source": "492",
                 "target": "thm:symm-sign",
                 "type": "ref"
             },
             {
-                "source": "153",
+                "source": "493",
                 "target": "thm:PFforEvPos",
                 "type": "ref"
             },
             {
-                "source": "154",
+                "source": "494",
                 "target": "lemma:no_two_pos-eig",
                 "type": "ref"
             },
             {
-                "source": "155",
+                "source": "495",
                 "target": "eq:ev-stoch-matrix",
                 "type": "ref"
             },
             {
-                "source": "156",
+                "source": "496",
                 "target": "cor:weight-bal-DT",
                 "type": "ref"
             },
             {
-                "source": "157",
+                "source": "497",
                 "target": "eq:ev-stoch-matrix",
                 "type": "ref"
             },
             {
-                "source": "158",
+                "source": "498",
                 "target": "th:form_c",
                 "type": "ref"
             },
             {
-                "source": "159",
+                "source": "499",
                 "target": "cor:weight-bal1",
                 "type": "ref"
             },
             {
-                "source": "160",
+                "source": "500",
                 "target": "horn2012matrix",
                 "type": "cite"
             },
             {
-                "source": "161",
+                "source": "501",
                 "target": "th:form_d",
                 "type": "ref"
             },
             {
-                "source": "162",
+                "source": "502",
                 "target": "th:form_c",
                 "type": "ref"
             },
             {
-                "source": "163",
+                "source": "503",
                 "target": "cor:weight-bal-DT",
                 "type": "ref"
             },
             {
-                "source": "164",
+                "source": "504",
                 "target": "th:CLF1",
                 "type": "ref"
             },
             {
-                "source": "165",
+                "source": "505",
                 "target": "cor:weight-bal1",
                 "type": "ref"
             },
             {
-                "source": "166",
+                "source": "506",
                 "target": "th:form_c",
                 "type": "ref"
             },
             {
-                "source": "167",
+                "source": "507",
                 "target": "th:CLF-DT1",
                 "type": "ref"
             },
             {
-                "source": "168",
+                "source": "508",
                 "target": "cor:weight-bal-DT",
                 "type": "ref"
             },
             {
-                "source": "169",
+                "source": "509",
                 "target": "prop:bip",
                 "type": "ref"
             },
             {
-                "source": "170",
+                "source": "510",
                 "target": "le:nec",
                 "type": "ref"
             }
@@ -4927,11 +4927,13 @@ const graphWidth = width * 2;
 const xaxisHeight = 100;
 const defaultNodeY = xaxisHeight + 20;
 const defaultPaperY = 20;
+const defaultEnvY = xaxisHeight;
 const nodeColor = "gray"
 const envColor = "purple"
 const sectionColor = "red"
 const defaultNodeRadius = 5;
-const envRectHeight = 50;
+const envRectHeight = 100;
+const defaultSectionRectHeight = envRectHeight + 50
 
 
 function lineGraph(nodes, links, envs) {
@@ -5102,7 +5104,7 @@ function lineGraph(nodes, links, envs) {
     var svgSectionLine = svgSection.append('g')
         .append('rect')
         .attr('width', node => getLineCountDiff(node, xAxisScale))
-        .attr('height', 100)
+        .attr('height', node => sectionRectHeight(node))
         .attr('fill', "red")
         .attr('fill-opacity', "0.3")
         .attr('x', node => getlineCount(node, xAxisScale))
@@ -5119,7 +5121,12 @@ function lineGraph(nodes, links, envs) {
     var envRect = svgEnvs
         .append('rect')
         .attr('width', node => getLineCountDiff(node, xAxisScale))
-        .attr('height', envRectHeight)
+        .attr('height', node => {
+
+            let numberOfSub = subCount(nodeDict[node.createdAt].type);
+
+            return envRectHeight - (10 * numberOfSub);
+        })
         .attr('fill', envColor)
         .attr('fill-opacity', "0.7")
         .attr('x', node => getlineCount(node, xAxisScale))
@@ -5170,7 +5177,7 @@ function lineGraph(nodes, links, envs) {
 
 
 
-    var links = svg
+    var svgLinks = svg
         .selectAll('mylinks')
         .data(links)
         .enter()
@@ -5215,6 +5222,7 @@ function lineGraph(nodes, links, envs) {
             let firstSourceNode = linkDict[node.name];
             //console.log("Target node: " + node.name);
             if (firstSourceNode) {
+                console.log("name: " + firstSourceNode)
                 let newLineCount = nodeDict[firstSourceNode].lineCount;
                 nodeDict[node.name].lineCount = newLineCount;
                 return scale(newLineCount);
@@ -5243,7 +5251,10 @@ function lineGraph(nodes, links, envs) {
         gX.call(xAxis.scale(new_xScale));
 
         nodeCircles.attr("cx", node => getlineCount(node, new_xScale));
-        links.attr("d", link => createArc(link, new_xScale))
+
+        svgLinks
+            .attr("d", link => createArc(link, new_xScale))
+            .attr("stroke-opacity", link => visibleLinks(link, new_xScale));
 
         svgSectionLine
             .attr('width', node => getLineCountDiff(node, new_xScale))
@@ -5274,6 +5285,88 @@ function lineGraph(nodes, links, envs) {
     svgCanvas.call(zoom);
     // start scale zoom: 
     zoom.scaleTo(svgCanvas, 1);
+
+
+    function selectNode(node, selected) {
+
+
+        svgLinks
+            .attr("stroke", link => {
+
+                if (link.source == selected.name) {
+                    return "#65FF00";
+                }
+                else {
+                    return getLinkColour(link);
+                }
+            })
+            .attr("stroke-opacity", link => {
+
+                if (link.source == selected.name) {
+                    return 1;
+                }
+                else {
+                    return 0.1;
+                }
+            })
+
+
+        if (node.name == selected.name) {
+            return "#65FF00";
+        }
+        else {
+
+            return selected.color;
+
+        }
+
+    }
+
+
+}
+
+function sectionRectHeight(node) {
+
+    const regex = /sub/gm;
+    let numberOfSub = subCount(node.type);
+
+    let newHeight = defaultSectionRectHeight - (numberOfSub * 20);
+    if (newHeight <= 20) {
+        return 20;
+    }
+
+    return newHeight;
+
+
+}
+
+function subCount(type) {
+
+    const regex = /sub/gm;
+    return ((type || '').match(regex) || []).length;
+
+}
+
+function visibleLinks(link, scale) {
+
+    let sourceNode = nodeDict[link.source];
+    let targetNode = nodeDict[link.target];
+
+    let sx = scale(sourceNode.lineCount);
+    let tx = scale(targetNode.lineCount);
+
+    let sourceOutside= (sx < 0 || sx > width)
+    let targetOutside = (tx < 0 || tx > width)
+
+
+
+    if (sourceOutside && targetOutside ) {
+        return 0;
+    } else if ((sourceOutside && !targetOutside) || (targetOutside && !sourceOutside)) {
+        return 0.5;
+    }else {
+        return 1;
+    }
 
 
 }
@@ -5334,18 +5427,7 @@ function getNodeY(node) {
     return defaultNodeY;
 }
 
-function selectNode(node, selected) {
 
-    if (node.name == selected.name) {
-        return "green";
-    }
-    else {
-
-        return selected.color;
-
-    }
-
-}
 
 function showName(node, selected) {
     if (node.name == selected.name) {
@@ -5358,19 +5440,12 @@ function showName(node, selected) {
 }
 
 function getLineCountDiff(node, scale) {
-    //console.log("lineCount: " + node.lineCount)
-    //console.log("lineCountEnd: " + node.lineCountEnd)
-    console.log("END " + node.lineCountEnd)
-    console.log("START " + node.lineCount)
-    if (node.lineCountEnd == null) {
-        console.log(node.name)
-        console.log(node.createdAt)
-    }
+   
     return (scale(node.lineCountEnd) - scale(node.lineCount));
 }
 
 function getEnvNodeY(node) {
-    return defaultNodeY - (envRectHeight/2);
+    return defaultEnvY;
 }
 
 function getRadiusNode(node) {

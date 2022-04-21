@@ -215,13 +215,14 @@ namespace Hermes.Website.Controllers
 
                 Console.WriteLine("HALLO _-------_______---_-_--_: ");
                 string pdfDir = environment.ContentRootPath + "/papers/pdfs/" + guid + "/";
-
+                Console.WriteLine("guid: " + guid);
                 var pdfPath = Directory.GetFiles(pdfDir, "*.pdf", SearchOption.TopDirectoryOnly)[0];
                 Console.WriteLine("pdfPath: " + pdfPath);
                 FileStream pdf = new FileStream(pdfPath, FileMode.Open);
                 return new FileStreamResult(pdf, "application/pdf");
             } catch (Exception e)
             {
+                Console.WriteLine( e.StackTrace);
                 return BadRequest();
             }
         }

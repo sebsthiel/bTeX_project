@@ -85,7 +85,7 @@ async function uploadFile() {
         let json = await getJson(guid);
 
 
-        //document.getElementById("outputPdf").src = pdf;
+        document.getElementById("outputPdf").src = pdf;
 
 
         // Load json into d3 graph

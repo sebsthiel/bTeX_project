@@ -23,5 +23,11 @@ namespace Hermes.Website.Models
 
         }
 
+        public static void resetIDs()
+        {
+            ID = 0;
+            ids = new List<long>();
+        }
+
     }
 }

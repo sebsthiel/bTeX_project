@@ -16,6 +16,8 @@ namespace Hermes.Website.Services
             WebHostEnvironment = webHostEnvironment;
             outerEnv = "DOCUMENT"; //ID_Generator.GenerateID();
             createdAt = outerEnv;
+
+            ID_Generator.resetIDs();
         }
 
         public IWebHostEnvironment WebHostEnvironment { get; }
@@ -261,9 +263,10 @@ namespace Hermes.Website.Services
                     }
                     //Console.WriteLine("Adding ref: " + groups["typeName"].Value);
                     var nodeId = ID_Generator.GenerateID().ToString();
-                    Node node = new Node(nodeId, createdAt, "refNode", lineCount);
-                    nodeDict.Add(nodeId, node);
-                    Link link = new Link(nodeId, typeNameWithoutRefs, "ref");
+                    var nodeName = "ref to " + typeNameWithoutRefs + " :id:" + nodeId;
+                    Node node = new Node(nodeName, createdAt, "refNode", lineCount);
+                    nodeDict.Add(nodeName, node);
+                    Link link = new Link(nodeName, typeNameWithoutRefs, "ref");
                     linksList.Add(link);
 
                     if (remainingString != "")
@@ -275,13 +278,15 @@ namespace Hermes.Website.Services
 
                     var tmps = typeNameWithoutRefs.Split(',');
                     var nodeId = ID_Generator.GenerateID().ToString();
-                    Node node = new Node(nodeId, createdAt, "citeNode", lineCount);
+                    var nodeName = "citation to " + typeNameWithoutRefs + " :id:" + nodeId;
+                    Node node = new Node(nodeName, createdAt, "citeNode", lineCount);
+
                     nodeDict.Add(nodeId, node);
                     foreach (string citation in tmps)
                     {
                         
                         
-                        Link link = new Link(nodeId, citation.Trim(), "cite");
+                        Link link = new Link(nodeName, citation.Trim(), "cite");
                         linksList.Add(link);
 
                     }
