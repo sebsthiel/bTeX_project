@@ -4,6 +4,61 @@
     ViewData["Title"] = "View Page";
 }
 
+<style>
+    .label {
+        font-size: 13px;
+        font-weight: bold;
+        fill: black;
+        /*text-anchor: middle;*/
+        /* Not selcect text */
+        pointer-events: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .title {
+        font-size: 15px;
+        font-weight: bold;
+        fill: black;
+        /* Not selcect text */
+        pointer-events: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .backgroundColor {
+        fill: white;
+        /* Not selcect text */
+        pointer-events: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .link {
+        /* Not selcect text */
+        pointer-events: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+</style>
+
+
 <body>
 
     <div class="topnav">
@@ -25,7 +80,7 @@
         </div>
 
         <div class="split graph">
-            <div class="centered" id="d3graph">
+            <div id="d3graph">
                 <!--<h1>*GRAPH*</h1>-->
 
             </div>
@@ -103,7 +158,7 @@
 
     /* Control the right side */
     .graph {
-        right: 0;
+        left: 50%;
     }
 
     /* If you want the content centered horizontally and vertically */
@@ -115,11 +170,15 @@
         text-align: center;
     }
 
-    /* Style the image inside the centered container, if needed */
-    .centered img {
-        width: 150px;
-        border-radius: 50%;
+        /* Style the image inside the centered container, if needed */
+        .centered img {
+            width: 150px;
+            border-radius: 50%;
+        }
+    #d3graph{
+        left:0;
     }
+    
 </style>
 
 <script src="~/js/fileUpload.js"></script>

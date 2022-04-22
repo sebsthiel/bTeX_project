@@ -4940,6 +4940,9 @@ const envTextY = xaxisHeight - 10;
 const ShowPaperNodes = false;
 
 
+const zoomThreshold = 20;
+
+
 var currentSelectedNode = null;
 
 
@@ -5302,14 +5305,28 @@ function lineGraph(nodes, links, envs) {
         .attr("dx", node => xAxisScale(node.lineCount))
         .attr("dy", node => nodeDict[node.name].y - 8)
         .attr("visibility", "hidden")
-        .text(node => node.name).call(getBB);
+        .text(function (node) {
+            if (node.type == "paper") {
+                if (node.title) {
+                    return node.title;
+                }
+                else {
+                    return node.name
+                }
+                   
+            } else {
+                return node.name;
+            }
+
+
+        }).call(getBB);
 
     var textBackground = textDiv.insert("rect", "text")
         .attr("class", "backgroundColor")
         .attr("width", function (d) { return d.bbox.width })
         .attr("height", function (d) { return d.bbox.height + 4 })
         .attr("x", node => xAxisScale(node.lineCount))
-        .attr("y", node => (nodeDict[node.name].y - 8) - node.bbox.height - 2)
+        .attr("y", node => (nodeDict[node.name].y - 8) - node.bbox.height)
         .attr("visibility", "hidden")
 
     function getBB(selection) {
@@ -5378,6 +5395,17 @@ function lineGraph(nodes, links, envs) {
         textSection.attr("dx", node => new_xScale(node.lineCount));
 
         textBackground.attr("x", node => new_xScale(node.lineCount))
+
+        console.log("TRANSFORM K: " + d3.event.transform.k);
+
+        if (d3.event.transform.k > zoomThreshold) {
+            textElements.attr("visibility", "visible");
+            textBackground.attr("visibility", "visible");
+        } else {
+
+            textElements.attr("visibility", function (node) { return showName(node, currentSelectedNode) });
+            textBackground.attr("visibility", function (node) { return showName(node, currentSelectedNode) });
+        }
         
     }
 
@@ -5556,6 +5584,9 @@ function getNodeY(node) {
 
 
 function showName(node, selected) {
+    if (selected == null) {
+        return "hidden";
+    }
     if (node.name == selected.name) {
         return "visible";
     }
