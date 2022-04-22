@@ -5055,13 +5055,23 @@ function lineGraph(nodes, links, envs) {
         .domain([0, maxLineCount])
         .range([0, width]);
 
+    var currentScale = xAxisScale;
+
     // select the svg for creating the graph
     // and configure the width and height
 
     var svgCanvas = d3.select("#d3graph")
                 .append("svg")
                 .attr("width", width)
-                .attr("height", height);
+        .attr("height", height);
+
+    var graphBackground = svgCanvas.append('rect')
+        .attr("class", "graphRect")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("x", 0)
+        .attr("y", 0)
+        .style("fill", "white");
 
     // main image of graph 
     var svg = svgCanvas.append("g").attr("id", "graph");
@@ -5223,7 +5233,7 @@ function lineGraph(nodes, links, envs) {
     });
 
     svgSectionLine.on("click", function (selected) {
-
+        console.log("OH NO! ")
         textSection.attr("visibility", function (node) { return showName(node, selected) });
         svgSectionLine.attr("fill", function (node) { return selectNode(node, selected) });
         textBackground.attr("visibility", function (node) { return showName(node, selected) });
@@ -5247,6 +5257,25 @@ function lineGraph(nodes, links, envs) {
     });
 
 
+    graphBackground.on("click", function (selected) {
+      
+        currentSelectedNode = null;
+
+        svgLinks
+            .attr("stroke", getLinkColour)
+            .attr("stroke-opacity", link => visibleLinks(link, currentScale));
+
+        
+
+        textEnvNode.attr("visibility", "hidden");
+        envRect.attr("fill", envColor);
+        textBackground.attr("visibility", "hidden" );
+
+        textSection.attr("visibility", "hidden");
+        svgSectionLine.attr("fill", sectionColor);
+        textElements.attr("visibility", "hidden");
+        nodeCircles.attr("fill", nodeColor);
+    });
 
     
 
@@ -5322,7 +5351,10 @@ function lineGraph(nodes, links, envs) {
         // update axes
         gX.call(xAxis.scale(new_xScale));
 
+        currentScale = new_xScale;
+
         nodeCircles.attr("cx", node => getlineCount(node, new_xScale));
+
 
         svgLinks
             .attr("d", link => createArc(link, new_xScale))
