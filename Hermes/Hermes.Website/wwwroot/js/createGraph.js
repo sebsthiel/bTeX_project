@@ -5213,7 +5213,7 @@ function lineGraph(nodes, links, envs) {
 
         textEnvNode.attr("visibility", function (node) { return showName(node, selected) });
         envRect.attr("fill", function (node) { return selectNode(node, selected) });
-
+        textBackground.attr("visibility", function (node) { return showName(node, selected) });
 
         textSection.attr("visibility", "hidden");
         svgSectionLine.attr("fill", sectionColor);
@@ -5226,6 +5226,7 @@ function lineGraph(nodes, links, envs) {
 
         textSection.attr("visibility", function (node) { return showName(node, selected) });
         svgSectionLine.attr("fill", function (node) { return selectNode(node, selected) });
+        textBackground.attr("visibility", function (node) { return showName(node, selected) });
 
         textEnvNode.attr("visibility", "hidden");
         envRect.attr("fill", envColor);
