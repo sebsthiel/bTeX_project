@@ -4925,15 +4925,22 @@ const width = window.innerWidth;//600;
 const height = 600;
 const graphWidth = width * 2;
 const xaxisHeight = 100;
-const defaultNodeY = xaxisHeight + 20;
+const defaultNodeY = xaxisHeight + 50;
 const defaultPaperY = 20;
 const defaultEnvY = xaxisHeight;
 const nodeColor = "gray"
 const envColor = "purple"
 const sectionColor = "red"
-const defaultNodeRadius = 5;
-const envRectHeight = 100;
+const defaultNodeRadius = 6;
+const envRectHeight = 200;
 const defaultSectionRectHeight = envRectHeight + 50
+
+const sectionTextY = xaxisHeight + defaultSectionRectHeight + 15;
+const envTextY = xaxisHeight - 10;
+const ShowPaperNodes = false;
+
+
+var currentSelectedNode = null;
 
 
 function lineGraph(nodes, links, envs) {
@@ -4948,16 +4955,27 @@ function lineGraph(nodes, links, envs) {
     // create dict of nodes for lookup later  
     let preSectionName;
     let preSubSect;
+
+
+    // TODO COMBINE TO ONE LOOB
     allNodes.forEach(node => {
         nodeDict[node.name] = node;
         nodeDict[node.name].radius = defaultNodeRadius;
-        nodeDict[node.name].y = 1;
-        if (node.type == "section") {
-            nodeDict[node.name].color = sectionColor;
+
+        if (node.type == "paper") {
+            nodeDict[node.name].y = defaultPaperY;
+        } else {
+            nodeDict[node.name].y = defaultNodeY;
         }
+        
+        if (node.type.includes("section")) {
+            nodeDict[node.name].color = sectionColor;
+        } else {
+            nodeDict[node.name].color = nodeColor;
+        }
+    
 
-
-        nodeDict[node.name].color = nodeColor;
+        
 
     })
 
@@ -4981,19 +4999,19 @@ function lineGraph(nodes, links, envs) {
 
     
     var bestLineCount = 0;
-    
+    var prevNode = null;
+    var threshold = 50
 
-    // filter for sections and other nodes
+    // filter for sections and other nodes  
     allNodes.forEach(node => {
         if (node.type in envDict && !node.type.includes("section")) {
-            console.log("WUHU " + node.name + "\n " + node.type + "\n" + node.lineCountEnd + "\n" + node.lineCount);
+           
             envNodes.push(node);
             nodeDict[node.name].color = envColor;
         }
         // TODO subsection 
         else if (node.type == "section" || node.type.includes("subsection")) {
-            console.log("section " + node.name);
-            console.log("sectionTYPE " + node.type);
+           
             sectionNodes.push(node);
         }
         else if (node.type == "paper") {
@@ -5007,6 +5025,24 @@ function lineGraph(nodes, links, envs) {
         if (bestLineCount < node.lineCountEnd) {
             bestLineCount = node.lineCountEnd;
         }
+
+        if (!node.type.includes("section")) {
+            if (prevNode != null) {
+                if (prevNode.y == defaultNodeY && (node.lineCount - prevNode.lineCount) <= threshold) {
+                    node.y = defaultNodeY + getRandomInt(10,30);
+                    prevNode = node;
+                } else {
+                    prevNode = node;
+                }
+
+            }
+            else {
+                prevNode = node;
+            }
+            
+
+        }
+       
 
 
     });
@@ -5062,7 +5098,7 @@ function lineGraph(nodes, links, envs) {
         .append("marker")
         .attr("id", "betterArrow")
         .attr("viewBox", "0 -5 10 10")
-        .attr("refX", 0)
+        .attr("refX", 3)
         .attr("refY", 0)
         .attr("markerWidth", 12)
         .attr("markerHeight", 12)
@@ -5133,11 +5169,7 @@ function lineGraph(nodes, links, envs) {
         .attr('y', getEnvNodeY);
 
 
-    envRect.on("click", function (selected) {
-
-        textEnvNode.attr("visibility", function (node) { return showName(node, selected) });
-        envRect.attr("fill", function (node) { return selectNode(node, selected) });
-    });
+    
 
         //svgSection.append('g').append('line')
         //.attr('stroke-width', 2)
@@ -5147,13 +5179,7 @@ function lineGraph(nodes, links, envs) {
         //.attr("x2", node => getlineCount(node, xAxisScale))
         //.attr("y2", height+ 1000)
 
-    svgSectionLine.on("click", function (selected) {
-
-        console.log(selected);
-
-        textSection.attr("visibility", function (node) { return showName(node, selected) });
-        
-    });
+    
 
 
     var svgNodes = svg
@@ -5161,59 +5187,104 @@ function lineGraph(nodes, links, envs) {
         .data(normalNodes.concat(paperNodes))
         .enter();
 
+    
+
     var nodeCircles = svgNodes.append('circle')
         .attr('r', getRadiusNode)
         .attr('fill', "gray")
         .attr('cx', node => getlineCount(node, xAxisScale))
         .attr('cy', getNodeY);
 
-
-
-    nodeCircles.on("click", function (selected) {
-
-        textElements.attr("visibility", function (node) { return showName(node, selected) });
-        nodeCircles.attr("fill", function (node) { return selectNode(node, selected) });
-    });
-
-
-
     var svgLinks = svg
         .selectAll('mylinks')
         .data(links)
         .enter()
         .append('path')
+        .attr("class", "link")
         .attr('d', link => createArc(link, xAxisScale)/*createArc(link, xAxisScale)*/)
         .attr("stroke", getLinkColour)
         .attr('stroke-width', 2)
         .style("fill", "none")
         .attr("marker-end", "url(#betterArrow)");
 
+    var textDiv = svgNodes.append('g');
+
+    envRect.on("click", function (selected) {
+
+        textEnvNode.attr("visibility", function (node) { return showName(node, selected) });
+        envRect.attr("fill", function (node) { return selectNode(node, selected) });
+
+
+        textSection.attr("visibility", "hidden");
+        svgSectionLine.attr("fill", sectionColor);
+        textElements.attr("visibility", "hidden");
+        nodeCircles.attr("fill", nodeColor);
+
+    });
+
+    svgSectionLine.on("click", function (selected) {
+
+        textSection.attr("visibility", function (node) { return showName(node, selected) });
+        svgSectionLine.attr("fill", function (node) { return selectNode(node, selected) });
+
+        textEnvNode.attr("visibility", "hidden");
+        envRect.attr("fill", envColor);
+        textElements.attr("visibility", "hidden");
+        nodeCircles.attr("fill", nodeColor);
+    });
+
+    nodeCircles.on("click", function (selected) {
+
+        textElements.attr("visibility", function (node) { return showName(node, selected) });
+        nodeCircles.attr("fill", function (node) { return selectNode(node, selected) });
+        textBackground.attr("visibility", function (node) { return showName(node, selected) });
+
+        textEnvNode.attr("visibility", "hidden");
+        envRect.attr("fill", envColor);
+        textSection.attr("visibility", "hidden");
+        svgSectionLine.attr("fill", sectionColor);
+    });
+
+
+
+    
+
     var textSection = svgSection
         .append('text')
         .text(node => node.name)
-        .attr('font-size', 15)
+        .attr("class", "title")
         .attr("dx", node => getlineCount(node, xAxisScale))
-        .attr("dy", xaxisHeight)
+        .attr("dy", sectionTextY)
         .attr("visibility", "hidden");
 
     var textEnvNode = svgEnvs
         .append('text')
         .text(node => node.name)
-        .attr('font-size', 15)
+        .attr("class", "label")
         .attr("dx", node => xAxisScale(node.lineCount))
-        .attr("dy", getEnvNodeY)
+        .attr("dy", envTextY)
         .attr("visibility", "hidden");
 
-    var textElements = svgNodes
+    
+    var textElements = textDiv
         .append('text')
-        .text(node => node.name)
-        .attr('font-size', 15)
+        .attr("class", "label")
         .attr("dx", node => xAxisScale(node.lineCount))
-        .attr("dy", node => nodeDict[node.name].y)
-        .attr("visibility", "hidden");
+        .attr("dy", node => nodeDict[node.name].y - 8)
+        .attr("visibility", "hidden")
+        .text(node => node.name).call(getBB);
 
+    var textBackground = textDiv.insert("rect", "text")
+        .attr("class", "backgroundColor")
+        .attr("width", function (d) { return d.bbox.width })
+        .attr("height", function (d) { return d.bbox.height + 4 })
+        .attr("x", node => xAxisScale(node.lineCount))
+        .attr("y", node => (nodeDict[node.name].y - 8) - node.bbox.height - 2)
+        .attr("visibility", "hidden")
 
-
+    function getBB(selection) {
+        selection.each(function (d) { d.bbox = this.getBBox(); })
+    }
     
 
     function getlineCount(node, scale) {
@@ -5222,7 +5293,7 @@ function lineGraph(nodes, links, envs) {
             let firstSourceNode = linkDict[node.name];
             //console.log("Target node: " + node.name);
             if (firstSourceNode) {
-                console.log("name: " + firstSourceNode)
+               
                 let newLineCount = nodeDict[firstSourceNode].lineCount;
                 nodeDict[node.name].lineCount = newLineCount;
                 return scale(newLineCount);
@@ -5233,7 +5304,7 @@ function lineGraph(nodes, links, envs) {
            
         }
         if (node.name == "Consensus on time-invariant signed digraphs") {
-            console.log("NEW COUNTX: " + scale(node.lineCount))
+            
         }
            
         return scale(node.lineCount);
@@ -5245,7 +5316,7 @@ function lineGraph(nodes, links, envs) {
 
        
         let new_xScale = d3.event.transform.rescaleX(xAxisScale)
-        console.log(d3.event.transform)
+       
 
         // update axes
         gX.call(xAxis.scale(new_xScale));
@@ -5272,13 +5343,15 @@ function lineGraph(nodes, links, envs) {
         textElements.attr("dx", node => new_xScale(node.lineCount));
         textEnvNode.attr("dx", node => new_xScale(node.lineCount));
         textSection.attr("dx", node => new_xScale(node.lineCount));
+
+        textBackground.attr("x", node => new_xScale(node.lineCount))
         
     }
 
     let zoom = d3.zoom()
-        //.scaleExtent([0.5, 5])
-        //.translateExtent([[-10, 0], [width, 0]])
+        .translateExtent([[0, 0], [width, 0]])
         .extent([[0, 0], [(0), 0]])
+        .scaleExtent([1, 100])
         .on('zoom', handleZoom);
 
 
@@ -5289,11 +5362,14 @@ function lineGraph(nodes, links, envs) {
 
     function selectNode(node, selected) {
 
+        currentSelectedNode = selected;
 
         svgLinks
             .attr("stroke", link => {
 
                 if (link.source == selected.name) {
+                    return "#65FF00";
+                } else if (link.target == selected.name) {
                     return "#65FF00";
                 }
                 else {
@@ -5305,10 +5381,13 @@ function lineGraph(nodes, links, envs) {
                 if (link.source == selected.name) {
                     return 1;
                 }
+                else if (link.target == selected.name) {
+                    return 1;
+                }
                 else {
                     return 0.1;
                 }
-            })
+            });
 
 
         if (node.name == selected.name) {
@@ -5355,17 +5434,25 @@ function visibleLinks(link, scale) {
     let sx = scale(sourceNode.lineCount);
     let tx = scale(targetNode.lineCount);
 
-    let sourceOutside= (sx < 0 || sx > width)
+    let sourceOutside = (sx < 0 || sx > width)
     let targetOutside = (tx < 0 || tx > width)
 
+    
+    if (currentSelectedNode != null && (link.target == currentSelectedNode.name || link.source == currentSelectedNode.name)) {
+        return 1
+    }
 
-
-    if (sourceOutside && targetOutside ) {
+    if (sourceOutside && targetOutside) {
         return 0;
     } else if ((sourceOutside && !targetOutside) || (targetOutside && !sourceOutside)) {
-        return 0.5;
-    }else {
-        return 1;
+        return 0.05;
+    } else {
+        if (currentSelectedNode != null) {
+            return 0.1;
+        } else {
+            return 1;
+        }
+        
     }
 
 
@@ -5373,58 +5460,64 @@ function visibleLinks(link, scale) {
 
 function getLinkColour(link) {
     if (link.type == "ref") {
-        return "blue";
+        return "black";
     } else {
-        return "orange";
+        return "grey";
     }
 }
 
-function linkArc(d, scale) {
-    
-    var dx = nodeDict[d.target].lineCount - nodeDict[d.source].lineCount,
+
+
+
+function createArc(d, scale) {
+
+    if (!ShowPaperNodes && nodeDict[d.target].type == "paper") {
+        return [];
+    }
+
+    var newCoord = getTargetNodeCircumferencePoint(d, scale);
+
+    var dx = scale(nodeDict[d.target].lineCount) - scale(nodeDict[d.source].lineCount),
         dy = nodeDict[d.target].y - nodeDict[d.source].y,
         dr = Math.sqrt(dx * dx + dy * dy);
+    return "M" + scale(nodeDict[d.source].lineCount) + "," + nodeDict[d.source].y + "A" + dr + "," + dr + " 0 0,1 " + newCoord[0] + "," + newCoord[1];
 
-    return "M" + scale(nodeDict[d.source].lineCount) + "," + nodeDict[d.source].y + "A" + dr + "," + dr + " 0 0,1 " + scale(nodeDict[d.target].lineCount) + "," + nodeDict[d.target].y;
+
+    //start = scale(nodeDict[link.source].lineCount)   // X position of start node on the X axis
+    //end = scale(nodeDict[link.target].lineCount)    // X position of end node
+
+    //startY = nodeDict[link.source].y
+    //endY = nodeDict[link.target].y
+
+    //if (nodeDict[link.source].type == "paper" || nodeDict[link.target].type == "paper") {
+    //    return ['M', start, startY, 'L', end, endY].join(' ');
+    //}
+
+    //return ['M', start, startY,    // the arc starts at the coordinate x=start, y=height-10 (where the starting node is)
+    //    'A',                            // This means we're gonna build an elliptical arc 
+    //    (start - end), ',',         // Next 2 lines are the coordinates of the inflexion point. Height of this point is proportional with start - end distance 
+    //    (start - end), 0, 0, ',',
+    //    start < end ? 1 : 1, end, ',', endY] // We always want the arc on top. So if end is before start, putting 0 here turn the arc upside down.
+    //    .join(' ');
+
 }
 
+function getTargetNodeCircumferencePoint(d, scale) {
 
-function createArc(link, scale) {
+    var t_radius = getRadiusNode(nodeDict[d.target]); // nodeWidth is just a custom attribute I calculate during the creation of the nodes depending on the node width
+    var dx = scale(nodeDict[d.target].lineCount) - scale(nodeDict[d.source].lineCount);
+    var dy = nodeDict[d.target].y - nodeDict[d.source].y;
+    var gamma = Math.atan2(dy, dx); // Math.atan2 returns the angle in the correct quadrant as opposed to Math.atan
+    var tx = scale(nodeDict[d.target].lineCount) - (Math.cos(gamma) * t_radius);
+    var ty = nodeDict[d.target].y - (Math.sin(gamma) * t_radius);
 
-    
-
-    start = scale(nodeDict[link.source].lineCount)   // X position of start node on the X axis
-    end = scale(nodeDict[link.target].lineCount)    // X position of end node
-
-    startY = nodeDict[link.source].y
-    endY = nodeDict[link.target].y
-
-    if (nodeDict[link.source].type == "paper" || nodeDict[link.target].type == "paper") {
-        return ['M', start, startY, 'L', end, endY].join(' ');
-    }
-
-    return ['M', start, startY,    // the arc starts at the coordinate x=start, y=height-10 (where the starting node is)
-        'A',                            // This means we're gonna build an elliptical arc 
-        (start - end), ',',         // Next 2 lines are the coordinates of the inflexion point. Height of this point is proportional with start - end distance 
-        (start - end), 0, 0, ',',
-        start < end ? 1 : 1, end, ',', endY] // We always want the arc on top. So if end is before start, putting 0 here turn the arc upside down.
-        .join(' ');
-
+    return [tx, ty];
 }
 
 
 function getNodeY(node) {
 
-    if (node.type == "paper") {
-        nodeDict[node.name].y = defaultPaperY;
-        return defaultPaperY;
-    } else {
-        nodeDict[node.name].y = defaultNodeY;
-        return defaultNodeY;
-    }
-
-
-    return defaultNodeY;
+    return nodeDict[node.name].y;
 }
 
 
@@ -5450,7 +5543,7 @@ function getEnvNodeY(node) {
 
 function getRadiusNode(node) {
     if (node.type == "refNode" || node.type == "citeNode") {
-        return 6; //defaultNodeRadius
+        return 3; //defaultNodeRadius
     } else if (node.type == "paper") {
         return 2; //defaultNodeRadius
     }
