@@ -8,6 +8,7 @@
 
     <div class="topnav">
         <a href="./">Back</a>
+        <button class="pref-button" onclick="openPreferences()" >Preferences</button>
         <div class="file-info">
             <input id="uploadFile" name="uploadFile" type="file">
             <input id="mainName" name="mainName" type="text" placeholder="Name of the main file" value="">
@@ -16,6 +17,34 @@
     </div>
 
     <div>
+        <div class="popup">
+            <h3>Graph Preferences</h3>
+            <button id="close-popup" onclick="closePreferences()"></button>
+            <div class="graph-preferences" style="float:left">
+                <div >
+                    <label class="pref-label">Show papers</label>
+                    <input type="checkbox" />
+                </div>
+                <div>
+                    <label class="pref-label">Pick color of nodes</label>
+                    <input type="color"/>
+                </div>
+                <div>
+                    <label class="pref-label">Pick color of link</label>
+                    <input type="color" />
+                </div>
+                <div>
+                    <label class="pref-label">Pick color of sections</label>
+                    <input type="color" />
+                </div>
+                <div>
+                    <label class="pref-label">Pick color of theorems</label>
+                    <input type="color" />
+                </div>
+            </div>
+            <button id="accept-preference" onclick="acceptPreferences()">Accept</button>
+            
+        </div>
 
         <div class="split pdf">
             <div class="centered" id="pdfviewer">
@@ -26,7 +55,7 @@
 
         <div class="split graph">
             <div class="centered" id="d3graph">
-                <!--<h1>*GRAPH*</h1>-->
+
 
             </div>
         </div>
@@ -39,6 +68,16 @@
 </body>
 
 <style>
+
+    .graph-preferences {
+        margin-left: auto;
+        margin-right: 0
+    }
+
+    .pref-label {
+        display: inline-block;
+    }
+
     .topnav {
         background-color: #f2f2f2;
         overflow: hidden;
@@ -50,19 +89,24 @@
         z-index: 2
     }
 
+        .topnav button,
         .topnav a {
             float: left;
             color: #1b1b1b;
+            background-color: #f2f2f2;
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
             font-size: 17px;
+            outline: none;
+            border: none;
         }
 
-            .topnav a:hover {
-                background-color: #00ff90;
-                color: black;
-            }
+    .topnav button:hover,
+    .topnav a:hover {
+        background-color: #00ff90;
+        color: black;
+    }
 
     .file-info {
         float: right;
@@ -120,8 +164,100 @@
         width: 150px;
         border-radius: 50%;
     }
+
+    .popup {
+        visibility: hidden;
+        background-color: #f2f2f2;
+        width: 30%;
+        padding: 30px 40px;
+        position: absolute;
+        left: 20%;
+        top: 10%;
+        transform: translate(50%,50%);
+        border: 2px;
+        border-color: #1b1b1b;
+        border-style: solid;
+        font-family: "Poppins",sans-serif;
+        text-align: center;
+        box-shadow: 3px 3px 10px 1px #4b4b4b;
+        z-index: 3;
+    }
+
+        #close-popup {
+            border-radius: 100%;
+            padding: 0.5em;
+            width: 30px;
+            height: 30px;
+            border: 2px solid #f2f2f2;
+            color: #f2f2f2;
+            position: absolute;
+            right: 5%;
+            top: 5%
+        }
+
+        #close-popup:hover {
+            border: 2px solid #f2f2f2;
+            background-color: #00ff90;
+            color: #ffffff;
+        }
+
+
+            #close-popup::before {
+                content: " ";
+                position: absolute;
+                display: block;
+                background-color: #1b1b1b;
+                width: 2px;
+                left: 12px;
+                top: 5px;
+                bottom: 5px;
+                transform: rotate(45deg);
+            }
+
+            #close-popup::after {
+                content: " ";
+                position: absolute;
+                display: block;
+                background-color: #1b1b1b;
+                height: 2px;
+                top: 12px;
+                left: 5px;
+                right: 5px;
+                transform: rotate(45deg);
+            }
+
+    #accept-preference {
+        display: inline-block;
+        border: solid black 3px;
+        position:absolute;
+        bottom: 5%;
+        right: 5%;
+    }
+
+    #accept-preference:hover {
+        background-color: #00ff90;
+        color: black;
+    }
+        
+        
 </style>
 
+
+<script>
+    function openPreferences() {
+        document.querySelector(".popup").style.visibility = "visible";
+    }
+
+    function closePreferences() {
+        document.querySelector(".popup").style.visibility = "hidden";
+    }
+
+    function acceptPreferences() {
+        document.querySelector(".popup").style.visibility = "hidden";
+        //TODO: read colors and set them
+    }
+
+</script>
 <script src="~/js/fileUpload.js"></script>
 <script src="~/js/createGraph.js" asp-append-version="true"></script>
 
