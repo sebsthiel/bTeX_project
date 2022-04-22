@@ -22,24 +22,31 @@ namespace Hermes.Website.Services
 
         public string ScanMultipleFiles(string[] filePaths, string mainFileName)
         {
-            files = new Dictionary<string, string>();
-            foreach (string filePath in filePaths)
+            try
             {
-                string fileName = Path.GetFileName(filePath);
+                files = new Dictionary<string, string>();
+                foreach (string filePath in filePaths)
+                {
+                    string fileName = Path.GetFileName(filePath);
 
-                //Remove .tex from fileName
-                fileName = fileName.Remove(fileName.Length-4);
-                string fileText = File.ReadAllText(filePath);
+                    //Remove .tex from fileName
+                    fileName = fileName.Remove(fileName.Length-4);
+                    string fileText = File.ReadAllText(filePath);
 
-                //DefaultValue is main
-                if (mainFileName == "")
-                    mainFileName = "main";
-                files.Add(fileName, fileText);
+                    //DefaultValue is main
+                    if (mainFileName == "")
+                        mainFileName = "main";
+                    files.Add(fileName, fileText);
+                }
+
+                //TODO: Change to be user input file 
+                string fullFileAsString = ScanFile(files[mainFileName]);
+                return fullFileAsString;
+            } catch (Exception)
+            {
+                throw new FileNotFoundException(mainFileName);
             }
-
-            //TODO: Change to be user input file 
-            string fullFileAsString = ScanFile(files[mainFileName]);
-            return fullFileAsString;
+            
         }
 
         private string ScanFile(string fileAsString)

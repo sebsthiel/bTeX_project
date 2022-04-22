@@ -46,6 +46,8 @@ namespace Hermes.Website.Controllers
         [HttpPost]
         public async Task<IActionResult> PostAsync(IFormFile file, string mainName)
         {
+            int amountOfTexFiles = 0;
+            string[] texFiles = new string[10];
             try
             {
                 string pdfPath;
@@ -88,7 +90,7 @@ namespace Hermes.Website.Controllers
                 string zipFile = zipDir + file.FileName;
 
                 Console.WriteLine(file.ContentType);
-
+                
                 // checking for zip
                 if (file.ContentType == "application/zip" || file.ContentType == "application/x-zip-compressed")
                 {
@@ -104,8 +106,9 @@ namespace Hermes.Website.Controllers
 
 
                     //TODO FIND A WAY TO FIND main.tex or something -> which .tex file to compile?
-                    var texFiles = Directory.GetFiles(texDir, "*.tex", SearchOption.TopDirectoryOnly);
-                    if (texFiles.Length > 1)
+                    texFiles = Directory.GetFiles(texDir, "*.tex", SearchOption.TopDirectoryOnly);
+                    amountOfTexFiles = texFiles.Length;
+                    if (amountOfTexFiles > 1)
                     {
                         Console.WriteLine("MORE THAN 1 TEX");
                         foreach (string v in texFiles)
@@ -122,6 +125,12 @@ namespace Hermes.Website.Controllers
                     }
                     else
                     {
+                        //If there is only one .tex file the main name is just set to that. 
+                        mainName = Path.GetFileName(texFiles[0]);
+                        //remove .tex from filename
+                        mainName = mainName.Remove(mainName.Length - 4);
+                        Console.WriteLine("The Only file: " + mainName);
+
                         texFile = texFiles[0];
                     }
 
@@ -197,11 +206,31 @@ namespace Hermes.Website.Controllers
                 return guid;
                 //FileStream pdf = new FileStream(pdfPath, FileMode.Open);
                 //return new FileStreamResult(pdf, "application/pdf");
-            } catch (Exception e)
+            } catch (FileNotFoundException f)
             {
-                return BadRequest();
+                string errorMessage;
+                if (amountOfTexFiles == 0)
+                    errorMessage = "There are no .tex messages in the .zip file that you uploaded";
+                else
+                    errorMessage = "the file: " + f.Message + " was not found. Perhaps you meant one of the following: " + TexFilesToString(texFiles);
+
+
+                return BadRequest(errorMessage/*new { message = errorMessage }*/);
             }
 
+        }
+
+        private string TexFilesToString(string[] texFiles)
+        {
+            string tmp = "";
+            foreach (string s in texFiles)
+            {
+                string fileName = Path.GetFileName(s);
+                fileName = fileName.Remove(fileName.Length - 4);
+                tmp += fileName + ", ";
+            }
+            tmp = tmp.Remove(tmp.Length - 2) + ".";
+            return tmp;
         }
 
 

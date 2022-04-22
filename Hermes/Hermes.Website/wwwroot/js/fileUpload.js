@@ -13,15 +13,15 @@ async function getPdf(guid) {
     //check if bad request
     if (!response.ok) {
         alert("Something went wrong when creating the pdf")
+    } else {
+        let pdfBlob = await response.blob();
+
+        console.log("Type: " + typeof (pdfBlob));
+
+        let fileUrl = URL.createObjectURL(pdfBlob);
+
+        return fileUrl;
     }
-
-    let pdfBlob = await response.blob();
-
-    console.log("Type: " + typeof (pdfBlob));
-
-    let fileUrl = URL.createObjectURL(pdfBlob);
-
-    return fileUrl;
 
 }
 
@@ -38,16 +38,15 @@ async function getJson(guid) {
 
     if (!response.ok) {
         alert("Something went wrong when creating your user ID")
+    } else {
+        let json = await response.json();
+
+        console.log(json.nodes[1]);
+
+        console.log("Type: " + typeof (json));
+
+        return json;
     }
-
-    let json = await response.json();
-
-    console.log(json.nodes[1]);
-
-    console.log("Type: " + typeof (json));
-
-    return json;
-
 }
 
 
@@ -69,31 +68,30 @@ async function uploadFile() {
     let response = await fetch("/api/pdf", {
         method: 'POST',
         body: formData
-    });
+    }).catch(err => console.log("ERROR BITCH"));
 
     if (!response.ok) {
-        alert("Something went wrong when loading your file")
+        console.log("Response StatTex: " + response.statusText);
+        alert("Something went wrong when loading your file. Please make sure the name of the main .tex file is correct and try again.");
+    } else {
+        // THIS NEEDS TO BE ASYNC
+        response.json().then(async data => {
+
+            //console.log("guid: " + await data.guid);
+            let guid = await data.guid;
+            let pdf = await getPdf(guid);
+            let json = await getJson(guid);
+
+
+            document.getElementById("outputPdf").src = pdf;
+
+            // Load json into d3 graph
+            createGraph(json);
+
+        });
     }
 
-    // THIS NEEDS TO BE ASYNC
-    response.json().then(async data => {
-
-
-        //console.log("guid: " + await data.guid);
-        let guid = await data.guid;
-        let pdf = await getPdf(guid);
-        let json = await getJson(guid);
-
-
-        document.getElementById("outputPdf").src = pdf;
-
-
-        // Load json into d3 graph
-        createGraph(json);
-
-
-
-    });
+    
 
     //let pdfBlob = await response.blob();
 
