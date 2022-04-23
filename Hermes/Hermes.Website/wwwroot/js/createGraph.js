@@ -4965,7 +4965,7 @@ function lineGraph(nodes, links, envs) {
         nodeDict[node.name] = node;
         nodeDict[node.name].radius = defaultNodeRadius;
 
-        if (node.type == "paper") {
+        if (node.type == "Paper") {
             nodeDict[node.name].y = defaultPaperY;
         } else {
             nodeDict[node.name].y = defaultNodeY;
@@ -5017,7 +5017,7 @@ function lineGraph(nodes, links, envs) {
            
             sectionNodes.push(node);
         }
-        else if (node.type == "paper") {
+        else if (node.type == "Paper") {
             paperNodes.push(node);
         }
         else {
@@ -5306,7 +5306,7 @@ function lineGraph(nodes, links, envs) {
         .attr("dy", node => nodeDict[node.name].y - 8)
         .attr("visibility", "hidden")
         .text(function (node) {
-            if (node.type == "paper") {
+            if (node.type == "Paper") {
                 if (node.title) {
                     return node.title;
                 }
@@ -5336,7 +5336,7 @@ function lineGraph(nodes, links, envs) {
 
     function getlineCount(node, scale) {
 
-        if (node.type == "paper") {
+        if (node.type == "Paper") {
             let firstSourceNode = linkDict[node.name];
             //console.log("Target node: " + node.name);
             if (firstSourceNode) {
@@ -5410,9 +5410,9 @@ function lineGraph(nodes, links, envs) {
     }
 
     let zoom = d3.zoom()
-        .translateExtent([[0, 0], [width, 0]])
+        .translateExtent([[-100, 0], [width, 0]])
         .extent([[0, 0], [(0), 0]])
-        .scaleExtent([1, 100])
+        .scaleExtent([0.4, 100])
         .on('zoom', handleZoom);
 
 
@@ -5532,7 +5532,9 @@ function getLinkColour(link) {
 
 function createArc(d, scale) {
 
-    if (!ShowPaperNodes && nodeDict[d.target].type == "paper") {
+    console.log(d.source);
+    console.log(d.target);
+    if (!ShowPaperNodes && nodeDict[d.target].type == "Paper") {
         return [];
     }
 
@@ -5608,7 +5610,7 @@ function getEnvNodeY(node) {
 function getRadiusNode(node) {
     if (node.type == "refNode" || node.type == "citeNode") {
         return 3; //defaultNodeRadius
-    } else if (node.type == "paper") {
+    } else if (node.type == "Paper") {
         return 2; //defaultNodeRadius
     }
     return node.radius;

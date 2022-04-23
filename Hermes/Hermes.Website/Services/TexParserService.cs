@@ -262,6 +262,8 @@ namespace Hermes.Website.Services
                         nodeDict[hyperLinkNode.name] = hyperLinkNode;
                     }
                     //Console.WriteLine("Adding ref: " + groups["typeName"].Value);
+
+                   
                     var nodeId = ID_Generator.GenerateID().ToString();
                     var nodeName = "ref to " + typeNameWithoutRefs + " :id:" + nodeId;
                     Node node = new Node(nodeName, createdAt, "refNode", lineCount);
@@ -281,7 +283,7 @@ namespace Hermes.Website.Services
                     var nodeName = "citation to " + typeNameWithoutRefs + " :id:" + nodeId;
                     Node node = new Node(nodeName, createdAt, "citeNode", lineCount);
 
-                    nodeDict.Add(nodeId, node);
+                    nodeDict.Add(nodeName, node);
                     foreach (string citation in tmps)
                     {
                         
@@ -589,7 +591,11 @@ namespace Hermes.Website.Services
 
             foreach (Node node in newNodes)
             {
-                nodeDict.Add(node.GetName(),node);
+                // FIXME SEB ÆNDREDE da der i en bib fil var samme entry to gange xd
+                if (!nodeDict.TryAdd(node.GetName(), node))
+                {
+                    Console.WriteLine("NODE ALREADY EXISTS");
+                }
             }
 
         }

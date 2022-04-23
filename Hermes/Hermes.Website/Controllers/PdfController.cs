@@ -47,9 +47,9 @@ namespace Hermes.Website.Controllers
         public async Task<IActionResult> PostAsync(IFormFile file, string mainName)
         {
             int amountOfTexFiles = 0;
-            string[] texFiles = new string[10];
-            try
-            {
+            string[] texFiles;
+            //try
+            //{
                 string pdfPath;
 
                 string texFile = "";
@@ -139,14 +139,19 @@ namespace Hermes.Website.Controllers
 
                     // Parsing bibfile if there is a bib file
                     // adding the new nodes to NodeDict
-                    var bibFiles = Directory.GetFiles(zipDir, "*.bib", SearchOption.TopDirectoryOnly);
+
+                    //FIXME SEB ÆNDREDE zipDir to texDir
+                    var bibFiles = Directory.GetFiles(texDir, "*.bib", SearchOption.TopDirectoryOnly);
+                    Console.WriteLine("len: " + bibFiles.Length);
                     if (bibFiles.Length > 1)
                     {
                         Console.WriteLine("MORE THAN 1 BIB");
                     }
-                    if (bibFiles.Length != 0)
+                    else if (bibFiles.Length != 0)
                     {
                         List<Node> paperNodes = await BibService.ParseBibFile(bibFiles[0]);
+
+      
 
                         // add to nodeDict
                         ParserService.AddToNodeDict(paperNodes);
@@ -206,17 +211,11 @@ namespace Hermes.Website.Controllers
                 return guid;
                 //FileStream pdf = new FileStream(pdfPath, FileMode.Open);
                 //return new FileStreamResult(pdf, "application/pdf");
-            } catch (FileNotFoundException f)
-            {
-                string errorMessage;
-                if (amountOfTexFiles == 0)
-                    errorMessage = "There are no .tex messages in the .zip file that you uploaded";
-                else
-                    errorMessage = "the file: " + f.Message + " was not found. Perhaps you meant one of the following: " + TexFilesToString(texFiles);
-
-
-                return BadRequest(errorMessage/*new { message = errorMessage }*/);
-            }
+            //} catch (FileNotFoundException f)
+            //{
+                
+            //    return BadRequest();
+            //}
 
         }
 

@@ -42,7 +42,9 @@ namespace Hermes.Website.Services
 
         private List<Node> SearchFile(string fileAsText)
         {
-            string pattern = @"(@(?<type>article|manual|book|incollection) *{(?<id>[^,]+),)|( *(?<artInfo>[^ \n]*) *= *({|""|)(?<artInfoValue>.*)(}|""),?)";
+            //FIXME SEB ÆNDREDE: New regex
+            string pattern = @"(@(?<type>\w+) *{(?<id>[^,]+),)|( *(?<artInfo>[^ \n]*) *= *({|""|)(?<artInfoValue>.*)(}|""),?)";
+            //string pattern = @"(@(?<type>article|manual|book|incollection|inproceedings) *{(?<id>[^,]+),)|( *(?<artInfo>[^ \n]*) *= *({|""|)(?<artInfoValue>.*)(}|""),?)";
             Regex rx = new Regex(pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             MatchCollection matches = rx.Matches(fileAsText);
             PaperNode currentPaper = null;
