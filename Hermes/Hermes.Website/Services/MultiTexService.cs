@@ -22,30 +22,37 @@ namespace Hermes.Website.Services
 
         public string ScanMultipleFiles(string[] filePaths, string mainFileName)
         {
-            try
+            //DefaultValue is main
+            if (mainFileName == "")
+                mainFileName = "main";
+            mainFileName += ".tex";
+            //try
+            //{
+            files = new Dictionary<string, string>();
+            
+            //Map a file's name to the text within it
+            foreach (string filePath in filePaths)
             {
-                files = new Dictionary<string, string>();
-                foreach (string filePath in filePaths)
+                string fileName = Path.GetFileName(filePath);
+                Console.WriteLine("Name: " + fileName);
+                //ignore files in MACOSX
+                if (!fileName.StartsWith("._"))
                 {
-                    string fileName = Path.GetFileName(filePath);
-
-                    //Remove .tex from fileName
-                    fileName = fileName.Remove(fileName.Length-4);
-                    string fileText = File.ReadAllText(filePath);
-
-                    //DefaultValue is main
-                    if (mainFileName == "")
-                        mainFileName = "main";
+                    string fileText = File.ReadAllText(filePath);                   
                     files.Add(fileName, fileText);
                 }
-
-                //TODO: Change to be user input file 
-                string fullFileAsString = ScanFile(files[mainFileName]);
-                return fullFileAsString;
-            } catch (Exception)
-            {
-                throw new FileNotFoundException(mainFileName);
+                
             }
+
+            //TODO: Change to be user input file 
+            string fullFileAsString = ScanFile(files[mainFileName]);
+            //Console.WriteLine(fullFileAsString);
+            return fullFileAsString;
+            //} catch (Exception)
+            //{
+            //    Console.WriteLine("(Exception) The name of mainfile from multiservice: " + mainFileName);
+            //    throw new FileNotFoundException(mainFileName);
+            //}
             
         }
 
@@ -56,10 +63,17 @@ namespace Hermes.Website.Services
             foreach (Match match in Regex.Matches(fileAsString, pattern))
             {
                 GroupCollection groups = match.Groups;
-                
+
+                //Delete any directory path I.e "prefix/file.tex" removes "prefix/"
+                string fileName = groups["fileName"].Value;
+                if (fileName.Contains("/"))
+                {
+                    string[] fileNameArray = fileName.Split("/");
+                    fileName = fileNameArray[fileNameArray.Length-1];
+                }
+
                 //TODO: Maybe unnecesary 
-                
-                string inputFileText = ScanFile(files[groups["fileName"].Value]);
+                string inputFileText = ScanFile(files[fileName]);
                 fileAsString = fileAsString.Replace(groups["input"].Value, inputFileText);
             }
             return fileAsString;

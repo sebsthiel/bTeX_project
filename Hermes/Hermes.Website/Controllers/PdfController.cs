@@ -129,7 +129,7 @@ namespace Hermes.Website.Controllers
                         mainName = Path.GetFileName(texFiles[0]);
                         //remove .tex from filename
                         mainName = mainName.Remove(mainName.Length - 4);
-                        Console.WriteLine("The Only file: " + mainName);
+                        Console.WriteLine("Only one .tex file from pdfController: " + mainName);
 
                         texFile = texFiles[0];
                     }

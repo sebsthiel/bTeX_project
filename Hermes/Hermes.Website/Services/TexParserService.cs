@@ -52,7 +52,8 @@ namespace Hermes.Website.Services
 
             // Go through file
 
-            string pattern = @"(?<comment>([^\\]|\n)%)|\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
+            string pattern = @"(?<comment>(([^\\]|\n)%)|\\renewcommand)|\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
+                //@"(?<comment>([^\\]|\n)%)|\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
             
             RegexOptions options = RegexOptions.Multiline;
             //Console.WriteLine("START PARSING");
@@ -62,7 +63,7 @@ namespace Hermes.Website.Services
             {
                 GroupCollection groups = match.Groups;
                 //Console.WriteLine("MATCH: " + match);
-                if (groups["comment"].Value.EndsWith("%"))
+                if (groups["comment"].Value.EndsWith("%") || groups["comment"].Value == "\\renewcommand")
                     inComment = true;
                     
                     
