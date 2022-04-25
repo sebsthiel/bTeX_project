@@ -4926,6 +4926,7 @@ const height = 600;
 const graphWidth = width * 2;
 const xaxisHeight = 100;
 const defaultNodeY = xaxisHeight + 50;
+const defaultRefNodeY = defaultNodeY + 100;
 const defaultPaperY = 20;
 const defaultEnvY = xaxisHeight;
 const nodeColor = "gray"
@@ -4962,22 +4963,27 @@ function lineGraph(nodes, links, envs) {
 
     // TODO COMBINE TO ONE LOOB
     allNodes.forEach(node => {
-        nodeDict[node.name] = node;
-        nodeDict[node.name].radius = defaultNodeRadius;
+        let nodeName = node.name;
+        nodeDict[nodeName] = node;
+        nodeDict[nodeName].radius = defaultNodeRadius;
 
-        if (node.type == "Paper") {
-            nodeDict[node.name].y = defaultPaperY;
-        } else {
-            nodeDict[node.name].y = defaultNodeY;
+        if (node.type == "paper") {
+            nodeDict[nodeName].y = defaultPaperY;
+        }
+        else if (node.type == "refNode" || node.type == "citeNode") {
+
+                nodeDict[nodeName].y = defaultRefNodeY;
+
+        }
+        else {
+            nodeDict[nodeName].y = defaultNodeY;
         }
         
         if (node.type.includes("section")) {
-            nodeDict[node.name].color = sectionColor;
+            nodeDict[nodeName].color = sectionColor;
         } else {
-            nodeDict[node.name].color = nodeColor;
+            nodeDict[nodeName].color = nodeColor;
         }
-    
-
         
 
     })
@@ -5017,7 +5023,7 @@ function lineGraph(nodes, links, envs) {
            
             sectionNodes.push(node);
         }
-        else if (node.type == "Paper") {
+        else if (node.type == "paper") {
             paperNodes.push(node);
         }
         else {
@@ -5306,7 +5312,7 @@ function lineGraph(nodes, links, envs) {
         .attr("dy", node => nodeDict[node.name].y - 8)
         .attr("visibility", "hidden")
         .text(function (node) {
-            if (node.type == "Paper") {
+            if (node.type == "paper") {
                 if (node.title) {
                     return node.title;
                 }
@@ -5336,7 +5342,7 @@ function lineGraph(nodes, links, envs) {
 
     function getlineCount(node, scale) {
 
-        if (node.type == "Paper") {
+        if (node.type == "paper") {
             let firstSourceNode = linkDict[node.name];
             //console.log("Target node: " + node.name);
             if (firstSourceNode) {
@@ -5534,7 +5540,8 @@ function createArc(d, scale) {
 
     console.log(d.source);
     console.log(d.target);
-    if (!ShowPaperNodes && nodeDict[d.target].type == "Paper") {
+    console.log(nodeDict[d.target]);
+    if (!ShowPaperNodes && nodeDict[d.target].type == "paper") {
         return [];
     }
 
@@ -5610,7 +5617,7 @@ function getEnvNodeY(node) {
 function getRadiusNode(node) {
     if (node.type == "refNode" || node.type == "citeNode") {
         return 3; //defaultNodeRadius
-    } else if (node.type == "Paper") {
+    } else if (node.type == "paper") {
         return 2; //defaultNodeRadius
     }
     return node.radius;

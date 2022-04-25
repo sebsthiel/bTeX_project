@@ -38,7 +38,8 @@ namespace Hermes.Website.Services
                 //ignore files in MACOSX
                 if (!fileName.StartsWith("._"))
                 {
-                    string fileText = File.ReadAllText(filePath);                   
+                    string fileText = File.ReadAllText(filePath);
+                  
                     files.Add(fileName, fileText);
                 }
                 

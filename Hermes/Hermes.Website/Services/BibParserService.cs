@@ -36,6 +36,7 @@ namespace Hermes.Website.Services
         {
 
             string fileAsString = await System.IO.File.ReadAllTextAsync(filePath); //ReadAsStringAsync(file);
+       
             List<Node> paperNodes = SearchFile(fileAsString);
             return paperNodes;
         }
@@ -56,7 +57,7 @@ namespace Hermes.Website.Services
                 //Console.WriteLine("Match: " + match);
                 GroupCollection groups = match.Groups;
                 string artInfo = groups["artInfo"].Value.ToLower();
-                string paperId = groups["id"].Value;
+                string paperId = groups["id"].Value.ToLower();
                 string paperType = groups["type"].Value;
 
 
@@ -67,7 +68,8 @@ namespace Hermes.Website.Services
                     //Console.WriteLine("PaperID: " + paperId);
                     if (currentPaper != null){ paperList.Add(currentPaper);}
                     //TODO: figure out what to do with linecount within Bib files
-                    currentPaper = new PaperNode(paperId, "BibFile", "Paper", -1);
+                    currentPaper = new PaperNode(paperId, "BibFile", "paper", -1);
+                    Console.WriteLine("HALLO: " + paperId);
                 }
                 if (paperType != null && paperType != "") 
                 {

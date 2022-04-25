@@ -41,6 +41,7 @@ namespace Hermes.Website.Services
         public void ParseTexFromFile(string pathToTex)
         {
             string text = System.IO.File.ReadAllText(pathToTex);
+            
             ParseTex(text);
         }
 
@@ -52,7 +53,7 @@ namespace Hermes.Website.Services
 
             // Go through file
 
-            string pattern = @"(?<comment>(([^\\]|\n)%)|\\renewcommand)|\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
+            string pattern = @"(?<comment>(([^\\]|\n)%)|\\renewcommand)|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
                 //@"(?<comment>([^\\]|\n)%)|\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
             
             RegexOptions options = RegexOptions.Multiline;
@@ -245,6 +246,7 @@ namespace Hermes.Website.Services
                 else if (groups["type"].Value == "label")
                 {
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
+                    typeNameWithoutRefs = typeNameWithoutRefs.ToLower();
                     Node node1 = new Node(typeNameWithoutRefs, createdAt, groups["type"].Value, lineCount);
                     nodeDict[node1.name] = node1;
                     //Console.WriteLine("Adding label: " + node1.GetName());
@@ -256,9 +258,10 @@ namespace Hermes.Website.Services
                 {
                     
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
+                    typeNameWithoutRefs = typeNameWithoutRefs.ToLower();
                     //Console.WriteLine("NAME: " + typeNameWithoutRefs + " REM: " + remainingString);
                     if (groups["type"].Value == "href")
-                    {
+                    {   //TODO make a refNode ref hyperlinkNode
                         Node hyperLinkNode = new Node(typeNameWithoutRefs, createdAt, "href", lineCount);
                         nodeDict[hyperLinkNode.name] = hyperLinkNode;
                     }
@@ -278,7 +281,7 @@ namespace Hermes.Website.Services
                 else if (groups["type"].Value.StartsWith("cite"))
                 {
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
-
+                    typeNameWithoutRefs = typeNameWithoutRefs.ToLower();
                     var tmps = typeNameWithoutRefs.Split(',');
                     var nodeId = ID_Generator.GenerateID().ToString();
                     var nodeName = "citation to " + typeNameWithoutRefs + " :id:" + nodeId;
@@ -386,7 +389,7 @@ namespace Hermes.Website.Services
                     string arg1 = groups["bibArg1"].Value;
                     string arg2 = groups["bibArg2"].Value;
                     //Console.WriteLine("bibitem has arguments: " + arg1 + " & " + arg2);
-                    PaperNode pNode = new PaperNode(arg2, createdAt, "paper", lineCount);
+                    PaperNode pNode = new PaperNode(arg2.ToLower(), createdAt, "paper", lineCount);
                     if (arg1 != "")
                     {
                         if (arg1.Contains(System.Environment.NewLine))
@@ -593,6 +596,7 @@ namespace Hermes.Website.Services
             foreach (Node node in newNodes)
             {
                 // FIXME SEB ÆNDREDE da der i en bib fil var samme entry to gange xd
+                Console.WriteLine("adding node " + node.GetName());
                 if (!nodeDict.TryAdd(node.GetName(), node))
                 {
                     Console.WriteLine("NODE ALREADY EXISTS");
