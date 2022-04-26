@@ -47,11 +47,20 @@ namespace Hermes.Website.Pages
        
         public void OnGet()
         {
+            string testString = @"
+\ifshort{}\gappto{\appendixProofText}{\section{Additional Material for Section~\ref{#1}}\label{app:#1}}\fi{}
+asdasd
+dsaklæ}
+}
+\section{world";
             //Console.WriteLine("BibParser OnGet()");
             //(string tmp1, string tmp2) = TexService.CheckForCommandsInName(@"align}\label{kd:eq:a");
-            TexService.ParseTex(@" % The RL controllers trained by this two-stage CL process are tested later in Section \ref{subsec-rl-mpc-compare}. Before that, to substantiate the necessity of the proposed CL framework, state-of-the-art RL algorithms are directly utilized to train controller for the original complicated problem for comparison. Table \ref{table-coverged-reward} shows the best converged values with hyper-parameter tuning; see Appendix \ref{appen-rl-parameters} \hl{for details}.\n \section{abc}");
-            PrintNodes(TexService.GetNodes());
-            PrintLinks(TexService.GetLinks());
+            //TexService.ParseTex(testString);
+            //PrintNodes(TexService.GetNodes());
+            //PrintLinks(TexService.GetLinks());
+            (string typeNameWithoutRefs, string remainingString) = TexService.CountBrackets(testString);
+            Console.WriteLine("TypeName: " + typeNameWithoutRefs);
+            Console.WriteLine("Remaining: " + remainingString);
         }
 
 

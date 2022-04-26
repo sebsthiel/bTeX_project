@@ -64,10 +64,12 @@
     <div class="topnav">
         <a href="./">Back</a>
         <button class="pref-button" onclick="openPreferences()" >Preferences</button>
+        <a class="nav-link text-dark" asp-area="" asp-page="BibParser">AbeaTesting</a>
         <div class="file-info">
             <input id="uploadFile" name="uploadFile" type="file">
             <input id="mainName" name="mainName" type="text" placeholder="Name of the main file" value="">
             <input type="submit" asp-page-handler="Upload" class="btn" onclick="uploadFile()">
+            
         </div>
     </div>
 
@@ -75,30 +77,34 @@
         <div class="popup">
             <h3>Graph Preferences</h3>
             <button id="close-popup" onclick="closePreferences()"></button>
+            <!--<form class="graph-preferences" style="float:left" onsubmit="acceptPreferences()">-->
             <div class="graph-preferences" style="float:left">
-                <div >
+                <div>
                     <label class="pref-label">Show papers</label>
-                    <input type="checkbox" />
+                    <input type="checkbox" id="show-papernodes" />
                 </div>
                 <div>
                     <label class="pref-label">Pick color of nodes</label>
-                    <input type="color"/>
+                    <input type="color" id="node-color" value="#8C8C8C" />
                 </div>
                 <div>
                     <label class="pref-label">Pick color of link</label>
-                    <input type="color" />
+                    <input type="color" id="link-color" value="#000000"/>
                 </div>
                 <div>
                     <label class="pref-label">Pick color of sections</label>
-                    <input type="color" />
+                    <input type="color" id="section-color" value="#FF2D00"/>
                 </div>
                 <div>
                     <label class="pref-label">Pick color of theorems</label>
-                    <input type="color" />
+                    <input type="color" id="theorem-color" value="#BE00FF" />
                 </div>
+                <!--<input type="submit" id="accept-preference" value="Accept"/>-->
             </div>
-            <button id="accept-preference" onclick="acceptPreferences()">Accept</button>
-            
+            <!--</form>-->
+            <button class="popup-button" id="accept-preference" onclick="acceptPreferences()">Apply changes</button>
+            <button class="popup-button" id="restore-default" onclick="restoreDefault()">Restore to default</button>
+
         </div>
 
         <div class="split pdf">
@@ -227,7 +233,7 @@
         visibility: hidden;
         background-color: #f2f2f2;
         width: 30%;
-        padding: 30px 40px;
+        padding: 40px 50px;
         position: absolute;
         left: 20%;
         top: 10%;
@@ -284,19 +290,25 @@
                 transform: rotate(45deg);
             }
 
-    #accept-preference {
+    .popup-button {
         display: inline-block;
         border: solid black 3px;
-        position:absolute;
+        position: absolute;
         bottom: 5%;
+    }
+        .popup-button:hover {
+            background-color: #00ff90;
+            color: black;
+        }
+    
+    #accept-preference {
         right: 5%;
     }
 
-    #accept-preference:hover {
-        background-color: #00ff90;
-        color: black;
+    #restore-default {
+        left: 5%;
     }
-        
+
         
 </style>
 
@@ -310,11 +322,46 @@
         document.querySelector(".popup").style.visibility = "hidden";
     }
 
-    function acceptPreferences() {
-        document.querySelector(".popup").style.visibility = "hidden";
-        //TODO: read colors and set them
+    class ColorObject {
+        constructor(showPaperNodes, nodeColor, linkColor, sectionColor, theoremColor) {
+            this.showPaperNodes = showPaperNodes;
+            this.nodeColor = nodeColor;
+            this.linkColor = linkColor;
+            this.sectionColor = sectionColor;
+            this.theoremColor = theoremColor;
+        }
     }
 
+    function acceptPreferences() {
+        
+        //TODO: read colors and set them
+        var showPaperNodes  = document.getElementById("show-papernodes").checked;
+        var nodeColor       = document.getElementById("node-color").value;
+        var linkColor       = document.getElementById("link-color").value;
+        var sectionColor    = document.getElementById("section-color").value;
+        var theoremColor = document.getElementById("theorem-color").value;
+
+        var colors = new ColorObject(showPaperNodes, nodeColor, linkColor, sectionColor, theoremColor);
+        setColors(colors);
+        
+
+        console.log("papernode: " + showPaperNodes);
+        console.log("nodecolor: " + nodeColor);
+        console.log("linkcolor: " + linkColor);
+        console.log("sectioncolor: " + sectionColor);
+        console.log("theoremcolor: " + theoremColor);
+
+        document.querySelector(".popup").style.visibility = "hidden";
+    }
+
+    function restoreDefault() {
+        document.getElementById("show-papernodes").checked = false;
+        document.getElementById("node-color").value = "#8C8C8C";
+        document.getElementById("link-color").value = "#000000";
+        document.getElementById("section-color").value = "#FF2D00";
+        document.getElementById("theorem-color").value = "#BE00FF";
+
+    }
 </script>
 <script src="~/js/fileUpload.js"></script>
 <script src="~/js/createGraph.js" asp-append-version="true"></script>

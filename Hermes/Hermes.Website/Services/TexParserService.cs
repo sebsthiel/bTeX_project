@@ -53,9 +53,10 @@ namespace Hermes.Website.Services
 
             // Go through file
 
-            string pattern = @"(?<comment>(([^\\]|\n)%)|\\renewcommand)|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
-                //@"(?<comment>([^\\]|\n)%)|\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
-            
+            string pattern = @"(?<comment>([^\\]|\n)%)|((?<newcommand>newcommand)({.+})?(\[.*\])?){(?<newcommandlines>(\n.*)*)}|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
+            //@"(?<comment>(([^\\]|\n)%)|\\renewcommand)|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
+            //@"(?<comment>([^\\]|\n)%)|\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
+
             RegexOptions options = RegexOptions.Multiline;
             //Console.WriteLine("START PARSING");
 
@@ -64,7 +65,7 @@ namespace Hermes.Website.Services
             {
                 GroupCollection groups = match.Groups;
                 //Console.WriteLine("MATCH: " + match);
-                if (groups["comment"].Value.EndsWith("%") || groups["comment"].Value == "\\renewcommand")
+                if (groups["comment"].Value.EndsWith("%"))
                     inComment = true;
                     
                     
@@ -76,6 +77,13 @@ namespace Hermes.Website.Services
                 if (inComment)
                     continue;
 
+                
+                if (groups["newcommand"].Value == "newcommand") 
+                {
+                    (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["newcommandlines"].Value);
+                    ParseTex(remainingString);
+                    //You haven't tested this yet Andreas
+                }
 
                 if (groups["type"].Value == "section")
                 {
@@ -623,7 +631,7 @@ namespace Hermes.Website.Services
             //}
             return (RemoveCommand(nameWithCommands), remainingString);
         }
-        private (string, string) CountBrackets(string input)
+        public (string, string) CountBrackets(string input)
         {
             //lvl is used to check when we have reached the correct end-curlybracket of the typeName
             int lvl = 1;
