@@ -11650,6 +11650,8 @@ function createLine(json) {
   
 }
 
+var colors = new ColorObject(false, "gray", "black", "red", "purple");
+
 var linkDict = {};
 var nodeDict = {};
 var envDict = {};
@@ -11667,16 +11669,16 @@ const defaultNodeY = xaxisHeight + 50;
 const defaultRefNodeY = defaultNodeY + 100;
 const defaultPaperY = 20;
 const defaultEnvY = xaxisHeight;
-const nodeColor = "gray"
-const envColor = "purple"
-const sectionColor = "red"
+const nodeColor = "gray" //isn't used
+const envColor = "purple" //isn't used
+const sectionColor = "red" //isn't used
 const defaultNodeRadius = 6;
 const envRectHeight = 200;
 const defaultSectionRectHeight = envRectHeight + 50
 
 const sectionTextY = xaxisHeight + defaultSectionRectHeight + 15;
 const envTextY = xaxisHeight - 10;
-const ShowPaperNodes = false;
+const ShowPaperNodes = false; //isn't used
 
 
 const zoomThreshold = 20;
@@ -11684,13 +11686,16 @@ const zoomThreshold = 20;
 
 var currentSelectedNode = null;
 
+//temporary by Andreas
+var allNodes;
+
 
 function lineGraph(nodes, links, envs) {
 
 
     allNodes = nodes;
     links = links;
-    console.log("env: " + envs[0]);
+    //console.log("env: " + envs[0]);
 
     allNodes.sort(compare);
 
@@ -11719,9 +11724,9 @@ function lineGraph(nodes, links, envs) {
         }
         
         if (node.type.includes("section")) {
-            nodeDict[nodeName].color = sectionColor;
+            nodeDict[nodeName].color = colors.sectionColor;
         } else {
-            nodeDict[nodeName].color = nodeColor;
+            nodeDict[nodeName].color = colors.nodeColor;
         }
         
 
@@ -11755,7 +11760,7 @@ function lineGraph(nodes, links, envs) {
         if (node.type in envDict && !node.type.includes("section")) {
            
             envNodes.push(node);
-            nodeDict[node.name].color = envColor;
+            nodeDict[node.name].color = colors.envColor;
         }
         // TODO subsection 
         else if (node.type == "section" || node.type.includes("subsection")) {
@@ -11922,7 +11927,7 @@ function lineGraph(nodes, links, envs) {
 
             return envRectHeight - (10 * numberOfSub);
         })
-        .attr('fill', envColor)
+        .attr('fill', colors.envColor)
         .attr('fill-opacity', "0.7")
         .attr('x', node => getlineCount(node, xAxisScale))
         .attr('y', getEnvNodeY);
@@ -11961,7 +11966,7 @@ function lineGraph(nodes, links, envs) {
         .append('path')
         .attr("class", "link")
         .attr('d', link => createArc(link, xAxisScale)/*createArc(link, xAxisScale)*/)
-        .attr("stroke", getLinkColour)
+        .attr("stroke", getLinkColor)
         .attr('stroke-width', 2)
         .style("fill", "none")
         .attr("marker-end", "url(#betterArrow)");
@@ -11975,22 +11980,22 @@ function lineGraph(nodes, links, envs) {
         textBackground.attr("visibility", function (node) { return showName(node, selected) });
 
         textSection.attr("visibility", "hidden");
-        svgSectionLine.attr("fill", sectionColor);
+        svgSectionLine.attr("fill", colors.sectionColor);
         textElements.attr("visibility", "hidden");
-        nodeCircles.attr("fill", nodeColor);
+        nodeCircles.attr("fill", colors.nodeColor);
 
     });
 
     svgSectionLine.on("click", function (selected) {
-       
+        //console.log("OH NO! ")
         textSection.attr("visibility", function (node) { return showName(node, selected) });
         svgSectionLine.attr("fill", function (node) { return selectNode(node, selected) });
         textBackground.attr("visibility", function (node) { return showName(node, selected) });
 
         textEnvNode.attr("visibility", "hidden");
-        envRect.attr("fill", envColor);
+        envRect.attr("fill", colors.envColor);
         textElements.attr("visibility", "hidden");
-        nodeCircles.attr("fill", nodeColor);
+        nodeCircles.attr("fill", colors.nodeColor);
     });
 
     nodeCircles.on("click", function (selected) {
@@ -12000,9 +12005,9 @@ function lineGraph(nodes, links, envs) {
         textBackground.attr("visibility", function (node) { return showName(node, selected) });
 
         textEnvNode.attr("visibility", "hidden");
-        envRect.attr("fill", envColor);
+        envRect.attr("fill", colors.envColor);
         textSection.attr("visibility", "hidden");
-        svgSectionLine.attr("fill", sectionColor);
+        svgSectionLine.attr("fill", colors.sectionColor);
     });
 
 
@@ -12012,19 +12017,19 @@ function lineGraph(nodes, links, envs) {
         displayInfoAboutNode();
 
         svgLinks
-            .attr("stroke", getLinkColour)
+            .attr("stroke", getLinkColor)
             .attr("stroke-opacity", link => visibleLinks(link, currentScale));
 
         
 
         textEnvNode.attr("visibility", "hidden");
-        envRect.attr("fill", envColor);
+        envRect.attr("fill", colors.envColor);
         textBackground.attr("visibility", "hidden" );
 
         textSection.attr("visibility", "hidden");
-        svgSectionLine.attr("fill", sectionColor);
+        svgSectionLine.attr("fill", colors.sectionColor);
         textElements.attr("visibility", "hidden");
-        nodeCircles.attr("fill", nodeColor);
+        nodeCircles.attr("fill", colors.nodeColor);
     });
 
     
@@ -12182,7 +12187,7 @@ function lineGraph(nodes, links, envs) {
                     return "#65FF00";
                 }
                 else {
-                    return getLinkColour(link);
+                    return getLinkColor(link);
                 }
             })
             .attr("stroke-opacity", link => {
@@ -12267,9 +12272,10 @@ function visibleLinks(link, scale) {
 
 }
 
-function getLinkColour(link) {
+function getLinkColor(link) {
     if (link.type == "ref") {
-        return "black";
+        return colors.linkColor;
+        //return "black";
     } else {
         return "grey";
     }
@@ -12283,7 +12289,7 @@ function createArc(d, scale) {
     //console.log(d.source);
     //console.log(d.target);
     //console.log(nodeDict[d.target]);
-    if (!ShowPaperNodes && nodeDict[d.target].type == "paper") {
+    if (!colors.ShowPaperNodes && nodeDict[d.target].type == "paper") {
         return [];
     }
 
@@ -12385,7 +12391,22 @@ function compare(a, b) {
     return 0;
 }
 
+function setColors(colorObject) {
+    colors = colorObject;
+    /*allNodes.forEach(node => {
+        let nodeName = node.name;
+        nodeDict[nodeName] = node;
 
+        if (node.type.includes("section")) {
+            nodeDict[nodeName].color = colors.sectionColor;
+        } else if(node.type in envDict) {
+            nodeDict[node.name].color = colors.envColor;
+        } else {
+            nodeDict[nodeName].color = colors.nodeColor;
+        }
+    })*/
+    
+}
 
 
 function displayInfoAboutNode() {
