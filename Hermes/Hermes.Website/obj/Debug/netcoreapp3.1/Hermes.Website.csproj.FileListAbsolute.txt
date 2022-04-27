@@ -102,3 +102,9 @@ C:/Users/jaffa/OneDrive/Skrivebord/Bachelor/GitRepo/bTeX_project/Hermes/Hermes.W
 C:/Users/jaffa/OneDrive/Skrivebord/Bachelor/GitRepo/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/8a9c1aea-62b5-43fd-961d-dd6adb3abd5e/some.json
 C:/Users/jaffa/OneDrive/Skrivebord/Bachelor/GitRepo/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/b855228f-1b50-4453-83a2-514aa66ad83e/some.json
 C:/Users/jaffa/OneDrive/Skrivebord/Bachelor/GitRepo/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/ac19df26-1ed1-44a9-9be9-4c7d2a14ef2b/some.json
+/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/2de5f194-e374-4500-95a9-e0821b729649/some.json
+/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/ce7b0046-d8ec-49f8-b502-c8a4c3d9b0a2/some.json
+/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/6f9e4dbe-88dc-4aa9-a361-a38a4b6f8820/some.json
+/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/1a97b8cf-1a5d-4411-b422-ae68d1574a67/some.json
+/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/2aedef9d-0ae3-4167-bd46-3daa891f8dc2/some.json
+/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/480f1426-905b-4ffe-83bf-3545d0a8b3e0/some.json
