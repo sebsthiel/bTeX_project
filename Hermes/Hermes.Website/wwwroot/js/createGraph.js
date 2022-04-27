@@ -4,8 +4,7 @@ function test() {
     console.log("From CreateGraph");
 }
 
-let nodes;
-let links;
+
 
 function createGraph(json) {
 
@@ -21,6 +20,11 @@ function createGraph(json) {
     //funGraph(nodes, links);
     lineGraph(nodes, links, envs);
 
+}
+
+
+function redraw(){
+    lineGraph(nodes,links,envs)
 }
 
 function createLine(json) {
@@ -11660,6 +11664,8 @@ var normalNodes = [];
 var paperNodes = [];
 var envNodes = [];
 
+var nodes, links, envs;
+
 // TODO figure out what width and height
 const width = window.innerWidth;//600; 
 const height = 600;
@@ -11681,6 +11687,12 @@ const envTextY = xaxisHeight - 10;
 const ShowPaperNodes = false; //isn't used
 
 
+var svgLinks;
+var envRect;
+var nodeCircles;
+var svgSectionLine;
+var currentScale;
+
 const zoomThreshold = 20;
 
 
@@ -11690,11 +11702,12 @@ var currentSelectedNode = null;
 var allNodes;
 
 
-function lineGraph(nodes, links, envs) {
+function lineGraph(input_nodes, input_links, input_envs) {
 
 
-    allNodes = nodes;
-    links = links;
+    allNodes = input_nodes;
+    links = input_links;
+    envs = input_envs;
     //console.log("env: " + envs[0]);
 
     allNodes.sort(compare);
@@ -11809,7 +11822,7 @@ function lineGraph(nodes, links, envs) {
         .domain([0, maxLineCount])
         .range([0, width]);
 
-    var currentScale = xAxisScale;
+    currentScale = xAxisScale;
 
     // select the svg for creating the graph
     // and configure the width and height
@@ -11901,11 +11914,11 @@ function lineGraph(nodes, links, envs) {
             .data(sectionNodes)
             .enter();
         
-    var svgSectionLine = svgSection.append('g')
+    svgSectionLine = svgSection.append('g')
         .append('rect')
         .attr('width', node => getLineCountDiff(node, xAxisScale))
         .attr('height', node => sectionRectHeight(node))
-        .attr('fill', "red")
+        .attr('fill', sectionColor)
         .attr('fill-opacity', "0.3")
         .attr('x', node => getlineCount(node, xAxisScale))
         .attr('y', getEnvNodeY)
@@ -11918,7 +11931,7 @@ function lineGraph(nodes, links, envs) {
         .data(envNodes)
         .enter().append('g');
 
-    var envRect = svgEnvs
+    envRect = svgEnvs
         .append('rect')
         .attr('width', node => getLineCountDiff(node, xAxisScale))
         .attr('height', node => {
@@ -11953,13 +11966,13 @@ function lineGraph(nodes, links, envs) {
 
     
 
-    var nodeCircles = svgNodes.append('circle')
+    nodeCircles = svgNodes.append('circle')
         .attr('r', getRadiusNode)
         .attr('fill', "gray")
         .attr('cx', node => getlineCount(node, xAxisScale))
         .attr('cy', getNodeY);
 
-    var svgLinks = svg
+    svgLinks = svg
         .selectAll('mylinks')
         .data(links)
         .enter()
@@ -12391,8 +12404,24 @@ function compare(a, b) {
     return 0;
 }
 
+
+
 function setColors(colorObject) {
     colors = colorObject;
+
+    svgLinks
+            .attr("stroke", getLinkColor)
+
+        envRect.attr("fill", colors.envColor);
+       
+
+     
+        svgSectionLine.attr("fill", colors.sectionColor);
+       
+        nodeCircles.attr("fill", colors.nodeColor);
+
+    console.log("color: " + colors.envColor)
+    //redraw();
     /*allNodes.forEach(node => {
         let nodeName = node.name;
         nodeDict[nodeName] = node;

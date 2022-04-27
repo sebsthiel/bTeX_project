@@ -331,12 +331,12 @@
     }
 
     class ColorObject {
-        constructor(showPaperNodes, nodeColor, linkColor, sectionColor, theoremColor) {
+        constructor(showPaperNodes, nodeColor, linkColor, sectionColor, envColor) {
             this.showPaperNodes = showPaperNodes;
             this.nodeColor = nodeColor;
             this.linkColor = linkColor;
             this.sectionColor = sectionColor;
-            this.theoremColor = theoremColor;
+            this.envColor = envColor;
         }
     }
 
@@ -347,9 +347,9 @@
         var nodeColor       = document.getElementById("node-color").value;
         var linkColor       = document.getElementById("link-color").value;
         var sectionColor    = document.getElementById("section-color").value;
-        var theoremColor = document.getElementById("theorem-color").value;
+        var envColor        = document.getElementById("theorem-color").value;
 
-        var colors = new ColorObject(showPaperNodes, nodeColor, linkColor, sectionColor, theoremColor);
+        var colors = new ColorObject(showPaperNodes, nodeColor, linkColor, sectionColor, envColor);
         setColors(colors);
         
 
@@ -357,7 +357,7 @@
         console.log("nodecolor: " + nodeColor);
         console.log("linkcolor: " + linkColor);
         console.log("sectioncolor: " + sectionColor);
-        console.log("theoremcolor: " + theoremColor);
+        console.log("theoremcolor: " + envColor);
 
         document.querySelector(".popup").style.visibility = "hidden";
     }

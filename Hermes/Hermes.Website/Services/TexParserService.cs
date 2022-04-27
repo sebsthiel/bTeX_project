@@ -52,8 +52,8 @@ namespace Hermes.Website.Services
                 envTypeDict.Add("section", sectionEnv);
 
             // Go through file
-
-            string pattern = @"(?<comment>([^\\]|\n)%)|((?<newcommand>newcommand)({.+})?(\[.*\])?){(?<newcommandlines>(\n.*)*)}|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
+            string pattern = @"(?<comment>([^\\]|\n)%)|((re)?(?<newcommand>newcommand)(\\[^{]*)?({.+})?(\[.*\])?){(?<newcommandlines>.*(\n.*)*)}|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
+            //string pattern = @"(?<comment>([^\\]|\n)%)|((?<newcommand>newcommand)({.+})?(\[.*\])?){(?<newcommandlines>(\n.*)*)}|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
             //@"(?<comment>(([^\\]|\n)%)|\\renewcommand)|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
             //@"(?<comment>([^\\]|\n)%)|\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
 
@@ -130,6 +130,7 @@ namespace Hermes.Website.Services
                 {
 
                     // Check how many sub
+                    //Console.WriteLine(groups["type"].Value + " : " + groups["typeName"].Value);
                     var subCountSubsection = subCount(groups["type"].Value);
                     var subCountCreatedAt = subCount(nodeDict[createdAt].GetType());
                     EnvNode newSubSection = null;
@@ -604,7 +605,7 @@ namespace Hermes.Website.Services
             foreach (Node node in newNodes)
             {
                 // FIXME SEB ÆNDREDE da der i en bib fil var samme entry to gange xd
-                Console.WriteLine("adding node " + node.GetName());
+               
                 if (!nodeDict.TryAdd(node.GetName(), node))
                 {
                     Console.WriteLine("NODE ALREADY EXISTS");

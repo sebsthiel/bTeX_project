@@ -235,15 +235,17 @@ namespace Hermes.Website.Controllers
 
         [HttpPost]
         [Route("pdf")]
-        public IActionResult PostFileAsync(string guid)
+        public async Task<IActionResult> PostFileAsync(string guid)
         {
             try
             {
 
-
+                
                 Console.WriteLine("HALLO _-------_______---_-_--_: ");
                 string pdfDir = environment.ContentRootPath + "/papers/pdfs/" + guid + "/";
                 Console.WriteLine("guid: " + guid);
+                await Task.Delay(5000);
+                Console.WriteLine("pdfDir: " + pdfDir);
                 var pdfPath = Directory.GetFiles(pdfDir, "*.pdf", SearchOption.TopDirectoryOnly)[0];
                 Console.WriteLine("pdfPath: " + pdfPath);
                 FileStream pdf = new FileStream(pdfPath, FileMode.Open);
