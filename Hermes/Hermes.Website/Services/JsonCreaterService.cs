@@ -16,10 +16,10 @@ namespace Hermes.Website.Services
 
         public IWebHostEnvironment WebHostEnvironment { get; }
 
-        public void CreateJsonFile(List<Node> nodes, List<Link> links, List<Env> environments, string jsonPath)
+        public void CreateJsonFile(List<Node> nodes, List<Link> links, List<Env> environments, HashSet<string> labelPrefixes, string jsonPath)
         {
 
-            JsonObject json = new JsonObject(nodes, links, environments);
+            JsonObject json = new JsonObject(nodes, links, environments, labelPrefixes);
             
             string strResultJson = JsonConvert.SerializeObject(json, Formatting.Indented);
             File.WriteAllText(jsonPath, strResultJson);

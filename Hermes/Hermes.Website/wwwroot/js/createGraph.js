@@ -8,11 +8,11 @@ function test() {
 
 function createGraph(json) {
 
-
     nodes = json.nodes;
     links = json.links;
     envs = json.environments;
 
+    labPrefixDepth = setupLabPrefixes(json.labelPrefixes);
 
     //makeGraph(nodes, links);
     //newGraph(nodes, links);
@@ -11654,11 +11654,12 @@ function createLine(json) {
   
 }
 
-var colors = new ColorObject(false, "gray", "black", "red", "purple");
+var colors = new ColorObject(false, "#8C8C8C", "#000000", "#FF2D00", "#BE00FF");
 
 var linkDict = {};
 var nodeDict = {};
 var envDict = {};
+var labPrefixDepth = {};
 var sectionNodes = [];
 var normalNodes = [];
 var paperNodes = [];
@@ -11698,7 +11699,6 @@ const zoomThreshold = 20;
 
 var currentSelectedNode = null;
 
-//temporary by Andreas
 var allNodes;
 
 
@@ -11738,7 +11738,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
 
         }
         else {
-            console.log("setting normal y: " + node.type);
+            //console.log("setting normal y: " + node.type);
             nodeDict[nodeName].y = defaultNodeY;
         }
         
@@ -11807,7 +11807,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
                 if (prevNode.y == defaultNodeY && (node.lineCount - prevNode.lineCount) <= threshold) {
                     node.y = defaultNodeY + getRandomInt(10,30);
                     prevNode = node;
-                    console.log("new prevNode: " + node.type +  " " +  (node.type != "refNode"));
+                    //console.log("new prevNode: " + node.type +  " " +  (node.type != "refNode"));
                 } else {
                     prevNode = node;
                 }
@@ -12414,7 +12414,14 @@ function compare(a, b) {
     return 0;
 }
 
-
+function setupLabPrefixes(prefixes) {
+    prefixHeightDict = {};
+    prefixHeight = height / prefixes.length;
+    for (var i = 0; i < prefixes.length; i++) {
+        prefixHeightDict[prefixes[i]] = prefixHeight * i;
+    }
+    return prefixHeightDict;
+}
 
 function setColors(colorObject) {
     colors = colorObject;
@@ -12447,7 +12454,7 @@ function setColors(colorObject) {
        
         nodeCircles.attr("fill", colors.nodeColor);
 
-    console.log("color: " + colors.envColor)
+    //console.log("color: " + colors.envColor)
     //redraw();
     /*allNodes.forEach(node => {
         let nodeName = node.name;

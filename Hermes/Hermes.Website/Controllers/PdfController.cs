@@ -24,6 +24,7 @@ namespace Hermes.Website.Controllers
         public TexCompilerService CompilerService;
         public TexParserService ParserService;
         public BibParserService BibService;
+        public BBLParserService BblService;
         public JsonCreaterService JsonService;
         private MultiTexService MultiService;
 
@@ -34,6 +35,7 @@ namespace Hermes.Website.Controllers
             TexCompilerService compilerService,
             TexParserService texParserService,
             BibParserService bibService,
+            BBLParserService bblService,
             JsonCreaterService jsonService,
             MultiTexService multiService)
         {
@@ -41,6 +43,7 @@ namespace Hermes.Website.Controllers
             CompilerService = compilerService;
             ParserService = texParserService;
             BibService = bibService;
+            BblService = bblService;
             JsonService = jsonService;
             MultiService = multiService;
         }
@@ -52,167 +55,182 @@ namespace Hermes.Website.Controllers
             string[] texFiles;
             //try
             //{
-                string pdfPath;
+            string pdfPath;
 
-                string texFile = "";
+            string texFile = "";
 
-                Console.WriteLine("POST REQUEST");
-
-
-
-                var userId = Guid.NewGuid();
-
-                var guid = new ContentResult
-                {
-                    Content = "{\"guid\" :" + "\"" + userId + "\"}",
-                    ContentType = "application/json"
-                };
+            Console.WriteLine("POST REQUEST");
 
 
-                long size = file.Length;
-                if (size <= 0) return null;
 
-                // creating paths and directory for the new files that will be saved
-                var projectName = userId;//Path.GetFileNameWithoutExtension(file.FileName);
-                Console.WriteLine("project name: " + projectName);
-                string texDir = Path.Combine(new string[] { environment.ContentRootPath, "papers", "tex", projectName + "", " " }).Trim();
-                //environment.ContentRootPath + "/papers/tex/" + projectName + "/";
-                string zipDir = Path.Combine(new string[] { environment.ContentRootPath, "papers", "zips", projectName + "", " " }).Trim();
-                //environment.ContentRootPath + "/papers/zips/" + projectName + "/";
-                string pdfDir = Path.Combine(new string[] { environment.ContentRootPath, "papers", "pdfs", projectName + "", " " }).Trim();
-                //environment.ContentRootPath + "/papers/pdfs/" + projectName + "/";
-                string jsonDir = Path.Combine(new string[] { environment.ContentRootPath, "papers", "jsons", projectName + "", " " }).Trim();
-                //environment.ContentRootPath + "/papers/jsons/" + projectName + "/";
-                Directory.CreateDirectory(texDir);
-                Directory.CreateDirectory(zipDir);
-                Directory.CreateDirectory(pdfDir);
-                Directory.CreateDirectory(jsonDir);
+            var userId = Guid.NewGuid();
 
-               
-                string zipFile = zipDir + file.FileName;
+            var guid = new ContentResult
+            {
+                Content = "{\"guid\" :" + "\"" + userId + "\"}",
+                ContentType = "application/json"
+            };
 
-                Console.WriteLine(file.ContentType);
+
+            long size = file.Length;
+            if (size <= 0) return null;
+
+            // creating paths and directory for the new files that will be saved
+            var projectName = userId;//Path.GetFileNameWithoutExtension(file.FileName);
+            Console.WriteLine("project name: " + projectName);
+            string texDir = Path.Combine(new string[] { environment.ContentRootPath, "papers", "tex", projectName + "", " " }).Trim();
+            //environment.ContentRootPath + "/papers/tex/" + projectName + "/";
+            string zipDir = Path.Combine(new string[] { environment.ContentRootPath, "papers", "zips", projectName + "", " " }).Trim();
+            //environment.ContentRootPath + "/papers/zips/" + projectName + "/";
+            string pdfDir = Path.Combine(new string[] { environment.ContentRootPath, "papers", "pdfs", projectName + "", " " }).Trim();
+            //environment.ContentRootPath + "/papers/pdfs/" + projectName + "/";
+            string jsonDir = Path.Combine(new string[] { environment.ContentRootPath, "papers", "jsons", projectName + "", " " }).Trim();
+            //environment.ContentRootPath + "/papers/jsons/" + projectName + "/";
+            Directory.CreateDirectory(texDir);
+            Directory.CreateDirectory(zipDir);
+            Directory.CreateDirectory(pdfDir);
+            Directory.CreateDirectory(jsonDir);
+
+
+            string zipFile = zipDir + file.FileName;
+
+            Console.WriteLine(file.ContentType);
                 
-                // checking for zip
-                if (file.ContentType == "application/zip" || file.ContentType == "application/x-zip-compressed")
+            // checking for zip
+            if (file.ContentType == "application/zip" || file.ContentType == "application/x-zip-compressed")
+            {
+                // save zip file and unzip at zipDir location
+                TexCompilerService.DeleteContentInDir(zipDir);
+                using (var stream = System.IO.File.Create(zipFile))
                 {
-                    // save zip file and unzip at zipDir location
-                    TexCompilerService.DeleteContentInDir(zipDir);
-                    using (var stream = System.IO.File.Create(zipFile))
-                    {
-                        Console.WriteLine("ZipFile: " + zipFile);
-                        await file.CopyToAsync(stream);
-                    }
-                    TexCompilerService.DeleteContentInDir(texDir);
-                    ZipFile.ExtractToDirectory(zipFile, texDir);
+                    //Console.WriteLine("ZipFile: " + zipFile);
+                    await file.CopyToAsync(stream);
+                }
+                TexCompilerService.DeleteContentInDir(texDir);
+                Console.WriteLine("ZipFile: " + zipFile);
+                Console.WriteLine("TexDir: " + texDir);
+                ZipFile.ExtractToDirectory(zipFile, texDir);
 
 
-                    //TODO FIND A WAY TO FIND main.tex or something -> which .tex file to compile?
-                    texFiles = Directory.GetFiles(texDir, "*.tex", SearchOption.TopDirectoryOnly);
-                    amountOfTexFiles = texFiles.Length;
-                    if (amountOfTexFiles > 1)
+                //TODO FIND A WAY TO FIND main.tex or something -> which .tex file to compile?
+                texFiles = Directory.GetFiles(texDir, "*.tex", SearchOption.TopDirectoryOnly);
+                amountOfTexFiles = texFiles.Length;
+                if (amountOfTexFiles > 1)
+                {
+                    Console.WriteLine("MORE THAN 1 TEX");
+                    foreach (string v in texFiles)
                     {
-                        Console.WriteLine("MORE THAN 1 TEX");
-                        foreach (string v in texFiles)
+
+                        if (Path.GetFileNameWithoutExtension(v) == "main")
                         {
+                            texFile = v;
+                            break;
 
-                            if (Path.GetFileNameWithoutExtension(v) == "main")
-                            {
-                                texFile = v;
-                                break;
-
-                            }
                         }
-
-                    }
-                    else
-                    {
-                        //If there is only one .tex file the main name is just set to that. 
-                        mainName = Path.GetFileName(texFiles[0]);
-                        //remove .tex from filename
-                        mainName = mainName.Remove(mainName.Length - 4);
-                        Console.WriteLine("Only one .tex file from pdfController: " + mainName);
-
-                        texFile = texFiles[0];
                     }
 
-                    //Console.WriteLine("TexFile: " + texFile);
-
-
-                    // Parsing bibfile if there is a bib file
-                    // adding the new nodes to NodeDict
-
-                    //FIXME SEB ÆNDREDE zipDir to texDir
-                    var bibFiles = Directory.GetFiles(texDir, "*.bib", SearchOption.TopDirectoryOnly);
-                    Console.WriteLine("len: " + bibFiles.Length);
-                    if (bibFiles.Length > 1)
-                    {
-                        Console.WriteLine("MORE THAN 1 BIB");
-                    }
-                    else if (bibFiles.Length != 0)
-                    {
-                        List<Node> paperNodes = await BibService.ParseBibFile(bibFiles[0]);
-
-      
-
-                        // add to nodeDict
-                        ParserService.AddToNodeDict(paperNodes);
-
-                    }
-
-
-                    Console.WriteLine("Done with UnZip and bib");
                 }
                 else
                 {
-                    // Save single tex file
-                    string singleTexFile = texDir + file.FileName;
-                    using (var stream = System.IO.File.Create(singleTexFile))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
-                    texFile = singleTexFile;
+                    //If there is only one .tex file the main name is just set to that. 
+                    mainName = Path.GetFileName(texFiles[0]);
+                    //remove .tex from filename
+                    mainName = mainName.Remove(mainName.Length - 4);
+                    Console.WriteLine("Only one .tex file from pdfController: " + mainName);
+
+                    texFile = texFiles[0];
+                }
+
+                //Console.WriteLine("TexFile: " + texFile);
+
+
+                // Parsing bibfile if there is a bib file
+                // adding the new nodes to NodeDict
+
+                //FIXME SEB ÆNDREDE zipDir to texDir
+                var bibFiles = Directory.GetFiles(texDir, "*.bib", SearchOption.TopDirectoryOnly);
+                Console.WriteLine("BibFiles Length: " + bibFiles.Length);
+                if (bibFiles.Length > 1)
+                {
+                    Console.WriteLine("MORE THAN 1 BIB");
+                }
+                else if (bibFiles.Length != 0)
+                {
+                    List<Node> paperNodes = await BibService.ParseBibFile(bibFiles[0]);
+                    // add to nodeDict
+                    ParserService.AddToNodeDict(paperNodes);
+
+                }
+
+                //Check for bbl file
+                var bblFiles = Directory.GetFiles(texDir, "*.bbl", SearchOption.TopDirectoryOnly);
+                Console.WriteLine("BBLFiles length: " + bblFiles.Length);
+                if (bibFiles.Length > 1)
+                {
+                    Console.WriteLine("MORE THAN 1 BBL");
+                }
+                else if (bibFiles.Length != 0)
+                {
+                    List<Node> paperNodes = await BblService.ParseBBLFile(bibFiles[0]);
+                    // add to nodeDict
+                    ParserService.AddToNodeDict(paperNodes);
 
                 }
 
 
+            Console.WriteLine("Done with UnZip and bib");
+            }
+            else
+            {
+                // Save single tex file
+                string singleTexFile = texDir + file.FileName;
+                using (var stream = System.IO.File.Create(singleTexFile))
+                {
+                    await file.CopyToAsync(stream);
+                }
+                texFile = singleTexFile;
 
-                // Compiling the texfile to pdf
-                pdfPath = await CompilerService.CompileTexAsync(texDir, pdfDir, texFile);
-
-                // Parsing tex to get dict of Nodes and list of Edges (links)
-                //ParserService.ParseTex(texFile);
-
-                var tmpFiles = Directory.GetFiles(texDir, "*.tex", SearchOption.AllDirectories);
-
-                /***********ADD MultiTexService here****************/
-                //TODO: maybe add a sort of default value if that is possible in c#
-                if (mainName == null)
-                    mainName = "";
-                string allTexFilesAsString = MultiService.ScanMultipleFiles(tmpFiles, mainName);
-                ParserService.ParseTex(allTexFilesAsString);
-
-                //foreach (string v in tmpFiles)
-                //{
-                //    Console.WriteLine("Should parse: " + v);
-                //    ParserService.ParseTexFromFile(v);
-                //}
-
-                //Create Jsonfile for d3.js
-                var nodes = ParserService.GetNodes().Values.ToList();
-                var links = ParserService.GetLinks();
-                var environments = ParserService.GetEnvs().Values.ToList();
+            }
 
 
-                var dagNodes = makeDagNodes(ParserService.GetNodes(), links);
 
-                // JsonService.CreateDagJson(dagNodes, "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/tester/some.json");
-                JsonService.CreateJsonFile(nodes, links, environments, jsonDir + "some.json");
+            // Compiling the texfile to pdf
+            pdfPath = await CompilerService.CompileTexAsync(texDir, pdfDir, texFile);
 
-    
-                return guid;
-                //FileStream pdf = new FileStream(pdfPath, FileMode.Open);
-                //return new FileStreamResult(pdf, "application/pdf");
+            // Parsing tex to get dict of Nodes and list of Edges (links)
+            //ParserService.ParseTex(texFile);
+
+            var tmpFiles = Directory.GetFiles(texDir, "*.tex", SearchOption.AllDirectories);
+
+            /***********ADD MultiTexService here****************/
+            //TODO: maybe add a sort of default value if that is possible in c#
+            if (mainName == null)
+                mainName = "";
+            string allTexFilesAsString = MultiService.ScanMultipleFiles(tmpFiles, mainName);
+            ParserService.ParseTex(allTexFilesAsString);
+
+            //foreach (string v in tmpFiles)
+            //{
+            //    Console.WriteLine("Should parse: " + v);
+            //    ParserService.ParseTexFromFile(v);
+            //}
+
+            //Create Jsonfile for d3.js
+            var nodes = ParserService.GetNodes().Values.ToList();
+            var links = ParserService.GetLinks();
+            var prefixes = ParserService.GetPrefixes();
+            var environments = ParserService.GetEnvs().Values.ToList();
+
+
+            var dagNodes = makeDagNodes(ParserService.GetNodes(), links);
+
+            // JsonService.CreateDagJson(dagNodes, "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/tester/some.json");
+            JsonService.CreateJsonFile(nodes, links, environments, prefixes, jsonDir + "some.json");
+
+            await Task.Delay(2000);
+            return guid;
+            //FileStream pdf = new FileStream(pdfPath, FileMode.Open);
+            //return new FileStreamResult(pdf, "application/pdf");
             //} catch (FileNotFoundException f)
             //{
                 
