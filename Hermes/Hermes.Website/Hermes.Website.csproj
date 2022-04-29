@@ -14,15 +14,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="serverPdfs\" />
-    <Folder Include="papers\jsons\" />
-    <Folder Include="papers\jsons\" />
-    <Folder Include="papers\jsons\" />
-    <Folder Include="papers\jsons\" />
-    <Folder Include="papers\jsons\" />
-    <Folder Include="papers\jsons\" />
-    <Folder Include="papers\jsons\" />
-    <Folder Include="papers\jsons\" />
-    <Folder Include="papers\jsons\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

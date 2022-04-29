@@ -34,12 +34,13 @@ namespace Hermes.Website.Services
             foreach (string filePath in filePaths)
             {
                 string fileName = Path.GetFileName(filePath);
-                Console.WriteLine("Name: " + fileName);
+                //Console.WriteLine("Name: " + fileName);
                 //ignore files in MACOSX
                 if (!fileName.StartsWith("._"))
                 {
                     string fileText = File.ReadAllText(filePath);
-                  
+
+                    Console.WriteLine("adding file: " + fileName);
                     files.Add(fileName, fileText);
                 }
                 
@@ -73,7 +74,8 @@ namespace Hermes.Website.Services
                     fileName = fileNameArray[fileNameArray.Length-1];
                 }
 
-                //TODO: Maybe unnecesary 
+                //TODO: Maybe unnecesary
+                Console.WriteLine("fileName: " + fileName);
                 string inputFileText = ScanFile(files[fileName]);
                 fileAsString = fileAsString.Replace(groups["input"].Value, inputFileText);
             }

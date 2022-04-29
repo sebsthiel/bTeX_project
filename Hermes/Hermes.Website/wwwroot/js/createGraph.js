@@ -11675,9 +11675,9 @@ const defaultNodeY = xaxisHeight + 50;
 const defaultRefNodeY = defaultNodeY + 100;
 const defaultPaperY = 20;
 const defaultEnvY = xaxisHeight;
-const nodeColor = "gray" //isn't used
-const envColor = "purple" //isn't used
-const sectionColor = "red" //isn't used
+//const nodeColor = "gray" //isn't used
+//const envColor = "purple" //isn't used
+//const sectionColor = "red" //isn't used
 const defaultNodeRadius = 6;
 const envRectHeight = 200;
 const defaultSectionRectHeight = envRectHeight + 50
@@ -11712,6 +11712,12 @@ function lineGraph(input_nodes, input_links, input_envs) {
 
     allNodes.sort(compare);
 
+
+
+    // Calculate all y-coords for prefix
+    // for i = 0; i < prefixes.Length; i++;
+    //      prefixY[prefixes[i]] = (graphHeight/prefixes.Length)*i+offset
+
     // create dict of nodes for lookup later  
     let preSectionName;
     let preSubSect;
@@ -11728,7 +11734,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
         }
         else if (node.type == "refNode" || node.type == "citeNode") {
             //TODO ÆNDRING
-            nodeDict[nodeName].y = defaultNodeY; //defaultRefNodeY;
+            nodeDict[nodeName].y = defaultRefNodeY;//defaultNodeY; //defaultRefNodeY;
 
         }
         else {
@@ -11741,6 +11747,10 @@ function lineGraph(input_nodes, input_links, input_envs) {
         } else {
             nodeDict[nodeName].color = colors.nodeColor;
         }
+
+
+        // new code for prefixY
+        //nodeDict[nodeName].y = prefixY[nodeName];
         
 
     })
@@ -11792,7 +11802,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
             bestLineCount = node.lineCountEnd;
         }
           //TODO ÆNDRING
-        if (!node.type.includes("section") /*&& (node.type != "refNode" && node.type != "citeNode")*/) {
+        if (!node.type.includes("section") && (node.type != "refNode" && node.type != "citeNode")) {
             if (prevNode != null) {
                 if (prevNode.y == defaultNodeY && (node.lineCount - prevNode.lineCount) <= threshold) {
                     node.y = defaultNodeY + getRandomInt(10,30);
@@ -11918,7 +11928,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
         .append('rect')
         .attr('width', node => getLineCountDiff(node, xAxisScale))
         .attr('height', node => sectionRectHeight(node))
-        .attr('fill', sectionColor)
+        .attr('fill', colors.sectionColor)
         .attr('fill-opacity', "0.3")
         .attr('x', node => getlineCount(node, xAxisScale))
         .attr('y', getEnvNodeY)
@@ -12266,7 +12276,7 @@ function visibleLinks(link, scale) {
 
     
     if (currentSelectedNode != null && (link.target == currentSelectedNode.name || link.source == currentSelectedNode.name)) {
-        return 1
+        return 0.5;
     }
 
     if (sourceOutside && targetOutside) {
@@ -12277,7 +12287,7 @@ function visibleLinks(link, scale) {
         if (currentSelectedNode != null) {
             return 0.1;
         } else {
-            return 1;
+            return 0.5;
         }
         
     }
@@ -12408,6 +12418,23 @@ function compare(a, b) {
 
 function setColors(colorObject) {
     colors = colorObject;
+
+
+    allNodes.forEach(node => {
+        let nodeName = node.name;
+        if (node.type.includes("section")) {
+            nodeDict[nodeName].color = colors.sectionColor;
+        } else if (node.type in envDict) {
+            nodeDict[nodeName].color = colors.envColor;
+        } else {
+            nodeDict[nodeName].color = colors.nodeColor;
+        }
+
+
+    });
+    
+
+
 
     svgLinks
             .attr("stroke", getLinkColor)

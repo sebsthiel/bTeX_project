@@ -27,6 +27,8 @@ namespace Hermes.Website.Controllers
         public JsonCreaterService JsonService;
         private MultiTexService MultiService;
 
+       
+
         public PdfController(
             IWebHostEnvironment environment,
             TexCompilerService compilerService,
@@ -86,7 +88,7 @@ namespace Hermes.Website.Controllers
                 Directory.CreateDirectory(pdfDir);
                 Directory.CreateDirectory(jsonDir);
 
-
+               
                 string zipFile = zipDir + file.FileName;
 
                 Console.WriteLine(file.ContentType);
@@ -207,7 +209,7 @@ namespace Hermes.Website.Controllers
                 // JsonService.CreateDagJson(dagNodes, "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/tester/some.json");
                 JsonService.CreateJsonFile(nodes, links, environments, jsonDir + "some.json");
 
-                await Task.Delay(2000);
+    
                 return guid;
                 //FileStream pdf = new FileStream(pdfPath, FileMode.Open);
                 //return new FileStreamResult(pdf, "application/pdf");

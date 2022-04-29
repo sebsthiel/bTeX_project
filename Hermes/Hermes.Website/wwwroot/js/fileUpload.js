@@ -79,15 +79,13 @@ async function uploadFile() {
 
             //console.log("guid: " + await data.guid);
             let guid = await data.guid;
-            let pdf = await getPdf(guid);
             let json = await getJson(guid);
-
-
-            document.getElementById("outputPdf").src = pdf;
-
             // Load json into d3 graph
             createGraph(json);
+            let pdf = await getPdf(guid);
+            document.getElementById("outputPdf").src = pdf;
 
+            
         });
     }
 

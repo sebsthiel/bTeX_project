@@ -69,7 +69,7 @@ namespace Hermes.Website.Services
                     if (currentPaper != null){ paperList.Add(currentPaper);}
                     //TODO: figure out what to do with linecount within Bib files
                     currentPaper = new PaperNode(paperId, "BibFile", "paper", -1);
-                    Console.WriteLine("HALLO: " + paperId);
+                    //Console.WriteLine("HALLO: " + paperId);
                 }
                 if (paperType != null && paperType != "") 
                 {
@@ -147,7 +147,7 @@ namespace Hermes.Website.Services
                             currentPaper.isbn = artInfoValue;
                             break;
                         default:
-                            Console.WriteLine(artInfo + " doesn't match any cases");
+                            //Console.WriteLine(artInfo + " doesn't match any cases");
                             break;
 
                     }
