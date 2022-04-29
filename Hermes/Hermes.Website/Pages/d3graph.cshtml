@@ -59,7 +59,17 @@
 
 
 </style>
-
+<script>
+    class ColorObject {
+        constructor(showPaperNodes, nodeColor, linkColor, sectionColor, envColor) {
+            this.showPaperNodes = showPaperNodes;
+            this.nodeColor = nodeColor;
+            this.linkColor = linkColor;
+            this.sectionColor = sectionColor;
+            this.envColor = envColor;
+        }
+    }
+</script>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="~/js/createGraph.js" asp-append-version="true"></script>
 

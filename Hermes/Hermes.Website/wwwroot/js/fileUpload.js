@@ -41,9 +41,6 @@ async function getJson(guid) {
     } else {
         let json = await response.json();
 
-        console.log(json.nodes[1]);
-
-        console.log("Type: " + typeof (json));
 
         return json;
     }

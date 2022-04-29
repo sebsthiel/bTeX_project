@@ -53,18 +53,17 @@
         <div class="split pdf">
             <div class="centered" id="pdfviewer">
                 <embed id="outputPdf" src="" width="500" height="375" type="application/pdf">
-                <h1>*PDF*</h1>
+                <div>
+                    <h1 id="nodeName"> </h1>
+                    <p id="nodeType"></p>
+                    <p id="nodeCreatedAt"></p>
+
+                </div>
             </div>
         </div>
 
         <div class="split graph">
 
-            <div>
-                <h1 id="nodeName"> </h1>
-                <p id="nodeType"></p>
-                <p id="nodeCreatedAt"></p>
-
-            </div>
             <div id="d3graph"></div>
 
 
@@ -177,6 +176,17 @@
         }
     #d3graph{
         left:0;
+    }
+    .backgroundColor {
+        fill: white;
+        /* Not selcect text */
+        pointer-events: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 
     .popup {

@@ -258,15 +258,17 @@ namespace Hermes.Website.Services
                 {
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
                     typeNameWithoutRefs = typeNameWithoutRefs.ToLower();
-
+                    Console.WriteLine("label before: " + typeNameWithoutRefs);
                     string labPattern = @"((?<prefix>\w*):)?(?<labelName>.*)";
                     MatchCollection labMatch = Regex.Matches(typeNameWithoutRefs, labPattern, options);
                     GroupCollection labGroups = labMatch[0].Groups;
                     string labelPrefix = labGroups["prefix"].Value;
-                    if (labelPrefix != "")
-                        labelPrefixes.Add(labelPrefix);
-                    typeNameWithoutRefs = labGroups["labelName"].Value;
 
+
+                    if (labelPrefix != "" && labelPrefix != "sec" && !labelPrefix.Contains("subsec"))
+                        labelPrefixes.Add(labelPrefix);
+                    
+                    //Console.WriteLine("label after " + typeNameWithoutRefs);
                     Node node1 = new Node(typeNameWithoutRefs, createdAt, groups["type"].Value, lineCount);
                     nodeDict[node1.name] = node1;
                     //Console.WriteLine("Adding label: " + node1.GetName());
