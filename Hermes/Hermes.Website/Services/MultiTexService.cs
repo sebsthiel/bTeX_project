@@ -25,7 +25,6 @@ namespace Hermes.Website.Services
             //DefaultValue is main
             if (mainFileName == "")
                 mainFileName = "main";
-            mainFileName += ".tex";
             //try
             //{
             files = new Dictionary<string, string>();
@@ -34,6 +33,8 @@ namespace Hermes.Website.Services
             foreach (string filePath in filePaths)
             {
                 string fileName = Path.GetFileName(filePath);
+                if (fileName.EndsWith(".tex"))
+                    fileName = fileName.Remove(fileName.Length - 4);
                 Console.WriteLine("Name: " + fileName);
                 //ignore files in MACOSX
                 if (!fileName.StartsWith("._"))
@@ -72,8 +73,10 @@ namespace Hermes.Website.Services
                     string[] fileNameArray = fileName.Split("/");
                     fileName = fileNameArray[fileNameArray.Length-1];
                 }
-
+                if (fileName.EndsWith(".tex"))
+                    fileName = fileName.Remove(fileName.Length - 4);
                 //TODO: Maybe unnecesary 
+                
                 string inputFileText = ScanFile(files[fileName]);
                 fileAsString = fileAsString.Replace(groups["input"].Value, inputFileText);
             }

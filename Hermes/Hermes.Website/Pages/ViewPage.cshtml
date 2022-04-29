@@ -4,72 +4,15 @@
     ViewData["Title"] = "View Page";
 }
 
-<style>
-    .label {
-        font-size: 13px;
-        font-weight: bold;
-        fill: black;
-        /*text-anchor: middle;*/
-        /* Not selcect text */
-        pointer-events: none;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-
-    .title {
-        font-size: 15px;
-        font-weight: bold;
-        fill: black;
-        /* Not selcect text */
-        pointer-events: none;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-
-    .backgroundColor {
-        fill: white;
-        /* Not selcect text */
-        pointer-events: none;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-
-    .link {
-        /* Not selcect text */
-        pointer-events: none;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-</style>
-
-
 <body>
 
     <div class="topnav">
         <a href="./">Back</a>
         <button class="pref-button" onclick="openPreferences()" >Preferences</button>
-        <a class="nav-link text-dark" asp-area="" asp-page="BibParser">AbeaTesting</a>
         <div class="file-info">
             <input id="uploadFile" name="uploadFile" type="file">
             <input id="mainName" name="mainName" type="text" placeholder="Name of the main file" value="">
             <input type="submit" asp-page-handler="Upload" class="btn" onclick="uploadFile()">
-            
         </div>
     </div>
 
@@ -122,14 +65,12 @@
                 <p id="nodeCreatedAt"></p>
 
             </div>
-            <div id="d3graph">
-                <!--<h1>*GRAPH*</h1>-->
-            </div>
+            <div id="d3graph"></div>
 
 
         </div>
 
-        <div class="vertical-line"></div>
+        <div id="vertical-line"></div>
 
     </div>
 
@@ -186,13 +127,13 @@
         font-size: 17px;
     }
 
-    .vertical-line {
+    #vertical-line {
         height: 93%;
         width: 6px;
-        left: 50%;
+        left: 40%;
         top: 7%;
         background-color: #f2f2f2;
-        box-shadow: 3px 3px 10px 1px #4b4b4b;
+        box-shadow: 3px 7px 10px 1px #4b4b4b;
         /*border-left: 4px solid white;*/
         position: fixed;
         margin-left: -2px;
@@ -201,7 +142,6 @@
 
     .split {
         height: 93%;
-        width: 50%;
         top: 7%;
         position: fixed;
         z-index: 1;
@@ -211,12 +151,14 @@
 
     /* Control the left side */
     .pdf {
+        width: 40%;
         left: 0;
     }
 
     /* Control the right side */
     .graph {
-        left: 50%;
+        width: 60%;
+        left: 40%;
     }
 
     /* If you want the content centered horizontally and vertically */

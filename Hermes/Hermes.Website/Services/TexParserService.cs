@@ -26,6 +26,8 @@ namespace Hermes.Website.Services
 
         Dictionary<string, Node> nodeDict = new Dictionary<string, Node>();
 
+        HashSet<string> labelPrefixes = new HashSet<string>();
+
         List<Link> linksList = new List<Link>();
 
         string outerEnv;
@@ -256,6 +258,15 @@ namespace Hermes.Website.Services
                 {
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
                     typeNameWithoutRefs = typeNameWithoutRefs.ToLower();
+
+                    string labPattern = @"((?<prefix>\w*):)?(?<labelName>.*)";
+                    MatchCollection labMatch = Regex.Matches(typeNameWithoutRefs, labPattern, options);
+                    GroupCollection labGroups = labMatch[0].Groups;
+                    string labelPrefix = labGroups["prefix"].Value;
+                    if (labelPrefix != "")
+                        labelPrefixes.Add(labelPrefix);
+                    typeNameWithoutRefs = labGroups["labelName"].Value;
+
                     Node node1 = new Node(typeNameWithoutRefs, createdAt, groups["type"].Value, lineCount);
                     nodeDict[node1.name] = node1;
                     //Console.WriteLine("Adding label: " + node1.GetName());
@@ -484,26 +495,12 @@ namespace Hermes.Website.Services
                         }
                     }
 
-
                     //TODO Create smart constructer for env such that we dont have to pass 1, new list...
                     envTypeDict[envName] = new Env(envName, envText, 1, new List<string>(), shouldUpdateList);
                     //Console.WriteLine($"Added new Environment: {envName}");
 
                 }
-
             }
-
-
-
-            //foreach (Link link in nodeDict.Keys)
-            //{
-                //Console.WriteLine(nodeDict[key].GetName());
-            //}
-
-            //Console.WriteLine("DONE PARSING");
-
-
-
         }
 
         private void SetLineCountEndForMissing(EnvNode prevSection, int currentLineCount, int currentSub, int subCount)
@@ -598,6 +595,11 @@ namespace Hermes.Website.Services
         public Dictionary<string, Env> GetEnvs()
         {
             return envTypeDict;
+        }
+
+        public HashSet<string> GetPrefixes()
+        {
+            return labelPrefixes;
         }
 
         public void AddToNodeDict(List<Node> newNodes){
