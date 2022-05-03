@@ -2992,9 +2992,8 @@ function lineGraph(input_nodes, input_links, input_envs) {
     });
 
     nodeCircles.on("click", function (selected) {
-        console.log("Hey Listen!! " + selected.name);
-        console.log("Plaintext Tex code: " + nodeToLineText[selected.name]);
-        document.getElementById("nodeTexCode").innerHTML = nodeToLineText[selected.name];
+        document.getElementById("nodeTexCode").innerHTML = nodeToLineText[selected.name]; // TODO: change this so it works like the ones bellow
+
         textElements.attr("visibility", function (node) { return showName(node, selected) });
         nodeCircles.attr("fill", function (node) { return selectNode(node, selected) });
         textBackground.attr("visibility", function (node) { return showName(node, selected) });
