@@ -2622,11 +2622,11 @@ var nodes, links, envs;
 // TODO figure out what width and height
 const width = window.innerWidth;//600; 
 const graphWidth = width * 2;
-const xaxisHeight = 100;
-const height = window.innerHeight - xaxisHeight;
+const xaxisHeight = 50;
+const height = window.innerHeight - 50;
 const defaultNodeY = xaxisHeight + 50;
 const defaultRefNodeY = xaxisHeight//defaultNodeY + 100;
-const defaultPaperY = 20;
+const defaultPaperY = 30;
 const defaultEnvY = xaxisHeight;
 //const nodeColor = "gray" //isn't used
 //const envColor = "purple" //isn't used
@@ -2681,7 +2681,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
         }
         else if (node.type == "refNode" || node.type == "citeNode") {
             //TODO ÆNDRING
-            nodeDict[nodeName].y = labPrefixDepth["refNode"]//defaultRefNodeY;//defaultNodeY; //defaultRefNodeY;
+            nodeDict[nodeName].y = defaultNodeY;//labPrefixDepth["refNode"]//defaultRefNodeY;//defaultNodeY; //defaultRefNodeY;
            
             
 
@@ -2690,6 +2690,8 @@ function lineGraph(input_nodes, input_links, input_envs) {
             if (prefixType in labPrefixDepth) {
                 nodeDict[nodeName].y = labPrefixDepth[prefixType];
                 console.log("prefixType " + prefixType + " " + labPrefixDepth[prefixType]);
+
+              
             } else {
                 nodeDict[nodeName].y = defaultNodeY;
             }
@@ -2734,6 +2736,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
     
     var bestLineCount = 0;
     var prevNode = null;
+    var prevNodeMoved = false;
     var threshold = 50
 
     // filter for sections and other nodes  
@@ -2785,7 +2788,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
                         if (prefixType in labPrefixDepth) {
                             console.log("prefixType " + prefixType + " " + labPrefixDepth[prefixType])
                             nodeDict[node.name].y = labPrefixDepth[prefixType];
-
+                            
                         }
 
 
@@ -2807,8 +2810,27 @@ function lineGraph(input_nodes, input_links, input_envs) {
         if (bestLineCount < node.lineCountEnd) {
             bestLineCount = node.lineCountEnd;
         }
-          //TODO ÆNDRING clustering fix
-        //if (!node.type.includes("section") && (node.type != "refNode" && node.type != "citeNode")) {
+          // clustering fix 
+        if (prevNode != null) {
+            if (!prevNodeMoved && (node.lineCount - prevNode.lineCount) <= threshold) {
+                node.y = node.y + getRandomInt(-30,30);
+                prevNode = node;
+                prevNodeMoved = true;
+                //console.log("new prevNode: " + node.type +  " " +  (node.type != "refNode"));
+            } else {
+                prevNode = node;
+                prevNodeMoved = false;
+            }
+
+        }
+        else {
+            prevNode = node;
+        }
+            
+
+        
+
+         //if (!node.type.includes("section") && (node.type != "refNode" && node.type != "citeNode")) {
         //    if (prevNode != null) {
         //        if (prevNode.y == defaultNodeY && (node.lineCount - prevNode.lineCount) <= threshold) {
         //            node.y = defaultNodeY + getRandomInt(10,30);
@@ -2822,7 +2844,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
         //    else {
         //        prevNode = node;
         //    }
-            
+
 
         //}
        
@@ -2954,7 +2976,9 @@ function lineGraph(input_nodes, input_links, input_envs) {
         .attr('fill', colors.envColor)
         .attr('fill-opacity', "0.7")
         .attr('x', node => getlineCount(node, xAxisScale))
-        .attr('y', getEnvNodeY);
+        .attr('y', getEnvNodeY)
+        .attr('stroke-width', 1)
+        .attr('stroke', 'black');
 
 
     
@@ -2981,7 +3005,9 @@ function lineGraph(input_nodes, input_links, input_envs) {
         .attr('r', getRadiusNode)
         .attr('fill', "gray")
         .attr('cx', node => getlineCount(node, xAxisScale))
-        .attr('cy', getNodeY);
+        .attr('cy', getNodeY)
+        .attr('stroke-width', 0.5)
+        .attr('stroke', 'black');
 
     svgLinks = svg
         .selectAll('mylinks')
@@ -3277,7 +3303,7 @@ function visibleLinks(link, scale) {
 
     
     if (currentSelectedNode != null && (link.target == currentSelectedNode.name || link.source == currentSelectedNode.name)) {
-        return 0.5;
+        return 0.3; // visible
     }
 
     if (sourceOutside && targetOutside) {
@@ -3286,9 +3312,9 @@ function visibleLinks(link, scale) {
         return 0.05;
     } else {
         if (currentSelectedNode != null) {
-            return 0.1;
+            return 0.05;
         } else {
-            return 0.5;
+            return 0.3;// visible
         }
         
     }
@@ -3301,7 +3327,7 @@ function getLinkColor(link) {
         return colors.linkColor;
         //return "black";
     } else {
-        return "grey";
+        return "orange";
     }
 }
 
@@ -3311,9 +3337,12 @@ function getLinkColor(link) {
 function createArc(d, scale) {
 
     //console.log(d.source);
-    console.log(d.target);
-    //console.log(nodeDict[d.target]);
-    if (!colors.ShowPaperNodes && nodeDict[d.target].type == "paper") {
+    //console.log(d.target);
+    console.log("LINK: ");
+    console.log(nodeDict[d.source]);
+    console.log(nodeDict[d.target]);
+    console.log("shpw : " + colors.showPaperNodes);
+    if (!colors.showPaperNodes && nodeDict[d.target].type == "paper") {
         return [];
     }
 
@@ -3437,7 +3466,7 @@ function setupLabPrefixes(prefixes) {
     prefixes.splice(((prefixes.length + 1) / 2), 0, "refNode");
     console.log("HEEEY");
     for (var i = 0; i < prefixes.length; i++) {
-        prefixHeightDict[prefixes[i]] = prefixHeight2 + (((height - prefixHeight2) / prefixes.length) * i);
+        prefixHeightDict[prefixes[i]] = prefixHeight2 + (((defaultSectionRectHeight - prefixHeight2) / prefixes.length) * i);
         console.log(prefixHeightDict[prefixes[i]]);
     }
     return prefixHeightDict;

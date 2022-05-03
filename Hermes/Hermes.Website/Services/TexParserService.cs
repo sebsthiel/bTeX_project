@@ -18,6 +18,10 @@ namespace Hermes.Website.Services
             createdAt = outerEnv;
 
             ID_Generator.resetIDs();
+            Env figEnv = new Env("figure", "fig", 0, new List<string>(), new List<string>());
+            Env proof = new Env("proof", "proof", 0, new List<string>(), new List<string>());
+            envTypeDict.TryAdd("figure", figEnv);
+            envTypeDict.TryAdd("proof", proof);
         }
 
         public IWebHostEnvironment WebHostEnvironment { get; }
@@ -340,8 +344,19 @@ namespace Hermes.Website.Services
                     if (!(envTypeDict.ContainsKey(typeNameWithoutRefs)))
                     {
                         //Console.WriteLine("Skipping over BEGIN: " + typeNameWithoutRefs);
+                        //TODO new stuff
+                        //Env newEnv = new Env(typeNameWithoutRefs, typeNameWithoutRefs, 0, new List<string>(), new List<string>());
+                        //envTypeDict.TryAdd(typeNameWithoutRefs, newEnv);
+                        //var basicEnvNode = new EnvNode(typeNameWithoutRefs, createdAt, typeNameWithoutRefs, 0, lineCount);
+                        //nodeDict[typeNameWithoutRefs] = basicEnvNode;
+
+                        //createdAt = typeNameWithoutRefs;
+                       
                         if (remainingString != "")
                             ParseTex(remainingString);
+
+                        
+
                         continue;
                     }
 
