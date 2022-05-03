@@ -2771,24 +2771,27 @@ function lineGraph(input_nodes, input_links, input_envs) {
             }
             normalNodes.push(node);
 
-            let nameToTarget = node.name.split(":id:")[0];
-            nameToTarget = nameToTarget.replace(/(ref to)|(citation to)/, "").trim();
-            console.log("nameTotarget " + nameToTarget);
-            console.log("nameTotarget " + nodeDict[nameToTarget]);
 
-            if (nameToTarget in nodeDict) {
-                if (nodeDict[nameToTarget].type == "label") {
+            if (node.type == "refNode" || node.type == "citeNode") {
+                let nameToTarget = node.name.split(":id:")[0];
+                nameToTarget = nameToTarget.replace(/(ref to)|(citation to)/, "").trim();
+                console.log("nameTotarget " + nameToTarget);
+                console.log("nameTotarget " + nodeDict[nameToTarget]);
 
-                    let prefixType = nameToTarget.split(':')[0];
-                    if (prefixType in labPrefixDepth) {
-                        console.log("prefixType " + prefixType + " " + labPrefixDepth[prefixType])
-                        nodeDict[node.name].y = labPrefixDepth[prefixType];
+                if (nameToTarget in nodeDict) {
+                    if (nodeDict[nameToTarget].type == "label") {
+
+                        let prefixType = nameToTarget.split(':')[0];
+                        if (prefixType in labPrefixDepth) {
+                            console.log("prefixType " + prefixType + " " + labPrefixDepth[prefixType])
+                            nodeDict[node.name].y = labPrefixDepth[prefixType];
+
+                        }
+
 
                     }
-                    
 
                 }
-
             }
            
 

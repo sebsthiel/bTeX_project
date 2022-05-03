@@ -168,13 +168,13 @@ namespace Hermes.Website.Controllers
                 //Check for bbl file
                 var bblFiles = Directory.GetFiles(texDir, "*.bbl", SearchOption.TopDirectoryOnly);
                 Console.WriteLine("BBLFiles length: " + bblFiles.Length);
-                if (bibFiles.Length > 1)
+                if (bblFiles.Length > 1)
                 {
                     Console.WriteLine("MORE THAN 1 BBL");
                 }
-                else if (bibFiles.Length != 0)
+                else if (bblFiles.Length != 0)
                 {
-                    List<Node> paperNodes = await BblService.ParseBBLFile(bibFiles[0]);
+                    List<Node> paperNodes = await BblService.ParseBBLFile(bblFiles[0]);
                     // add to nodeDict
                     ParserService.AddToNodeDict(paperNodes);
 
