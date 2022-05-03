@@ -1,10 +1,6 @@
-﻿
-
-function test() {
+﻿function test() {
     console.log("From CreateGraph");
 }
-
-
 
 function createGraph(json) {
 
@@ -13,6 +9,7 @@ function createGraph(json) {
     envs = json.environments;
 
     labPrefixDepth = setupLabPrefixes(json.labelPrefixes);
+    nodeToLineText = json.nodeToLineText;
 
     //makeGraph(nodes, links);
     //newGraph(nodes, links);
@@ -21,9 +18,6 @@ function createGraph(json) {
     lineGraph(nodes, links, envs);
 
 }
-
-
-
 
 function createLine(json) {
     data = {
@@ -2617,6 +2611,7 @@ var linkDict = {};
 var nodeDict = {};
 var envDict = {};
 var labPrefixDepth = {};
+var nodeToLineText = {};
 var sectionNodes = [];
 var normalNodes = [];
 var paperNodes = [];
@@ -3025,6 +3020,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
     });
 
     nodeCircles.on("click", function (selected) {
+        document.getElementById("nodeTexCode").innerHTML = nodeToLineText[selected.name]; // TODO: change this so it works like the ones bellow
 
         textElements.attr("visibility", function (node) { return showName(node, selected) });
         nodeCircles.attr("fill", function (node) { return selectNode(node, selected) });

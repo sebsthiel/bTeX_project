@@ -66,19 +66,20 @@ namespace Hermes.Website.Services
             foreach (Match match in Regex.Matches(text, pattern, options))
             {
                 GroupCollection groups = match.Groups;
-                //Console.WriteLine("MATCH: " + match);
+
                 if (groups["comment"].Value.EndsWith("%"))
+                {
                     inComment = true;
-                    
+                    //comments can contain 1 newline, so we have to check
+                    if (groups["comment"].Value.Contains("\n"))
+                        lineCount++;
+                }
                     
                 if (groups["newLine"].Value == "\n")
                 {
                     inComment = false;
                     lineCount++;
                 }
-                if (inComment)
-                    continue;
-
                 
                 if (groups["newcommand"].Value == "newcommand") 
                 {
@@ -86,6 +87,9 @@ namespace Hermes.Website.Services
                     ParseTex(remainingString);
                     //You haven't tested this yet Andreas
                 }
+                
+                if (inComment)
+                    continue;
 
                 if (groups["type"].Value == "section")
                 {
@@ -258,7 +262,7 @@ namespace Hermes.Website.Services
                 {
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
                     typeNameWithoutRefs = typeNameWithoutRefs.ToLower();
-                   
+                    //Console.WriteLine("label before: " + typeNameWithoutRefs);
                     string labPattern = @"((?<prefix>\w*):)?(?<labelName>.*)";
                     MatchCollection labMatch = Regex.Matches(typeNameWithoutRefs, labPattern, options);
                     GroupCollection labGroups = labMatch[0].Groups;
@@ -266,7 +270,7 @@ namespace Hermes.Website.Services
 
 
                    // if (labelPrefix != "" && labelPrefix != "sec" && !labelPrefix.Contains("subsec"))
-                        labelPrefixes.Add(labelPrefix);
+                    labelPrefixes.Add(labelPrefix);
                     
                     //Console.WriteLine("label after " + typeNameWithoutRefs);
                     Node node1 = new Node(typeNameWithoutRefs, createdAt, groups["type"].Value, lineCount);
@@ -582,6 +586,11 @@ namespace Hermes.Website.Services
                 envTypeDict[e].counter = envTypeDict[envName].counter;
                 
             }
+        }
+
+        public int GetLineCount()
+        {
+            return lineCount;
         }
 
         public Dictionary<string,Node> GetNodes()
