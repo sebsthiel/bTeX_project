@@ -265,7 +265,7 @@ namespace Hermes.Website.Services
                     string labelPrefix = labGroups["prefix"].Value;
 
 
-                    if (labelPrefix != "" && labelPrefix != "sec" && !labelPrefix.Contains("subsec"))
+                   // if (labelPrefix != "" && labelPrefix != "sec" && !labelPrefix.Contains("subsec"))
                         labelPrefixes.Add(labelPrefix);
                     
                     //Console.WriteLine("label after " + typeNameWithoutRefs);

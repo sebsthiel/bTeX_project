@@ -51,10 +51,10 @@ namespace Hermes.Website.Services
             PaperNode currentPaper = null;
             
             currentPaper = null;
-            
+            Console.WriteLine("ohNO BBL");
             foreach (Match match in matches)
             {
-                //Console.WriteLine("Match: " + match);
+                Console.WriteLine("Match: in bbl " + match);
                 GroupCollection groups = match.Groups;
                 string artInfo = groups["artInfo"].Value.ToLower();
                 string paperId = groups["id"].Value.ToLower();

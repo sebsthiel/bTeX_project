@@ -2678,6 +2678,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
     allNodes.forEach(node => {
         let nodeName = node.name;
         nodeDict[nodeName] = node;
+      
         nodeDict[nodeName].radius = defaultNodeRadius;
 
         if (node.type == "paper") {
@@ -2686,6 +2687,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
         else if (node.type == "refNode" || node.type == "citeNode") {
             //TODO ÆNDRING
             nodeDict[nodeName].y = labPrefixDepth["refNode"]//defaultRefNodeY;//defaultNodeY; //defaultRefNodeY;
+           
             
 
         } else if (node.type == "label") {
@@ -2746,7 +2748,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
             envNodes.push(node);
             nodeDict[node.name].color = colors.envColor;
         }
-        // TODO subsection 
+        
         else if (node.type == "section" || node.type.includes("subsection")) {
            
             sectionNodes.push(node);
@@ -2761,16 +2763,41 @@ function lineGraph(input_nodes, input_links, input_envs) {
             //    // createdAt
             //}
 
+            // if label for env (lemma, theorem...) 
             if (node.type == "label" && nodeDict[node.createdAt].type in envDict) {
-                nodeDict[node.name].lineCount = nodeDict[node.createdAt].lineCount;
+                //nodeDict[node.name].lineCount = nodeDict[node.createdAt].lineCount;
                 //nodeDict[node.name].y = nodeDict[node.createdAt].y;
                 //console.log("hmm : " + calEnvHeight(nodeDict[node.createdAt]));
                 //nodeDict[node.name].y = calEnvHeight(nodeDict[node.createdAt]) + defaultEnvY-10;
 
             } else {
                 // TODO move out of else to draw all nodes
-                normalNodes.push(node);
+               
             }
+            normalNodes.push(node);
+
+            let nameToTarget = node.name.split(":id:")[0];
+            nameToTarget = nameToTarget.replace(/(ref to)|(citation to)/, "").trim();
+            console.log("nameTotarget " + nameToTarget);
+            console.log("nameTotarget " + nodeDict[nameToTarget]);
+
+            if (nameToTarget in nodeDict) {
+                if (nodeDict[nameToTarget].type == "label") {
+
+                    let prefixType = nameToTarget.split(':')[0];
+                    if (prefixType in labPrefixDepth) {
+                        console.log("prefixType " + prefixType + " " + labPrefixDepth[prefixType])
+                        nodeDict[node.name].y = labPrefixDepth[prefixType];
+
+                    }
+                    
+
+                }
+
+            }
+           
+
+
             
             
 
@@ -3285,7 +3312,7 @@ function getLinkColor(link) {
 function createArc(d, scale) {
 
     //console.log(d.source);
-    //console.log(d.target);
+    console.log(d.target);
     //console.log(nodeDict[d.target]);
     if (!colors.ShowPaperNodes && nodeDict[d.target].type == "paper") {
         return [];

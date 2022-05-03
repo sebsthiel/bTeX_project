@@ -68,6 +68,7 @@ namespace Hermes.Website.Services
                     if (arg2 == "")
                         name = arg1;
                     //TODO: figure out what to do with linecount within BBL files
+                    Console.WriteLine("bblName: "+ name.ToLower());
                     currentPaper = new BBLNode(name.ToLower(), "BBL", outerEnv, -1);
                     //Console.WriteLine("tester " + name.ToLower());
                 }
