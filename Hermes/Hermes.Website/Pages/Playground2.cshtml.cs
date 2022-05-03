@@ -159,7 +159,7 @@ namespace Hermes.Website.Pages
             var prefixes = ParserService.GetPrefixes();
             var environments = ParserService.GetEnvs().Values.ToList();
 
-            JsonService.CreateJsonFile(nodes, links, environments, prefixes, "");
+            //JsonService.CreateJsonFile(nodes, links, environments, prefixes, "");
 
 
             return RedirectToPage("./Playground2");

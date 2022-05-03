@@ -8,7 +8,8 @@
 
     <div class="topnav">
         <a href="./">Back</a>
-        <button class="pref-button" onclick="openPreferences()" >Preferences</button>
+        <button class="pref-button" onclick="openPreferences()">Preferences</button>
+        <a class="nav-link text-dark" asp-area="" asp-page="/BibParser">AbeaTesting</a>
         <div class="file-info">
             <input id="uploadFile" name="uploadFile" type="file">
             <input id="mainName" name="mainName" type="text" placeholder="Name of the main file" value="">
@@ -53,10 +54,12 @@
         <div class="split pdf">
             <div class="centered" id="pdfviewer">
                 <embed id="outputPdf" src="" width="500" height="375" type="application/pdf">
+                <p id="nodeTexCode"></p>
                 <div>
                     <h1 id="nodeName"> </h1>
                     <p id="nodeType"></p>
                     <p id="nodeCreatedAt"></p>
+                    
 
                 </div>
             </div>

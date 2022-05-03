@@ -27,6 +27,7 @@ namespace Hermes.Website.Controllers
         public BBLParserService BblService;
         public JsonCreaterService JsonService;
         private MultiTexService MultiService;
+        private LineCountService LineCountService;
 
        
 
@@ -37,7 +38,8 @@ namespace Hermes.Website.Controllers
             BibParserService bibService,
             BBLParserService bblService,
             JsonCreaterService jsonService,
-            MultiTexService multiService)
+            MultiTexService multiService,
+            LineCountService lineCountService)
         {
             this.environment = environment;
             CompilerService = compilerService;
@@ -46,6 +48,7 @@ namespace Hermes.Website.Controllers
             BblService = bblService;
             JsonService = jsonService;
             MultiService = multiService;
+            LineCountService = lineCountService;
         }
 
         [HttpPost]
@@ -219,13 +222,15 @@ namespace Hermes.Website.Controllers
             var nodes = ParserService.GetNodes().Values.ToList();
             var links = ParserService.GetLinks();
             var prefixes = ParserService.GetPrefixes();
+            var nodeToLineText = LineCountService.GetLineFromNodeName(allTexFilesAsString, ParserService.GetNodes());
             var environments = ParserService.GetEnvs().Values.ToList();
+            
 
 
             var dagNodes = makeDagNodes(ParserService.GetNodes(), links);
 
             // JsonService.CreateDagJson(dagNodes, "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/tester/some.json");
-            JsonService.CreateJsonFile(nodes, links, environments, prefixes, jsonDir + "some.json");
+            JsonService.CreateJsonFile(nodes, links, environments, prefixes, nodeToLineText, jsonDir + "some.json");
 
             await Task.Delay(2000);
             return guid;
