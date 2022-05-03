@@ -2692,6 +2692,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
             let prefixType = nodeName.split(':')[0];
             if (prefixType in labPrefixDepth) {
                 nodeDict[nodeName].y = labPrefixDepth[prefixType];
+                console.log("prefixType " + prefixType + " " + labPrefixDepth[prefixType]);
             } else {
                 nodeDict[nodeName].y = defaultNodeY;
             }
@@ -2762,12 +2763,17 @@ function lineGraph(input_nodes, input_links, input_envs) {
 
             if (node.type == "label" && nodeDict[node.createdAt].type in envDict) {
                 nodeDict[node.name].lineCount = nodeDict[node.createdAt].lineCount;
-                nodeDict[node.name].y = nodeDict[node.createdAt].y;
+                //nodeDict[node.name].y = nodeDict[node.createdAt].y;
+                //console.log("hmm : " + calEnvHeight(nodeDict[node.createdAt]));
+                //nodeDict[node.name].y = calEnvHeight(nodeDict[node.createdAt]) + defaultEnvY-10;
+
             } else {
                 // TODO move out of else to draw all nodes
                 normalNodes.push(node);
-                
             }
+            
+            
+
            
             
         }
@@ -2776,7 +2782,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
         if (bestLineCount < node.lineCountEnd) {
             bestLineCount = node.lineCountEnd;
         }
-          //TODO ÆNDRING
+          //TODO ÆNDRING clustering fix
         //if (!node.type.includes("section") && (node.type != "refNode" && node.type != "citeNode")) {
         //    if (prevNode != null) {
         //        if (prevNode.y == defaultNodeY && (node.lineCount - prevNode.lineCount) <= threshold) {
@@ -2860,7 +2866,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
         .append("marker")
         .attr("id", "betterArrow")
         .attr("viewBox", "0 -5 10 10")
-        .attr("refX", 3)
+        .attr("refX", 0)
         .attr("refY", 0)
         .attr("markerWidth", 12)
         .attr("markerHeight", 12)
@@ -2919,12 +2925,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
     envRect = svgEnvs
         .append('rect')
         .attr('width', node => getLineCountDiff(node, xAxisScale))
-        .attr('height', node => {
-
-            let numberOfSub = subCount(nodeDict[node.createdAt].type);
-
-            return envRectHeight - (10 * numberOfSub);
-        })
+        .attr('height', node => calEnvHeight(node))
         .attr('fill', colors.envColor)
         .attr('fill-opacity', "0.7")
         .attr('x', node => getlineCount(node, xAxisScale))
@@ -3100,9 +3101,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
             
            
         }
-        if (node.name == "Consensus on time-invariant signed digraphs") {
-            
-        }
+        
            
         return scale(node.lineCount);
 
@@ -3293,6 +3292,7 @@ function createArc(d, scale) {
     }
 
     var newCoord = getTargetNodeCircumferencePoint(d, scale);
+    //var newCoord = [scale(nodeDict[d.target].lineCount), nodeDict[d.target].y];
       //TODO ÆNDRING
     //return ['M', scale(nodeDict[d.source].lineCount), nodeDict[d.source].y, 'L', newCoord[0], newCoord[1]].join(' ');
 
@@ -3335,8 +3335,22 @@ function getTargetNodeCircumferencePoint(d, scale) {
 
 
 function getNodeY(node) {
-
+    console.log("HALLO : " + nodeDict[node.name].y);
     return nodeDict[node.name].y;
+}
+
+function calEnvHeight(node) {
+    console.log("NodeName: " + node.name);
+    if (node.createdAt.toLowerCase() == "document") {
+        return defaultSectionRectHeight;
+    }
+
+   
+
+    let numberOfSub = subCount(nodeDict[node.createdAt].type);
+    console.log("NodeHeight: " + (envRectHeight - (10 * numberOfSub)));
+    return envRectHeight - (10 * numberOfSub);
+   
 }
 
 
@@ -3395,9 +3409,10 @@ function setupLabPrefixes(prefixes) {
     prefixHeight = defaultSectionRectHeight / prefixes.length;
     prefixHeight2 = defaultNodeY
     prefixes.splice(((prefixes.length + 1) / 2), 0, "refNode");
+    console.log("HEEEY");
     for (var i = 0; i < prefixes.length; i++) {
         prefixHeightDict[prefixes[i]] = prefixHeight2 + (((height - prefixHeight2) / prefixes.length) * i);
-        
+        console.log(prefixHeightDict[prefixes[i]]);
     }
     return prefixHeightDict;
 }

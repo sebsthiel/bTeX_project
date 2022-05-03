@@ -258,7 +258,7 @@ namespace Hermes.Website.Services
                 {
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
                     typeNameWithoutRefs = typeNameWithoutRefs.ToLower();
-                    Console.WriteLine("label before: " + typeNameWithoutRefs);
+                   
                     string labPattern = @"((?<prefix>\w*):)?(?<labelName>.*)";
                     MatchCollection labMatch = Regex.Matches(typeNameWithoutRefs, labPattern, options);
                     GroupCollection labGroups = labMatch[0].Groups;
