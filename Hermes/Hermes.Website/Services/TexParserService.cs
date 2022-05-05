@@ -87,7 +87,7 @@ namespace Hermes.Website.Services
                 
                 if (groups["newcommand"].Value == "newcommand") 
                 {
-                    (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["newcommandlines"].Value);
+                    (string typeNameWithoutRefs, string remainingString) = CountBrackets(groups["newcommandlines"].Value);
                     ParseTex(remainingString);
                     //You haven't tested this yet Andreas
                 }

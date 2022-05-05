@@ -2639,7 +2639,7 @@ const defaultEnvY = xaxisHeight;
 //const sectionColor = "red" //isn't used
 const defaultNodeRadius = 6;
 const defaultSectionRectHeight = height - 100;//envRectHeight + 50
-const envRectHeight = defaultSectionRectHeight - 50;
+const envRectHeight = defaultSectionRectHeight - 30;
 
 const sectionTextY = xaxisHeight + defaultSectionRectHeight + 15;
 const envTextY = xaxisHeight - 10;
@@ -2746,7 +2746,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
     
     var bestLineCount = 0;
     var prevNode = null;
-    //var prevPrefixNode = {}
+    var prevPrefixNode = {}
     var prevNodeMoved = false;
     var threshold = 100;
 
@@ -2823,21 +2823,84 @@ function lineGraph(input_nodes, input_links, input_envs) {
         }
         // clustering fix 
         if (node.type != "paper") {
-            if (prevNode != null) {
-                if (!prevNodeMoved && (node.lineCount - prevNode.lineCount) <= threshold) {
-                    node.y = node.y + (unit / 2);//getRandomInt(-30, 30);
-                    prevNode = node;
-                    prevNodeMoved = true;
-                    //console.log("new prevNode: " + node.type +  " " +  (node.type != "refNode"));
+
+
+            // if node.prefix in prevPrefixNode (instead of null)
+            let nodePrefix = node.name.split(':')[0];
+            console.log("test2 " + node.type);
+            if (nodePrefix in prevPrefixNode) {
+                let currentPrevNode = prevPrefixNode[nodePrefix];
+                if (!currentPrevNode.moved && (node.lineCount - currentPrevNode.lineCount) <= threshold) {
+                    node.y = node.y + (unit / 2);
+                    let currentNode = node;
+                    currentNode.moved = true;
+                    console.log("moving regular");
+                    prevPrefixNode[nodePrefix] = currentNode;
                 } else {
-                    prevNode = node;
-                    prevNodeMoved = false;
+                    let currentNode = node;
+                    currentNode.moved = false;
+                    prevPrefixNode[nodePrefix] = currentNode;
                 }
 
             }
             else {
-                prevNode = node;
+                if (node.type == "refNode") {
+                    let nameToTarget = node.name.split(":id:")[0];
+                    nameToTarget = nameToTarget.replace(/(ref to)|(citation to)/, "").trim();
+                    let targetPrefix = nameToTarget.split(':')[0];
+
+
+                    if (targetPrefix in prevPrefixNode) {
+                        console.log("targetPre " + targetPrefix);
+                        let currentPrevNode = prevPrefixNode[targetPrefix];
+                        if (!currentPrevNode.moved && (node.lineCount - currentPrevNode.lineCount) <= threshold) {
+                            node.y = labPrefixDepth[targetPrefix] + (unit / 2);
+                            console.log("UNIT" + (unit / 2));
+                            let currentNode = node;
+                            currentNode.moved = true;
+                            prevPrefixNode[targetPrefix] = currentNode;
+                        } else {
+                            let currentNode = node;
+                            currentNode.moved = false;
+                            prevPrefixNode[targetPrefix] = currentNode;
+                        }
+                    }
+
+
+
+                } else {
+                    let currentNode = node;
+                    currentNode.moved = false;
+
+                    if (nodePrefix in labPrefixDepth) {
+
+                        prevPrefixNode[nodePrefix] = currentNode;
+                    } else {
+                        prevPrefixNode["prevNode"] = currentNode;
+                    }
+
+                }
+                
+
             }
+                // if !prevNodeMoved && (node.lineCount - prevNode.lineCount) <= threshold
+              
+
+            //if (prevNode != null) {
+            //    if (!prevNodeMoved && (node.lineCount - prevNode.lineCount) <= threshold) {
+            //        node.y = node.y + (unit / 2);//getRandomInt(-30, 30);
+            //        prevNode = node;
+            //        prevNodeMoved = true;
+            //        //console.log("new prevNode: " + node.type +  " " +  (node.type != "refNode"));
+            //    } else {
+            //        prevNode = node;
+            //        prevNodeMoved = false;
+            //    }
+
+            //}
+            //else {
+            //    prevNode = node;
+            //}
 
         }
         
@@ -3360,10 +3423,10 @@ function createArc(d, scale) {
 
     //console.log(d.source);
     //console.log(d.target);
-    console.log("LINK: ");
-    console.log(nodeDict[d.source]);
-    console.log(nodeDict[d.target]);
-    console.log("shpw : " + colors.showPaperNodes);
+    //console.log("LINK: ");
+    //console.log(nodeDict[d.source]);
+    //console.log(nodeDict[d.target]);
+    //console.log("shpw : " + colors.showPaperNodes);
 
     var newCoord = getTargetNodeCircumferencePoint(d, scale);
 
@@ -3406,7 +3469,8 @@ function createArc(d, scale) {
 }
 
 function getTargetNodeCircumferencePoint(d, scale) {
-
+    console.log("name: " + d.target);
+    console.log(nodeDict[d.target]);
     var t_radius = getRadiusNode(nodeDict[d.target]); // nodeWidth is just a custom attribute I calculate during the creation of the nodes depending on the node width
     var dx = scale(nodeDict[d.target].lineCount) - scale(nodeDict[d.source].lineCount);
     var dy = nodeDict[d.target].y - nodeDict[d.source].y;
@@ -3419,21 +3483,37 @@ function getTargetNodeCircumferencePoint(d, scale) {
 
 
 function getNodeY(node) {
-    console.log("HALLO : " + nodeDict[node.name].y);
+    //console.log("HALLO : " + nodeDict[node.name].y);
     return nodeDict[node.name].y;
 }
 
+//TODO Fix height
 function calEnvHeight(node) {
-    console.log("NodeName: " + node.name);
+    console.log("EnvNode: " + node.name + " \n CA: " + node.createdAt);
     if (node.createdAt.toLowerCase() == "document") {
         return defaultSectionRectHeight;
     }
 
-   
+    let i = 1;
+    let nodeCreatedAt = node.createdAt;
+    while (true) {
+        if (nodeDict[nodeCreatedAt].type in envDict) {
+            i += 1;
+            nodeCreatedAt = nodeDict[nodeCreatedAt].createdAt;
+            if (nodeCreatedAt.toLowerCase() == "document") {
+                break;
+            }
+        } else {
+            break;
+        }
 
-    let numberOfSub = subCount(nodeDict[node.createdAt].type);
-    console.log("NodeHeight: " + (envRectHeight - (10 * numberOfSub)));
-    return envRectHeight - (10 * numberOfSub);
+    }
+    console.log("i: " + i);
+    
+
+    let numberOfSub = 0;//subCount(nodeDict[node.createdAt].type);
+    //console.log("NodeHeight: " + (envRectHeight - (10 * numberOfSub)));
+    return envRectHeight - (10 * (numberOfSub + i));
    
 }
 
@@ -3462,6 +3542,7 @@ function getEnvNodeY(node) {
 }
 
 function getRadiusNode(node) {
+    console.log(node);
     if (node.type == "refNode" || node.type == "citeNode") {
         return 3; //defaultNodeRadius
     } else if (node.type == "paper") {

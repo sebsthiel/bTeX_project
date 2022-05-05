@@ -74,6 +74,10 @@ namespace Hermes.Website.Services
                     string[] fileNameArray = fileName.Split("/");
                     fileName = fileNameArray[fileNameArray.Length-1];
                 }
+                if (fileName.EndsWith(".pdf_tex") || fileName.EndsWith(".tikz"))
+                {
+                    continue;
+                }
                 if (fileName.EndsWith(".tex"))
                     fileName = fileName.Remove(fileName.Length - 4);
                 //TODO: Maybe unnecesary 
