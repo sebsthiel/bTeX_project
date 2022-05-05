@@ -3106,6 +3106,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
     var textDiv = svgNodes.append('g');
 
     envRect.on("click", function (selected) {
+        document.getElementById("nodeTexCode").innerHTML = nodeToLineText[selected.name]; // TODO: change this so it works like the ones bellow
 
         textEnvNode.attr("visibility", function (node) { return showName(node, selected) });
         envRect.attr("fill", function (node) { return selectNode(node, selected) });
@@ -3123,6 +3124,8 @@ function lineGraph(input_nodes, input_links, input_envs) {
 
     svgSectionLine.on("click", function (selected) {
         //console.log("OH NO! ")
+        document.getElementById("nodeTexCode").innerHTML = nodeToLineText[selected.name]; // TODO: change this so it works like the ones bellow
+
         textSection.attr("visibility", function (node) { return showName(node, selected) });
         svgSectionLine.attr("fill", function (node) { return selectNode(node, selected) });
         textBackground.attr("visibility", function (node) { return showName(node, selected) });
@@ -3149,7 +3152,8 @@ function lineGraph(input_nodes, input_links, input_envs) {
 
 
     graphBackground.on("click", function (selected) {
-      
+        document.getElementById("nodeTexCode").innerHTML = ""; 
+
         currentSelectedNode = null;
         displayInfoAboutNode();
 
