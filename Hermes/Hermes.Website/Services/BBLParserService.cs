@@ -69,17 +69,26 @@ namespace Hermes.Website.Services
                         name = arg1;
                     //TODO: figure out what to do with linecount within BBL files
                     Console.WriteLine("bblName: "+ name.ToLower());
-                    currentPaper = new BBLNode(name.ToLower(), "BBL", outerEnv, -1);
+                    currentPaper = new BBLNode(name.ToLower(), outerEnv, "paper" , -1);
                     //Console.WriteLine("tester " + name.ToLower());
                 }
-                if (author != "")
+                if (currentPaper != null)
                 {
-                    currentPaper.author = author;
+                    if (author != "")
+                    {
+                        currentPaper.author = author;
+                    }
+                    Console.WriteLine("match: " + match);
+                    if (description != "")
+                    {
+                        Console.WriteLine("Descr: " + description);
+                        Console.WriteLine("hmm2: " + (currentPaper == null));
+                        Console.WriteLine("hmm: " + currentPaper.information);
+                        currentPaper.information.Add(description);
+                    }
+
                 }
-                if (description != "")
-                {
-                    currentPaper.information.Add(description);
-                }
+                
 
             }
             if (currentPaper != null)

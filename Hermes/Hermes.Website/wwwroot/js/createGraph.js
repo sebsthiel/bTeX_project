@@ -8,7 +8,10 @@ function createGraph(json) {
     links = json.links;
     envs = json.environments;
 
-    labPrefixDepth = setupLabPrefixes(json.labelPrefixes);
+    let tmpVar = setupLabPrefixes(json.labelPrefixes);
+    labPrefixDepth = tmpVar[0];
+    unit = tmpVar[1];
+
     nodeToLineText = json.nodeToLineText;
 
     //makeGraph(nodes, links);
@@ -2600,7 +2603,9 @@ function createLine(json) {
     nodes = data.nodes;
     links = data.links;
     envs = data.environments;
-    labPrefixDepth = setupLabPrefixes(data.labelPrefixes);
+    let tmpVar = setupLabPrefixes(data.labelPrefixes);
+    labPrefixDepth = tmpVar[0];
+    unit = tmpVar[1];
     lineGraph(nodes, links, envs);
   
 }
@@ -2611,6 +2616,7 @@ var linkDict = {};
 var nodeDict = {};
 var envDict = {};
 var labPrefixDepth = {};
+var unit = 10;
 var nodeToLineText = {};
 var sectionNodes = [];
 var normalNodes = [];
@@ -2645,6 +2651,7 @@ var envRect;
 var nodeCircles;
 var svgSectionLine;
 var currentScale;
+var arrowMarker;
 
 const zoomThreshold = 20;
 
@@ -2667,6 +2674,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
     // create dict of nodes for lookup later  
     let preSectionName;
     let preSubSect;
+    let i = 1;
 
 
     // TODO COMBINE TO ONE LOOB
@@ -2678,6 +2686,8 @@ function lineGraph(input_nodes, input_links, input_envs) {
 
         if (node.type == "paper") {
             nodeDict[nodeName].y = defaultPaperY;
+            i += 1;
+            nodeDict[nodeName].lineCount = (50*i);
         }
         else if (node.type == "refNode" || node.type == "citeNode") {
             //TODO ÆNDRING
@@ -2736,8 +2746,9 @@ function lineGraph(input_nodes, input_links, input_envs) {
     
     var bestLineCount = 0;
     var prevNode = null;
+    //var prevPrefixNode = {}
     var prevNodeMoved = false;
-    var threshold = 50
+    var threshold = 100;
 
     // filter for sections and other nodes  
     allNodes.forEach(node => {
@@ -2810,22 +2821,26 @@ function lineGraph(input_nodes, input_links, input_envs) {
         if (bestLineCount < node.lineCountEnd) {
             bestLineCount = node.lineCountEnd;
         }
-          // clustering fix 
-        if (prevNode != null) {
-            if (!prevNodeMoved && (node.lineCount - prevNode.lineCount) <= threshold) {
-                node.y = node.y + getRandomInt(-30,30);
+        // clustering fix 
+        if (node.type != "paper") {
+            if (prevNode != null) {
+                if (!prevNodeMoved && (node.lineCount - prevNode.lineCount) <= threshold) {
+                    node.y = node.y + (unit / 2);//getRandomInt(-30, 30);
+                    prevNode = node;
+                    prevNodeMoved = true;
+                    //console.log("new prevNode: " + node.type +  " " +  (node.type != "refNode"));
+                } else {
+                    prevNode = node;
+                    prevNodeMoved = false;
+                }
+
+            }
+            else {
                 prevNode = node;
-                prevNodeMoved = true;
-                //console.log("new prevNode: " + node.type +  " " +  (node.type != "refNode"));
-            } else {
-                prevNode = node;
-                prevNodeMoved = false;
             }
 
         }
-        else {
-            prevNode = node;
-        }
+        
             
 
         
@@ -2909,18 +2924,21 @@ function lineGraph(input_nodes, input_links, input_envs) {
         .style("fill", "black");
 
     // working on better arrow
-    svg.append("defs")
+    arrowMarker = svg.append("defs")
+        //.selectAll("marker")
+        //.data(["selectedArrow", "arrow"])
         .append("marker")
         .attr("id", "betterArrow")
         .attr("viewBox", "0 -5 10 10")
-        .attr("refX", 0)
+        .attr("refX", 3)
         .attr("refY", 0)
         .attr("markerWidth", 12)
         .attr("markerHeight", 12)
         .attr("orient", "auto")
         .append("path")
         .attr("d", "M0,-5L10,0L0,5")
-        .style("fill", "black")
+        .style("fill", colors.linkColor)
+        .attr('fill-opacity', "0.5")
         .attr("transform", "scale(0.3)");
 ;
 
@@ -3020,6 +3038,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
         .attr('stroke-width', 2)
         .style("fill", "none")
         .attr("marker-end", "url(#betterArrow)");
+        
 
     var textDiv = svgNodes.append('g');
 
@@ -3033,6 +3052,9 @@ function lineGraph(input_nodes, input_links, input_envs) {
         svgSectionLine.attr("fill", colors.sectionColor);
         textElements.attr("visibility", "hidden");
         nodeCircles.attr("fill", colors.nodeColor);
+
+
+       
 
     });
 
@@ -3050,7 +3072,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
 
     nodeCircles.on("click", function (selected) {
         document.getElementById("nodeTexCode").innerHTML = nodeToLineText[selected.name]; // TODO: change this so it works like the ones bellow
-
+       
         textElements.attr("visibility", function (node) { return showName(node, selected) });
         nodeCircles.attr("fill", function (node) { return selectNode(node, selected) });
         textBackground.attr("visibility", function (node) { return showName(node, selected) });
@@ -3059,6 +3081,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
         envRect.attr("fill", colors.envColor);
         textSection.attr("visibility", "hidden");
         svgSectionLine.attr("fill", colors.sectionColor);
+        svgLinks.selectAll("marker").attr("fill", "red");
     });
 
 
@@ -3071,7 +3094,6 @@ function lineGraph(input_nodes, input_links, input_envs) {
             .attr("stroke", getLinkColor)
             .attr("stroke-opacity", link => visibleLinks(link, currentScale));
 
-        
 
         textEnvNode.attr("visibility", "hidden");
         envRect.attr("fill", colors.envColor);
@@ -3110,15 +3132,15 @@ function lineGraph(input_nodes, input_links, input_envs) {
         .attr("visibility", "hidden")
         .text(function (node) {
             if (node.type == "paper") {
-                if (node.title) {
-                    return node.title;
+                if (node.information.length != 0) {
+                    return node.information[0];
                 }
                 else {
-                    return node.name
+                    return node.name.split(":id:")[0]
                 }
                    
             } else {
-                return node.name;
+                return node.name.split(":id:")[0];
             }
 
 
@@ -3139,20 +3161,20 @@ function lineGraph(input_nodes, input_links, input_envs) {
 
     function getlineCount(node, scale) {
 
-        if (node.type == "paper") {
-            let firstSourceNode = linkDict[node.name];
-            //console.log("Target node: " + node.name);
-            if (firstSourceNode) {
+        //if (node.type == "paper") {
+        //    let firstSourceNode = linkDict[node.name];
+        //    //console.log("Target node: " + node.name);
+        //    if (firstSourceNode) {
                
-                let newLineCount = nodeDict[firstSourceNode].lineCount;
-                nodeDict[node.name].lineCount = newLineCount;
-                return scale(newLineCount);
-            }
+        //        let newLineCount = nodeDict[firstSourceNode].lineCount;
+        //        nodeDict[node.name].lineCount = newLineCount;
+        //        return scale(newLineCount);
+        //    }
 
-            return scale(bestLineCount/2)
+        //    return scale(bestLineCount/2)
             
            
-        }
+        //}
         
            
         return scale(node.lineCount);
@@ -3327,7 +3349,7 @@ function getLinkColor(link) {
         return colors.linkColor;
         //return "black";
     } else {
-        return "orange";
+        return "blue";
     }
 }
 
@@ -3342,11 +3364,18 @@ function createArc(d, scale) {
     console.log(nodeDict[d.source]);
     console.log(nodeDict[d.target]);
     console.log("shpw : " + colors.showPaperNodes);
-    if (!colors.showPaperNodes && nodeDict[d.target].type == "paper") {
-        return [];
-    }
 
     var newCoord = getTargetNodeCircumferencePoint(d, scale);
+
+
+    if (!colors.showPaperNodes && nodeDict[d.target].type == "paper") {
+        return [];
+    } else if (nodeDict[d.target].type == "paper") {
+        return ['M', scale(nodeDict[d.source].lineCount), nodeDict[d.source].y, 'L', newCoord[0], newCoord[1]].join(' ');
+
+    }
+
+    
     //var newCoord = [scale(nodeDict[d.target].lineCount), nodeDict[d.target].y];
       //TODO ÆNDRING
     //return ['M', scale(nodeDict[d.source].lineCount), nodeDict[d.source].y, 'L', newCoord[0], newCoord[1]].join(' ');
@@ -3465,11 +3494,12 @@ function setupLabPrefixes(prefixes) {
     prefixHeight2 = defaultNodeY
     prefixes.splice(((prefixes.length + 1) / 2), 0, "refNode");
     console.log("HEEEY");
+    let unit = ((defaultSectionRectHeight - prefixHeight2) / prefixes.length)
     for (var i = 0; i < prefixes.length; i++) {
-        prefixHeightDict[prefixes[i]] = prefixHeight2 + (((defaultSectionRectHeight - prefixHeight2) / prefixes.length) * i);
+        prefixHeightDict[prefixes[i]] = prefixHeight2 + (unit * i);
         console.log(prefixHeightDict[prefixes[i]]);
     }
-    return prefixHeightDict;
+    return [prefixHeightDict, unit];
 }
 
 function setColors(colorObject) {
@@ -3490,7 +3520,7 @@ function setColors(colorObject) {
     });
     
 
-
+    arrowMarker.style("fill", colors.linkColor);
 
     svgLinks
             .attr("stroke", getLinkColor)
@@ -3529,7 +3559,8 @@ function displayInfoAboutNode() {
     if (currentSelectedNode != null) {
 
         let createdAtType = "";
-        if (currentSelectedNode.createdAt != "DOCUMENT") {
+        let tmpCreatedAt = currentSelectedNode.createdAt.toLowerCase();
+        if (tmpCreatedAt != "document" && tmpCreatedAt != "bibfile" && tmpCreatedAt != "bbl" ) {
             createdAtType = nodeDict[currentSelectedNode.createdAt].type
         }
             
