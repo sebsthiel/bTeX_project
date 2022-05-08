@@ -3124,7 +3124,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
 
     svgSectionLine.on("click", function (selected) {
         //console.log("OH NO! ")
-        document.getElementById("nodeTexCode").innerHTML = nodeToLineText[selected.name]; // TODO: change this so it works like the ones bellow
+        document.getElementById("nodeTexCode").innerHTML = ""; // TODO: change this so it works like the ones bellow
 
         textSection.attr("visibility", function (node) { return showName(node, selected) });
         svgSectionLine.attr("fill", function (node) { return selectNode(node, selected) });
@@ -3199,7 +3199,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
         .attr("visibility", "hidden")
         .text(function (node) {
             if (node.type == "paper") {
-                if (node.information.length != 0) {
+                if (node.information) {
                     return node.information[0];
                 }
                 else {
