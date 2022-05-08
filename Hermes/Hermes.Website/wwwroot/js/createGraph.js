@@ -3101,7 +3101,40 @@ function lineGraph(input_nodes, input_links, input_envs) {
         .attr('stroke-width', 2)
         .style("fill", "none")
         .attr("marker-end", "url(#betterArrow)");
+
+
+    var prefixesList = Object.keys(labPrefixDepth);
+    //for (var key in labPrefixDepth) {
+    //    if (labPrefixDepth.hasOwnProperty(key)) {
+    //        prefixesList.push([key, prefixesList[key]]);
+    //    }
+    //}
+
+    var prefixLabelDiv = svg.selectAll("prefixLabel")
+        .data(prefixesList)
+        .enter().append('g');
+
+    
+
+
+    var prefixLabels = prefixLabelDiv
+        .append('text')
+        .text(prefix => prefix)
+        .attr("class", "prefixLabel")
+        .attr("dx", node => xAxisScale(10))
+        .attr("dy", prefix => {
+            console.log("prefix : " + prefix);
+
+            console.log("y: " + labPrefixDepth[prefix])
+            return labPrefixDepth[prefix] + 2;
+
+        });
+
+
+    
         
+
+
 
     var textDiv = svgNodes.append('g');
 
@@ -3213,19 +3246,20 @@ function lineGraph(input_nodes, input_links, input_envs) {
 
         }).call(getBB);
 
+    function getBB(selection) {
+        selection.each(function (d) { d.bbox = this.getBBox(); })
+    }
+
+
     var textBackground = textDiv.insert("rect", "text")
         .attr("class", "backgroundColor")
         .attr("width", function (d) { return d.bbox.width })
         .attr("height", function (d) { return d.bbox.height + 4 })
         .attr("x", node => xAxisScale(node.lineCount))
         .attr("y", node => (nodeDict[node.name].y - 8) - node.bbox.height)
-        .attr("visibility", "hidden")
+        .attr("visibility", "hidden");
 
-    function getBB(selection) {
-        selection.each(function (d) { d.bbox = this.getBBox(); })
-    }
-    
-
+   
     function getlineCount(node, scale) {
 
         //if (node.type == "paper") {

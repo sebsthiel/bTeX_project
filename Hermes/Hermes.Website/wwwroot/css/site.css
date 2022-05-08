@@ -89,6 +89,20 @@ body {
     -ms-user-select: none;
     user-select: none;
 }
+.prefixLabel {
+    font-size: 9px;
+    font-weight: bold;
+    fill: black;
+    /*text-anchor: middle;*/
+    /* Not selcect text */
+    pointer-events: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
 .title {
     font-size: 15px;

@@ -267,7 +267,8 @@ namespace Hermes.Website.Controllers
 
                 
                 Console.WriteLine("HALLO _-------_______---_-_--_: ");
-                string pdfDir = environment.ContentRootPath + "/papers/pdfs/" + guid + "/";
+                //string pdfDir = environment.ContentRootPath + "/papers/pdfs/" + guid + "/";
+                string pdfDir = environment.ContentRootPath + "/papers/tex/" + guid + "/";
                 Console.WriteLine("guid: " + guid);
                 await Task.Delay(5000);
                 Console.WriteLine("pdfDir: " + pdfDir);

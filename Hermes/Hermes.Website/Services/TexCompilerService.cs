@@ -31,25 +31,37 @@ namespace Hermes.Website.Services
 
             if (size <= 0) return null;
            
-            Process process = new Process
-            {
-                StartInfo = new ProcessStartInfo
-                {
-                    FileName = "bash",
-                    RedirectStandardInput = true,
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    UseShellExecute = false
-                }
-            };
-            process.Start();
-            await process.StandardInput.WriteLineAsync("cd " + texDir);
-            Console.WriteLine("this dir: " + pdfDir);
-            await process.StandardInput.WriteLineAsync("pdflatex -interaction=nonstopmode -output-directory=" + pdfDir + " " + texFile);
-            //await process.StandardInput.WriteLineAsync("latexmk -pdf " + "-interaction=nonstopmode " + texFile);
+            //Process process = new Process
+            //{
+            //    StartInfo = new ProcessStartInfo
+            //    {
+            //        FileName = "bash",
+            //        RedirectStandardInput = true,
+            //        RedirectStandardOutput = true,
+            //        RedirectStandardError = true,
+            //        UseShellExecute = false
+            //    }
+            //};
 
-            pdfFile = pdfDir + Path.GetFileNameWithoutExtension(texFile) + ".pdf";
+            //process.Start();
+            //await process.StandardInput.WriteLineAsync("cd " + texDir);
+            //Console.WriteLine("this dir: " + pdfDir);
+            //await process.StandardInput.WriteLineAsync("pdflatex -interaction=nonstopmode -output-directory=" + pdfDir + " " + texFile);
+            ////await process.StandardInput.WriteLineAsync("latexmk -pdf " + "-interaction=nonstopmode " + texFile);
+
+
+            //ProcessStartInfo startInfo = new ProcessStartInfo("pdflatex", "-interaction=nonstopmode -output-directory=" + pdfDir + " " + texFile);
+            ProcessStartInfo startInfo = new ProcessStartInfo("latexmk", "-pdf " + "-interaction=nonstopmode " + texFile);
+            startInfo.WorkingDirectory = texDir;
+            //Trace.Write("WORKING DIRECTORY IS=" + startInfo.WorkingDirectory);
            
+            Process proc = new Process();
+            proc.StartInfo = startInfo;
+            proc.Start();
+
+            //pdfFile = pdfDir + Path.GetFileNameWithoutExtension(texFile) + ".pdf";
+            pdfFile = texFile + Path.GetFileNameWithoutExtension(texFile) + ".pdf";
+
 
             return pdfFile;
             
