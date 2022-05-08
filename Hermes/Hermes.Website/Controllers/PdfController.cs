@@ -144,8 +144,6 @@ namespace Hermes.Website.Controllers
                     texFile = texFiles[0];
                 }
 
-                //Console.WriteLine("TexFile: " + texFile);
-
 
                 // Parsing bibfile if there is a bib file
                 // adding the new nodes to NodeDict
@@ -201,11 +199,9 @@ namespace Hermes.Website.Controllers
             pdfPath = await CompilerService.CompileTexAsync(texDir, pdfDir, texFile);
 
             // Parsing tex to get dict of Nodes and list of Edges (links)
-            //ParserService.ParseTex(texFile);
 
             var tmpFiles = Directory.GetFiles(texDir, "*.tex", SearchOption.AllDirectories);
 
-            /***********ADD MultiTexService here****************/
             //TODO: maybe add a sort of default value if that is possible in c#
             if (mainName == null)
                 mainName = "";
@@ -224,10 +220,19 @@ namespace Hermes.Website.Controllers
             var prefixes = ParserService.GetPrefixes();
             var nodeToLineText = LineCountService.GetLineFromNodeName(allTexFilesAsString, ParserService.GetNodes());
             var environments = ParserService.GetEnvs().Values.ToList();
-            
 
 
-            var dagNodes = makeDagNodes(ParserService.GetNodes(), links);
+
+            //var dagNodes = makeDagNodes(ParserService.GetNodes(), links);
+
+            Console.WriteLine("PDFCont + ParserService Linecount: " + ParserService.GetLineCount());
+            Console.WriteLine("PDFCont + LineCountService Linecount: " + LineCountService.GetLineCount());
+
+
+            using (StreamWriter writer = new StreamWriter(@"C:\Users\jaffa\OneDrive\Skrivebord\allfilesasstring.txt"))
+            {
+                writer.WriteLine(allTexFilesAsString);
+            }
 
             // JsonService.CreateDagJson(dagNodes, "/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/tester/some.json");
             JsonService.CreateJsonFile(nodes, links, environments, prefixes, nodeToLineText, jsonDir + "some.json");
