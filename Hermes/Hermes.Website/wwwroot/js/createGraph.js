@@ -2943,6 +2943,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
     // select the svg for creating the graph
     // and configure the width and height
 
+    d3.selectAll("#d3graph > *").remove();
     var svgCanvas = d3.select("#d3graph")
                 .append("svg")
                 .attr("width", width)
@@ -3123,9 +3124,9 @@ function lineGraph(input_nodes, input_links, input_envs) {
         .attr("class", "prefixLabel")
         .attr("dx", node => xAxisScale(10))
         .attr("dy", prefix => {
-            console.log("prefix : " + prefix);
+            //console.log("prefix : " + prefix);
 
-            console.log("y: " + labPrefixDepth[prefix])
+            //console.log("y: " + labPrefixDepth[prefix])
             return labPrefixDepth[prefix] + 2;
 
         });
@@ -3507,8 +3508,8 @@ function createArc(d, scale) {
 }
 
 function getTargetNodeCircumferencePoint(d, scale) {
-    console.log("name: " + d.target);
-    console.log(nodeDict[d.target]);
+    //console.log("name: " + d.target);
+    //console.log(nodeDict[d.target]);
     var t_radius = getRadiusNode(nodeDict[d.target]); // nodeWidth is just a custom attribute I calculate during the creation of the nodes depending on the node width
     var dx = scale(nodeDict[d.target].lineCount) - scale(nodeDict[d.source].lineCount);
     var dy = nodeDict[d.target].y - nodeDict[d.source].y;
@@ -3527,7 +3528,7 @@ function getNodeY(node) {
 
 //TODO Fix height
 function calEnvHeight(node) {
-    console.log("EnvNode: " + node.name + " \n CA: " + node.createdAt);
+    //console.log("EnvNode: " + node.name + " \n CA: " + node.createdAt);
     if (node.createdAt.toLowerCase() == "document") {
         return defaultSectionRectHeight;
     }
@@ -3546,7 +3547,7 @@ function calEnvHeight(node) {
         }
 
     }
-    console.log("i: " + i);
+    //console.log("i: " + i);
     
 
     let numberOfSub = 0;//subCount(nodeDict[node.createdAt].type);
@@ -3580,7 +3581,7 @@ function getEnvNodeY(node) {
 }
 
 function getRadiusNode(node) {
-    console.log(node);
+    //console.log(node);
     if (node.type == "refNode" || node.type == "citeNode") {
         return 3; //defaultNodeRadius
     } else if (node.type == "paper") {
@@ -3612,11 +3613,11 @@ function setupLabPrefixes(prefixes) {
     prefixHeight = defaultSectionRectHeight / prefixes.length;
     prefixHeight2 = defaultNodeY
     prefixes.splice(((prefixes.length + 1) / 2), 0, "refNode");
-    console.log("HEEEY");
+    //console.log("HEEEY");
     let unit = ((defaultSectionRectHeight - prefixHeight2) / prefixes.length)
     for (var i = 0; i < prefixes.length; i++) {
         prefixHeightDict[prefixes[i]] = prefixHeight2 + (unit * i);
-        console.log(prefixHeightDict[prefixes[i]]);
+        //console.log(prefixHeightDict[prefixes[i]]);
     }
     return [prefixHeightDict, unit];
 }

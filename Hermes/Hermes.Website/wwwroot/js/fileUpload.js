@@ -1,9 +1,10 @@
 ﻿
-async function getPdf(guid) {
+async function getPdf(guid, mainTex) {
 
     let formData = new FormData();
 
     formData.append("guid", guid);
+    formData.append("mainTex", mainTex);
 
     let response = await fetch("/api/pdf/pdf", {
         method: 'POST',
@@ -48,7 +49,7 @@ async function getJson(guid) {
 
 
 async function uploadFile() {
-    console.log("test hej");
+    console.log("test hej22");
 
     let file = document.getElementById("uploadFile").files[0];
     let mainName = document.getElementById("mainName").value;
@@ -72,14 +73,17 @@ async function uploadFile() {
         alert("Something went wrong when loading your file. Please make sure the name of the main .tex file is correct and try again.");
     } else {
         // THIS NEEDS TO BE ASYNC
+        console.log("testHej");
         response.json().then(async data => {
 
             //console.log("guid: " + await data.guid);
             let guid = await data.guid;
+            let mainTex = await data.mainName;
+            console.log("mainName: " + mainTex);
             let json = await getJson(guid);
             // Load json into d3 graph
             createGraph(json);
-            let pdf = await getPdf(guid);
+            let pdf = await getPdf(guid,mainTex);
             document.getElementById("outputPdf").src = pdf;
 
             
