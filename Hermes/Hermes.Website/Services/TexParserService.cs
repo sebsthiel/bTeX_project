@@ -57,8 +57,10 @@ namespace Hermes.Website.Services
             if (!envTypeDict.ContainsKey("section"))
                 envTypeDict.Add("section", sectionEnv);
 
+
             // Go through file
-            string pattern = @"(?<comment>([^\\]|\n)%)|((re)?(?<newcommand>newcommand)(\\[^{]*)?({.+})?(\[.*\])?){(?<newcommandlines>.*(\n.*)*)}|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
+            string pattern = @"(?<comment>([^\\]|\n)%)|((re)?(?<newcommand>newcommand)(\\[^{\n]*)?({.+})?(\[.*\])?){(?<newcommandlines>.*(\n.*)*)}|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
+            //string pattern = @"(?<comment>([^\\]|\n)%)|((re)?(?<newcommand>newcommand)(\\[^{]*)?({.+})?(\[.*\])?){(?<newcommandlines>.*(\n.*)*)}|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
             //string pattern = @"(?<comment>([^\\]|\n)%)|((?<newcommand>newcommand)({.+})?(\[.*\])?){(?<newcommandlines>(\n.*)*)}|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
             //@"(?<comment>(([^\\]|\n)%)|\\renewcommand)|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
             //@"(?<comment>([^\\]|\n)%)|\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
@@ -75,8 +77,9 @@ namespace Hermes.Website.Services
                 {
                     inComment = true;
                     //comments can contain 1 newline, so we have to check
-                    if (groups["comment"].Value.Contains("\n"))
-                        lineCount++;
+                    AddNewlinesCount(groups["comment"].Value);
+                    //if (groups["comment"].Value.Contains("\n"))
+                    //    lineCount++;
                 }
                     
                 if (groups["newLine"].Value == "\n")
@@ -88,6 +91,7 @@ namespace Hermes.Website.Services
                 if (groups["newcommand"].Value == "newcommand") 
                 {
                     (string typeNameWithoutRefs, string remainingString) = CountBrackets(groups["newcommandlines"].Value);
+                    AddNewlinesCount(typeNameWithoutRefs);
                     ParseTex(remainingString);
                     //You haven't tested this yet Andreas
                 }
@@ -98,9 +102,10 @@ namespace Hermes.Website.Services
                 if (groups["type"].Value == "section")
                 {
                    
-
                     //Console.WriteLine("TypeName: " + groups["typeName"].Value);
                     (string typeNameWithoutRefs,string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
+                    AddNewlinesCount(typeNameWithoutRefs);
+
                     if (nodeDict.ContainsKey(typeNameWithoutRefs))
                     {
                         //Console.WriteLine("ID");
@@ -147,6 +152,7 @@ namespace Hermes.Website.Services
                     // SLET
                    
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
+                    AddNewlinesCount(typeNameWithoutRefs);
 
                     if (nodeDict.ContainsKey(typeNameWithoutRefs))
                     {
@@ -265,6 +271,8 @@ namespace Hermes.Website.Services
                 else if (groups["type"].Value == "label")
                 {
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
+                    AddNewlinesCount(typeNameWithoutRefs);
+
                     typeNameWithoutRefs = typeNameWithoutRefs.ToLower();
                     //Console.WriteLine("label before: " + typeNameWithoutRefs);
                     string labPattern = @"((?<prefix>\w*):)?(?<labelName>.*)";
@@ -288,6 +296,8 @@ namespace Hermes.Website.Services
                 {
                     
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
+                    AddNewlinesCount(typeNameWithoutRefs);
+
                     typeNameWithoutRefs = typeNameWithoutRefs.ToLower();
                     //Console.WriteLine("NAME: " + typeNameWithoutRefs + " REM: " + remainingString);
                     if (groups["type"].Value == "href")
@@ -311,6 +321,8 @@ namespace Hermes.Website.Services
                 else if (groups["type"].Value.StartsWith("cite"))
                 {
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
+                    AddNewlinesCount(typeNameWithoutRefs);
+
                     typeNameWithoutRefs = typeNameWithoutRefs.ToLower();
                     var tmps = typeNameWithoutRefs.Split(',');
                     var nodeId = ID_Generator.GenerateID().ToString();
@@ -339,6 +351,7 @@ namespace Hermes.Website.Services
                     //Console.WriteLine("BEGIN: " + groups["typeName"].Value);
                     //Console.WriteLine("PREV TYPENAME: " + groups["typeName"].Value);
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
+                    AddNewlinesCount(typeNameWithoutRefs);
 
                     // make sure that stuff like enumerate isnt created as a node
                     if (!(envTypeDict.ContainsKey(typeNameWithoutRefs)))
@@ -394,9 +407,10 @@ namespace Hermes.Website.Services
                     
                     //Console.WriteLine("END: " + groups["typeName"].Value);
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
+                    AddNewlinesCount(typeNameWithoutRefs);
 
                     //TODO is this good?
-                    if(typeNameWithoutRefs.ToLower() == "document")
+                    if (typeNameWithoutRefs.ToLower() == "document")
                     {
                         SetLineCountEndForMissing(prevSection, lineCount, 0, subCount(prevSection.type));
                         nodeDict[prevSection.name].lineCountEnd = lineCount;
@@ -429,15 +443,13 @@ namespace Hermes.Website.Services
 
                     string arg1 = groups["bibArg1"].Value;
                     string arg2 = groups["bibArg2"].Value;
+                    AddNewlinesCount(arg1);
+                    AddNewlinesCount(arg2);
                     //Console.WriteLine("bibitem has arguments: " + arg1 + " & " + arg2);
                     PaperNode pNode = new PaperNode(arg2.ToLower(), createdAt, "paper", lineCount);
                     if (arg1 != "")
                     {
-                        if (arg1.Contains(System.Environment.NewLine))
-                        {
-                            //Console.WriteLine("Title contains newline");
-                        }
-                        pNode.title = arg1.Replace(System.Environment.NewLine, " ");
+                        pNode.title = arg1.Replace(Environment.NewLine, " ");
                     }
                     //Console.WriteLine("Adding bibitem:" + pNode.name);
                     nodeDict[pNode.name] = pNode;
@@ -603,6 +615,12 @@ namespace Hermes.Website.Services
             }
         }
 
+
+        private void AddNewlinesCount(string line)
+        {
+            var regex = @"\n";
+            lineCount += Regex.Matches(line, regex).Count;
+        }
         public int GetLineCount()
         {
             return lineCount;

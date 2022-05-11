@@ -35,13 +35,10 @@ namespace Hermes.Website.Services
                 string fileName = Path.GetFileName(filePath);
                 if (fileName.EndsWith(".tex"))
                     fileName = fileName.Remove(fileName.Length - 4);
-                Console.WriteLine("Name: " + fileName);
                 //ignore files in MACOSX
                 if (!fileName.StartsWith("._"))
                 {
                     string fileText = File.ReadAllText(filePath);
-
-                    Console.WriteLine("adding file: " + fileName);
                     files.Add(fileName, fileText);
                 }
                 

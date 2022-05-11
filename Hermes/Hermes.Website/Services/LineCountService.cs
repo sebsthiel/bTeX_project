@@ -81,12 +81,17 @@ namespace Hermes.Website.Services
                 return lineCountToLine[startLine];
 
             string tmp = ""; 
-            for (int i = startLine; i < endLine; i++)
+            for (int i = startLine; (i < endLine) && i < (startLine + 5); i++)
             {
                 tmp += lineCountToLine[i];
                 tmp += '\n';
             }
             return tmp;
+        }
+
+        public int GetLineCount()
+        {
+            return lineCount;
         }
     }
 
