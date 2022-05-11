@@ -76,3 +76,7 @@ C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.W
 C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\bin\Debug\netcoreapp3.1\papers\jsons\9649b96e-ca30-4413-bb4b-fa00e3a846a2\some.json
 C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\bin\Debug\netcoreapp3.1\papers\jsons\a36fc052-10d9-450a-824f-e0d28a3d7694\some.json
 C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\bin\Debug\netcoreapp3.1\papers\jsons\afb7890b-613a-48fe-9ab5-f4c4890080ae\some.json
+C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\bin\Debug\netcoreapp3.1\papers\jsons\73105776-e951-491f-927c-f622a7fe0c73\some.json
+C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\bin\Debug\netcoreapp3.1\papers\jsons\d051d9b6-61a7-496a-9e18-e5bd2cf855ca\some.json
+C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\bin\Debug\netcoreapp3.1\papers\jsons\d8b8c33b-ab06-4f61-9823-d35a1d6ba3f7\some.json
+C:\Users\jaffa\OneDrive\Skrivebord\Bachelor\GitRepo\bTeX_project\Hermes\Hermes.Website\bin\Debug\netcoreapp3.1\papers\jsons\bce9e0be-0a37-44cc-b9f4-9b3cd84dc3d2\some.json
