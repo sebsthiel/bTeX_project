@@ -25,11 +25,6 @@ namespace Hermes.Website.Services
 
         public string testString = "BibParserSevice Test String";
 
-        /*
-        auther, title, note, journal, fjournal, volume, year, pages, issn, mrclass, mrnumber, 
-        mrreviewer, doi, url, key, organization, publisher, series, booktitle, 
-            */
-
         
 
         public async Task<List<Node>> ParseBBLFile(string filePath)
@@ -67,9 +62,9 @@ namespace Hermes.Website.Services
                     string name = arg2;
                     if (arg2 == "")
                         name = arg1;
-                    //TODO: figure out what to do with linecount within BBL files
+                    
                     currentPaper = new BBLNode(name.ToLower(), outerEnv, "paper" , -1);
-                    //Console.WriteLine("tester " + name.ToLower());
+                   
                 }
                 if (currentPaper != null)
                 {
@@ -79,9 +74,7 @@ namespace Hermes.Website.Services
                     }
                     if (description != "")
                     {
-                        //Console.WriteLine("Descr: " + description);
-                        //Console.WriteLine("hmm2: " + (currentPaper == null));
-                        //Console.WriteLine("hmm: " + currentPaper.information);
+                        
                         currentPaper.information.Add(description);
                     }
 

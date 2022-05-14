@@ -25,8 +25,7 @@ namespace Hermes.Website.Services
             //DefaultValue is main
             if (mainFileName == "")
                 mainFileName = "main";
-            //try
-            //{
+           
             files = new Dictionary<string, string>();
             
             //Map a file's name to the text within it
@@ -44,15 +43,12 @@ namespace Hermes.Website.Services
                 
             }
 
-            //TODO: Change to be user input file 
+            
+            
             string fullFileAsString = ScanFile(files[mainFileName]);
-            //Console.WriteLine(fullFileAsString);
+            
             return fullFileAsString;
-            //} catch (Exception)
-            //{
-            //    Console.WriteLine("(Exception) The name of mainfile from multiservice: " + mainFileName);
-            //    throw new FileNotFoundException(mainFileName);
-            //}
+            
             
         }
 
@@ -77,7 +73,6 @@ namespace Hermes.Website.Services
                 }
                 if (fileName.EndsWith(".tex"))
                     fileName = fileName.Remove(fileName.Length - 4);
-                //TODO: Maybe unnecesary 
                 
                 string inputFileText = ScanFile(files[fileName]);
                 fileAsString = fileAsString.Replace(groups["input"].Value, inputFileText);

@@ -25,11 +25,6 @@ namespace Hermes.Website.Services
             File.WriteAllText(jsonPath, strResultJson);
         }
 
-        public void CreateDagJson(List<DagNode> nodes, string jsonPath)
-        {
-            string strResultJson = JsonConvert.SerializeObject(nodes, Formatting.Indented);
-            File.WriteAllText(jsonPath, strResultJson);
-        }
 
     }
 

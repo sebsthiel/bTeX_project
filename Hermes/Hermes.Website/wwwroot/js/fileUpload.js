@@ -17,7 +17,7 @@ async function getPdf(guid, mainTex) {
     } else {
         let pdfBlob = await response.blob();
 
-        console.log("Type: " + typeof (pdfBlob));
+     
 
         let fileUrl = URL.createObjectURL(pdfBlob);
 
@@ -49,7 +49,6 @@ async function getJson(guid) {
 
 
 async function uploadFile() {
-    console.log("test hej22");
 
     let file = document.getElementById("uploadFile").files[0];
     let mainName = document.getElementById("mainName").value;
@@ -66,20 +65,18 @@ async function uploadFile() {
     let response = await fetch("/api/pdf", {
         method: 'POST',
         body: formData
-    }).catch(err => console.log("ERROR BITCH"));
+    }).catch(err => console.log("ERROR"));
 
     if (!response.ok) {
-        console.log("Response StatTex: " + response.statusText);
         alert("Something went wrong when loading your file. Please make sure the name of the main .tex file is correct and try again.");
     } else {
-        // THIS NEEDS TO BE ASYNC
-        console.log("testHej");
+
         response.json().then(async data => {
 
-            //console.log("guid: " + await data.guid);
+           
             let guid = await data.guid;
             let mainTex = await data.mainName;
-            console.log("mainName: " + mainTex);
+           
             let json = await getJson(guid);
             // Load json into d3 graph
             createGraph(json);
@@ -92,10 +89,4 @@ async function uploadFile() {
 
     
 
-    //let pdfBlob = await response.blob();
-
-    //let fileUrl = URL.createObjectURL(pdfBlob);
-
-
-    //document.getElementById("outputPdf").src = fileUrl;
 }

@@ -20,22 +20,18 @@ namespace Hermes.Website.Services
         
 
 
-        public async Task<string> CompileTexAsync(string texDir, string texFile)
+        public void CompileTex(string texDir, string texFile)
         {
             long size = texFile.Length;
 
-            if (size <= 0) return null;
+            if (size <= 0) return;
            
-            ProcessStartInfo startInfo = new ProcessStartInfo("latexmk", "-pdf " + "-interaction=nonstopmode " + texFile);
+            ProcessStartInfo startInfo = new ProcessStartInfo("latexmk", "-pdf " + "-interaction=nonstopmode " + "\""+texFile+"\"");
             startInfo.WorkingDirectory = texDir;
             Process proc = new Process();
             proc.StartInfo = startInfo;
             proc.Start();
 
-            string pdfFile = texFile + Path.GetFileNameWithoutExtension(texFile) + ".pdf";
-
-
-            return pdfFile;
             
 
         }

@@ -72,8 +72,7 @@ namespace Hermes.Website.Services
                     inComment = true;
                     //comments can contain 1 newline, so we have to check
                     AddNewlinesCount(groups["comment"].Value);
-                    //if (groups["comment"].Value.Contains("\n"))
-                    //    lineCount++;
+                    
                 }
                     
                 if (groups["newLine"].Value == "\n")
@@ -87,7 +86,7 @@ namespace Hermes.Website.Services
                     (string typeNameWithoutRefs, string remainingString) = CountBrackets(groups["newcommandlines"].Value);
                     AddNewlinesCount(typeNameWithoutRefs);
                     ParseTex(remainingString);
-                    //You haven't tested this yet Andreas
+                   
                 }
                 
                 if (inComment)
@@ -111,11 +110,10 @@ namespace Hermes.Website.Services
 
 
                     createdAt = typeNameWithoutRefs; 
-                    nodeDict.Add(newEnvNode.GetName(), newEnvNode);
+                    nodeDict.Add(newEnvNode.name, newEnvNode);
 
                     if (prevSection == null)
                     {
-                        Console.WriteLine("prevSection IS NULL ");
                         prevSection = newEnvNode;
                     } else
                     {
@@ -132,57 +130,53 @@ namespace Hermes.Website.Services
                 {
 
                     // Check how many sub
-                    //Console.WriteLine(groups["type"].Value + " : " + groups["typeName"].Value);
                     var subCountSubsection = subCount(groups["type"].Value);
-                    var subCountCreatedAt = subCount(nodeDict[createdAt].GetType());
+                    var subCountCreatedAt = subCount(nodeDict[createdAt].type);
                     EnvNode newSubSection = null;
-                    // SLET
                    
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
                     AddNewlinesCount(typeNameWithoutRefs);
 
                     if (nodeDict.ContainsKey(typeNameWithoutRefs))
                     {
-                        //Console.WriteLine("ID");
+                        
                         typeNameWithoutRefs = typeNameWithoutRefs + " :id: " + ID_Generator.GenerateID();
-                        //Console.WriteLine("typeNameWithoutRefs" + typeNameWithoutRefs);
+                       
                     }
 
                     if (subCountSubsection == subCountCreatedAt)
                     {
                         // same sub amount
-                        newSubSection = new EnvNode(typeNameWithoutRefs, nodeDict[createdAt].GetCreatedAt(), groups["type"].Value, envTypeDict[groups["type"].Value].counter, lineCount);
-                        //Console.WriteLine("Counter for " + groups["type"].Value + ": " + envTypeDict[groups["type"].Value].counter);
+                        newSubSection = new EnvNode(typeNameWithoutRefs, nodeDict[createdAt].createdAt, groups["type"].Value, envTypeDict[groups["type"].Value].counter, lineCount);
+                       
                         UpdateCounters(groups["type"].Value);
 
                         if (prevSection == null)
                         {
-                            Console.WriteLine("prevSection IS NULL ");
                             prevSection = newSubSection;
                         }
                         else
                         {
                             nodeDict[prevSection.name].lineCountEnd = newSubSection.lineCount;
-                            //SetLineCountEndForMissing(prevSection, newSubSection.lineCount, subCountSubsection, subCount(prevSection.type));
+                           
 
                             prevSection = newSubSection;
                         }
 
-                        //UpdateCounters(groups["type"].Value);
+                      
 
-                        createdAt = newSubSection.GetName();
+                        createdAt = newSubSection.name;
                     }
                     else if (subCountSubsection > subCountCreatedAt)
                     {
-                        // større
-                        // hvis ikke findes
+                        // bigger
+                        // if not exists
                         if (!(envTypeDict.ContainsKey(groups["type"].Value)))
                         {
                             envTypeDict[groups["type"].Value] = new Env(groups["type"].Value, groups["type"].Value, 1, new List<string>(), new List<string>());
-                            //Console.WriteLine("Counter for " + groups["type"].Value + ": (1)" + 1);
-
+                           
                             // should add it as dependent of createdAt (counter)
-                            var createdAtType = nodeDict[createdAt].GetType();
+                            var createdAtType = nodeDict[createdAt].type;
                             if (createdAtType != null) // If DOCUMENT
                             {
                                 envTypeDict[createdAtType].AddToCounterShouldReset(groups["type"].Value);
@@ -204,20 +198,16 @@ namespace Hermes.Website.Services
 
                         // updateCounters
 
-                        //Console.WriteLine("Counter for " + groups["type"].Value + ": " + envTypeDict[groups["type"].Value].counter);
                         UpdateCounters(groups["type"].Value);
 
-                        createdAt = newSubSection.GetName();
+                        createdAt = newSubSection.name;
 
 
                     }
                     else
                     {
-                        //mindre
-                        //Console.WriteLine("Subcount er mindre! ");
-                        //Console.WriteLine("Name of section: " + typeNameWithoutRefs);
-
-
+                        //smaller
+                        
                         var differenceInSubCount = (subCountCreatedAt - subCountSubsection);
                         
 
@@ -230,24 +220,20 @@ namespace Hermes.Website.Services
                         }
                         else
                         {
-                            //Console.WriteLine("New sub: " + subCountSubsection);
-                            //Console.WriteLine("New Name: " + typeNameWithoutRefs);
-                            //Console.WriteLine("Prev sub: " + subCount(prevSection.type));
-                            //Console.WriteLine("Prev Name: " + prevSection.name);
+                         
                             
                             SetLineCountEndForMissing(prevSection, newSubSection.lineCount, subCountSubsection, subCount(prevSection.type));
                             nodeDict[prevSection.name].lineCountEnd = newSubSection.lineCount;
                             prevSection = newSubSection;
                         }
 
-                        //Console.WriteLine("Counter for " + groups["type"].Value + ": " + envTypeDict[groups["type"].Value].counter);
                         UpdateCounters(groups["type"].Value);
 
-                        // WRONG CREATEDAT - skal være newNode
+                       
                         createdAt = newSubSection.name;
 
                     }
-                    //Console.WriteLine("Adding subsection: " + newSubSection.GetName());
+                   
                     
                     nodeDict[typeNameWithoutRefs] = newSubSection;
                     
@@ -261,20 +247,19 @@ namespace Hermes.Website.Services
                     AddNewlinesCount(typeNameWithoutRefs);
 
                     typeNameWithoutRefs = typeNameWithoutRefs.ToLower();
-                    //Console.WriteLine("label before: " + typeNameWithoutRefs);
+                  
                     string labPattern = @"((?<prefix>\w*):)?(?<labelName>.*)";
                     MatchCollection labMatch = Regex.Matches(typeNameWithoutRefs, labPattern, options);
                     GroupCollection labGroups = labMatch[0].Groups;
                     string labelPrefix = labGroups["prefix"].Value;
 
 
-                   // if (labelPrefix != "" && labelPrefix != "sec" && !labelPrefix.Contains("subsec"))
                     labelPrefixes.Add(labelPrefix);
                     
-                    //Console.WriteLine("label after " + typeNameWithoutRefs);
+                  
                     Node node1 = new Node(typeNameWithoutRefs, createdAt, groups["type"].Value, lineCount);
                     nodeDict[node1.name] = node1;
-                    //Console.WriteLine("Adding label: " + node1.GetName());
+                    
 
                     if (remainingString != "")
                         ParseTex(remainingString);
@@ -286,13 +271,13 @@ namespace Hermes.Website.Services
                     AddNewlinesCount(typeNameWithoutRefs);
 
                     typeNameWithoutRefs = typeNameWithoutRefs.ToLower();
-                    //Console.WriteLine("NAME: " + typeNameWithoutRefs + " REM: " + remainingString);
+                   
                     if (groups["type"].Value == "href")
-                    {   //TODO make a refNode ref hyperlinkNode
+                    {  
                         Node hyperLinkNode = new Node(typeNameWithoutRefs, createdAt, "href", lineCount);
                         nodeDict[hyperLinkNode.name] = hyperLinkNode;
                     }
-                    //Console.WriteLine("Adding ref: " + groups["typeName"].Value);
+                    
 
                    
                     var nodeId = ID_Generator.GenerateID().ToString();
@@ -326,7 +311,7 @@ namespace Hermes.Website.Services
 
                     }
 
-                    //throw new Exception("Not implemented -> test when parsed bib");
+                   
                     
                    
 
@@ -335,22 +320,14 @@ namespace Hermes.Website.Services
                 }
                 else if (groups["type"].Value == "begin")
                 {
-                    //Console.WriteLine("BEGIN: " + groups["typeName"].Value);
-                    //Console.WriteLine("PREV TYPENAME: " + groups["typeName"].Value);
+                   
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
                     AddNewlinesCount(typeNameWithoutRefs);
 
                     // make sure that stuff like enumerate isnt created as a node
                     if (!(envTypeDict.ContainsKey(typeNameWithoutRefs)))
                     {
-                        //Console.WriteLine("Skipping over BEGIN: " + typeNameWithoutRefs);
-                        //TODO new stuff
-                        //Env newEnv = new Env(typeNameWithoutRefs, typeNameWithoutRefs, 0, new List<string>(), new List<string>());
-                        //envTypeDict.TryAdd(typeNameWithoutRefs, newEnv);
-                        //var basicEnvNode = new EnvNode(typeNameWithoutRefs, createdAt, typeNameWithoutRefs, 0, lineCount);
-                        //nodeDict[typeNameWithoutRefs] = basicEnvNode;
-
-                        //createdAt = typeNameWithoutRefs;
+                        
                        
                         if (remainingString != "")
                             ParseTex(remainingString);
@@ -364,26 +341,18 @@ namespace Hermes.Website.Services
 
                     var newEnvNodeName = typeNameWithoutRefs + " " + thisEnvCount;
 
-                    //Console.WriteLine("EnvNode with count: " + newEnvNodeName);
-                    // TODO what do we do about counter?? should it be string or what?
-                    //var newEnvNode = new EnvNode(newEnvNodeName, createdAt, groups["typeName"].Value, thisEnvCount);
-                    //Console.WriteLine(groups["type"].Value + " " + groups["typeName"].Value );
-                    //Console.WriteLine("lineCount in begin: " + lineCount);
+                   
                     var newEnvNode = new EnvNode(newEnvNodeName, createdAt, typeNameWithoutRefs, envTypeDict[typeNameWithoutRefs].counter, lineCount);
 
-                    //Console.WriteLine("Adding envNode: " + newEnvNode.GetName());
+                    
                     nodeDict[newEnvNodeName] = newEnvNode;
 
                     //update counter
-                    //Console.WriteLine("Counter for " + typeNameWithoutRefs + ": " + envTypeDict[typeNameWithoutRefs].counter);
                     UpdateCounters(typeNameWithoutRefs);
                     
 
                     createdAt = newEnvNodeName;
 
-                    //Console.WriteLine("TYPENAMEWITHOUTREFS: " + typeNameWithoutRefs);
-                    //if (typeNameWithoutRefs == "align")
-                        //Console.WriteLine("ALIGN: " + typeNameWithoutRefs + "REMAINGS: " + remainingString);
                     
                     if (remainingString != "") 
                         ParseTex(remainingString);
@@ -392,11 +361,11 @@ namespace Hermes.Website.Services
                 else if (groups["type"].Value == "end")
                 {
                     
-                    //Console.WriteLine("END: " + groups["typeName"].Value);
+                    
                     (string typeNameWithoutRefs, string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
                     AddNewlinesCount(typeNameWithoutRefs);
 
-                    //TODO is this good?
+                    
                     if (typeNameWithoutRefs.ToLower() == "document")
                     {
                         SetLineCountEndForMissing(prevSection, lineCount, 0, subCount(prevSection.type));
@@ -405,19 +374,18 @@ namespace Hermes.Website.Services
                     // make sure that stuff like enumerate isnt created as a node
                     if (!(envTypeDict.ContainsKey(typeNameWithoutRefs)))
                     {
-                        //Console.WriteLine("Skipping over END: " + typeNameWithoutRefs);
                         continue;
                     }
 
                     EnvNode tmpNode = (EnvNode)nodeDict[createdAt];
                     tmpNode.lineCountEnd = lineCount;
-                    //Console.WriteLine("Setting endLineCount: " + tmpNode.lineCountEnd);
+                   
                     nodeDict[createdAt] = tmpNode;
 
                     if (createdAt != outerEnv)
                     {
 
-                        createdAt = nodeDict[createdAt].GetCreatedAt();
+                        createdAt = nodeDict[createdAt].createdAt;
                     }
 
 
@@ -432,13 +400,13 @@ namespace Hermes.Website.Services
                     string arg2 = groups["bibArg2"].Value;
                     AddNewlinesCount(arg1);
                     AddNewlinesCount(arg2);
-                    //Console.WriteLine("bibitem has arguments: " + arg1 + " & " + arg2);
+                  
                     PaperNode pNode = new PaperNode(arg2.ToLower(), createdAt, "paper", lineCount);
                     if (arg1 != "")
                     {
                         pNode.title = arg1.Replace(Environment.NewLine, " ");
                     }
-                    //Console.WriteLine("Adding bibitem:" + pNode.name);
+                   
                     nodeDict[pNode.name] = pNode;
 
 
@@ -452,7 +420,7 @@ namespace Hermes.Website.Services
                     string arg2 = groups["arg2"].Value;
                     string arg3 = groups["arg3"].Value;
 
-                    //Console.WriteLine("NewTheorem: " + envName + " " + arg2 + " " + arg3);
+                    
 
                     string envText;
                     string counterName;
@@ -470,7 +438,7 @@ namespace Hermes.Website.Services
                                 counterName = null;
                             }else
                             {
-                                counterName = nodeDict[createdAt].GetType();
+                                counterName = nodeDict[createdAt].type;
                             }
                             
                         }
@@ -481,7 +449,7 @@ namespace Hermes.Website.Services
 
                         if(counterName == null)
                         {
-                            //TODO Find a better way
+                          
                             Console.WriteLine("Handle exception better");
                         }
                         else if (envTypeDict.ContainsKey(counterName))
@@ -498,16 +466,16 @@ namespace Hermes.Website.Services
                     {
                         envText = arg3.Trim(new char[] { '{', '}' });
 
-                        //TODO is arg3 in this case always []?
+                       
                         counterName = arg2.Trim(new char[] { '[', ']' });
 
                         if (envTypeDict.ContainsKey(counterName))
                         {
-                            //Console.WriteLine(counterName + " just got " + envName);
+                            
                             envTypeDict[counterName].AddToCounterShouldUpdate(envName);
 
                             shouldUpdateList.Add(counterName);
-                            //envTypeDict[envName].AddToCounterShouldUpdate(counterName);
+                            
                         }
                         else
                         {
@@ -515,10 +483,9 @@ namespace Hermes.Website.Services
                         }
                     }
 
-                    //TODO Create smart constructer for env such that we dont have to pass 1, new list...
+                   
                     envTypeDict[envName] = new Env(envName, envText, 1, new List<string>(), shouldUpdateList);
-                    //Console.WriteLine($"Added new Environment: {envName}");
-
+                   
                 }
             }
         }
@@ -545,10 +512,10 @@ namespace Hermes.Website.Services
             string acc = "";
             while( nodeDict.ContainsKey( newCreatedAt))
             {
-                //Console.WriteLine("NewCreatedAt: " +newCreatedAt);
+               
                 EnvNode t = (EnvNode)nodeDict[newCreatedAt];
                 acc = t.counter + "." + acc;
-                newCreatedAt = nodeDict[newCreatedAt].GetCreatedAt();
+                newCreatedAt = nodeDict[newCreatedAt].createdAt;
             }
             return acc;
         }
@@ -559,9 +526,9 @@ namespace Hermes.Website.Services
             var newCreatedAt = createdAt;
             for (int i = 0; i < differenceInSubCount; i++)
             {
-                newCreatedAt = nodeDict[newCreatedAt].GetCreatedAt();
+                newCreatedAt = nodeDict[newCreatedAt].createdAt;
             }
-            return nodeDict[newCreatedAt].GetCreatedAt();
+            return nodeDict[newCreatedAt].createdAt;
         }
 
         //Returns how many times "sub" appears in the input string
@@ -637,9 +604,9 @@ namespace Hermes.Website.Services
 
             foreach (Node node in newNodes)
             {
-                // FIXME SEB ÆNDREDE da der i en bib fil var samme entry to gange xd
                
-                if (!nodeDict.TryAdd(node.GetName(), node))
+               
+                if (!nodeDict.TryAdd(node.name, node))
                 {
                     Console.WriteLine("NODE ALREADY EXISTS");
                 }
@@ -659,10 +626,6 @@ namespace Hermes.Website.Services
             ParseTex(nameWithCommands);
 
             //Remove whatever command was before the curly brackets I.e \texit{abc}
-            //if (nameWithCommands == "align")
-            //{
-            //    Console.WriteLine("Begin: " + nameWithCommands + " REMAING: " + remainingString);
-            //}
             return (RemoveCommand(nameWithCommands), remainingString);
         }
         public (string, string) CountBrackets(string input)

@@ -25,11 +25,7 @@ namespace Hermes.Website.Services
 
         public string testString = "BibParserSevice Test String";
 
-        /*
-        auther, title, note, journal, fjournal, volume, year, pages, issn, mrclass, mrnumber, 
-        mrreviewer, doi, url, key, organization, publisher, series, booktitle, 
-            */
-
+       
         List<Node> paperList = new List<Node>();
 
         public async Task<List<Node>> ParseBibFile(string filePath) 
@@ -43,18 +39,18 @@ namespace Hermes.Website.Services
 
         private List<Node> SearchFile(string fileAsText)
         {
-            //FIXME SEB ÆNDREDE: New regex
+            
             string pattern = @"(@(?<type>\w+) *{(?<id>[^,]+),)|( *(?<artInfo>[^ \n]*) *= *({|""|)(?<artInfoValue>.*)(}|""),?)";
-            //string pattern = @"(@(?<type>article|manual|book|incollection|inproceedings) *{(?<id>[^,]+),)|( *(?<artInfo>[^ \n]*) *= *({|""|)(?<artInfoValue>.*)(}|""),?)";
+            
             Regex rx = new Regex(pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             MatchCollection matches = rx.Matches(fileAsText);
             PaperNode currentPaper = null;
             
             currentPaper = null;
-            Console.WriteLine("ohNO BBL");
+           
             foreach (Match match in matches)
             {
-                Console.WriteLine("Match: in bbl " + match);
+               
                 GroupCollection groups = match.Groups;
                 string artInfo = groups["artInfo"].Value.ToLower();
                 string paperId = groups["id"].Value.ToLower();
@@ -65,11 +61,10 @@ namespace Hermes.Website.Services
                 
                 if (paperId != null && paperId != "")
                 {
-                    //Console.WriteLine("PaperID: " + paperId);
+                   
                     if (currentPaper != null){ paperList.Add(currentPaper);}
-                    //TODO: figure out what to do with linecount within Bib files
                     currentPaper = new PaperNode(paperId, "BibFile", "paper", -1);
-                    //Console.WriteLine("HALLO: " + paperId);
+                   
                 }
                 if (paperType != null && paperType != "") 
                 {
@@ -77,7 +72,7 @@ namespace Hermes.Website.Services
                 }
                 if (artInfo != null && artInfo != "")
                 {
-                    //Console.WriteLine("Art Info is: " + artInfo);
+                   
                     switch (artInfo)
                     {
                         case "title":
@@ -147,7 +142,7 @@ namespace Hermes.Website.Services
                             currentPaper.isbn = artInfoValue;
                             break;
                         default:
-                            //Console.WriteLine(artInfo + " doesn't match any cases");
+                           
                             break;
 
                     }

@@ -27,7 +27,7 @@ namespace Hermes.Website.Services
         public Dictionary<string,string> GetLineFromNodeName(string input, Dictionary<string, Node> nodes)
         {
             Dictionary<int, string> lineCountToLine = CreateMapFromLineCountToLine(input);
-            Console.WriteLine("LINECOUNTY: " + lineCount);
+           
             return CreateMapFromNodeToLine(nodes, lineCountToLine);
         }
 
@@ -56,12 +56,12 @@ namespace Hermes.Website.Services
             foreach (KeyValuePair<string, Node> entry in nodes)
             {
                 string allLinesOfNode;
-                //Console.WriteLine("LineCountFixThing: " + entry.Value.name + " startCount: " + entry.Value.lineCount + " endCount: " + entry.Value.lineCountEnd);
+               
                 if (entry.Value.lineCountEnd != null) //If true then it is an environment and can spand several lines
                     allLinesOfNode = CombineAllLinesOfEnvironment(entry.Value.lineCount, (int)entry.Value.lineCountEnd, lineCountToLine);
                 else
                 {
-                    //TODO: "Temporary" solution, since we don't give papers a linecount
+                    
                     if (entry.Value.lineCount == -1)
                         allLinesOfNode = "No information available on " + entry.Value.name;
                     else
@@ -82,7 +82,7 @@ namespace Hermes.Website.Services
 
             int charCount = 0;
             string tmp = "";
-            for (int i = startLine; (i < endLine)/* && i < (startLine + 5)*/; i++)
+            for (int i = startLine; (i < endLine); i++)
             {
                 for (int j = 0; j < lineCountToLine[i].Length; j++)
                 {
@@ -91,7 +91,7 @@ namespace Hermes.Website.Services
                     if (charCount == 200)
                         return tmp + "...";
                 }
-                //tmp += lineCountToLine[i];
+                
                 tmp += '\n';
             }
             return tmp;
