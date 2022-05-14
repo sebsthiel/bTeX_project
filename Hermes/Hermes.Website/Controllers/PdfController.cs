@@ -192,7 +192,7 @@ namespace Hermes.Website.Controllers
 
 
             // Compiling the texfile to pdf
-            pdfPath = await CompilerService.CompileTexAsync(texDir, pdfDir, texFile);
+            pdfPath = await CompilerService.CompileTexAsync(texDir, texFile);
 
             // Parsing tex to get dict of Nodes and list of Edges (links)
 
@@ -244,7 +244,7 @@ namespace Hermes.Website.Controllers
             };
 
 
-            await Task.Delay(2000);
+            //await Task.Delay(2000);
             return guid; //TODO return mainName too
             //FileStream pdf = new FileStream(pdfPath, FileMode.Open);
             //return new FileStreamResult(pdf, "application/pdf");
@@ -272,7 +272,7 @@ namespace Hermes.Website.Controllers
 
         [HttpPost]
         [Route("pdf")]
-        public async Task<IActionResult> PostFileAsync(string guid, string mainTex)
+        public async Task<IActionResult> GetPdfAsync(string guid, string mainTex)
         {
             try
             {
@@ -309,7 +309,7 @@ namespace Hermes.Website.Controllers
 
         [HttpPost]
         [Route("json")]
-        public IActionResult PostJsonAsync(string guid)
+        public IActionResult GetJsonAsync(string guid)
         {
             string jsonDir = environment.ContentRootPath + "/papers/jsons/" + guid + "/";
 
@@ -321,7 +321,7 @@ namespace Hermes.Website.Controllers
 
 
 
-        private List<DagNode> makeDagNodes(Dictionary<string, Node> nodes, List<Link> links)
+        private List<DagNode> MakeDagNodes(Dictionary<string, Node> nodes, List<Link> links)
         {
             Dictionary<string, DagNode> dNodes = new Dictionary<string, DagNode>();
             Dictionary<string, string> toId = new Dictionary<string, string>();

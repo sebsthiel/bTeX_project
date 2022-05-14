@@ -26,6 +26,8 @@ namespace Hermes.Website.Services
 
         public IWebHostEnvironment WebHostEnvironment { get; }
 
+
+        // Global variables
         Dictionary<string, Env> envTypeDict = new Dictionary<string, Env>();
 
         Dictionary<string, Node> nodeDict = new Dictionary<string, Node>();
@@ -60,15 +62,7 @@ namespace Hermes.Website.Services
 
             // Go through file
             string pattern = @"(?<comment>([^\\]|\n)%)|((re)?(?<newcommand>newcommand)(\\[^{\n]*)?({.+})?(\[.*\])?){(?<newcommandlines>.*(\n.*)*)}|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
-            //string pattern = @"(?<comment>([^\\]|\n)%)|((re)?(?<newcommand>newcommand)(\\[^{]*)?({.+})?(\[.*\])?){(?<newcommandlines>.*(\n.*)*)}|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
-            //string pattern = @"(?<comment>([^\\]|\n)%)|((?<newcommand>newcommand)({.+})?(\[.*\])?){(?<newcommandlines>(\n.*)*)}|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
-            //@"(?<comment>(([^\\]|\n)%)|\\renewcommand)|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
-            //@"(?<comment>([^\\]|\n)%)|\\((?<type>ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
-
             RegexOptions options = RegexOptions.Multiline;
-            //Console.WriteLine("START PARSING");
-
-
             foreach (Match match in Regex.Matches(text, pattern, options))
             {
                 GroupCollection groups = match.Groups;
@@ -102,28 +96,21 @@ namespace Hermes.Website.Services
                 if (groups["type"].Value == "section")
                 {
                    
-                    //Console.WriteLine("TypeName: " + groups["typeName"].Value);
+                    
                     (string typeNameWithoutRefs,string remainingString) = CheckForCommandsInName(groups["typeName"].Value);
                     AddNewlinesCount(typeNameWithoutRefs);
 
                     if (nodeDict.ContainsKey(typeNameWithoutRefs))
                     {
-                        //Console.WriteLine("ID");
+                       
                         typeNameWithoutRefs = typeNameWithoutRefs + " : ID : " + ID_Generator.GenerateID();
-                        //Console.WriteLine("typeNameWithoutRefs" + typeNameWithoutRefs);
+                        
                     }
                     EnvNode newEnvNode = new EnvNode(typeNameWithoutRefs, outerEnv, groups["type"].Value, envTypeDict["section"].counter, lineCount);
-                    //Console.WriteLine("Counter for " + groups["type"].Value + ": " + envTypeDict["section"].counter);
                     UpdateCounters("section");
 
 
-                    createdAt = typeNameWithoutRefs; //groups["typeName"].Value;
-
-                    //var createdAtName = groups["typeName"].Value;
-                    //createdAt = nodeDict[createdAtName].GetName();
-
-                    //add section to dict
-                    //Console.WriteLine("Adding section: " + newEnvNode.GetName());
+                    createdAt = typeNameWithoutRefs; 
                     nodeDict.Add(newEnvNode.GetName(), newEnvNode);
 
                     if (prevSection == null)

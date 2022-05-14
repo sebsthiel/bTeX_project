@@ -80,10 +80,18 @@ namespace Hermes.Website.Services
             if (startLine == endLine) // the environment starts and ends on the same line
                 return lineCountToLine[startLine];
 
-            string tmp = ""; 
-            for (int i = startLine; (i < endLine) && i < (startLine + 5); i++)
+            int charCount = 0;
+            string tmp = "";
+            for (int i = startLine; (i < endLine)/* && i < (startLine + 5)*/; i++)
             {
-                tmp += lineCountToLine[i];
+                for (int j = 0; j < lineCountToLine[i].Length; j++)
+                {
+                    charCount++;
+                    tmp += lineCountToLine[i][j];
+                    if (charCount == 200)
+                        return tmp + "...";
+                }
+                //tmp += lineCountToLine[i];
                 tmp += '\n';
             }
             return tmp;

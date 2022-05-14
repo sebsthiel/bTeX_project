@@ -3613,7 +3613,7 @@ function setupLabPrefixes(prefixes) {
     prefixHeightDict = {};
     prefixHeight = defaultSectionRectHeight / prefixes.length;
     prefixHeight2 = defaultNodeY
-    prefixes.splice(((prefixes.length + 1) / 2), 0, "refNode");
+    //prefixes.splice(((prefixes.length + 1) / 2), 0, "refNode");
     //console.log("HEEEY");
     let unit = ((defaultSectionRectHeight - prefixHeight2) / prefixes.length)
     for (var i = 0; i < prefixes.length; i++) {
@@ -3687,7 +3687,7 @@ function displayInfoAboutNode() {
             
 
 
-        nodeName.innerHTML = "Selected node: \n " + currentSelectedNode.name;
+        nodeName.innerHTML = currentSelectedNode.name;
         nodeCreatedAt.innerHTML = "Defined in " + createdAtType + ": " + currentSelectedNode.createdAt;
         nodeType.innerHTML = "Type : " + currentSelectedNode.type;
     } else {

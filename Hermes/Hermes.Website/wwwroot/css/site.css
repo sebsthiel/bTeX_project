@@ -90,7 +90,7 @@ body {
     user-select: none;
 }
 .prefixLabel {
-    font-size: 9px;
+    font-size: 10px;
     font-weight: bold;
     fill: black;
     /*text-anchor: middle;*/
