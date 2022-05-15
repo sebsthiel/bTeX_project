@@ -6,13 +6,7 @@ function createGraph(json) {
     links = json.links;
     envs = json.environments;
 
-    let tmpVar = setupLabPrefixes(json.labelPrefixes);
-    labPrefixDepth = tmpVar[0];
-    unit = tmpVar[1];
-
-    nodeToLineText = json.nodeToLineText;
-
-    lineGraph(nodes, links, envs);
+    lineGraph(nodes, links, envs, json.labelPrefixes, json.nodeToLineText);
 
 }
 
@@ -65,13 +59,28 @@ var currentSelectedNode = null;
 var allNodes;
 
 
-function lineGraph(input_nodes, input_links, input_envs) {
+function lineGraph(input_nodes, input_links, input_envs, input_prefix, input_nodeToLine) {
+
+
+    let tmpVar = setupLabPrefixes(input_prefix);
+    labPrefixDepth = tmpVar[0];
+    unit = tmpVar[1];
+
+    nodeToLineText = input_nodeToLine;
 
 
     allNodes = input_nodes;
     links = input_links;
     envs = input_envs;
+
+    linkDict = {};
+    nodeDict = {};
+    envDict = {};
     
+    sectionNodes = [];
+    normalNodes = [];
+    paperNodes = [];
+    envNodes = [];
 
     allNodes.sort(compare);
 
@@ -163,15 +172,14 @@ function lineGraph(input_nodes, input_links, input_envs) {
             if (node.type == "refNode" || node.type == "citeNode") {
                 let nameToTarget = node.name.split(":id:")[0];
                 nameToTarget = nameToTarget.replace(/(ref to)|(citation to)/, "").trim();
-                console.log("nameTotarget " + nameToTarget);
-                console.log("nameTotarget " + nodeDict[nameToTarget]);
+            
 
                 if (nameToTarget in nodeDict) {
                     if (nodeDict[nameToTarget].type == "label") {
 
                         let prefixType = nameToTarget.split(':')[0];
                         if (prefixType in labPrefixDepth) {
-                            console.log("prefixType " + prefixType + " " + labPrefixDepth[prefixType])
+                           
                             nodeDict[node.name].y = labPrefixDepth[prefixType];
                             
                         }
@@ -264,6 +272,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
     });
 
 
+
   
     const maxLineCount = bestLineCount + 100;
 
@@ -275,8 +284,9 @@ function lineGraph(input_nodes, input_links, input_envs) {
 
     // select the svg for creating the graph
     // and configure the width and height
-
+    
     d3.selectAll("#d3graph > *").remove();
+    //d3.selectAll("svg > *").remove();
     var svgCanvas = d3.select("#d3graph")
                 .append("svg")
                 .attr("width", width)
@@ -591,6 +601,7 @@ function lineGraph(input_nodes, input_links, input_envs) {
     svgCanvas.call(zoom);
     // start scale zoom: 
     zoom.scaleTo(svgCanvas, 1);
+   
 
 
     function selectNode(node, selected) {

@@ -108,8 +108,9 @@ namespace Hermes.Website.Controllers
                 amountOfTexFiles = texFiles.Length;
                 if (amountOfTexFiles > 1)
                 {
-                    if(mainName != "")
+                    if(mainName != null && (mainName != ""))
                     {
+                        Console.WriteLine("mainName: " + mainName == "");
                         texFile = Path.Combine(texDir, mainName);
 
                     }
