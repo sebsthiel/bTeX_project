@@ -92,6 +92,7 @@ namespace Hermes.Website.Controllers
                     await file.CopyToAsync(stream);
                     
                 }
+                Console.WriteLine("FILETYPE: " + file.ContentType);
                 TexCompilerService.DeleteContentInDir(texDir);
                 ZipFile.ExtractToDirectory(zipFile, texDir);
 

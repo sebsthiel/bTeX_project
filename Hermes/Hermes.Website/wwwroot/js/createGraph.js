@@ -699,7 +699,7 @@ function visibleLinks(link, scale) {
 
     
     if (currentSelectedNode != null && (link.target == currentSelectedNode.name || link.source == currentSelectedNode.name)) {
-        return 0.3; // visible
+        return 1; // visible
     }
 
     if (sourceOutside && targetOutside) {
