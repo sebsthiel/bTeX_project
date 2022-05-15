@@ -25,7 +25,7 @@ namespace Hermes.Website.Services
             long size = texFile.Length;
 
             if (size <= 0) return;
-           
+            Console.WriteLine("RUNS");
             ProcessStartInfo startInfo = new ProcessStartInfo("latexmk", "-pdf " + "-interaction=nonstopmode " + "\""+texFile+"\"");
             startInfo.WorkingDirectory = texDir;
             Process proc = new Process();

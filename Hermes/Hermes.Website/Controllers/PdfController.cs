@@ -108,18 +108,28 @@ namespace Hermes.Website.Controllers
                 amountOfTexFiles = texFiles.Length;
                 if (amountOfTexFiles > 1)
                 {
-                    
-                    foreach (string v in texFiles)
+                    if(mainName != "")
                     {
+                        texFile = Path.Combine(texDir, mainName);
 
-                        if (Path.GetFileNameWithoutExtension(v) == "main")
-                        {
-                            texFile = v;
-                            
-                            break;
-
-                        }
                     }
+                    else
+                    {
+                        foreach (string v in texFiles)
+                        {
+
+                            if (Path.GetFileNameWithoutExtension(v) == "main")
+                            {
+                                texFile = v;
+
+                                break;
+
+                            }
+                        }
+
+                    }
+                    
+                    
 
                 }
                 else
@@ -170,6 +180,8 @@ namespace Hermes.Website.Controllers
 
 
             // Compiling the texfile to pdf
+            Console.WriteLine("dir: " + texDir);
+            Console.WriteLine("file: " + texFile);
             CompilerService.CompileTex(texDir, texFile);
 
             if (mainName == null)
