@@ -61,7 +61,7 @@ namespace Hermes.Website.Services
 
 
             // Go through file
-            string pattern = @"(?<comment>([^\\]|\n)%)|((re)?(?<newcommand>newcommand)(\\[^{\n]*)?({.+})?(\[.*\])?){(?<newcommandlines>.*(\n.*)*)}|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(p|t|author|year)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
+            string pattern = @"(?<comment>([^\\]|\n)%)|((re)?(?<newcommand>newcommand)(\\[^{\n]*)?({.+})?(\[.*\])?){(?<newcommandlines>.*(\n.*)*)}|\\((?<type>((\w*)?ref|label|begin|end|(sub)*section|cite?(\w*)?\*?)){(?<typeName>.+)})|((?<bibitem>bibitem)(\[(?<bibArg1>[^\]]*)\])?({(?<bibArg2>[^}]*)}))|(?<newtheorem>newtheorem)(?<envName>({.+?}))(?<arg2>{.+?}|\[.+?\])(?<arg3>{.+?}|\[.+?\])?|(?<newLine>\n)";
             RegexOptions options = RegexOptions.Multiline;
             foreach (Match match in Regex.Matches(text, pattern, options))
             {

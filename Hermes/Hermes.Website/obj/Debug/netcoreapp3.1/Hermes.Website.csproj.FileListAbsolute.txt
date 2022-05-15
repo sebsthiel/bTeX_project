@@ -123,3 +123,4 @@ C:/Users/jaffa/OneDrive/Skrivebord/Bachelor/GitRepo/bTeX_project/Hermes/Hermes.W
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/808ef1da-4156-4257-b2a9-556c100b97a8/some.json
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/110431cb-5817-4e1b-850d-46cc0b68b797/some.json
 /Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/f46aecd7-d0e7-4cf7-ba9c-9a23e04dda91/some.json
+/Users/sebs/Code/6Semester/Bachelor/Codebase/bTeX_project/Hermes/Hermes.Website/bin/Debug/netcoreapp3.1/papers/jsons/e61a1e71-e65f-4ed5-9395-af25ee0349eb/some.json
