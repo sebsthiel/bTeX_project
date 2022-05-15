@@ -511,13 +511,27 @@ function lineGraph(input_nodes, input_links, input_envs, input_prefix, input_nod
         .attr("visibility", "hidden")
         .text(function (node) {
             if (node.type == "paper") {
+                var paperNodeName = "";
                 if (node.information) {
-                    return node.information[0];
-                }
-                else {
+                    paperNodeName = node.information[0] + " Written by " + node.author;
+                    
+                    return paperNodeName;
+                } else if (node.author || node.year || node.title) {
+                    if (node.title != null && node.title != "") {
+                        paperNodeName += node.title;
+                    } else {
+                        paperNodeName += node.name.split(":id:")[0];
+                    }
+                    if (node.author != null && node.author != "")
+                        paperNodeName += " Written by " + node.author;
+                    if (node.year != null && node.year != "")
+                        paperNodeName += " (" + node.year + ")";
+
+                    return paperNodeName;
+                } else {
                     return node.name.split(":id:")[0]
                 }
-                   
+                
             } else {
                 return node.name.split(":id:")[0];
             }
